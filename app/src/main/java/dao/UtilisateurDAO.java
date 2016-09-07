@@ -1,11 +1,13 @@
 package dao;
 
+import android.content.ContentValues;
+
 import dbClass.Utilisateur;
 
 /**
  * Created by RENAUD on 06/09/2016.
  */
-public class UtilisateurDAO {
+public class UtilisateurDAO extends DAOBase {
     public static final String UTILISATEUR_ID = "UTILISATEUR_ID";
     public static final String UTILISATEUR_NOM = "UTILISATEUR_NOM";
     public static final String UTILISATEUR_PRENOM = "UTILISATEUR_PRENOM";
@@ -34,7 +36,18 @@ public class UtilisateurDAO {
     public static final String  DROP_UTILISATEUR = "DROP TABLE IF EXISTS " + TABLE_UTILISATEUR + ";";
 
     public void ajouterUtilisateur(Utilisateur u){
-        //TODO ajouter un utilisateur
+        ContentValues value = new ContentValues();
+        value.put(UTILISATEUR_NOM, u.getNom());
+        value.put(UTILISATEUR_PRENOM, u.getPrenom());
+        value.put(UTILISATEUR_MAIL, u.getMail());
+        value.put(UTILISATEUR_TELEPHONE, u.getTelephone());
+        value.put(UTILISATEUR_MOBILE, u.getMobile());
+        value.put(UTILISATEUR_ADRESSE, u.getAdresse());
+        value.put(UTILISATEUR_CP, u.getCp());
+        value.put(UTILISATEUR_VILLE, u.getVille());
+        value.put(UTILISATEUR_USERNAME, u.getUsername());
+        value.put(UTILISATEUR_MDP, u.getMdp());
+        mDb.insert(TABLE_UTILISATEUR, null, value);
     }
 
     public void supprimerUtilisateur(int id){

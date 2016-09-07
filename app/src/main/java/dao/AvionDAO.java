@@ -6,13 +6,19 @@ import dbClass.Avion;
  * Created by RENAUD on 07/09/2016.
  */
 public class AvionDAO {
+    /**
+     * Entité de la table AVION
+     */
     public static final String AVION_ID = "AVION_ID";
     public static final String AVION_MODELE = "AVION_MODELE";
     public static final String AVION_CONSTRUCTEUR = "AVION_CONSTRUCTEUR";
     public static final String AVION_NBPLACES = "AVION_NBPLACES";
     public static final String AVION_COMPAGNIE = "AVION_COMPAGNIE";
 
-    public static final String TABLE_AVION = "AVION";
+    public static final String TABLE_AVION = "AVION";//Nom de la table
+    /**
+     * Création de la table AVION
+     */
     public static final String CREATE_AVION = "CREATE TABLE " + TABLE_AVION + "("
             + AVION_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + AVION_MODELE + " VARCHAR(50), "

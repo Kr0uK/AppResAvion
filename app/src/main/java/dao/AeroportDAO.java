@@ -6,6 +6,9 @@ import dbClass.Aeroport;
  * Created by RENAUD on 07/09/2016.
  */
 public class AeroportDAO {
+    /**
+     * Entité de la table AEROPORT
+     */
     public static final String AEROPORT_ID = "AEROPORT_ID";
     public static final String AEROPORT_NOM = "AEROPORT_NOM";
     public static final String AEROPORT_CODE = "AEROPORT_CODE";
@@ -15,7 +18,10 @@ public class AeroportDAO {
     public static final String AEROPORT_TELEPHONE = "AEROPORT_TELEPHONE";
     public static final String AEROPORT_PAYS = "AEROPORT_PAYS";
 
-    public static final String TABLE_AEROPORT = "AEROPORT";
+    public static final String TABLE_AEROPORT = "AEROPORT";//Nom de la table
+    /**
+     * Création de la table AEROPORT
+     */
     public static final String CREATE_AEROPORT = "CREATE TABLE " + TABLE_AEROPORT + "("
             + AEROPORT_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + AEROPORT_NOM + " VARCHAR(100), "
