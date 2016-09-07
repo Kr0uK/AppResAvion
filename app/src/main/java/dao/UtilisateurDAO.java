@@ -8,6 +8,9 @@ import dbClass.Utilisateur;
  * Created by RENAUD on 06/09/2016.
  */
 public class UtilisateurDAO extends DAOBase {
+    /**
+     * Entité de la table UTILISATEUR
+     */
     public static final String UTILISATEUR_ID = "UTILISATEUR_ID";
     public static final String UTILISATEUR_NOM = "UTILISATEUR_NOM";
     public static final String UTILISATEUR_PRENOM = "UTILISATEUR_PRENOM";
@@ -20,7 +23,10 @@ public class UtilisateurDAO extends DAOBase {
     public static final String UTILISATEUR_USERNAME = "UTILISATEUR_USERNAME";
     public static final String UTILISATEUR_MDP = "UTILISATEUR_MDP";
 
-    public static final String TABLE_UTILISATEUR = "UTILISATEUR";
+    public static final String TABLE_UTILISATEUR = "UTILISATEUR";//Nom de la table
+    /**
+     * Création de la table UTILISATEUR
+     */
     public static final String CREATE_UTILISATEUR = "CREATE TABLE " + TABLE_UTILISATEUR + " ("
             + UTILISATEUR_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + UTILISATEUR_NOM + " VARCHAR(80), "
@@ -35,6 +41,10 @@ public class UtilisateurDAO extends DAOBase {
             + UTILISATEUR_MDP + " VARCHAR(20));";
     public static final String  DROP_UTILISATEUR = "DROP TABLE IF EXISTS " + TABLE_UTILISATEUR + ";";
 
+    /**
+     * Ajout d'un utilisateur a partir de l'objet Utilisateur
+     * @param u
+     */
     public void ajouterUtilisateur(Utilisateur u){
         ContentValues value = new ContentValues();
         value.put(UTILISATEUR_NOM, u.getNom());
