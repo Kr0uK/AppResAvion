@@ -42,7 +42,7 @@ public class UtilisateurDAO extends DAOBase {
     public static final String  DROP_UTILISATEUR = "DROP TABLE IF EXISTS " + TABLE_UTILISATEUR + ";";
 
     /**
-     * Ajout d'un utilisateur a partir de l'objet Utilisateur
+     * Ajout d'un utilisateur dans la bdd a partir de l'objet Utilisateur
      * @param u
      */
     public void ajouterUtilisateur(Utilisateur u){
