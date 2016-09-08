@@ -7,17 +7,17 @@ public class Aeroport {
     private int id;
     private String nom;
     private String code;
-    private String adresse;
+    private String localisation;
     private String cp;
     private String ville;
     private String telephone;
     private String pays;
 
-    public Aeroport(int id, String nom, String code, String adresse, String cp, String ville, String telephone, String pays) {
+    public Aeroport(int id, String nom, String code, String localisation, String cp, String ville, String telephone, String pays) {
         this.id = id;
         this.nom = nom;
         this.code = code;
-        this.adresse = adresse;
+        this.localisation = localisation;
         this.cp = cp;
         this.ville = ville;
         this.telephone = telephone;
@@ -48,12 +48,12 @@ public class Aeroport {
         this.code = code;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public String getLocalisation() {
+        return localisation;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setLocalisation(String localisation) {
+        this.localisation = localisation;
     }
 
     public String getCp() {

@@ -16,6 +16,9 @@ public class Utilisateur {
     private String username;
     private String mdp;
 
+    public Utilisateur() {
+    }
+
     public Utilisateur(String nom, String prenom, String mail, String telephone, String mobile, String adresse, String cp, String ville, String username, String mdp) {
         super();
         this.nom = nom;

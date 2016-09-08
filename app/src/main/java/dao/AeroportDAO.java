@@ -12,7 +12,7 @@ public class AeroportDAO {
     public static final String AEROPORT_ID = "AEROPORT_ID";
     public static final String AEROPORT_NOM = "AEROPORT_NOM";
     public static final String AEROPORT_CODE = "AEROPORT_CODE";
-    public static final String AEROPORT_ADRESSE = "AEROPORT_ADRESSE";
+    public static final String AEROPORT_LOCALISATION = "AEROPORT_LOCALISATION";
     public static final String AEROPORT_CP = "Aeroport_CP";
     public static final String AEROPORT_VILLE = "AEROPORT_VILLE";
     public static final String AEROPORT_TELEPHONE = "AEROPORT_TELEPHONE";
@@ -26,7 +26,7 @@ public class AeroportDAO {
             + AEROPORT_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + AEROPORT_NOM + " VARCHAR(100), "
             + AEROPORT_CODE + " CHAR(3), "
-            + AEROPORT_ADRESSE + " VARCHAR(100), "
+            + AEROPORT_LOCALISATION + " VARCHAR(100), "
             + AEROPORT_CP + " VARCHAR(10), "
             + AEROPORT_VILLE + " VARCHAR(80), "
             + AEROPORT_TELEPHONE + " VARCHAR(15), "
