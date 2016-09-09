@@ -51,11 +51,8 @@ public class UtilisateurDAO {
      * @param u
      */
     public static void ajouterUtilisateur(Utilisateur u){
-        //databaseHandler = new DatabaseHandler(context);
-        //sqLiteDatabase = databaseHandler.getWritableDatabase();
-
         ContentValues value = new ContentValues();
-        Log.w("TEST","Je suis dans l'ajout d'util");
+
         value.put(UTILISATEUR_NOM, u.getNom());
         value.put(UTILISATEUR_PRENOM, u.getPrenom());
         value.put(UTILISATEUR_MAIL, u.getMail());
@@ -68,7 +65,6 @@ public class UtilisateurDAO {
         value.put(UTILISATEUR_MDP, u.getMdp());
 
         DAOBase.getWDb().insert(TABLE_UTILISATEUR, null, value);
-        Log.w("TEST","J'ai réussi !");
     }
 
     public static void supprimerUtilisateur(int id){
@@ -79,13 +75,19 @@ public class UtilisateurDAO {
         //TODO modifier un utilisateur
     }
 
-    public static Cursor selectionnerUtilisateur(int id){
-        //TODO selectionner un utilisateur
-        //databaseHandler = new DatabaseHandler(context);
-        //sqLiteDatabase = databaseHandler.getReadableDatabase();
-        Log.w("TEST","Jessaye de te montrer l'util");
-        Cursor c = DAOBase.rDb().rawQuery("select " + UTILISATEUR_NOM + " from " + TABLE_UTILISATEUR + " where " + UTILISATEUR_ID + " = " + id + ";", null);
-        return c;
-        //Cursor res = sqLiteDatabase.rawQuery("select * from UTILISATEUR", null);
+    public static Utilisateur selectionnerUtilisateur(int id){
+        Cursor c = DAOBase.rDb().query(TABLE_UTILISATEUR, new String[] {UTILISATEUR_NOM}, UTILISATEUR_ID + " = " + id, null, null, null, null);
+        return cursorToUtilisateur(c);
+    }
+
+    public static Utilisateur cursorToUtilisateur(Cursor c){
+        if (c.getCount() == 0) {
+            return null;
+        }
+        c.moveToFirst();
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setNom(c.getString(0));
+        c.close();
+        return utilisateur;
     }
 }

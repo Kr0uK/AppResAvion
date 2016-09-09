@@ -20,11 +20,12 @@ public class MainActivity extends AppCompatActivity {
         DAOBase daoBase = new DAOBase(getApplicationContext());
 
         daoBase.getWDb();
+
         Utilisateur util =  new Utilisateur("METZ", "Renaud", "test@test.fr", "0388943632", "0622493390", "33 rue de la paix", "67160", "OBERLAUTERBACH", "renaud", "1610");
 
         UtilisateurDAO.ajouterUtilisateur(util);
 
-        String test = UtilisateurDAO.selectionnerUtilisateur(1).toString();
+        String test = UtilisateurDAO.selectionnerUtilisateur(1).getNom().toString();
         Log.w("TEST",test);
     }
 }
