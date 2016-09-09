@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 DAOBase daoBase = new DAOBase(getApplicationContext());
                 daoBase.getWDb();
                 Aeroport aeroport;
-                String mCSVfile = "aeroports.csv";
+                String mCSVfile = "/res/assets/aeroports.csv";
                 AssetManager manager = getAssets();
                 InputStream inStream = null;
                 try {
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                             continue;
                         }
 
-                        aeroport = new Aeroport(0,colums[0].trim(),colums[1].trim(),colums[2].trim(),colums[3].trim(),Float.parseFloat(colums[4].trim()),Float.parseFloat([5].trim()));
+                        aeroport = new Aeroport(0,colums[0].trim(),colums[1].trim(),colums[2].trim(),colums[3].trim(),Float.parseFloat(colums[4].trim()),Float.parseFloat(colums[5].trim()));
                         AeroportDAO.ajouterAeroport(aeroport);
                         Log.d("TAG",aeroport.toString());
                         Log.d("TAG","ajouté");
