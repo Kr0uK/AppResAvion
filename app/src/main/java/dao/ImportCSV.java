@@ -1,4 +1,4 @@
-package cdi.appresavion;
+package dao;
 
 import android.content.ContentValues;
 import android.content.res.AssetManager;
@@ -14,7 +14,7 @@ public class ImportCSV {
 
 
     //TODO faire marcher ça
-    public static () {
+    public  ImportCSV () {
         String mCSVfile = "file.csv";
         AssetManager manager = context.getAssets();
         InputStream inStream = null;
