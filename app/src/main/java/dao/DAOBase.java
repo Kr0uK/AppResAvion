@@ -24,7 +24,7 @@ public class DAOBase {
         return mDb;
     }
 
-    public static SQLiteDatabase rDb(){
+    public static SQLiteDatabase getRDb(){
         mDb = mHandler.getReadableDatabase();
         return mDb;
     }

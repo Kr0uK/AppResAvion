@@ -14,18 +14,29 @@ import dbClass.Utilisateur;
  */
 public class UtilisateurDAO {
 
-    //Entité de la table UTILISATEUR
+    //Entité de la table UTILISATEUR + numéro de la colonne pour la sélection
     public static final String UTILISATEUR_ID = "UTILISATEUR_ID";
+    public static final int NUM_UTILISATEUR_ID = 0;
     public static final String UTILISATEUR_NOM = "UTILISATEUR_NOM";
+    public static final int NUM_UTILISATEUR_NOM = 1;
     public static final String UTILISATEUR_PRENOM = "UTILISATEUR_PRENOM";
+    public static final int NUM_UTILISATEUR_PRENOM = 2;
     public static final String UTILISATEUR_MAIL = "UTILISATEUR_MAIL";
+    public static final int NUM_UTILISATEUR_MAIL = 3;
     public static final String UTILISATEUR_TELEPHONE = "UTILISATEUR_TELEPHONE";
+    public static final int NUM_UTILISATEUR_TELEPHONE = 4;
     public static final String UTILISATEUR_MOBILE = "UTILISATEUR_MOBILE";
+    public static final int NUM_UTILISATEUR_MOBILE = 5;
     public static final String UTILISATEUR_ADRESSE = "UTILISATEUR_ADRESSE";
+    public static final int NUM_UTILISATEUR_ADRESSE = 6;
     public static final String UTILISATEUR_CP = "UTILISATEUR_CP";
+    public static final int NUM_UTILISATEUR_CP = 7;
     public static final String UTILISATEUR_VILLE = "UTILISATEUR_VILLE";
+    public static final int NUM_UTILISATEUR_VILLE = 8;
     public static final String UTILISATEUR_USERNAME = "UTILISATEUR_USERNAME";
+    public static final int NUM_UTILISATEUR_USERNAME = 9;
     public static final String UTILISATEUR_MDP = "UTILISATEUR_MDP";
+    public static final int NUM_UTILISATEUR_MDP = 10;
 
     //Nom de la table
     public static final String TABLE_UTILISATEUR = "UTILISATEUR";
@@ -48,11 +59,12 @@ public class UtilisateurDAO {
 
     /**
      * Ajout d'un utilisateur dans la bdd a partir de l'objet Utilisateur
-     * @param u
+     * @param u Utilisateur
      */
     public static void ajouterUtilisateur(Utilisateur u){
         ContentValues value = new ContentValues();
 
+        //Récupération des valeurs dans l'objet Utilisateur
         value.put(UTILISATEUR_NOM, u.getNom());
         value.put(UTILISATEUR_PRENOM, u.getPrenom());
         value.put(UTILISATEUR_MAIL, u.getMail());
@@ -64,6 +76,7 @@ public class UtilisateurDAO {
         value.put(UTILISATEUR_USERNAME, u.getUsername());
         value.put(UTILISATEUR_MDP, u.getMdp());
 
+        //Insert dans la base
         DAOBase.getWDb().insert(TABLE_UTILISATEUR, null, value);
     }
 
@@ -75,18 +88,38 @@ public class UtilisateurDAO {
         //TODO modifier un utilisateur
     }
 
+    /**
+     * Création du curseur qui va parcourir la base
+     * @param id
+     * @return
+     */
     public static Utilisateur selectionnerUtilisateur(int id){
-        Cursor c = DAOBase.rDb().query(TABLE_UTILISATEUR, new String[] {UTILISATEUR_NOM}, UTILISATEUR_ID + " = " + id, null, null, null, null);
+        Cursor c = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_UTILISATEUR + " WHERE " + UTILISATEUR_ID + " = " + id + ";", null);
         return cursorToUtilisateur(c);
     }
 
+    /**
+     *
+     * @param c
+     * @return
+     */
     public static Utilisateur cursorToUtilisateur(Cursor c){
         if (c.getCount() == 0) {
             return null;
         }
         c.moveToFirst();
         Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setNom(c.getString(0));
+        utilisateur.setId(c.getInt(NUM_UTILISATEUR_ID));
+        utilisateur.setNom(c.getString(NUM_UTILISATEUR_NOM));
+        utilisateur.setPrenom(c.getString(NUM_UTILISATEUR_PRENOM));
+        utilisateur.setMail(c.getString(NUM_UTILISATEUR_MAIL));
+        utilisateur.setTelephone(c.getString(NUM_UTILISATEUR_TELEPHONE));
+        utilisateur.setMobile(c.getString(NUM_UTILISATEUR_MOBILE));
+        utilisateur.setAdresse(c.getString(NUM_UTILISATEUR_ADRESSE));
+        utilisateur.setCp(c.getString(NUM_UTILISATEUR_CP));
+        utilisateur.setVille(c.getString(NUM_UTILISATEUR_VILLE));
+        utilisateur.setUsername(c.getString(NUM_UTILISATEUR_USERNAME));
+        utilisateur.setMdp(c.getString(NUM_UTILISATEUR_MDP));
         c.close();
         return utilisateur;
     }
