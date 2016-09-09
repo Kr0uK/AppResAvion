@@ -24,46 +24,56 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+/*
         Thread thread = new Thread(new Runnable() {
             @Override
-            public void run() {
+            public void run() {*/
 
+                Log.w("TAG", "début");
                 DAOBase daoBase = new DAOBase(getApplicationContext());
                 daoBase.getWDb();
+
                 Aeroport aeroport;
-                String mCSVfile = "/res/assets/aeroports.csv";
+
+                String mCSVfile = "assets/aeroports.csv";
                 AssetManager manager = getAssets();
                 InputStream inStream = null;
+                Log.w("TAG", "avant le try");
                 try {
                     inStream = manager.open(mCSVfile);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
-                String line = "";
+                Log.w("TAG", "ca lit");
+            //    BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
+              String line = "";
+        Log.w("TAG", "avant l'autre try");
                 try {
-                    while ((line = buffer.readLine()) != null) {
+                    while ((line = )) != null) {
                         String[] colums = line.split(",");
-                        if (colums.length != 5) {
+                        /*
+                        if (colums.length != 6) {
                             Log.d("CSVParser", "Skipping Bad CSV Row");
                             continue;
-                        }
-
-                        aeroport = new Aeroport(0,colums[0].trim(),colums[1].trim(),colums[2].trim(),colums[3].trim(),Float.parseFloat(colums[4].trim()),Float.parseFloat(colums[5].trim()));
+                        } */
+                        Log.w("TAG", "ca marche");
+                        aeroport = new Aeroport(0,colums[0].trim().toString(),colums[1].trim().toString(),colums[2].trim().toString(),colums[3].trim().toString(),Float.parseFloat(colums[4].trim()),Float.parseFloat(colums[5].trim()));
                         AeroportDAO.ajouterAeroport(aeroport);
                         Log.d("TAG",aeroport.toString());
                         Log.d("TAG","ajouté");
                     }
-                } catch (IOException e) {
+                }finally {
+                }
+        /*catch (IOException e) {
+                    Log.w("TAG", "exception");
                     e.printStackTrace();
+                }
+*/
                 }
 
 
 
-
             }
-        });
-    }
-}
+
+
+

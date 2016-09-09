@@ -20,7 +20,7 @@ import dao.DAOBase;
 public class ImportCSV {
 
 
-
+/*
     //TODO faire marcher ça
     public void ImportCSV (Context context) {
         Aeroport aeroport;
@@ -43,7 +43,7 @@ public class ImportCSV {
                     continue;
                 }
 
-                aeroport = new Aeroport(0,colums[0].trim(),colums[1].trim(),colums[2].trim(),colums[3].trim(),Float.parseFloat(colums[4].trim()),Float.parseFloat([5].trim()));
+                aeroport = new Aeroport(0,colums[0].trim(),colums[1].trim(),colums[2].trim(),colums[3].trim(),Float.parseFloat(colums[4].trim()),Float.parseFloat(colums[5].trim()));
                 AeroportDAO.ajouterAeroport(aeroport);
             }
         } catch (IOException e) {
@@ -51,5 +51,5 @@ public class ImportCSV {
         }
 
 
-    }
+    }*/
 }
