@@ -39,13 +39,13 @@ public class AeroportDAO {
 
     public static final String DROP_AEROPORT = "DROP TABLE IF EXISTS " + TABLE_AEROPORT + ";";
 
-    public void ajouterAeroport(Aeroport a){
+    public static void ajouterAeroport(Aeroport a){
         //TODO ajouter un Aeroport
         //databaseHandler = new DatabaseHandler(context);
         //sqLiteDatabase = databaseHandler.getWritableDatabase();
 
         ContentValues value = new ContentValues();
-        Log.w("TEST","Je suis dans l'ajout d'util");
+        Log.w("TEST","Je suis dans l'ajout d'aeroport");
         value.put(AEROPORT_NOM, a.getNom());
         value.put(AEROPORT_VILLE, a.getVille());
         value.put(AEROPORT_PAYS, a.getPays());
