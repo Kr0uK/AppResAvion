@@ -1,7 +1,5 @@
 package dao;
 
-import dbClass.Trajet;
-
 /**
  * Created by RENAUD on 07/09/2016.
  */

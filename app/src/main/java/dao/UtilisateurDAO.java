@@ -1,12 +1,9 @@
 package dao;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import cdi.appresavion.DatabaseHandler;
+import android.content.ContentValues;
+import android.database.Cursor;
+
 import dbClass.Utilisateur;
 
 /**
@@ -80,35 +77,63 @@ public class UtilisateurDAO {
         DAOBase.getWDb().insert(TABLE_UTILISATEUR, null, value);
     }
 
+    /**
+     * Supprime un utilisateur a partir d'un id
+     * @param id
+     */
     public static void supprimerUtilisateur(int id){
-        //TODO supprimer un utilisateur
+        DAOBase.getWDb().delete(TABLE_UTILISATEUR, UTILISATEUR_ID + " = " + id,null);
     }
 
-    public static void modifierUtilisateur(Utilisateur u){
-        //TODO modifier un utilisateur
+    /**
+     * Modifier un utilisateur a partir d'un id et de l'objet Utilisateur
+     * @param u utilisateur
+     * @param id
+     */
+    public static void modifierUtilisateur(Utilisateur u, int id){
+        //TODO /!\ si un champ est vide dans l'objet, il remplace par null
+        ContentValues value = new ContentValues();
+
+        //Récupération des valeurs dans l'objet Utilisateur
+        value.put(UTILISATEUR_NOM, u.getNom());
+        value.put(UTILISATEUR_PRENOM, u.getPrenom());
+        value.put(UTILISATEUR_MAIL, u.getMail());
+        value.put(UTILISATEUR_TELEPHONE, u.getTelephone());
+        value.put(UTILISATEUR_MOBILE, u.getMobile());
+        value.put(UTILISATEUR_ADRESSE, u.getAdresse());
+        value.put(UTILISATEUR_CP, u.getCp());
+        value.put(UTILISATEUR_VILLE, u.getVille());
+        value.put(UTILISATEUR_USERNAME, u.getUsername());
+        value.put(UTILISATEUR_MDP, u.getMdp());
+
+        //Update dans la base
+        DAOBase.getWDb().update(TABLE_UTILISATEUR, value, UTILISATEUR_ID + " = " + id, null);
     }
 
     /**
      * Création du curseur qui va parcourir la base
      * @param id
-     * @return
+     * @return utilisateur
      */
     public static Utilisateur selectionnerUtilisateur(int id){
-        Cursor c = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_UTILISATEUR + " WHERE " + UTILISATEUR_ID + " = " + id + ";", null);
+        Cursor c = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_UTILISATEUR + " WHERE " + UTILISATEUR_ID + " = " + id, null);
         return cursorToUtilisateur(c);
     }
 
     /**
-     *
-     * @param c
-     * @return
+     * Transformation du curseur en Utilisateur
+     * @param c cursor
+     * @return utilisateur
      */
     public static Utilisateur cursorToUtilisateur(Cursor c){
-        if (c.getCount() == 0) {
+        //Verifie qu'il y a une ligne
+        if (c.getCount() == 0){
             return null;
         }
+        //Déplace le curseur a la valeur 0
         c.moveToFirst();
         Utilisateur utilisateur = new Utilisateur();
+        //Ajout les informations du curseur dans l'objet utilisateur
         utilisateur.setId(c.getInt(NUM_UTILISATEUR_ID));
         utilisateur.setNom(c.getString(NUM_UTILISATEUR_NOM));
         utilisateur.setPrenom(c.getString(NUM_UTILISATEUR_PRENOM));
@@ -120,6 +145,7 @@ public class UtilisateurDAO {
         utilisateur.setVille(c.getString(NUM_UTILISATEUR_VILLE));
         utilisateur.setUsername(c.getString(NUM_UTILISATEUR_USERNAME));
         utilisateur.setMdp(c.getString(NUM_UTILISATEUR_MDP));
+
         c.close();
         return utilisateur;
     }
