@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import cdi.appresavion.DatabaseHandler;
 import dao.AeroportDAO;
 import dbClass.Aeroport;
+import dao.DAOBase;
 
 public class ImportCSV {
 
@@ -20,7 +21,6 @@ public class ImportCSV {
 
     //TODO faire marcher ça
     public  ImportCSV (Context context) {
-        SQLiteDatabase db = new SQLiteDatabase;
         String mCSVfile = "aeroports.csv";
         AssetManager manager = context.getAssets();
         InputStream inStream = null;
@@ -36,16 +36,16 @@ public class ImportCSV {
         try {
             while ((line = buffer.readLine()) != null) {
                 String[] colums = line.split(",");
-                if (colums.length != 4) {
+                if (colums.length != 5) {
                     Log.d("CSVParser", "Skipping Bad CSV Row");
                     continue;
                 }
                 ContentValues cv = new ContentValues(5);
-                cv.put(nom, colums[0].trim());
-                cv.put(dbCol1, colums[1].trim());
-                cv.put(dbCol2, colums[2].trim());
-                cv.put(dbCol3, colums[3].trim());
-                cv.put(dbCol4, colums[4].trim());
+                cv.put(, colums[0].trim());
+                cv.put(, colums[1].trim());
+                cv.put(, colums[2].trim());
+                cv.put(, colums[3].trim());
+                cv.put(, colums[4].trim());
                 db.insert(, null, cv);
             }
         } catch (IOException e) {
