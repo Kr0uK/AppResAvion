@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">AppResAvion</string>
+    <string name="title_activity_maps">Map</string>
+
+    <!--    Navigation    -->
+    <string name="GMap_label">Itinéraire</string>
+    <string name="GMap_description">Localisation GMS avec trajet routier vers Aeroport</string>
+
+    <!--    MapsActivity    -->
+    <string name="geoloc_ok">"Géolocalisation effectuée avec succès !"</string>
+
+    <!--    PermissionsUtilis    -->
+    <string name="permission_rationale_location">L\'accès au service de localisation est nécessaire pour utiliser la fonctionnalité \'my location\', qui indique votre position actuelle sur la carte.</string>
+    <string name="location_permission_denied">Cet activité nécessite l\'autorisation de localisation pour activer le layer \'my location\'.  Veuillez essayer de nouveau en accordant l\'accès à la géolocalisation.\nSi l\'autorisation a été refusée de manière permanence, il peut être activé à partir des paramètres système &gt; Apps &gt; AppResAvion</string>
+    <string name="permission_required_toast">Votre géolocalisation est nécessaire pour utiliser cette fonctionnalité.</string>
 </resources>
