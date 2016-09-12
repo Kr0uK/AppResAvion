@@ -29,7 +29,7 @@ public class DAOBase {
         return mDb;
     }
 
-    public void close(){
+    public static void close(){
         mDb.close();
     }
 

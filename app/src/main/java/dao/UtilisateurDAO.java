@@ -75,20 +75,26 @@ public class UtilisateurDAO {
 
         //Insert dans la base
         DAOBase.getWDb().insert(TABLE_UTILISATEUR, null, value);
+
+        //Fermeture de la connexion a la bdd
+        DAOBase.close();
     }
 
     /**
      * Supprime un utilisateur a partir d'un id
-     * @param id
+     * @param id id id de l'utilisateur
      */
     public static void supprimerUtilisateur(int id){
         DAOBase.getWDb().delete(TABLE_UTILISATEUR, UTILISATEUR_ID + " = " + id,null);
+
+        //Fermeture de la connexion a la bdd
+        DAOBase.close();
     }
 
     /**
      * Modifier un utilisateur a partir d'un id et de l'objet Utilisateur
      * @param u utilisateur
-     * @param id
+     * @param id id de l'utilisateur
      */
     public static void modifierUtilisateur(Utilisateur u, int id){
         //TODO /!\ si un champ est vide dans l'objet, il remplace par null a faire dans interface
@@ -108,11 +114,14 @@ public class UtilisateurDAO {
 
         //Update dans la base
         DAOBase.getWDb().update(TABLE_UTILISATEUR, value, UTILISATEUR_ID + " = " + id, null);
+
+        //Fermeture de la connexion a la bdd
+        DAOBase.close();
     }
 
     /**
      * Création du curseur qui va parcourir la base
-     * @param id
+     * @param id id id de l'utilisateur
      * @return utilisateur
      */
     public static Utilisateur selectionnerUtilisateur(int id){
@@ -132,8 +141,9 @@ public class UtilisateurDAO {
         }
         //Déplace le curseur a la valeur 0
         c.moveToFirst();
+
+        //Ajoute les informations du curseur dans l'objet utilisateur
         Utilisateur utilisateur = new Utilisateur();
-        //Ajout les informations du curseur dans l'objet utilisateur
         utilisateur.setId(c.getInt(NUM_UTILISATEUR_ID));
         utilisateur.setNom(c.getString(NUM_UTILISATEUR_NOM));
         utilisateur.setPrenom(c.getString(NUM_UTILISATEUR_PRENOM));

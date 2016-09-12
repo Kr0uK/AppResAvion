@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         try{
-            Utilisateur utilTest = UtilisateurDAO.selectionnerUtilisateur(3);
+            Utilisateur utilTest = UtilisateurDAO.selectionnerUtilisateur(1);
             String testString = utilTest.getNom() + " " + utilTest.getPrenom() + " " + utilTest.getMail();
             Log.w("TEST",testString);
         } catch (Exception e){

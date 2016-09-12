@@ -1,36 +1,36 @@
 package dbClass;
 
-import java.sql.Time;
 import java.util.Date;
 
 /**
  * Created by RENAUD on 06/09/2016.
  */
 public class Trajet {
-    private int id;
+    private int trajetId;
     private int avionId;
     private int aeroportId;
     private int aerAeroportId;
     private Date dateDepart;
-    private Time heureDepart;
-    private Time heureArrivee;
+    private Date dateArrivee;
 
-    public Trajet(int id, int avionId, int aeroportId, int aerAeroportId, Date dateDepart, Time heureDepart, Time heureArrivee) {
-        this.id = id;
+    public Trajet() {
+    }
+
+    public Trajet(int trajetId, int avionId, int aeroportId, int aerAeroportId, Date dateDepart, Date dateArrivee) {
+        this.trajetId = trajetId;
         this.avionId = avionId;
         this.aeroportId = aeroportId;
         this.aerAeroportId = aerAeroportId;
         this.dateDepart = dateDepart;
-        this.heureDepart = heureDepart;
-        this.heureArrivee = heureArrivee;
+        this.dateArrivee = dateArrivee;
     }
 
-    public int getId() {
-        return id;
+    public int getTrajetId() {
+        return trajetId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTrajetId(int trajetId) {
+        this.trajetId = trajetId;
     }
 
     public int getAvionId() {
@@ -65,19 +65,11 @@ public class Trajet {
         this.dateDepart = dateDepart;
     }
 
-    public Time getHeureDepart() {
-        return heureDepart;
+    public Date getDateArrivee() {
+        return dateArrivee;
     }
 
-    public void setHeureDepart(Time heureDepart) {
-        this.heureDepart = heureDepart;
-    }
-
-    public Time getHeureArrivee() {
-        return heureArrivee;
-    }
-
-    public void setHeureArrivee(Time heureArrivee) {
-        this.heureArrivee = heureArrivee;
+    public void setDateArrivee(Date dateArrivee) {
+        this.dateArrivee = dateArrivee;
     }
 }
