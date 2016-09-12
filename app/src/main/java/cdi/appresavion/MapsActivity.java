@@ -63,6 +63,8 @@ public class MapsActivity extends AppCompatActivity
     public void onMapReady(GoogleMap map) {
         mMap = map;
 
+        int i = 1;
+
         //CONFIG
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         map.getUiSettings().setZoomControlsEnabled(true);
