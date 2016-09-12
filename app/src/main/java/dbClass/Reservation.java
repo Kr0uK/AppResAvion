@@ -3,7 +3,8 @@ package dbClass;
 import java.util.Date;
 
 /**
- * Created by RENAUD on 06/09/2016.
+ * Created by bigwanjeog
+ * 06/09/2016
  */
 public class Reservation {
     private int reservationId;

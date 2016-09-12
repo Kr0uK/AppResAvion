@@ -1,7 +1,8 @@
 package dbClass;
 
 /**
- * Created by RENAUD on 12/09/2016.
+ * Created by bigwanjeog
+ * 12/09/2016
  */
 public class Place {
     private int reservationId;

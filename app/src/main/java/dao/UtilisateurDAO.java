@@ -7,7 +7,8 @@ import android.database.Cursor;
 import dbClass.Utilisateur;
 
 /**
- * Created by RENAUD on 06/09/2016.
+ * Created by bigwanjeog
+ * 06/09/2016
  */
 public class UtilisateurDAO {
 

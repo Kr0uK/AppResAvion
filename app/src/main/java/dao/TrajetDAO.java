@@ -6,7 +6,8 @@ import android.database.Cursor;
 import dbClass.Trajet;
 
 /**
- * Created by RENAUD on 07/09/2016.
+ * Created by bigwanjeog
+ * 07/09/2016
  */
 public class TrajetDAO {
 

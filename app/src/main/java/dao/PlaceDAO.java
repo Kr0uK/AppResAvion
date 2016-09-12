@@ -5,7 +5,8 @@ import android.content.ContentValues;
 import dbClass.Place;
 
 /**
- * Created by RENAUD on 07/09/2016.
+ * Created by bigwanjeog
+ * 07/09/2016
  */
 public class PlaceDAO {
 
