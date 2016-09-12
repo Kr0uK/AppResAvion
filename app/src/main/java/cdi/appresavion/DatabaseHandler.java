@@ -25,10 +25,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.w("TEST","Je suis dans le onCreate");
-      //  db.execSQL(UtilisateurDAO.CREATE_UTILISATEUR);
+        Log.w("TEST", "Je suis dans le onCreate");
+        //db.execSQL(UtilisateurDAO.CREATE_UTILISATEUR);
+
         db.execSQL(AeroportDAO.CREATE_AEROPORT);
-        Log.w("TEST","Je suis a la fin du onCreate");
+        Log.w("TEST", "Je suis a la fin du onCreate");
 
     }
 

@@ -13,7 +13,7 @@ public class Aeroport {
     private float longitude;
 
 
-    public Aeroport(int id, String nom,String ville, String pays, String code, float latitude,float longitude ) {
+    public Aeroport(int id, String nom,String ville, String pays, String code, float latitude,float longitude) {
         this.id = id;
         this.nom = nom;
         this.ville = ville;

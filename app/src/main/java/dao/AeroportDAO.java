@@ -30,11 +30,11 @@ public class AeroportDAO {
     public static final String CREATE_AEROPORT = "CREATE TABLE " + TABLE_AEROPORT + "("
             + AEROPORT_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + AEROPORT_NOM + " VARCHAR(100), "
-            + AEROPORT_VILLE + "VARCHAR(80), "
-            + AEROPORT_PAYS + "VARCHAR(100)"
-            + AEROPORT_CODE + " CHAR(3), "
-            + AEROPORT_LATITUDE + "REAL, "
-            + AEROPORT_LONGITUDE + "REAL);";
+            + AEROPORT_VILLE + " VARCHAR(80), "
+            + AEROPORT_PAYS + " VARCHAR(100), "
+            + AEROPORT_CODE + " VARCHAR(3), "
+            + AEROPORT_LATITUDE + " REAL, "
+            + AEROPORT_LONGITUDE + " REAL );";
 
 
     public static final String DROP_AEROPORT = "DROP TABLE IF EXISTS " + TABLE_AEROPORT + ";";
