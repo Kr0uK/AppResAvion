@@ -2,6 +2,7 @@ package dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 
@@ -40,17 +41,17 @@ public class ReservationDAO {
 
     /**
      * Ajout d'une reservation dans la bdd a partir de l'objet Reservation
-     * @param r Reservation
+     * @param ReservationAdd Reservation
      */
-    public static void ajouterReservation(Reservation r){
+    public static void ajouterReservation(Reservation ReservationAdd){
         ContentValues value = new ContentValues();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         //Récupération des valeurs dans l'objet Reservation
-        value.put(RESERVATION_UTILISATEUR_ID, r.getUtilisateurId());
-        value.put(RESERVATION_DATE, sdf.format(r.getDate()));
-        value.put(RESERVATION_PRIX, r.getPrix());
-        value.put(RESERVATION_NBPERSONNES, r.getNbPersonnes());
+        value.put(RESERVATION_UTILISATEUR_ID, ReservationAdd.getUtilisateurId());
+        value.put(RESERVATION_DATE, sdf.format(ReservationAdd.getDate()));
+        value.put(RESERVATION_PRIX, ReservationAdd.getPrix());
+        value.put(RESERVATION_NBPERSONNES, ReservationAdd.getNbPersonnes());
 
         //Insert dans la base
         DAOBase.getWDb().insert(TABLE_RESERVATION, null, value);
@@ -72,10 +73,10 @@ public class ReservationDAO {
 
     /**
      * Modifier une reservation a partir d'un id et de l'objet Reservation
-     * @param r Reservation
+     * @param ReservationUpdate Reservation
      * @param id id de la reservation
      */
-    public static void modifierReservation(Reservation r, int id){
+    public static void modifierReservation(Reservation ReservationUpdate, int id){
         //TODO /!\ si un champ est vide dans l'objet, il remplace par null a faire dans interface + date probleme
         /**
          * // set the format to sql date time
@@ -90,10 +91,10 @@ public class ReservationDAO {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         //Récupération des valeurs dans l'objet Reservation
-        value.put(RESERVATION_UTILISATEUR_ID, r.getUtilisateurId());
-        value.put(RESERVATION_DATE, sdf.format(r.getDate()));
-        value.put(RESERVATION_PRIX, r.getPrix());
-        value.put(RESERVATION_NBPERSONNES, r.getNbPersonnes());
+        value.put(RESERVATION_UTILISATEUR_ID, ReservationUpdate.getUtilisateurId());
+        value.put(RESERVATION_DATE, sdf.format(ReservationUpdate.getDate()));
+        value.put(RESERVATION_PRIX, ReservationUpdate.getPrix());
+        value.put(RESERVATION_NBPERSONNES, ReservationUpdate.getNbPersonnes());
 
         //Update dans la base
         DAOBase.getWDb().update(TABLE_RESERVATION, value, RESERVATION_ID + " = " + id, null);
@@ -127,18 +128,18 @@ public class ReservationDAO {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        Reservation reservation = new Reservation();
+        Reservation ReservationSelect = new Reservation();
         //Ajoute les informations du curseur dans l'objet reservation
         try{
-            reservation.setReservationId(c.getInt(NUM_RESERVATION_ID));
-            reservation.setUtilisateurId(c.getInt(NUM_RESERVATION_UTILISATEUR_ID));
-            reservation.setDate(sdf.parse(c.getString(NUM_RESERVATION_DATE)));
-            reservation.setPrix(c.getInt(NUM_RESERVATION_PRIX));
-            reservation.setNbPersonnes(c.getInt(NUM_RESERVATION_NBPERSONNES));
+            ReservationSelect.setReservationId(c.getInt(NUM_RESERVATION_ID));
+            ReservationSelect.setUtilisateurId(c.getInt(NUM_RESERVATION_UTILISATEUR_ID));
+            ReservationSelect.setDate(sdf.parse(c.getString(NUM_RESERVATION_DATE)));
+            ReservationSelect.setPrix(c.getInt(NUM_RESERVATION_PRIX));
+            ReservationSelect.setNbPersonnes(c.getInt(NUM_RESERVATION_NBPERSONNES));
         }catch (Exception e){
-
+            Log.w("TEST",e);
         }
         c.close();
-        return reservation;
+        return ReservationSelect;
     }
 }

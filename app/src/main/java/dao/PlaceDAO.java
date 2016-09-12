@@ -27,13 +27,13 @@ public class PlaceDAO {
     //Suppression de la table PLACE si elle existe
     public static final String DROP_PLACE = "DROP TABLE IF EXISTS " + TABLE_PLACE + ";";
 
-    public void ajouterPlace(Place p){
+    public void ajouterPlace(Place PlaceAdd){
         ContentValues value = new ContentValues();
 
         //Récupération des valeurs dans l'objet Utilisateur
-        value.put(PLACE_RESERVATION_ID, p.getReservationId());
-        value.put(PLACE_TRAJET_ID, p.getTrajetId());
-        value.put(PLACE_NUM, p.getPlaceNum());
+        value.put(PLACE_RESERVATION_ID, PlaceAdd.getReservationId());
+        value.put(PLACE_TRAJET_ID, PlaceAdd.getTrajetId());
+        value.put(PLACE_NUM, PlaceAdd.getPlaceNum());
 
         //Insert dans la base
         DAOBase.getWDb().insert(TABLE_PLACE, null, value);

@@ -43,16 +43,16 @@ public class AeroportDAO {
     //Suppresion de la table si elle existe déjà
     public static final String DROP_AEROPORT = "DROP TABLE IF EXISTS " + TABLE_AEROPORT + ";";
 
-    public static void ajouterAeroport(Aeroport a){
+    public static void ajouterAeroport(Aeroport AeroportAdd){
         ContentValues value = new ContentValues();
 
         //Récupération des valeurs dans l'objet Utilisateur
-        value.put(AEROPORT_NOM, a.getNom());
-        value.put(AEROPORT_VILLE, a.getVille());
-        value.put(AEROPORT_PAYS, a.getPays());
-        value.put(AEROPORT_CODE, a.getCode());
-        value.put(AEROPORT_LATITUDE, a.getLatitude());
-        value.put(AEROPORT_LONGITUDE, a.getLongitude());
+        value.put(AEROPORT_NOM, AeroportAdd.getNom());
+        value.put(AEROPORT_VILLE, AeroportAdd.getVille());
+        value.put(AEROPORT_PAYS, AeroportAdd.getPays());
+        value.put(AEROPORT_CODE, AeroportAdd.getCode());
+        value.put(AEROPORT_LATITUDE, AeroportAdd.getLatitude());
+        value.put(AEROPORT_LONGITUDE, AeroportAdd.getLongitude());
 
         //Insert dans la base
         DAOBase.getWDb().insert(TABLE_AEROPORT, null, value);
@@ -92,16 +92,16 @@ public class AeroportDAO {
         c.moveToFirst();
 
         //Ajoute les informations du curseur dans l'objet Aeroport
-        Aeroport aeroport = new Aeroport();
-        aeroport.setId(c.getInt(NUM_AEROPORT_ID));
-        aeroport.setNom(c.getString(NUM_AEROPORT_NOM));
-        aeroport.setVille(c.getString(NUM_AEROPORT_VILLE));
-        aeroport.setPays(c.getString(NUM_AEROPORT_PAYS));
-        aeroport.setCode(c.getString(NUM_AEROPORT_CODE));
-        aeroport.setLatitude(c.getDouble(NUM_AEROPORT_LATITUDE));
-        aeroport.setLongitude(c.getDouble(NUM_AEROPORT_LONGITUDE));
+        Aeroport AeroportSelect = new Aeroport();
+        AeroportSelect.setId(c.getInt(NUM_AEROPORT_ID));
+        AeroportSelect.setNom(c.getString(NUM_AEROPORT_NOM));
+        AeroportSelect.setVille(c.getString(NUM_AEROPORT_VILLE));
+        AeroportSelect.setPays(c.getString(NUM_AEROPORT_PAYS));
+        AeroportSelect.setCode(c.getString(NUM_AEROPORT_CODE));
+        AeroportSelect.setLatitude(c.getDouble(NUM_AEROPORT_LATITUDE));
+        AeroportSelect.setLongitude(c.getDouble(NUM_AEROPORT_LONGITUDE));
 
         c.close();
-        return aeroport;
+        return AeroportSelect;
     }
 }
