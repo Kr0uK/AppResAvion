@@ -3,10 +3,12 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.text.SimpleDateFormat;
+
 import dbClass.Reservation;
 
 /**
- * Created by bigwanjeog
+ * Created by bigwanjeog.
  * 07/09/2016
  */
 public class ReservationDAO {
@@ -20,8 +22,8 @@ public class ReservationDAO {
     public static final int NUM_RESERVATION_DATE = 2;
     public static final String RESERVATION_PRIX = "RESERVATION_PRIX";
     public static final int NUM_RESERVATION_PRIX = 3;
-    public static final String RESERVATION_NBPERSONNES= "RESERVATION_NBPERSONNES";
-    public static final int NUM_RESERVATION_NBPERSONNES= 4;
+    public static final String RESERVATION_NBPERSONNES = "RESERVATION_NBPERSONNES";
+    public static final int NUM_RESERVATION_NBPERSONNES = 4;
 
     //Nom de la table
     public static final String TABLE_RESERVATION = "RESERVATION";
@@ -40,12 +42,13 @@ public class ReservationDAO {
      * Ajout d'une reservation dans la bdd a partir de l'objet Reservation
      * @param r Reservation
      */
-    public void ajouterReservation(Reservation r){
+    public static void ajouterReservation(Reservation r){
         ContentValues value = new ContentValues();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         //Récupération des valeurs dans l'objet Reservation
         value.put(RESERVATION_UTILISATEUR_ID, r.getUtilisateurId());
-        //value.put(RESERVATION_DATE, r.getDate()); problème avec date
+        value.put(RESERVATION_DATE, sdf.format(r.getDate()));
         value.put(RESERVATION_PRIX, r.getPrix());
         value.put(RESERVATION_NBPERSONNES, r.getNbPersonnes());
 
@@ -60,7 +63,7 @@ public class ReservationDAO {
      * Supprime une reservation a partir d'un id
      * @param id id de la reservation
      */
-    public void supprimerReservation(int id){
+    public static void supprimerReservation(int id){
         DAOBase.getWDb().delete(TABLE_RESERVATION, RESERVATION_ID + " = " + id, null);
 
         //Fermeture de la connexion a la bdd
@@ -72,7 +75,7 @@ public class ReservationDAO {
      * @param r Reservation
      * @param id id de la reservation
      */
-    public void modifierReservation(Reservation r, int id){
+    public static void modifierReservation(Reservation r, int id){
         //TODO /!\ si un champ est vide dans l'objet, il remplace par null a faire dans interface + date probleme
         /**
          * // set the format to sql date time
@@ -84,9 +87,11 @@ public class ReservationDAO {
          */
         ContentValues value = new ContentValues();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         //Récupération des valeurs dans l'objet Reservation
         value.put(RESERVATION_UTILISATEUR_ID, r.getUtilisateurId());
-        //value.put(RESERVATION_DATE, r.getDate());
+        value.put(RESERVATION_DATE, sdf.format(r.getDate()));
         value.put(RESERVATION_PRIX, r.getPrix());
         value.put(RESERVATION_NBPERSONNES, r.getNbPersonnes());
 
@@ -120,14 +125,19 @@ public class ReservationDAO {
         //Déplace le curseur a la valeur 0
         c.moveToFirst();
 
-        //Ajoute les informations du curseur dans l'objet reservation
-        Reservation reservation = new Reservation();
-        reservation.setReservationId(c.getInt(NUM_RESERVATION_ID));
-        reservation.setUtilisateurId(c.getInt(NUM_RESERVATION_UTILISATEUR_ID));
-        //reservation.setDate(c.getString(NUM_RESERVATION_DATE));
-        reservation.setPrix(c.getInt(NUM_RESERVATION_PRIX));
-        reservation.setNbPersonnes(c.getInt(NUM_RESERVATION_NBPERSONNES));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+        Reservation reservation = new Reservation();
+        //Ajoute les informations du curseur dans l'objet reservation
+        try{
+            reservation.setReservationId(c.getInt(NUM_RESERVATION_ID));
+            reservation.setUtilisateurId(c.getInt(NUM_RESERVATION_UTILISATEUR_ID));
+            reservation.setDate(sdf.parse(c.getString(NUM_RESERVATION_DATE)));
+            reservation.setPrix(c.getInt(NUM_RESERVATION_PRIX));
+            reservation.setNbPersonnes(c.getInt(NUM_RESERVATION_NBPERSONNES));
+        }catch (Exception e){
+
+        }
         c.close();
         return reservation;
     }

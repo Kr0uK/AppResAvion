@@ -1,27 +1,28 @@
 package dbClass;
 
 /**
- * Created by RENAUD on 06/09/2016.
+ * Created by bigwanjeog
+ * 06/09/2016
  */
 public class Aeroport {
     private int id;
     private String nom;
-    private String code;
-    private String localisation;
-    private String cp;
     private String ville;
-    private String telephone;
     private String pays;
+    private String code;
+    private double latitude;
+    private double longitude;
 
-    public Aeroport(int id, String nom, String code, String localisation, String cp, String ville, String telephone, String pays) {
-        this.id = id;
+    public Aeroport() {
+    }
+
+    public Aeroport(String nom, String ville, String pays, String code, double latitude, double longitude) {
         this.nom = nom;
-        this.code = code;
-        this.localisation = localisation;
-        this.cp = cp;
         this.ville = ville;
-        this.telephone = telephone;
         this.pays = pays;
+        this.code = code;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public int getId() {
@@ -40,30 +41,6 @@ public class Aeroport {
         this.nom = nom;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getLocalisation() {
-        return localisation;
-    }
-
-    public void setLocalisation(String localisation) {
-        this.localisation = localisation;
-    }
-
-    public String getCp() {
-        return cp;
-    }
-
-    public void setCp(String cp) {
-        this.cp = cp;
-    }
-
     public String getVille() {
         return ville;
     }
@@ -72,19 +49,35 @@ public class Aeroport {
         this.ville = ville;
     }
 
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
     public String getPays() {
         return pays;
     }
 
     public void setPays(String pays) {
         this.pays = pays;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

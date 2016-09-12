@@ -16,7 +16,8 @@ import dao.UtilisateurDAO;
 
 
 /**
- * Created by RENAUD on 05/09/2016.
+ * Created by bigwanjeog
+ * 05/09/2016
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -34,7 +35,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL(TrajetDAO.CREATE_TRAJET);
             db.execSQL(ReservationDAO.CREATE_RESERVATION);
             db.execSQL(PlaceDAO.CREATE_PLACE);
-            Log.w("TEST","Base crée !");
+            Log.w("TEST","Base created !");
         }catch (SQLiteException e){
             Log.w("TEST", e);
         }
