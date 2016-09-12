@@ -91,7 +91,7 @@ public class UtilisateurDAO {
      * @param id
      */
     public static void modifierUtilisateur(Utilisateur u, int id){
-        //TODO /!\ si un champ est vide dans l'objet, il remplace par null
+        //TODO /!\ si un champ est vide dans l'objet, il remplace par null a faire dans interface
         ContentValues value = new ContentValues();
 
         //Récupération des valeurs dans l'objet Utilisateur

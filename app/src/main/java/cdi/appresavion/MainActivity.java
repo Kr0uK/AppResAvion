@@ -23,12 +23,18 @@ public class MainActivity extends AppCompatActivity {
         //UtilisateurDAO.ajouterUtilisateur(util);
 
         //Modifier un utilisateur
-        UtilisateurDAO.modifierUtilisateur(util, 1);
+        //UtilisateurDAO.modifierUtilisateur(util, 1);
 
-        //Affichage d'un utilisateur en fonction de son ID /!\ CRASH SI LA LIGNE EST VIDE /!\
-        Utilisateur utilTest = UtilisateurDAO.selectionnerUtilisateur(1);
-        String testString = utilTest.getNom() + " " + utilTest.getPrenom() + " " + utilTest.getMail();
-        Log.w("TEST",testString);
+
+
+        try{
+            Utilisateur utilTest = UtilisateurDAO.selectionnerUtilisateur(3);
+            String testString = utilTest.getNom() + " " + utilTest.getPrenom() + " " + utilTest.getMail();
+            Log.w("TEST",testString);
+        } catch (Exception e){
+            Log.w("TEST", "L'utilisateur n'existe pas");
+        }
+
 
         //Supprimer un utilisateur
         UtilisateurDAO.supprimerUtilisateur(3);

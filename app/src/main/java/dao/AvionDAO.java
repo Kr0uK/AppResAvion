@@ -24,7 +24,7 @@ public class AvionDAO {
             + AVION_MODELE + " VARCHAR(50), "
             + AVION_CONSTRUCTEUR + " VARCHAR(60), "
             + AVION_NBPLACES + " INTEGER, "
-            + AVION_COMPAGNIE + "VARCHAR(60));";
+            + AVION_COMPAGNIE + " VARCHAR(60));";
     public static final String DROP_AVION = "DROP TABLE IF EXISTS " + TABLE_AVION + ";";
 
     public void ajouterAvion(Avion a){
