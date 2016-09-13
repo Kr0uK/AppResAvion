@@ -16,7 +16,7 @@ import dao.UtilisateurDAO;
 
 
 /**
- * Created by bigwanjeog
+ * Created by bigwanjeog.
  * 05/09/2016
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -28,22 +28,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        try{
+        try {
             db.execSQL(UtilisateurDAO.CREATE_UTILISATEUR);
             db.execSQL(AeroportDAO.CREATE_AEROPORT);
             db.execSQL(AvionDAO.CREATE_AVION);
             db.execSQL(TrajetDAO.CREATE_TRAJET);
             db.execSQL(ReservationDAO.CREATE_RESERVATION);
             db.execSQL(PlaceDAO.CREATE_PLACE);
-            Log.w("TEST","Base created !");
-        }catch (SQLiteException e){
+            Log.w("TEST", "Base created !");
+        } catch (SQLiteException e) {
             Log.w("TEST", e);
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        try{
+        try {
             db.execSQL(UtilisateurDAO.DROP_UTILISATEUR);
             db.execSQL(AeroportDAO.DROP_AEROPORT);
             db.execSQL(AvionDAO.DROP_AVION);
@@ -51,7 +51,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL(ReservationDAO.DROP_RESERVATION);
             db.execSQL(PlaceDAO.DROP_PLACE);
             onCreate(db);
-        }catch (SQLiteException e){
+        } catch (SQLiteException e) {
             Log.w("TEST", e);
         }
     }

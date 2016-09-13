@@ -4,10 +4,10 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import dbClass.Utilisateur;
+import dbtable.Utilisateur;
 
 /**
- * Created by bigwanjeog
+ * Created by bigwanjeog.
  * 06/09/2016
  */
 public class UtilisateurDAO {
@@ -56,23 +56,23 @@ public class UtilisateurDAO {
     public static final String  DROP_UTILISATEUR = "DROP TABLE IF EXISTS " + TABLE_UTILISATEUR + ";";
 
     /**
-     * Ajout d'un utilisateur dans la bdd a partir de l'objet Utilisateur
-     * @param UtilisateurAdd Utilisateur
+     * Ajout d'un utilisateur dans la bdd a partir de l'objet Utilisateur.
+     * @param utilisateurAdd Utilisateur
      */
-    public static void ajouterUtilisateur(Utilisateur UtilisateurAdd){
+    public static void ajouterUtilisateur(Utilisateur utilisateurAdd) {
         ContentValues value = new ContentValues();
 
         //Récupération des valeurs dans l'objet Utilisateur
-        value.put(UTILISATEUR_NOM, UtilisateurAdd.getNom());
-        value.put(UTILISATEUR_PRENOM, UtilisateurAdd.getPrenom());
-        value.put(UTILISATEUR_MAIL, UtilisateurAdd.getMail());
-        value.put(UTILISATEUR_TELEPHONE, UtilisateurAdd.getTelephone());
-        value.put(UTILISATEUR_MOBILE, UtilisateurAdd.getMobile());
-        value.put(UTILISATEUR_ADRESSE, UtilisateurAdd.getAdresse());
-        value.put(UTILISATEUR_CP, UtilisateurAdd.getCp());
-        value.put(UTILISATEUR_VILLE, UtilisateurAdd.getVille());
-        value.put(UTILISATEUR_USERNAME, UtilisateurAdd.getUsername());
-        value.put(UTILISATEUR_MDP, UtilisateurAdd.getMdp());
+        value.put(UTILISATEUR_NOM, utilisateurAdd.getNom());
+        value.put(UTILISATEUR_PRENOM, utilisateurAdd.getPrenom());
+        value.put(UTILISATEUR_MAIL, utilisateurAdd.getMail());
+        value.put(UTILISATEUR_TELEPHONE, utilisateurAdd.getTelephone());
+        value.put(UTILISATEUR_MOBILE, utilisateurAdd.getMobile());
+        value.put(UTILISATEUR_ADRESSE, utilisateurAdd.getAdresse());
+        value.put(UTILISATEUR_CP, utilisateurAdd.getCp());
+        value.put(UTILISATEUR_VILLE, utilisateurAdd.getVille());
+        value.put(UTILISATEUR_USERNAME, utilisateurAdd.getUsername());
+        value.put(UTILISATEUR_MDP, utilisateurAdd.getMdp());
 
         //Insert dans la base
         DAOBase.getWDb().insert(TABLE_UTILISATEUR, null, value);
@@ -82,36 +82,35 @@ public class UtilisateurDAO {
     }
 
     /**
-     * Supprime un utilisateur a partir d'un id
+     * Supprime un utilisateur a partir d'un id.
      * @param id id id de l'utilisateur
      */
-    public static void supprimerUtilisateur(int id){
-        DAOBase.getWDb().delete(TABLE_UTILISATEUR, UTILISATEUR_ID + " = " + id,null);
+    public static void supprimerUtilisateur(int id) {
+        DAOBase.getWDb().delete(TABLE_UTILISATEUR, UTILISATEUR_ID + " = " + id, null);
 
         //Fermeture de la connexion a la bdd
         DAOBase.close();
     }
 
     /**
-     * Modifier un utilisateur a partir d'un id et de l'objet Utilisateur
-     * @param UtilisateurUpdate utilisateur
+     * Modifier un utilisateur a partir d'un id et de l'objet Utilisateur.
+     * @param utilisateurUpdate utilisateur
      * @param id id de l'utilisateur
      */
-    public static void modifierUtilisateur(Utilisateur UtilisateurUpdate, int id){
-        //TODO /!\ si un champ est vide dans l'objet, il remplace par null a faire dans interface
+    public static void modifierUtilisateur(Utilisateur utilisateurUpdate, int id) {
         ContentValues value = new ContentValues();
 
         //Récupération des valeurs dans l'objet Utilisateur
-        value.put(UTILISATEUR_NOM, UtilisateurUpdate.getNom());
-        value.put(UTILISATEUR_PRENOM, UtilisateurUpdate.getPrenom());
-        value.put(UTILISATEUR_MAIL, UtilisateurUpdate.getMail());
-        value.put(UTILISATEUR_TELEPHONE, UtilisateurUpdate.getTelephone());
-        value.put(UTILISATEUR_MOBILE, UtilisateurUpdate.getMobile());
-        value.put(UTILISATEUR_ADRESSE, UtilisateurUpdate.getAdresse());
-        value.put(UTILISATEUR_CP, UtilisateurUpdate.getCp());
-        value.put(UTILISATEUR_VILLE, UtilisateurUpdate.getVille());
-        value.put(UTILISATEUR_USERNAME, UtilisateurUpdate.getUsername());
-        value.put(UTILISATEUR_MDP, UtilisateurUpdate.getMdp());
+        value.put(UTILISATEUR_NOM, utilisateurUpdate.getNom());
+        value.put(UTILISATEUR_PRENOM, utilisateurUpdate.getPrenom());
+        value.put(UTILISATEUR_MAIL, utilisateurUpdate.getMail());
+        value.put(UTILISATEUR_TELEPHONE, utilisateurUpdate.getTelephone());
+        value.put(UTILISATEUR_MOBILE, utilisateurUpdate.getMobile());
+        value.put(UTILISATEUR_ADRESSE, utilisateurUpdate.getAdresse());
+        value.put(UTILISATEUR_CP, utilisateurUpdate.getCp());
+        value.put(UTILISATEUR_VILLE, utilisateurUpdate.getVille());
+        value.put(UTILISATEUR_USERNAME, utilisateurUpdate.getUsername());
+        value.put(UTILISATEUR_MDP, utilisateurUpdate.getMdp());
 
         //Update dans la base
         DAOBase.getWDb().update(TABLE_UTILISATEUR, value, UTILISATEUR_ID + " = " + id, null);
@@ -121,43 +120,43 @@ public class UtilisateurDAO {
     }
 
     /**
-     * Création du curseur qui va parcourir la base
+     * Création du curseur qui va parcourir la base.
      * @param id id id de l'utilisateur
      * @return utilisateur
      */
-    public static Utilisateur selectionnerUtilisateur(int id){
+    public static Utilisateur selectionnerUtilisateur(int id) {
         Cursor c = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_UTILISATEUR + " WHERE " + UTILISATEUR_ID + " = " + id, null);
         return cursorToUtilisateur(c);
     }
 
     /**
-     * Transformation du curseur en Utilisateur
+     * Transformation du curseur en Utilisateur.
      * @param c cursor
      * @return utilisateur
      */
-    public static Utilisateur cursorToUtilisateur(Cursor c){
+    public static Utilisateur cursorToUtilisateur(Cursor c) {
         //Verifie qu'il y a une ligne
-        if (c.getCount() == 0){
+        if (c.getCount() == 0) {
             return null;
         }
         //Déplace le curseur a la valeur 0
         c.moveToFirst();
 
         //Ajoute les informations du curseur dans l'objet utilisateur
-        Utilisateur UtilisateurSelect = new Utilisateur();
-        UtilisateurSelect.setId(c.getInt(NUM_UTILISATEUR_ID));
-        UtilisateurSelect.setNom(c.getString(NUM_UTILISATEUR_NOM));
-        UtilisateurSelect.setPrenom(c.getString(NUM_UTILISATEUR_PRENOM));
-        UtilisateurSelect.setMail(c.getString(NUM_UTILISATEUR_MAIL));
-        UtilisateurSelect.setTelephone(c.getString(NUM_UTILISATEUR_TELEPHONE));
-        UtilisateurSelect.setMobile(c.getString(NUM_UTILISATEUR_MOBILE));
-        UtilisateurSelect.setAdresse(c.getString(NUM_UTILISATEUR_ADRESSE));
-        UtilisateurSelect.setCp(c.getString(NUM_UTILISATEUR_CP));
-        UtilisateurSelect.setVille(c.getString(NUM_UTILISATEUR_VILLE));
-        UtilisateurSelect.setUsername(c.getString(NUM_UTILISATEUR_USERNAME));
-        UtilisateurSelect.setMdp(c.getString(NUM_UTILISATEUR_MDP));
+        Utilisateur utilisateurSelect = new Utilisateur();
+        utilisateurSelect.setId(c.getInt(NUM_UTILISATEUR_ID));
+        utilisateurSelect.setNom(c.getString(NUM_UTILISATEUR_NOM));
+        utilisateurSelect.setPrenom(c.getString(NUM_UTILISATEUR_PRENOM));
+        utilisateurSelect.setMail(c.getString(NUM_UTILISATEUR_MAIL));
+        utilisateurSelect.setTelephone(c.getString(NUM_UTILISATEUR_TELEPHONE));
+        utilisateurSelect.setMobile(c.getString(NUM_UTILISATEUR_MOBILE));
+        utilisateurSelect.setAdresse(c.getString(NUM_UTILISATEUR_ADRESSE));
+        utilisateurSelect.setCp(c.getString(NUM_UTILISATEUR_CP));
+        utilisateurSelect.setVille(c.getString(NUM_UTILISATEUR_VILLE));
+        utilisateurSelect.setUsername(c.getString(NUM_UTILISATEUR_USERNAME));
+        utilisateurSelect.setMdp(c.getString(NUM_UTILISATEUR_MDP));
 
         c.close();
-        return UtilisateurSelect;
+        return utilisateurSelect;
     }
 }

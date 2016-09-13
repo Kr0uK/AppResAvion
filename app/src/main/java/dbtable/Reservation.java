@@ -1,9 +1,9 @@
-package dbClass;
+package dbtable;
 
 import java.util.Date;
 
 /**
- * Created by bigwanjeog
+ * Created by bigwanjeog.
  * 06/09/2016
  */
 public class Reservation {

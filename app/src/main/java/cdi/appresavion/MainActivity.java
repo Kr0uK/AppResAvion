@@ -4,16 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import dao.AeroportDAO;
 import dao.DAOBase;
 import dao.ReservationDAO;
-import dao.UtilisateurDAO;
-import dbClass.Aeroport;
-import dbClass.Reservation;
-import dbClass.Utilisateur;
+import dbtable.Aeroport;
+import dbtable.Reservation;
+
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -31,28 +27,29 @@ public class MainActivity extends AppCompatActivity {
 
         //Modifier un utilisateur
         //UtilisateurDAO.modifierUtilisateur(Util, 1);
-        /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try{
-            Reservation Reserv = new Reservation(1, sdf.parse("1994-16-10"), 1500,3);
-            ReservationDAO.ajouterReservation(Reserv);
-            Log.w("TEST", sdf.format(Reserv.getDate()));
-        }catch (Exception e){
-            Log.w("TEST","nop");
-        }*/
 
-        Aeroport Aero = new Aeroport("Goroka", "Goroka", "Papua New Guinea", "GKA", -6.081689, 145.391881); //Objet aeroport
-        AeroportDAO.ajouterAeroport(Aero);                                                                  //Ajout de l'aeroport
-        Aeroport aeroTest = AeroportDAO.selectionnerAeroport(1);                                                //Selection de l'aeroport 1
+        //Test des dates sur Reservation
+        Reservation reservation = new Reservation(1, DateConvertisseur.stringToDate("16/10/1993 03:30"), 1500, 3);
+        ReservationDAO.ajouterReservation(reservation);
+        Log.w("TEST", DateConvertisseur.dateSys() + " !");
+        Reservation reservation2 = ReservationDAO.selectionnerReservation(1);
+        String testR = DateConvertisseur.dateToString(reservation2.getDate());
+        Log.w("TEST", testR);
+
+        //Test d'aeroport
+        Aeroport aeroport = new Aeroport("Goroka", "Goroka", "Papua New Guinea", "GKA", -6.081689, 145.391881); //Objet aeroport
+        AeroportDAO.ajouterAeroport(aeroport);                                                                  //Ajout de l'aeroport
+        Aeroport aeroTest = AeroportDAO.selectionnerAeroport(1);                                            //Selection de l'aeroport 1
         String stringAero = aeroTest.getNom() + " situé : " + aeroTest.getLatitude() + " / " + aeroTest.getLongitude();
         Log.w("TEST", stringAero);
+
         /*
+        //try and catch si l'utilisateur selectionner est vide
         try{
-            Utilisateur UtilTest = UtilisateurDAO.selectionnerUtilisateur(1);
-            String testString = UtilTest.getNom() + " " + UtilTest.getPrenom() + " " + UtilTest.getMail();
+            Utilisateur utilTest = UtilisateurDAO.selectionnerUtilisateur(1);
+            String testString = utilTest.getNom() + " " + utilTest.getPrenom() + " " + utilTest.getMail();
             Log.w("TEST",testString);
-            Reservation R = ReservationDAO.selectionnerReservation(1);
-            String testR = sdf.format(R.getDate());
-            Log.w("TEST", testR);
+
         } catch (Exception e){
             Log.w("TEST", e);
         }*/

@@ -2,12 +2,11 @@ package dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
 
-import dbClass.Aeroport;
+import dbtable.Aeroport;
 
 /**
- * Created by bigwanjeog
+ * Created by bigwanjeog.
  * 07/09/2016
  */
 public class AeroportDAO {
@@ -43,16 +42,20 @@ public class AeroportDAO {
     //Suppresion de la table si elle existe déjà
     public static final String DROP_AEROPORT = "DROP TABLE IF EXISTS " + TABLE_AEROPORT + ";";
 
-    public static void ajouterAeroport(Aeroport AeroportAdd){
+    /**
+     * Ajout d'un aeroport.
+     * @param aeroportAdd objet aeroport
+     */
+    public static void ajouterAeroport(Aeroport aeroportAdd) {
         ContentValues value = new ContentValues();
 
-        //Récupération des valeurs dans l'objet Utilisateur
-        value.put(AEROPORT_NOM, AeroportAdd.getNom());
-        value.put(AEROPORT_VILLE, AeroportAdd.getVille());
-        value.put(AEROPORT_PAYS, AeroportAdd.getPays());
-        value.put(AEROPORT_CODE, AeroportAdd.getCode());
-        value.put(AEROPORT_LATITUDE, AeroportAdd.getLatitude());
-        value.put(AEROPORT_LONGITUDE, AeroportAdd.getLongitude());
+        //Récupération des valeurs dans l'objet Aeoroport
+        value.put(AEROPORT_NOM, aeroportAdd.getNom());
+        value.put(AEROPORT_VILLE, aeroportAdd.getVille());
+        value.put(AEROPORT_PAYS, aeroportAdd.getPays());
+        value.put(AEROPORT_CODE, aeroportAdd.getCode());
+        value.put(AEROPORT_LATITUDE, aeroportAdd.getLatitude());
+        value.put(AEROPORT_LONGITUDE, aeroportAdd.getLongitude());
 
         //Insert dans la base
         DAOBase.getWDb().insert(TABLE_AEROPORT, null, value);
@@ -60,48 +63,40 @@ public class AeroportDAO {
         DAOBase.close();
     }
 
-    public void supprimerAeroport(int id){
-        //TODO supprimer un Aeroport
-    }
-
-    public void modifierAeroport(Aeroport a){
-        //TODO modifier un Aeroport
-    }
-
     /**
-     * Création du curseur qui va parcourir la base
+     * Création du curseur qui va parcourir la base.
      * @param id id id de l'Aeroport
      * @return Aeroport
      */
-    public static Aeroport selectionnerAeroport(int id){
+    public static Aeroport selectionnerAeroport(int id) {
         Cursor c = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_AEROPORT + " WHERE " + AEROPORT_ID + " = " + id, null);
         return cursorToAeroport(c);
     }
 
     /**
-     * Transformation du curseur en Utilisateur
+     * Transformation du curseur en Aeroport.
      * @param c cursor
-     * @return utilisateur
+     * @return Aeroport
      */
-    public static Aeroport cursorToAeroport (Cursor c){
+    public static Aeroport cursorToAeroport(Cursor c) {
         //Verifie qu'il y a une ligne
-        if (c.getCount() == 0){
+        if (c.getCount() == 0) {
             return null;
         }
         //Déplace le curseur a la valeur 0
         c.moveToFirst();
 
         //Ajoute les informations du curseur dans l'objet Aeroport
-        Aeroport AeroportSelect = new Aeroport();
-        AeroportSelect.setId(c.getInt(NUM_AEROPORT_ID));
-        AeroportSelect.setNom(c.getString(NUM_AEROPORT_NOM));
-        AeroportSelect.setVille(c.getString(NUM_AEROPORT_VILLE));
-        AeroportSelect.setPays(c.getString(NUM_AEROPORT_PAYS));
-        AeroportSelect.setCode(c.getString(NUM_AEROPORT_CODE));
-        AeroportSelect.setLatitude(c.getDouble(NUM_AEROPORT_LATITUDE));
-        AeroportSelect.setLongitude(c.getDouble(NUM_AEROPORT_LONGITUDE));
+        Aeroport aeroportSelect = new Aeroport();
+        aeroportSelect.setId(c.getInt(NUM_AEROPORT_ID));
+        aeroportSelect.setNom(c.getString(NUM_AEROPORT_NOM));
+        aeroportSelect.setVille(c.getString(NUM_AEROPORT_VILLE));
+        aeroportSelect.setPays(c.getString(NUM_AEROPORT_PAYS));
+        aeroportSelect.setCode(c.getString(NUM_AEROPORT_CODE));
+        aeroportSelect.setLatitude(c.getDouble(NUM_AEROPORT_LATITUDE));
+        aeroportSelect.setLongitude(c.getDouble(NUM_AEROPORT_LONGITUDE));
 
         c.close();
-        return AeroportSelect;
+        return aeroportSelect;
     }
 }

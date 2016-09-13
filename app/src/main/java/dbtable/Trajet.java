@@ -1,9 +1,9 @@
-package dbClass;
+package dbtable;
 
 import java.util.Date;
 
 /**
- * Created by bigwanjeog
+ * Created by bigwanjeog.
  * 06/09/2016
  */
 public class Trajet {
@@ -17,8 +17,7 @@ public class Trajet {
     public Trajet() {
     }
 
-    public Trajet(int trajetId, int avionId, int aeroportId, int aerAeroportId, Date dateDepart, Date dateArrivee) {
-        this.trajetId = trajetId;
+    public Trajet(int avionId, int aeroportId, int aerAeroportId, Date dateDepart, Date dateArrivee) {
         this.avionId = avionId;
         this.aeroportId = aeroportId;
         this.aerAeroportId = aerAeroportId;

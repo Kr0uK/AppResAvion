@@ -3,10 +3,11 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import dbClass.Trajet;
+import cdi.appresavion.DateConvertisseur;
+import dbtable.Trajet;
 
 /**
- * Created by bigwanjeog
+ * Created by bigwanjeog.
  * 07/09/2016
  */
 public class TrajetDAO {
@@ -40,18 +41,18 @@ public class TrajetDAO {
     public static final String DROP_TRAJET = "DROP TABLE IF EXISTS " + TABLE_TRAJET + ";";
 
     /**
-     * Ajout d'un trajet dans la bdd a partir de l'objet Trajet
-     * @param TrajetAdd Trajet
+     * Ajout d'un trajet dans la bdd a partir de l'objet Trajet.
+     * @param trajetAdd Trajet
      */
-    public void ajouterTrajet(Trajet TrajetAdd){
+    public static void ajouterTrajet(Trajet trajetAdd) {
         ContentValues value = new ContentValues();
 
         //Récupération des valeurs dans l'objet Trajet
-        value.put(TRAJET_AVION_ID, TrajetAdd.getAvionId());
-        value.put(TRAJET_AEROPORT_ID, TrajetAdd.getAeroportId());
-        value.put(TRAJET_AER_AEROPORT_ID, TrajetAdd.getAerAeroportId());
-        //value.put(TRAJET_DATE_DEPART, TrajetAdd.getDateDepart());
-        //value.put(TRAJET_DATE_ARRIVEE, TrajetAdd.getDateArrivee());
+        value.put(TRAJET_AVION_ID, trajetAdd.getAvionId());
+        value.put(TRAJET_AEROPORT_ID, trajetAdd.getAeroportId());
+        value.put(TRAJET_AER_AEROPORT_ID, trajetAdd.getAerAeroportId());
+        value.put(TRAJET_DATE_DEPART, DateConvertisseur.dateToString(trajetAdd.getDateDepart()));
+        value.put(TRAJET_DATE_ARRIVEE, DateConvertisseur.dateToString(trajetAdd.getDateArrivee()));
 
         //Insert dans la base
         DAOBase.getWDb().insert(TABLE_TRAJET, null, value);
@@ -61,10 +62,10 @@ public class TrajetDAO {
     }
 
     /**
-     * Supprime un trajet a partir d'un id
+     * Supprime un trajet a partir d'un id.
      * @param id id du trajet
      */
-    public void supprimerTrajet(int id){
+    public static void supprimerTrajet(int id) {
         DAOBase.getWDb().delete(TABLE_TRAJET, TRAJET_ID + " = " + id, null);
 
         //Fermeture de la connexion a la bdd
@@ -72,20 +73,19 @@ public class TrajetDAO {
     }
 
     /**
-     * Modifier un trajet a partir d'un id et l'objet Trajet
-     * @param TrajetUpdate Trajet
+     * Modifier un trajet a partir d'un id et l'objet Trajet.
+     * @param trajetUpdate Trajet
      * @param id id du trajet
      */
-    public void modifierTrajet(Trajet TrajetUpdate, int id){
-        //TODO /!\ si un champ est vide dans l'objet, il remplace par null a faire dans interface + date
+    public static void modifierTrajet(Trajet trajetUpdate, int id) {
         ContentValues value = new ContentValues();
 
         //Récupération des valeurs dans l'objet Trajet
-        value.put(TRAJET_AVION_ID, TrajetUpdate.getAvionId());
-        value.put(TRAJET_AEROPORT_ID, TrajetUpdate.getAeroportId());
-        value.put(TRAJET_AER_AEROPORT_ID, TrajetUpdate.getAerAeroportId());
-        //value.put(TRAJET_DATE_DEPART, TrajetUpdate.getDateDepart());
-        //value.put(TRAJET_DATE_ARRIVEE, TrajetUpdate.getDateArrivee());
+        value.put(TRAJET_AVION_ID, trajetUpdate.getAvionId());
+        value.put(TRAJET_AEROPORT_ID, trajetUpdate.getAeroportId());
+        value.put(TRAJET_AER_AEROPORT_ID, trajetUpdate.getAerAeroportId());
+        value.put(TRAJET_DATE_DEPART, DateConvertisseur.dateToString(trajetUpdate.getDateDepart()));
+        value.put(TRAJET_DATE_ARRIVEE, DateConvertisseur.dateToString(trajetUpdate.getDateArrivee()));
 
         //Update dans la base
         DAOBase.getWDb().update(TABLE_TRAJET, value, TRAJET_ID + " = " + id, null);
@@ -95,38 +95,38 @@ public class TrajetDAO {
     }
 
     /**
-     * Création du curseur qui va parcourir la base
+     * Création du curseur qui va parcourir la base.
      * @param id id du trajet
      * @return Trajet
      */
-    public static Trajet selectionnerTrajet(int id){
+    public static Trajet selectionnerTrajet(int id) {
         Cursor c = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_TRAJET + " WHERE " + TRAJET_ID + " = " + id, null);
         return cursorToTrajet(c);
     }
 
     /**
-     * Transformation du curseur en Utilisateur
+     * Transformation du curseur en trajet.
      * @param c cursor
      * @return utilisateur
      */
-    public static Trajet cursorToTrajet(Cursor c){
+    public static Trajet cursorToTrajet(Cursor c) {
         //Verifie qu'il y a une ligne
-        if (c.getCount() == 0){
+        if (c.getCount() == 0) {
             return null;
         }
         //Déplace le curseur a la valeur 0
         c.moveToFirst();
 
         //Ajoute les informations du curseur dans l'objet Trajet
-        Trajet TrajetSelect = new Trajet();
-        TrajetSelect.setTrajetId(c.getInt(NUM_TRAJET_ID));
-        TrajetSelect.setAvionId(c.getInt(NUM_TRAJET_AVION_ID));
-        TrajetSelect.setAeroportId(c.getInt(NUM_TRAJET_AEROPORT_ID));
-        TrajetSelect.setAerAeroportId(c.getInt(NUM_TRAJET_AER_AEROPORT_ID));
-        //TrajetSelect.setDateDepart(c.getString(NUM_TRAJET_DATE_DEPART));
-        //TrajetSelect.setDateArrivee(c.getString(NUM_TRAJET_DATE_ARRIVEE));
+        Trajet trajetSelect = new Trajet();
+        trajetSelect.setTrajetId(c.getInt(NUM_TRAJET_ID));
+        trajetSelect.setAvionId(c.getInt(NUM_TRAJET_AVION_ID));
+        trajetSelect.setAeroportId(c.getInt(NUM_TRAJET_AEROPORT_ID));
+        trajetSelect.setAerAeroportId(c.getInt(NUM_TRAJET_AER_AEROPORT_ID));
+        trajetSelect.setDateDepart(DateConvertisseur.stringToDate(c.getString(NUM_TRAJET_DATE_DEPART)));
+        trajetSelect.setDateArrivee(DateConvertisseur.stringToDate(c.getString(NUM_TRAJET_DATE_ARRIVEE)));
 
         c.close();
-        return TrajetSelect;
+        return trajetSelect;
     }
 }

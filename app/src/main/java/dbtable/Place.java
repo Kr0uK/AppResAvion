@@ -1,7 +1,7 @@
-package dbClass;
+package dbtable;
 
 /**
- * Created by bigwanjeog
+ * Created by bigwanjeog.
  * 12/09/2016
  */
 public class Place {
