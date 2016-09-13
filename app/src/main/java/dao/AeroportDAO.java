@@ -3,7 +3,7 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import dbtable.Aeroport;
+import dbclass.Aeroport;
 
 /**
  * Created by bigwanjeog.

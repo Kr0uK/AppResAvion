@@ -7,8 +7,8 @@ import android.util.Log;
 import dao.AeroportDAO;
 import dao.DAOBase;
 import dao.ReservationDAO;
-import dbtable.Aeroport;
-import dbtable.Reservation;
+import dbclass.Aeroport;
+import dbclass.Reservation;
 
 
 public class MainActivity extends AppCompatActivity {

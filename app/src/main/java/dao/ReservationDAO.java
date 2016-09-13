@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import cdi.appresavion.DateConvertisseur;
-import dbtable.Reservation;
+import dbclass.Reservation;
 
 /**
  * Created by bigwanjeog.
