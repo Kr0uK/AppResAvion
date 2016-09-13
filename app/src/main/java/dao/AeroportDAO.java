@@ -2,8 +2,11 @@ package dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
-import dbclass.Aeroport;
+import java.util.ArrayList;
+
+import dbClass.Aeroport;
 
 /**
  * Created by bigwanjeog.
@@ -64,39 +67,61 @@ public class AeroportDAO {
     }
 
     /**
-     * Création du curseur qui va parcourir la base.
+     * Sélection d'un aeroport dans la bdd.
      * @param id id id de l'Aeroport
      * @return Aeroport
      */
     public static Aeroport selectionnerAeroport(int id) {
-        Cursor c = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_AEROPORT + " WHERE " + AEROPORT_ID + " = " + id, null);
-        return cursorToAeroport(c);
-    }
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_AEROPORT + " WHERE " + AEROPORT_ID + " = " + id, null);
 
-    /**
-     * Transformation du curseur en Aeroport.
-     * @param c cursor
-     * @return Aeroport
-     */
-    public static Aeroport cursorToAeroport(Cursor c) {
-        //Verifie qu'il y a une ligne
-        if (c.getCount() == 0) {
-            return null;
-        }
         //Déplace le curseur a la valeur 0
-        c.moveToFirst();
+        cursor.moveToFirst();
 
         //Ajoute les informations du curseur dans l'objet Aeroport
         Aeroport aeroportSelect = new Aeroport();
-        aeroportSelect.setId(c.getInt(NUM_AEROPORT_ID));
-        aeroportSelect.setNom(c.getString(NUM_AEROPORT_NOM));
-        aeroportSelect.setVille(c.getString(NUM_AEROPORT_VILLE));
-        aeroportSelect.setPays(c.getString(NUM_AEROPORT_PAYS));
-        aeroportSelect.setCode(c.getString(NUM_AEROPORT_CODE));
-        aeroportSelect.setLatitude(c.getDouble(NUM_AEROPORT_LATITUDE));
-        aeroportSelect.setLongitude(c.getDouble(NUM_AEROPORT_LONGITUDE));
+        aeroportSelect.setId(cursor.getInt(NUM_AEROPORT_ID));
+        aeroportSelect.setNom(cursor.getString(NUM_AEROPORT_NOM));
+        aeroportSelect.setVille(cursor.getString(NUM_AEROPORT_VILLE));
+        aeroportSelect.setPays(cursor.getString(NUM_AEROPORT_PAYS));
+        aeroportSelect.setCode(cursor.getString(NUM_AEROPORT_CODE));
+        aeroportSelect.setLatitude(cursor.getDouble(NUM_AEROPORT_LATITUDE));
+        aeroportSelect.setLongitude(cursor.getDouble(NUM_AEROPORT_LONGITUDE));
 
-        c.close();
+        cursor.close();
         return aeroportSelect;
+    }
+
+    /**
+     * Recupére tout les aeroports de la bdd.
+     * @return arraylist d'aeroport
+     */
+    public static ArrayList<Aeroport> getAllAeroport() {
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_AEROPORT, null);
+
+        //Déplace le curseur a la valeur 0
+        cursor.moveToFirst();
+
+        //ArrayList qui va contenir les aeroports
+        ArrayList<Aeroport> array_list = new ArrayList<>();
+
+        while (!cursor.isAfterLast()) {
+            Aeroport aeroportSelectAll = new Aeroport();
+
+            aeroportSelectAll.setId(cursor.getInt(NUM_AEROPORT_ID));
+            aeroportSelectAll.setNom(cursor.getString(NUM_AEROPORT_NOM));
+            aeroportSelectAll.setVille(cursor.getString(NUM_AEROPORT_VILLE));
+            aeroportSelectAll.setPays(cursor.getString(NUM_AEROPORT_PAYS));
+            aeroportSelectAll.setCode(cursor.getString(NUM_AEROPORT_CODE));
+            aeroportSelectAll.setLatitude(cursor.getDouble(NUM_AEROPORT_LATITUDE));
+            aeroportSelectAll.setLongitude(cursor.getDouble(NUM_AEROPORT_LONGITUDE));
+
+            //Ajout de l'array list
+            array_list.add(aeroportSelectAll);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return array_list;
     }
 }

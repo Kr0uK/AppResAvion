@@ -2,7 +2,7 @@ package dao;
 
 import android.content.ContentValues;
 
-import dbclass.Place;
+import dbClass.Place;
 
 /**
  * Created by bigwanjeog.

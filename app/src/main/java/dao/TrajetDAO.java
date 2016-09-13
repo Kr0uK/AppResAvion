@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import cdi.appresavion.DateConvertisseur;
-import dbclass.Trajet;
+import dbClass.Trajet;
 
 /**
  * Created by bigwanjeog.

@@ -4,11 +4,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import dao.AeroportDAO;
 import dao.DAOBase;
 import dao.ReservationDAO;
-import dbclass.Aeroport;
-import dbclass.Reservation;
+import dbClass.Aeroport;
+import dbClass.Reservation;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,11 +40,21 @@ public class MainActivity extends AppCompatActivity {
         Log.w("TEST", testR);
 
         //Test d'aeroport
-        Aeroport aeroport = new Aeroport("Goroka", "Goroka", "Papua New Guinea", "GKA", -6.081689, 145.391881); //Objet aeroport
-        AeroportDAO.ajouterAeroport(aeroport);                                                                  //Ajout de l'aeroport
-        Aeroport aeroTest = AeroportDAO.selectionnerAeroport(1);                                            //Selection de l'aeroport 1
+        //Objet aeroport
+        Aeroport aeroport = new Aeroport("Renaud", "METZ", "Papua New Guinea", "GKA", -6.081689, 145.391881);
+        //Ajout de l'aeroport
+        AeroportDAO.ajouterAeroport(aeroport);
+        //Selection de l'aeroport 1
+        Aeroport aeroTest = AeroportDAO.selectionnerAeroport(1);
         String stringAero = aeroTest.getNom() + " situé : " + aeroTest.getLatitude() + " / " + aeroTest.getLongitude();
         Log.w("TEST", stringAero);
+
+        //Lis tout les aeroports de la base
+        ArrayList arrayList = AeroportDAO.getAllAeroport();
+        Iterator<Aeroport> iterator = arrayList.iterator();
+        while (iterator.hasNext()) {
+            Log.w("TEST", iterator.next().getNom());
+        }
 
         /*
         //try and catch si l'utilisateur selectionner est vide
