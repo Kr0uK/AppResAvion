@@ -46,13 +46,13 @@ public class MapsActivity extends AppCompatActivity
         private SupportMapFragment mapFrag;
         private GoogleApiClient mGoogleApiClient;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-
+        Ident_User logUser = new Ident_User();
+        Toast.makeText(this, logUser.getEmail(), Toast.LENGTH_SHORT).show();;
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -94,17 +94,38 @@ public class MapsActivity extends AppCompatActivity
     }
 
     private void enableMyLocation() {
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE, Manifest.permission.ACCESS_FINE_LOCATION, true);
         } else if (mMap != null) {
-/*
+
             LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            try {
+                //TODO (String.valueOf(location.getLongitude()).equals(null))
+                if (String.valueOf(location.getLongitude()).equals(null)) {
+                    Toast.makeText(getApplicationContext(), "Votre géolocalisation à échouée, impossible d'enregistrer votre position actuelle !", Toast.LENGTH_SHORT).show();
+                } else {
+                    Geoloc_User User = new Geoloc_User();
+                    User.setLongitude((double) location.getLongitude());
+                    User.setLatitude((double) location.getLatitude());
+                    Toast.makeText(getApplicationContext(), "Coordonnée GPS : "+User.getLatitude()+" ; "+User.getLatitude(), Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(this, String.valueOf(location), Toast.LENGTH_LONG).show();
+            }
+            /*
             final LocationListener locationListener = new LocationListener() {
                 public void onLocationChanged(Location location) {
                     longitude = location.getLongitude();
                     latitude = location.getLatitude();
                     Toast.makeText(getApplicationContext(), String.format("longitude : " + longitude + "\nlatitude : " + latitude), Toast.LENGTH_SHORT).show();
+                }
+                public void onLocationChanged(Location location) {
+                    Geoloc_User User = new Geoloc_User();
+                    User.setLongitude(location.getLongitude());
+                    User.setLatitude(location.getLatitude());
+                    Toast.makeText(getApplicationContext(), String.format("longitude : " + User.getLongitude() + "\nlatitude : " + User.getLatitude()), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -200,14 +221,47 @@ class Geoloc_Aeroport {
         return latitude;
     }
 
+    // Surcharge sur le constructeur
     public Geoloc_Aeroport() {
-
+        // Ce constructeur vide sert uniquement à instancier la classe
+        // Rien n'empeche d'utiliser les accesseurs/mutateurs (get/set)
     }
-
     public Geoloc_Aeroport(String nom, double longit, double latit)
     {
+        // Ce constructeur permet d'instancier la classe et déclarer des valeurs (SET)
+        // Rien n'empeche par la suite d'utiliser les accesseurs/mutateurs (get/set)
         super();
         this.nomCoord = nom;
+        this.longitude = longit;
+        this.latitude  = latit;
+    }
+}
+
+/** LOCALISATION GMS/GPS DE L'UTILISATEUR : */
+class Geoloc_User {
+
+    /* Déclaration des variables (+GET/SET)*/
+    // Coordonnée longitudinale de l'user
+    private static double longitude;
+    public void setLongitude ( double data){
+        longitude = data;
+    }
+    public double getLongitude(){
+        return longitude;
+    }
+    // Coordonnée latitudinale de l'user
+    private static double latitude;
+    public void setLatitude ( double data){
+        latitude = data;
+    }
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public Geoloc_User() {    }
+    public Geoloc_User(double longit, double latit)
+    {
+        super();
         this.longitude = longit;
         this.latitude  = latit;
     }

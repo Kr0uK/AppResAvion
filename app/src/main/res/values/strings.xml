@@ -19,7 +19,7 @@
     <string name="error_field_required">Ce champs est requis !</string>
     <string name="permission_rationale">L\'accès à vos contacts est nécessaire pour permettre l\'auto-complétion !</string>
 
-    <!--    Navigation    -->
+    <!--    Navigationi    -->
     <string name="GMap_label">Itinéraire</string>
     <string name="GMap_description">Localisation GMS avec trajet routier vers Aeroport</string>
 
