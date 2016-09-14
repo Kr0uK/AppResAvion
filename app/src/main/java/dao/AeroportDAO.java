@@ -5,7 +5,7 @@ import android.database.Cursor;
 
 import java.util.ArrayList;
 
-import dbclasses.Aeroport;
+import dbclass.Aeroport;
 
 /**
  * Created by bigwanjeog.

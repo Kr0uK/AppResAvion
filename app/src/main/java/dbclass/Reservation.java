@@ -1,4 +1,4 @@
-package dbclasses;
+package dbclass;
 
 import java.util.Date;
 

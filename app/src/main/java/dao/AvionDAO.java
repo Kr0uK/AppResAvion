@@ -3,7 +3,7 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import dbclasses.Avion;
+import dbclass.Avion;
 
 /**
  * Created by bigwanjeog.

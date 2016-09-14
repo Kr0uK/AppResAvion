@@ -10,8 +10,8 @@ import java.util.Iterator;
 import dao.AeroportDAO;
 import dao.DAOBase;
 import dao.ReservationDAO;
-import dbclasses.Aeroport;
-import dbclasses.Reservation;
+import dbclass.Aeroport;
+import dbclass.Reservation;
 import shell.DateConvertisseur;
 
 

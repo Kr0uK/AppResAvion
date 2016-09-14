@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import shell.DateConvertisseur;
-import dbclasses.Trajet;
+import dbclass.Trajet;
 
 /**
  * Created by bigwanjeog.

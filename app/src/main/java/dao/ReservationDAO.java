@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import shell.DateConvertisseur;
-import dbclasses.Reservation;
+import dbclass.Reservation;
 
 /**
  * Created by bigwanjeog.
