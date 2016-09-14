@@ -6,34 +6,35 @@ import cdi.appresavion.DatabaseHandler;
 
 
 /**
- * Created by RENAUD on 07/09/2016.
+ * Created by bigwanjeog.
+ * 07/09/2016
  */
 public class DAOBase {
-    public final static String DATABASE_NAME = "database.db";
-    public final static int VERSION = 1;
+    public static final String DATABASE_NAME = "database.db";
+    public static final int VERSION = 1;
 
     static SQLiteDatabase mDb = null;
     static DatabaseHandler mHandler = null;
 
-    public DAOBase(Context context){
+    public DAOBase(Context context) {
         this.mHandler = new DatabaseHandler(context, DATABASE_NAME, VERSION);
     }
 
-    public static SQLiteDatabase getWDb(){
+    public static SQLiteDatabase getWDb() {
         mDb = mHandler.getWritableDatabase();
         return mDb;
     }
 
-    public static SQLiteDatabase rDb(){
+    public static SQLiteDatabase getRDb() {
         mDb = mHandler.getReadableDatabase();
         return mDb;
     }
 
-    public void close(){
+    public static void close() {
         mDb.close();
     }
 
-    public SQLiteDatabase getDb(){
+    public SQLiteDatabase getDb() {
         return mDb;
     }
 }

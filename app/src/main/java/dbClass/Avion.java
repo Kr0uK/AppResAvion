@@ -1,7 +1,8 @@
-package dbClass;
+package dbclass;
 
 /**
- * Created by RENAUD on 06/09/2016.
+ * Created by bigwanjeog.
+ * 07/09/2016
  */
 public class Avion {
     private int id;
@@ -10,8 +11,10 @@ public class Avion {
     private int nbPlaces;
     private String compagnie;
 
-    public Avion(int id, String modele, String constructeur, int nbPlaces, String compagnie) {
-        this.id = id;
+    public Avion() {
+    }
+
+    public Avion(String modele, String constructeur, int nbPlaces, String compagnie) {
         this.modele = modele;
         this.constructeur = constructeur;
         this.nbPlaces = nbPlaces;

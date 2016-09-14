@@ -1,7 +1,8 @@
-package dbClass;
+package dbclass;
 
 /**
- * Created by RENAUD on 06/09/2016.
+ * Created by bigwanjeog.
+ * 06/09/2016
  */
 public class Aeroport {
     private int id;
@@ -9,12 +10,13 @@ public class Aeroport {
     private String ville;
     private String pays;
     private String code;
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
 
+    public Aeroport() {
+    }
 
-    public Aeroport(int id, String nom,String ville, String pays, String code, float latitude,float longitude) {
-        this.id = id;
+    public Aeroport(String nom, String ville, String pays, String code, double latitude, double longitude) {
         this.nom = nom;
         this.ville = ville;
         this.pays = pays;
@@ -39,29 +41,12 @@ public class Aeroport {
         this.nom = nom;
     }
 
-    public String getCode() {
-        return code;
+    public String getVille() {
+        return ville;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-
-    public float getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(float longitude) {
-        this.longitude = longitude;
-    }
-
-    public float getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(float latitude) {
-        this.latitude = latitude;
+    public void setVille(String ville) {
+        this.ville = ville;
     }
 
     public String getPays() {
@@ -72,11 +57,27 @@ public class Aeroport {
         this.pays = pays;
     }
 
-    public String getVille() {
-        return ville;
+    public String getCode() {
+        return code;
     }
 
-    public void setVille(String ville) {
-        this.ville = ville;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

@@ -1,22 +1,5 @@
 package dao;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.ConnectException;
-
-import cdi.appresavion.DatabaseHandler;
-import dao.AeroportDAO;
-import dbClass.Aeroport;
-import dao.DAOBase;
-
 public class ImportCSV {
 
 
@@ -24,7 +7,7 @@ public class ImportCSV {
     //TODO faire marcher ça
     public void ImportCSV (Context context) {
         Aeroport aeroport;
-        String mCSVfile = "aeroports.csv";
+        String mCSVfile = "aeroports2.csv";
         AssetManager manager = context.getAssets();
         InputStream inStream = null;
         try {

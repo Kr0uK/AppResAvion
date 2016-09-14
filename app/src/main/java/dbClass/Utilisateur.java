@@ -1,7 +1,8 @@
-package dbClass;
+package dbclass;
 
 /**
- * Created by RENAUD on 06/09/2016.
+ * Created by bigwanjeog.
+ * 05/09/2016
  */
 public class Utilisateur {
     private int id;
