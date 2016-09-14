@@ -19,6 +19,11 @@
     <string name="error_field_required">Ce champs est requis !</string>
     <string name="permission_rationale">L\'accès à vos contacts est nécessaire pour permettre l\'auto-complétion !</string>
 
+    <!-- ACCUEIL -->
+    <string name="title_activity_scrolling">ACCUEIL</string>
+    <string name="false_reserv">Vous n\'avez aucune réservation pour le moment...</string>
+    <string name="true_reserv">Voici la liste des billets d\'avion que vous avez réservé :</string>
+
     <!--    Navigationi    -->
     <string name="GMap_label">Itinéraire</string>
     <string name="GMap_description">Localisation GMS avec trajet routier vers Aeroport</string>
@@ -31,10 +36,5 @@
     <string name="location_permission_denied">Cet activité nécessite l\'autorisation de localisation pour activer le layer \'my location\'.  Veuillez essayer de nouveau en accordant l\'accès à la géolocalisation.\nSi l\'autorisation a été refusée de manière permanence, il peut être activé à partir des paramètres système &gt; Apps &gt; AppResAvion</string>
     <string name="permission_required_toast">Votre géolocalisation est nécessaire pour utiliser cette fonctionnalité.</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
 
 </resources>

@@ -36,12 +36,24 @@ public class MainActivity extends AppCompatActivity
         Intent Login = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(Login);
 
+
+
         // SECTION API GOOGLE MAP
         /*
         Geoloc_Aeroport Aeroport = new Geoloc_Aeroport("AFPA Frouard",48.776524,6.1393364);
         Intent GMap = new Intent(MainActivity.this, MapsActivity.class);
         startActivity(GMap);
         */
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Ident_User identification = new Ident_User();
+        if ((identification.getEmail().equals(null)) || (identification.getEmail().equals(null))) {
+            int i = 0;
+        }
     }
 
 /*
@@ -99,10 +111,10 @@ class NavDetails {
     }
 }
 
-class Navigationi {
+class Navigation {
 
     /** Cette classe ne dois pas être instanciée. */
-    private Navigationi() {
+    private Navigation() {
     }
 /*
     public static final Navigationi[] NAVBAR = {
