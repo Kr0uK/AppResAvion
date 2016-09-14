@@ -120,43 +120,32 @@ public class UtilisateurDAO {
     }
 
     /**
-     * Création du curseur qui va parcourir la base.
+     * Sélectionne un utilisateur dans la bdd.
      * @param id id id de l'utilisateur
      * @return utilisateur
      */
     public static Utilisateur selectionnerUtilisateur(int id) {
-        Cursor c = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_UTILISATEUR + " WHERE " + UTILISATEUR_ID + " = " + id, null);
-        return cursorToUtilisateur(c);
-    }
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_UTILISATEUR + " WHERE " + UTILISATEUR_ID + " = " + id, null);
 
-    /**
-     * Transformation du curseur en Utilisateur.
-     * @param c cursor
-     * @return utilisateur
-     */
-    public static Utilisateur cursorToUtilisateur(Cursor c) {
-        //Verifie qu'il y a une ligne
-        if (c.getCount() == 0) {
-            return null;
-        }
         //Déplace le curseur a la valeur 0
-        c.moveToFirst();
+        cursor.moveToFirst();
 
         //Ajoute les informations du curseur dans l'objet utilisateur
         Utilisateur utilisateurSelect = new Utilisateur();
-        utilisateurSelect.setId(c.getInt(NUM_UTILISATEUR_ID));
-        utilisateurSelect.setNom(c.getString(NUM_UTILISATEUR_NOM));
-        utilisateurSelect.setPrenom(c.getString(NUM_UTILISATEUR_PRENOM));
-        utilisateurSelect.setMail(c.getString(NUM_UTILISATEUR_MAIL));
-        utilisateurSelect.setTelephone(c.getString(NUM_UTILISATEUR_TELEPHONE));
-        utilisateurSelect.setMobile(c.getString(NUM_UTILISATEUR_MOBILE));
-        utilisateurSelect.setAdresse(c.getString(NUM_UTILISATEUR_ADRESSE));
-        utilisateurSelect.setCp(c.getString(NUM_UTILISATEUR_CP));
-        utilisateurSelect.setVille(c.getString(NUM_UTILISATEUR_VILLE));
-        utilisateurSelect.setUsername(c.getString(NUM_UTILISATEUR_USERNAME));
-        utilisateurSelect.setMdp(c.getString(NUM_UTILISATEUR_MDP));
+        utilisateurSelect.setId(cursor.getInt(NUM_UTILISATEUR_ID));
+        utilisateurSelect.setNom(cursor.getString(NUM_UTILISATEUR_NOM));
+        utilisateurSelect.setPrenom(cursor.getString(NUM_UTILISATEUR_PRENOM));
+        utilisateurSelect.setMail(cursor.getString(NUM_UTILISATEUR_MAIL));
+        utilisateurSelect.setTelephone(cursor.getString(NUM_UTILISATEUR_TELEPHONE));
+        utilisateurSelect.setMobile(cursor.getString(NUM_UTILISATEUR_MOBILE));
+        utilisateurSelect.setAdresse(cursor.getString(NUM_UTILISATEUR_ADRESSE));
+        utilisateurSelect.setCp(cursor.getString(NUM_UTILISATEUR_CP));
+        utilisateurSelect.setVille(cursor.getString(NUM_UTILISATEUR_VILLE));
+        utilisateurSelect.setUsername(cursor.getString(NUM_UTILISATEUR_USERNAME));
+        utilisateurSelect.setMdp(cursor.getString(NUM_UTILISATEUR_MDP));
 
-        c.close();
+        cursor.close();
         return utilisateurSelect;
     }
 }

@@ -3,6 +3,8 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+
 import dbclass.Avion;
 
 /**
@@ -57,37 +59,55 @@ public class AvionDAO {
     }
 
     /**
-     * Création du curseur qui va parcourir la base.
+     * Sélection d'un avion dans la bdd a partir d'un id.
      * @param id id id de l'Avion
      * @return Avion
      */
     public static Avion selectionnerAvion(int id) {
-        Cursor c = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_AVION + " WHERE " + AVION_ID + " = " + id, null);
-        return cursorToAvion(c);
-    }
-
-    /**
-     * Transformation du curseur en Avion.
-     * @param c cursor
-     * @return Avion
-     */
-    public static Avion cursorToAvion(Cursor c) {
-        //Verifie qu'il y a une ligne
-        if (c.getCount() == 0) {
-            return null;
-        }
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_AVION + " WHERE " + AVION_ID + " = " + id, null);
         //Déplace le curseur a la valeur 0
-        c.moveToFirst();
+        cursor.moveToFirst();
 
         //Ajoute les informations du curseur dans l'objet Avion
         Avion avionSelect = new Avion();
-        avionSelect.setId(c.getInt(NUM_AVION_ID));
-        avionSelect.setModele(c.getString(NUM_AVION_MODELE));
-        avionSelect.setConstructeur(c.getString(NUM_AVION_CONSTRUCTEUR));
-        avionSelect.setNbPlaces(c.getInt(NUM_AVION_NBPLACES));
-        avionSelect.setCompagnie(c.getString(NUM_AVION_COMPAGNIE));
+        avionSelect.setId(cursor.getInt(NUM_AVION_ID));
+        avionSelect.setModele(cursor.getString(NUM_AVION_MODELE));
+        avionSelect.setConstructeur(cursor.getString(NUM_AVION_CONSTRUCTEUR));
+        avionSelect.setNbPlaces(cursor.getInt(NUM_AVION_NBPLACES));
+        avionSelect.setCompagnie(cursor.getString(NUM_AVION_COMPAGNIE));
 
-        c.close();
+        cursor.close();
         return avionSelect;
+    }
+
+    /**
+     * Récupére tous les avions de la bdd
+     * @return arraylist d'avion
+     */
+    public static ArrayList<Avion> getAllAvion() {
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_AVION, null);
+
+        //Déplace le curseur a la valeur 0
+        cursor.moveToFirst();
+
+        //ArrayList qui va contenir les avions
+        ArrayList<Avion> arrayList = new ArrayList<>();
+
+        while (!cursor.isAfterLast()) {
+            //Ajoute les informations du curseur dans l'objet Avion
+            Avion avionGetAll = new Avion();
+            avionGetAll.setId(cursor.getInt(NUM_AVION_ID));
+            avionGetAll.setModele(cursor.getString(NUM_AVION_MODELE));
+            avionGetAll.setConstructeur(cursor.getString(NUM_AVION_CONSTRUCTEUR));
+            avionGetAll.setNbPlaces(cursor.getInt(NUM_AVION_NBPLACES));
+            avionGetAll.setCompagnie(cursor.getString(NUM_AVION_COMPAGNIE));
+
+            //Ajout dans l'ArrayList
+            arrayList.add(avionGetAll);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return arrayList;
     }
 }

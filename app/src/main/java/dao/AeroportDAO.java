@@ -66,7 +66,7 @@ public class AeroportDAO {
     }
 
     /**
-     * Sélection d'un aeroport dans la bdd.
+     * Sélection d'un aeroport dans la bdd a partir d'un id.
      * @param id id id de l'Aeroport
      * @return Aeroport
      */
@@ -92,7 +92,7 @@ public class AeroportDAO {
     }
 
     /**
-     * Recupére tout les aeroports de la bdd.
+     * Recupére tous les aeroports de la bdd.
      * @return arraylist d'aeroport
      */
     public static ArrayList<Aeroport> getAllAeroport() {
@@ -106,18 +106,18 @@ public class AeroportDAO {
         ArrayList<Aeroport> array_list = new ArrayList<>();
 
         while (!cursor.isAfterLast()) {
-            Aeroport aeroportSelectAll = new Aeroport();
+            //Ajoute les informations du curseur dans l'objet Aeroport
+            Aeroport aeroportGetAll = new Aeroport();
+            aeroportGetAll.setId(cursor.getInt(NUM_AEROPORT_ID));
+            aeroportGetAll.setNom(cursor.getString(NUM_AEROPORT_NOM));
+            aeroportGetAll.setVille(cursor.getString(NUM_AEROPORT_VILLE));
+            aeroportGetAll.setPays(cursor.getString(NUM_AEROPORT_PAYS));
+            aeroportGetAll.setCode(cursor.getString(NUM_AEROPORT_CODE));
+            aeroportGetAll.setLatitude(cursor.getDouble(NUM_AEROPORT_LATITUDE));
+            aeroportGetAll.setLongitude(cursor.getDouble(NUM_AEROPORT_LONGITUDE));
 
-            aeroportSelectAll.setId(cursor.getInt(NUM_AEROPORT_ID));
-            aeroportSelectAll.setNom(cursor.getString(NUM_AEROPORT_NOM));
-            aeroportSelectAll.setVille(cursor.getString(NUM_AEROPORT_VILLE));
-            aeroportSelectAll.setPays(cursor.getString(NUM_AEROPORT_PAYS));
-            aeroportSelectAll.setCode(cursor.getString(NUM_AEROPORT_CODE));
-            aeroportSelectAll.setLatitude(cursor.getDouble(NUM_AEROPORT_LATITUDE));
-            aeroportSelectAll.setLongitude(cursor.getDouble(NUM_AEROPORT_LONGITUDE));
-
-            //Ajout de l'array list
-            array_list.add(aeroportSelectAll);
+            //Ajout dans l'ArrayList
+            array_list.add(aeroportGetAll);
             cursor.moveToNext();
         }
         cursor.close();

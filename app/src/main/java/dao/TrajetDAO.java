@@ -3,6 +3,8 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+
 import shell.DateConvertisseur;
 import dbclass.Trajet;
 
@@ -95,38 +97,58 @@ public class TrajetDAO {
     }
 
     /**
-     * Création du curseur qui va parcourir la base.
+     * Sélectionne un trajet dans la bdd a partir d'un id.
      * @param id id du trajet
      * @return Trajet
      */
     public static Trajet selectionnerTrajet(int id) {
-        Cursor c = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_TRAJET + " WHERE " + TRAJET_ID + " = " + id, null);
-        return cursorToTrajet(c);
-    }
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_TRAJET + " WHERE " + TRAJET_ID + " = " + id, null);
 
-    /**
-     * Transformation du curseur en trajet.
-     * @param c cursor
-     * @return utilisateur
-     */
-    public static Trajet cursorToTrajet(Cursor c) {
-        //Verifie qu'il y a une ligne
-        if (c.getCount() == 0) {
-            return null;
-        }
         //Déplace le curseur a la valeur 0
-        c.moveToFirst();
+        cursor.moveToFirst();
 
         //Ajoute les informations du curseur dans l'objet Trajet
         Trajet trajetSelect = new Trajet();
-        trajetSelect.setTrajetId(c.getInt(NUM_TRAJET_ID));
-        trajetSelect.setAvionId(c.getInt(NUM_TRAJET_AVION_ID));
-        trajetSelect.setAeroportId(c.getInt(NUM_TRAJET_AEROPORT_ID));
-        trajetSelect.setAerAeroportId(c.getInt(NUM_TRAJET_AER_AEROPORT_ID));
-        trajetSelect.setDateDepart(DateConvertisseur.stringToDate(c.getString(NUM_TRAJET_DATE_DEPART)));
-        trajetSelect.setDateArrivee(DateConvertisseur.stringToDate(c.getString(NUM_TRAJET_DATE_ARRIVEE)));
+        trajetSelect.setTrajetId(cursor.getInt(NUM_TRAJET_ID));
+        trajetSelect.setAvionId(cursor.getInt(NUM_TRAJET_AVION_ID));
+        trajetSelect.setAeroportId(cursor.getInt(NUM_TRAJET_AEROPORT_ID));
+        trajetSelect.setAerAeroportId(cursor.getInt(NUM_TRAJET_AER_AEROPORT_ID));
+        trajetSelect.setDateDepart(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_DEPART)));
+        trajetSelect.setDateArrivee(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_ARRIVEE)));
 
-        c.close();
+        cursor.close();
         return trajetSelect;
+    }
+
+    /**
+     * Récupére tous les trajets de la bdd.
+     * @return ArrayList de trajet
+     */
+    public static ArrayList<Trajet> getAllTrajet() {
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_TRAJET, null);
+
+        //Déplace le curseur a la valeur 0
+        cursor.moveToFirst();
+
+        ArrayList<Trajet> arrayList = new ArrayList<>();
+
+        while (!cursor.isAfterLast()) {
+            //Ajoute les informations du curseur dans l'objet Trajet
+            Trajet trajetGetAll = new Trajet();
+            trajetGetAll.setTrajetId(cursor.getInt(NUM_TRAJET_ID));
+            trajetGetAll.setAvionId(cursor.getInt(NUM_TRAJET_AVION_ID));
+            trajetGetAll.setAeroportId(cursor.getInt(NUM_TRAJET_AEROPORT_ID));
+            trajetGetAll.setAerAeroportId(cursor.getInt(NUM_TRAJET_AER_AEROPORT_ID));
+            trajetGetAll.setDateDepart(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_DEPART)));
+            trajetGetAll.setDateArrivee(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_ARRIVEE)));
+
+            //Ajout dans l'ArrayList
+            arrayList.add(trajetGetAll);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return arrayList;
     }
 }
