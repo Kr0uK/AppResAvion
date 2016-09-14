@@ -14,7 +14,7 @@ import cdi.appresavion.R;
  */
 public class ImportCSV {
 
-
+/*
 
     Log.w("TAG", "début");
 
@@ -60,7 +60,7 @@ public class ImportCSV {
                 double latit = Double.parseDouble(line.substring(index4 + 1, index5 - 1));
                 double longit = Double.parseDouble(line.substring(index5 + 1, index6 - 1));
 
-*/
+
             Aeroport aeroport = new Aeroport(0, colums[0].trim(), colums[1].trim(), colums[2].trim(), colums[3].trim(), Double.parseDouble(colums[4].trim()), Double.parseDouble(colums[5].trim()));
 
             Log.w("TAG", "Nom : " + aeroport.getNom() + " Ville: " + aeroport.getVille() + " Pays: " + aeroport.getPays() + " AITA : " + aeroport.getCode() + " LATITUDE :" + aeroport.getLatitude() + " LONGITUDE :" + aeroport.getLongitude());
@@ -76,7 +76,7 @@ public class ImportCSV {
     }
 }
 
-/*
+
         InputStream inStream = null;
 
 
