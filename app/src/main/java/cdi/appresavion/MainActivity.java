@@ -20,7 +20,11 @@ package cdi.appresavion;
         import java.util.Iterator;
 
         import dao.AeroportDAO;
+        import dao.DAOBase;
+        import dao.ReservationDAO;
         import dbclass.Aeroport;
+        import dbclass.Reservation;
+        import shell.DateConvertisseur;
 
 public class MainActivity extends AppCompatActivity
 { //implements AdapterView.OnItemClickListener {
