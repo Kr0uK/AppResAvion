@@ -305,32 +305,33 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
 
+            // TODO: attempt authentication against a network service.
+            boolean tempsuccess = false;
             try {
 
                 // Simulate network access.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                return false;
+                tempsuccess = false;
             }
 
-
-            //Lis tout les utilisateurs de la base
+            // Lecture des utilisateurs dans la BDD
             ArrayList arrayList = UtilisateurDAO.getAllUtilisateur();
             Iterator<Utilisateur> iterator = arrayList.iterator();
+            // Vérification : si le mail et mot de passe correspondent, on se log
+            // autrement un message d'erreur nous signale de modifier les données.
             while (iterator.hasNext()) {
-                if( iterator.next().getMail().toString() == logUser.getEmail().toString()) {
-                    if( iterator.next().getMdp().toString() == logUser.getPassword().toString()) {
-                        Toast.makeText(getApplicationContext(), "VOUS ETES LOG", Toast.LENGTH_SHORT).show();
-
+                Utilisateur utilisateur = iterator.next();
+                if (utilisateur.getMail().equals(logUser.getEmail().toString())) {
+                    if (utilisateur.getMdp().equals(logUser.getPassword().toString())) {
+                        tempsuccess = true; // Si
                     }
                 }
             }
 
-
             // TODO: register the new account here.
-            return true;
+            return tempsuccess;
         }
 
         @Override

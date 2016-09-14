@@ -22,8 +22,10 @@ package cdi.appresavion;
         import dao.AeroportDAO;
         import dao.DAOBase;
         import dao.ReservationDAO;
+        import dao.UtilisateurDAO;
         import dbclass.Aeroport;
         import dbclass.Reservation;
+        import dbclass.Utilisateur;
         import shell.DateConvertisseur;
 
 public class MainActivity extends AppCompatActivity
@@ -40,8 +42,8 @@ public class MainActivity extends AppCompatActivity
         daoBase.getWDb();
 
         //Ajout d'un utilisateur util
-        //Utilisateur Util =  new Utilisateur("METZ", "Renaud", "renaudmtz@gmail.com", "0388943632", "0622493390", "33 rue de la paix", "67160", "OBERLAUTERBACH", "renaud", "1610");
-        //UtilisateurDAO.ajouterUtilisateur(Util);
+        Utilisateur Util =  new Utilisateur("METZ", "Renaud", "r@", "0388943632", "0622493390", "33 rue de la paix", "67160", "OBERLAUTERBACH", "renaud", "12345678");
+        UtilisateurDAO.ajouterUtilisateur(Util);
 
         //Modifier un utilisateur
         //UtilisateurDAO.modifierUtilisateur(Util, 1);
@@ -66,10 +68,10 @@ public class MainActivity extends AppCompatActivity
 
         //Lis tout les aeroports de la base
         ArrayList arrayList = AeroportDAO.getAllAeroport();
-        Iterator<Aeroport> iterator = arrayList.iterator();
+        /*Iterator<Aeroport> iterator = arrayList.iterator();
         while (iterator.hasNext()) {
             Log.w("TEST", iterator.next().getNom());
-        }
+        }*/
 
         /*
         //try and catch si l'utilisateur selectionner est vide

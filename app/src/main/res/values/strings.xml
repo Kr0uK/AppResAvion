@@ -14,7 +14,7 @@
     <string name="email_format_error">"Le champs Email ne correspond pas au format d'une adresse mail..."</string>
     <string name="email_or_password_empty">"L\'adresse Email et mot de passe sont obligatoires !"</string>
     <string name="error_invalid_email">Cette adresse mail n\'est pas valide.</string>
-    <string name="error_invalid_password">Ce mot de passe ne suis pas les règles de sécurité.</string>
+    <string name="error_invalid_password">Ce mot de passe doit comprendre plus de caractères.</string>
     <string name="error_incorrect_password">Votre mot de passe est incorrect...</string>
     <string name="error_field_required">Ce champs est requis !</string>
     <string name="permission_rationale">L\'accès à vos contacts est nécessaire pour permettre l\'auto-complétion !</string>
