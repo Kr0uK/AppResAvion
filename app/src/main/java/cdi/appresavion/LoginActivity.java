@@ -325,12 +325,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Utilisateur utilisateur = iterator.next();
                 if (utilisateur.getMail().equals(logUser.getEmail().toString())) {
                     if (utilisateur.getMdp().equals(logUser.getPassword().toString())) {
-                        tempsuccess = true; // Si
+                        tempsuccess = true; // Si identique, on peux acceder a l'appli
                     }
                 }
             }
 
-            // TODO: register the new account here.
+            // Si false, on propose à l'utilisateur de créer un compte en plus de signaler
+            // une possible erreur dans la saisie...
+            if (!tempsuccess) {
+
+            }
             return tempsuccess;
         }
 

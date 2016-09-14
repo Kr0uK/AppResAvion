@@ -3,7 +3,7 @@
     <string name="title_activity_maps">Map</string>
 
     <!--    LOGIN    -->
-    <string name="title_activity_login">Identification</string>
+    <string name="title_activity_login">AppResAvion : Identification</string>
     <string name="footer_login">Voyagez encore plus simplement !</string>
     <string name="create_account">Créer un compte</string>
     <string name="connect">Se connecter</string>
