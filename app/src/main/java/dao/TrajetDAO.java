@@ -3,8 +3,8 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import cdi.appresavion.DateConvertisseur;
-import dbClass.Trajet;
+import shell.DateConvertisseur;
+import dbclasses.Trajet;
 
 /**
  * Created by bigwanjeog.

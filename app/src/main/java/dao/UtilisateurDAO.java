@@ -4,7 +4,7 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import dbClass.Utilisateur;
+import dbclasses.Utilisateur;
 
 /**
  * Created by bigwanjeog.

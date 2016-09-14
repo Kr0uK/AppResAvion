@@ -1,4 +1,4 @@
-package dbClass;
+package dbclasses;
 
 /**
  * Created by bigwanjeog.

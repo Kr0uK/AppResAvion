@@ -10,8 +10,9 @@ import java.util.Iterator;
 import dao.AeroportDAO;
 import dao.DAOBase;
 import dao.ReservationDAO;
-import dbClass.Aeroport;
-import dbClass.Reservation;
+import dbclasses.Aeroport;
+import dbclasses.Reservation;
+import shell.DateConvertisseur;
 
 
 public class MainActivity extends AppCompatActivity {
