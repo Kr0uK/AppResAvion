@@ -4,6 +4,8 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+
 import dbclass.Utilisateur;
 
 /**
@@ -147,5 +149,38 @@ public class UtilisateurDAO {
 
         cursor.close();
         return utilisateurSelect;
+    }
+
+    public static ArrayList<Utilisateur> getAllUtilisateur() {
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_UTILISATEUR, null);
+
+        //Déplace le curseur a la valeur 0
+        cursor.moveToFirst();
+
+        //ArrayList qui va contenir les aeroports
+        ArrayList<Utilisateur> array_list = new ArrayList<>();
+
+        while (!cursor.isAfterLast()) {
+            //Ajoute les informations du curseur dans l'objet Aeroport
+            Utilisateur utilisateurSelect = new Utilisateur();
+            utilisateurSelect.setId(cursor.getInt(NUM_UTILISATEUR_ID));
+            utilisateurSelect.setNom(cursor.getString(NUM_UTILISATEUR_NOM));
+            utilisateurSelect.setPrenom(cursor.getString(NUM_UTILISATEUR_PRENOM));
+            utilisateurSelect.setMail(cursor.getString(NUM_UTILISATEUR_MAIL));
+            utilisateurSelect.setTelephone(cursor.getString(NUM_UTILISATEUR_TELEPHONE));
+            utilisateurSelect.setMobile(cursor.getString(NUM_UTILISATEUR_MOBILE));
+            utilisateurSelect.setAdresse(cursor.getString(NUM_UTILISATEUR_ADRESSE));
+            utilisateurSelect.setCp(cursor.getString(NUM_UTILISATEUR_CP));
+            utilisateurSelect.setVille(cursor.getString(NUM_UTILISATEUR_VILLE));
+            utilisateurSelect.setUsername(cursor.getString(NUM_UTILISATEUR_USERNAME));
+            utilisateurSelect.setMdp(cursor.getString(NUM_UTILISATEUR_MDP));
+
+            //Ajout dans l'ArrayList
+            array_list.add(utilisateurSelect);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return array_list;
     }
 }
