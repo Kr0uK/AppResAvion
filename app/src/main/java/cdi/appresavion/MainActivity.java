@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity
         list.setEmptyView(findViewById(R.id.empty));
 */
         // SECTION LOGIN
-        Intent Login = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(Login);
+        //Intent Login = new Intent(MainActivity.this, LoginActivity.class);
+        //startActivity(Login);
 
         // SECTION ACCUEIL
         Intent Accueil = new Intent(MainActivity.this, AccueilActivity.class);

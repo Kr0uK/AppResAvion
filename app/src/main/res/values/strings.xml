@@ -31,10 +31,15 @@
     <string name="location_permission_denied">Cet activité nécessite l\'autorisation de localisation pour activer le layer \'my location\'.  Veuillez essayer de nouveau en accordant l\'accès à la géolocalisation.\nSi l\'autorisation a été refusée de manière permanence, il peut être activé à partir des paramètres système &gt; Apps &gt; AppResAvion</string>
     <string name="permission_required_toast">Votre géolocalisation est nécessaire pour utiliser cette fonctionnalité.</string>
 
-    <!--    ACCUEIL ACTIVITY   -->
-    <string name="title_activity_accueil">Accueil</string>
+    <!-- navigation accueil/trajet/num vol -->
     <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
     <string name="navigation_drawer_close">Fermer le menu de navigation</string>
     <string name="action_settings">Géolocalisation</string>
+
+    <!--    ACCUEIL ACTIVITY   -->
+    <string name="title_activity_accueil">Accueil</string>
+
+    <!--    TRAJETS ACTIVITY   -->
+    <string name="title_activity_trajets">Trouvez votre vol</string>
 
 </resources>
