@@ -3,22 +3,21 @@ package cdi.appresavion;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
+import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -48,6 +47,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+    public int id = 0;
+
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -66,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +160,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
+        int id = 0;
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
@@ -190,7 +193,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new UserLoginTask(id, email, password);
             mAuthTask.execute((Void) null);
         }
     }
@@ -301,8 +304,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        UserLoginTask(String email, String password) {
-            Ident_User logUser = new Ident_User(email, password);
+        UserLoginTask(int id, String email, String password) {
+            Ident_User logUser = new Ident_User(id, email, password);
         }
 
         Ident_User logUser = new Ident_User();
@@ -329,6 +332,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 if (utilisateur.getMail().equals(logUser.getEmail().toString())) {
                     if (utilisateur.getMdp().equals(logUser.getPassword().toString())) {
                         tempsuccess = true; // Si identique, on peux acceder a l'appli
+                        id = utilisateur.getId();
                     }
                 }
             }
@@ -347,7 +351,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                Geoloc_Aeroport Aeroport = new Geoloc_Aeroport("AFPA Frouard",48.776524,6.1393364);
+                Geoloc_Aeroport Aeroport = new Geoloc_Aeroport("AFPA Frouard", 48.776524, 6.1393364);
                 Intent Accueil = new Intent(LoginActivity.this, AccueilActivity.class);
                 startActivity(Accueil);
 
@@ -369,38 +373,47 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 class Ident_User {
 
     /* Déclaration des variables (+GET/SET)*/
-    // Mail
-    private static String mId;
-    public void setId ( String data){
-        mId = ;
+    // Id
+    private static int mId;
+
+    public void setId(int id) {
+        mId = id;
     }
-    public String getId(){
+
+    public int getId() {
         return mId;
     }
 
+    // Email
     private static String mEmail;
-    public void setEmail ( String data){
+
+    public void setEmail(String data) {
         mEmail = data;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return mEmail;
     }
+
     // Password
     private static String mPassword;
-    public void setPassword ( String data){
+
+    public void setPassword(String data) {
         mPassword = data;
     }
+
     public String getPassword() {
         return mPassword;
     }
 
-    public Ident_User() {    }
-    public Ident_User(int id,String Email, String Password)
-    {
+    public Ident_User() {
+    }
+
+    public Ident_User(int id, String Email, String Password) {
         super();
-        this.mId = Id;
+        this.mId = id;
         this.mEmail = Email;
-        this.mPassword  = Password;
+        this.mPassword = Password;
     }
 }
 
