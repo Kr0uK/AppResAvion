@@ -6,6 +6,7 @@ import android.Manifest;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 import android.widget.Toast;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -51,8 +52,8 @@ public class MapsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        Ident_User logUser = new Ident_User();
-        Toast.makeText(this, logUser.getEmail(), Toast.LENGTH_SHORT).show();;
+        //Ident_User logUser = new Ident_User();
+        //Toast.makeText(this, logUser.getEmail(), Toast.LENGTH_SHORT).show();;
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -80,7 +81,7 @@ public class MapsActivity extends AppCompatActivity
         }
 
         addMarker(Aeroport.getNomCoord(), Aeroport.getLongitude(), Aeroport.getLatitude());
-        Toast.makeText(this, Aeroport.getNomCoord()+" : "+String.valueOf(Aeroport.getLongitude())+" / "+String.valueOf(Aeroport.getLatitude()), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, Aeroport.getNomCoord()+" : "+String.valueOf(Aeroport.getLongitude())+" / "+String.valueOf(Aeroport.getLatitude()), Toast.LENGTH_SHORT).show();
 
         mMap.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
@@ -112,7 +113,8 @@ public class MapsActivity extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), "Coordonnée GPS : "+User.getLatitude()+" ; "+User.getLatitude(), Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
-                Toast.makeText(this, String.valueOf(location), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, String.valueOf(location), Toast.LENGTH_LONG).show();
+                Log.w("ERROR",e.toString());
             }
             /*
             final LocationListener locationListener = new LocationListener() {
