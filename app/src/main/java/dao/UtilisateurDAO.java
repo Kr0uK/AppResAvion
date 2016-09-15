@@ -4,6 +4,8 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+
 import dbclass.Utilisateur;
 
 /**
@@ -147,5 +149,42 @@ public class UtilisateurDAO {
 
         cursor.close();
         return utilisateurSelect;
+    }
+
+    /**
+     * Recupere tous les utilisateurs de la bdd.
+     * @return ArrayList d'utilsateur
+     */
+    public static ArrayList<Utilisateur> getAllUtilisateur() {
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_UTILISATEUR, null);
+
+        //Déplace le curseur a la valeur 0
+        cursor.moveToFirst();
+
+        //ArrayList qui va contenir les aeroports
+        ArrayList<Utilisateur> array_list = new ArrayList<>();
+
+        while (!cursor.isAfterLast()) {
+            //Ajoute les informations du curseur dans l'objet Aeroport
+            Utilisateur utilisateurGetAll = new Utilisateur();
+            utilisateurGetAll.setId(cursor.getInt(NUM_UTILISATEUR_ID));
+            utilisateurGetAll.setNom(cursor.getString(NUM_UTILISATEUR_NOM));
+            utilisateurGetAll.setPrenom(cursor.getString(NUM_UTILISATEUR_PRENOM));
+            utilisateurGetAll.setMail(cursor.getString(NUM_UTILISATEUR_MAIL));
+            utilisateurGetAll.setTelephone(cursor.getString(NUM_UTILISATEUR_TELEPHONE));
+            utilisateurGetAll.setMobile(cursor.getString(NUM_UTILISATEUR_MOBILE));
+            utilisateurGetAll.setAdresse(cursor.getString(NUM_UTILISATEUR_ADRESSE));
+            utilisateurGetAll.setCp(cursor.getString(NUM_UTILISATEUR_CP));
+            utilisateurGetAll.setVille(cursor.getString(NUM_UTILISATEUR_VILLE));
+            utilisateurGetAll.setUsername(cursor.getString(NUM_UTILISATEUR_USERNAME));
+            utilisateurGetAll.setMdp(cursor.getString(NUM_UTILISATEUR_MDP));
+
+            //Ajout dans l'ArrayList
+            array_list.add(utilisateurGetAll);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return array_list;
     }
 }

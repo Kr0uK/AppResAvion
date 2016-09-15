@@ -7,17 +7,32 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="cdi.appresavion.MainActivity">
+    tools:context="cdi.appresavion.MainActivity"
+    android:background="@color/cast_intro_overlay_button_background_color">
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="0dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="APK : AppResAvion"
-        android:id="@+id/texte" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="367dp"
+            android:layout_height="287dp"
+            android:text="APK : AppResAvion (HEAVEN Project)"
+            android:id="@+id/texte" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/heaven" />
+    </LinearLayout>
+
 </RelativeLayout>

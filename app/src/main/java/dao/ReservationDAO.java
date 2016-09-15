@@ -5,6 +5,7 @@ import android.database.Cursor;
 
 import java.util.ArrayList;
 
+import dbclass.Place;
 import shell.DateConvertisseur;
 import dbclass.Reservation;
 
@@ -43,17 +44,21 @@ public class ReservationDAO {
      * Ajout d'une reservation dans la bdd a partir de l'objet Reservation.
      * @param reservationAdd Reservation
      */
-    public static void ajouterReservation(Reservation reservationAdd) {
+    public static void ajouterReservationPlace(Reservation reservationAdd, int idTrajet) {
         ContentValues value = new ContentValues();
 
         //Récupération des valeurs dans l'objet Reservation
         value.put(RESERVATION_UTILISATEUR_ID, reservationAdd.getUtilisateurId());
-        value.put(RESERVATION_DATE, DateConvertisseur.dateSys());
+        value.put(RESERVATION_DATE, DateConvertisseur.dateSysString());
         value.put(RESERVATION_PRIX, reservationAdd.getPrix());
         value.put(RESERVATION_NBPERSONNES, reservationAdd.getNbPersonnes());
 
-        //Insert dans la base
-        DAOBase.getWDb().insert(TABLE_RESERVATION, null, value);
+        //Insert dans la base reservation
+        int idReservation = (int) DAOBase.getWDb().insert(TABLE_RESERVATION, null, value);
+
+        //Ajout de la place
+        Place place = new Place(idReservation, idTrajet, 50);
+        PlaceDAO.ajouterPlace(place);
 
         //Fermeture de la connexion a la bdd
         DAOBase.close();

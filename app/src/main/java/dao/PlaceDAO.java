@@ -1,6 +1,9 @@
 package dao;
 
 import android.content.ContentValues;
+import android.database.Cursor;
+
+import java.util.ArrayList;
 
 import dbclass.Place;
 
@@ -9,11 +12,14 @@ import dbclass.Place;
  * 07/09/2016
  */
 public class PlaceDAO {
-    //TODO methode supprimer modifier selectionner getAll pour une Place
+    //TODO methode supprimer modifier pour une Place
     //Entité de la table PLACE + numéro de la colonne pour la sélection
-    public static final String PLACE_RESERVATION_ID = "¨RESERVATION_ID";
-    public static final String PLACE_TRAJET_ID = "¨TRAJET_ID";
-    public static final String PLACE_NUM = "¨PLACE_NUM";
+    public static final String PLACE_RESERVATION_ID = "RESERVATION_ID";
+    public static final int NUM_PLACE_RESERVATION_ID = 0;
+    public static final String PLACE_TRAJET_ID = "TRAJET_ID";
+    public static final int NUM_PLACE_TRAJET_ID = 1;
+    public static final String PLACE_NUM = "PLACE_NUM";
+    public static final int NUM_PLACE_NUM = 2;
 
     //Nom de la table
     public static final String TABLE_PLACE = "PLACE";
@@ -52,6 +58,61 @@ public class PlaceDAO {
     public static void modifierPlace() {
     }
 
-    public static void selectionnerPlace(int id) {
+    /**
+     * Séléction d'une place dans la bdd a partir d'un id.
+     * @param id id de la place
+     * @param where si le where se fait sur la reservation ou le trajet
+     * @return Place
+     */
+    public static Place selectionnerPlace(int id, String where) {
+        Cursor cursor = null;
+        if(where == "r"){
+            //Création du curseur
+            cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_PLACE + " WHERE " + PLACE_RESERVATION_ID + " = " + id, null);
+        } else {
+            //Création du curseur
+            cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_PLACE + " WHERE " + PLACE_TRAJET_ID + " = " + id, null);
+        }
+
+        //Déplace le curseur a la valeur 0
+        cursor.moveToFirst();
+
+        //Ajoute les informations du curseur dans l'objet place
+        Place placeSelect = new Place();
+        placeSelect.setReservationId(cursor.getInt(NUM_PLACE_RESERVATION_ID));
+        placeSelect.setTrajetId(cursor.getInt(NUM_PLACE_TRAJET_ID));
+        placeSelect.setPlaceNum(cursor.getInt(NUM_PLACE_NUM));
+
+        cursor.close();
+        return placeSelect;
+    }
+
+    /**
+     * Récupére toutes les places de la bdd.
+     * @return arraylist de place
+     */
+    public static ArrayList<Place> getAllPlace() {
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_PLACE, null);
+
+        //Déplace le curseur a la valeur 0
+        cursor.moveToFirst();
+
+        //ArrayList qui va contenir les places
+        ArrayList<Place> arrayList = new ArrayList<>();
+
+        while (!cursor.isAfterLast()){
+            //Ajoute les informations du curseur dans l'objet place
+            Place placeGetAll = new Place();
+            placeGetAll.setReservationId(cursor.getInt(NUM_PLACE_RESERVATION_ID));
+            placeGetAll.setTrajetId(cursor.getInt(NUM_PLACE_TRAJET_ID));
+            placeGetAll.setPlaceNum(cursor.getInt(NUM_PLACE_NUM));
+
+            //Ajout dans l'ArrayList
+            arrayList.add(placeGetAll);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return arrayList;
     }
 }

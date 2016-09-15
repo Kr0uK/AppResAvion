@@ -31,7 +31,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import dao.UtilisateurDAO;
+import dbclass.Utilisateur;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -306,24 +310,35 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
+            boolean tempsuccess = false;
             try {
+
                 // Simulate network access.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                return false;
+                tempsuccess = false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(logUser.getEmail())) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(logUser.getPassword());
+            // Lecture des utilisateurs dans la BDD
+            ArrayList arrayList = UtilisateurDAO.getAllUtilisateur();
+            Iterator<Utilisateur> iterator = arrayList.iterator();
+            // Vérification : si le mail et mot de passe correspondent, on se log
+            // autrement un message d'erreur nous signale de modifier les données.
+            while (iterator.hasNext()) {
+                Utilisateur utilisateur = iterator.next();
+                if (utilisateur.getMail().equals(logUser.getEmail().toString())) {
+                    if (utilisateur.getMdp().equals(logUser.getPassword().toString())) {
+                        tempsuccess = true; // Si identique, on peux acceder a l'appli
+                    }
                 }
             }
 
-            // TODO: register the new account here.
-            return true;
+            // Si false, on propose à l'utilisateur de créer un compte en plus de signaler
+            // une possible erreur dans la saisie...
+            if (!tempsuccess) {
+
+            }
+            return tempsuccess;
         }
 
         @Override
