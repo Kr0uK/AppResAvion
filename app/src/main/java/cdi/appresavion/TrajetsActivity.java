@@ -1,5 +1,6 @@
 package cdi.appresavion;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,9 +13,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TrajetsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ListView listViewCity;
+    private Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,17 @@ public class TrajetsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        ctx = this;
+        List listVol= new ArrayList();
+        // public Vol(String logo, String depart, String arrivee, String code, String prix) {
+        listVol.add(new Vol("ic_indo_black_24dp","10/11/12 21:00:00","10/11/12 22:00:00","CDG","100"));
+        listVol.add(new Vol("ic_indo_black_24dp","10/11/12 22:15:00","10/11/12 22:00:00","CDG","110"));
+        listVol.add(new Vol("ic_indo_black_24dp","10/11/12 23:30:00","10/11/12 22:00:00","CDG","120"));
+
+        listViewCity = ( ListView ) findViewById( R.id.city_list);
+        listViewCity.setAdapter( new VolListAdapter(ctx, R.layout.vol_row_item, listVol ) );
     }
 
     @Override
