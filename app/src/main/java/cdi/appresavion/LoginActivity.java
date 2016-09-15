@@ -348,8 +348,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 Geoloc_Aeroport Aeroport = new Geoloc_Aeroport("AFPA Frouard",48.776524,6.1393364);
-                Intent GMap = new Intent(LoginActivity.this, MapsActivity.class);
-                startActivity(GMap);
+                Intent Accueil = new Intent(LoginActivity.this, AccueilActivity.class);
+                startActivity(Accueil);
 
                 finish();
             } else {
@@ -370,6 +370,14 @@ class Ident_User {
 
     /* Déclaration des variables (+GET/SET)*/
     // Mail
+    private static String mId;
+    public void setId ( String data){
+        mId = ;
+    }
+    public String getId(){
+        return mId;
+    }
+
     private static String mEmail;
     public void setEmail ( String data){
         mEmail = data;
@@ -387,9 +395,10 @@ class Ident_User {
     }
 
     public Ident_User() {    }
-    public Ident_User(String Email, String Password)
+    public Ident_User(int id,String Email, String Password)
     {
         super();
+        this.mId = Id;
         this.mEmail = Email;
         this.mPassword  = Password;
     }
