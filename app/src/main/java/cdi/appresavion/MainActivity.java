@@ -14,10 +14,11 @@ import java.util.Iterator;
 import dao.AeroportDAO;
 import dao.DAOBase;
 import dao.ReservationDAO;
+import dao.UtilisateurDAO;
 import dbclass.Aeroport;
 import dbclass.Reservation;
+import dbclass.Utilisateur;
 import shell.DateConvertisseur;
-import shell.ThreadHandler;
 
 
 public class MainActivity extends AppCompatActivity { //implements AdapterView.OnItemClickListener {
@@ -29,16 +30,44 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         ListView list = (ListView) findViewById(R.id.list);
 
 
-        Thread FirstBoot = new Thread(new ThreadHandler(getApplicationContext()));
         //Création de la base
         Log.w("TAG", "Avant de lancer le thread");
-        FirstBoot.run();
+        new Thread(new Runnable() {     //Thread du premier boot pour créer et remplir la BDD
 
 
+            @Override
+            public void run() { //La méthode qui va exécuter le code du thread
+                DAOBase daoBase = new DAOBase(getApplicationContext());
+                daoBase.getWDb();
+
+                Log.w("TAG", "On rentre bien dans le thread");
+
+                //Ajout d'un utilisateur util
+                Utilisateur util = new Utilisateur("METZ", "Renaud", "renaudmtz@gmail.com", "0388943632", "0622493390", "33 rue de la paix", "67160", "OBERLAUTERBACH", "renaud", "1610");
+                UtilisateurDAO.ajouterUtilisateur(util);
+                Log.w("TAG", "Bien ajouté");
+
+                UtilisateurDAO.ajouterUtilisateur(new Utilisateur("Kenobi", "Obi-Wan", "obiwan@kenobi.jedi", "0000000000", "0000000000", "33 rue de la paix", "68000", "COLMAR", "Obiwan", "12345678"));
+                Log.w("TAG", "Bien ajouté");
 
 
+                //Test des dates sur Reservation
+                Reservation reservation = new Reservation(1, DateConvertisseur.stringToDate("16/10/1993 03:30"), 1500, 3);
+                ReservationDAO.ajouterReservation(reservation);
+                Log.w("TEST", DateConvertisseur.dateSys() + " !");
+                Reservation reservation2 = ReservationDAO.selectionnerReservation(1);
+                String testR = DateConvertisseur.dateToString(reservation2.getDate());
+                Log.w("TEST", testR);
+
+                //Objet aeroport
+                Aeroport aeroport = new Aeroport("Goroka", "Goroka", "Papua New Guinea", "GKA", -6.081689, 145.391881);
+                //Ajout de l'aeroport
+                AeroportDAO.ajouterAeroport(aeroport);
 
 
+            }
+
+        }).start();
 
         /*
         //try and catch si l'utilisateur selectionner est vide
@@ -63,6 +92,7 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         list.setEmptyView(findViewById(R.id.empty));
 */
         // SECTION LOGIN
+
         Intent Login = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(Login);
 
