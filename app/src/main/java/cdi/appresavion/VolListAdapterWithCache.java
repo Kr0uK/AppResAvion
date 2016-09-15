@@ -15,9 +15,8 @@ import java.util.List;
 /**
  * Created by Frédéric on 15/09/2016.
  * Creation de l'adaptateur du cache : Dans ce cas, lorsque le système veut rendre une rangée, il
- * utilise la classe de cache pour prendre toutes les composantes de notre mise en page
- * (getTextNameCity, getTextWikiCity, getImageView). De cette façon, notre ListView sera très
- * bien pour contenir de nombreuses lignes.
+ * utilise la classe de cache pour prendre toutes les composantes de notre mise en page.
+ * De cette façon, notre ListView sera très bien pour contenir de nombreuses lignes.
  */
 public class VolListAdapterWithCache extends ArrayAdapter<Vol> {
 

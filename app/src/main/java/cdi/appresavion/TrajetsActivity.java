@@ -36,7 +36,7 @@ public class TrajetsActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Informations légales", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -54,16 +54,25 @@ public class TrajetsActivity extends AppCompatActivity
             ctx = this;
             List listVol = new ArrayList();
             // public Vol(String depart, String arrivee, String code, String prix) {
-            listVol.add(new Vol("10/11/12 21:00:00", "10/11/12 22:00:00", "CDG", "100"));
-            listVol.add(new Vol("10/11/12 22:15:00", "10/11/12 22:00:00", "CDG", "110"));
-            listVol.add(new Vol("10/11/12 23:30:00", "10/11/12 22:00:00", "CDG", "120"));
+            listVol.add(new Vol("09/11/12 21:00:00", "10/11/12 01:00:00", "CDG", "100"));
+            listVol.add(new Vol("10/11/12 22:15:00", "11/11/12 02:00:00", "CDG", "110"));
+            listVol.add(new Vol("11/11/12 23:30:00", "12/11/12 03:00:00", "CDG", "120"));
 
             listViewVol = (ListView) findViewById(R.id.vol_list);
-            listViewVol.setAdapter(new VolListAdapter(ctx, R.layout.vol_row_item, listVol));
+            // VolListAdapter : Context ctx, int resourceId, List objects
+            Log.e("ERROR", ""+R.layout.vol_row_item);
+
+
+            //listViewVol.setAdapter(new VolListAdapter(ctx, R.layout.vol_row_item, listVol));
+            listViewVol.setAdapter(new VolListAdapterWithCache(ctx, R.layout.vol_row_item, listVol));
+/*
+            VolListAdapter adapter = new VolListAdapter(ctx, R.layout.vol_row_item, listVol);
+            adapter.notifyDataSetChanged();
+            listViewVol.setAdapter(adapter);
+*/
+
         } catch (Exception e) {
             Log.w("ERROR",e.toString());
-            //09-15 11:05:22.646 24262-24262/cdi.appresavion W/ERROR: java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.ListView.setAdapter(android.widget.ListAdapter)' on a null object reference
-            //09-15 11:05:22.755 24262-24871/cdi.appresavion E/Surface: getSlotFromBufferLocked: unknown buffer: 0xae56dae0
         }
     }
 

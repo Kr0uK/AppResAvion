@@ -2,7 +2,7 @@
 <!-- Mise  place de l'affichage graphique -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="80dip" >
+    android:layout_height="300dip" >
 
     <!--<ImageView
         android:id="@+id/imgLogo"
@@ -13,34 +13,39 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:paddingLeft="10sp">
+        android:paddingLeft="10sp"
+        android:weightSum="1">
         <!--android:layout_toRightOf="@id/volLogo">-->
 
         <TextView
             android:id="@+id/txtDep"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp" />
+            android:textSize="25sp"
+            android:layout_weight="0.16" />
 
         <TextView
             android:id="@+id/txtArr"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autoLink="web"
-            android:textSize="15sp" />
+            android:textSize="25sp"
+            android:layout_weight="0.17" />
 
         <TextView
             android:id="@+id/txtCod"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp" />
+            android:textSize="25sp"
+            android:layout_weight="0.25" />
 
         <TextView
             android:id="@+id/txtPri"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autoLink="web"
-            android:textSize="15sp" />
+            android:textSize="25sp"
+            android:layout_weight="0.27" />
     </LinearLayout>
 
 </RelativeLayout>

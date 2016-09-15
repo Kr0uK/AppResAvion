@@ -16,13 +16,12 @@ public class VolListViewCache {
 
     private View baseView;
     private TextView txtDep;
-    private TextView	txtArr;
-    private TextView	txtCod;
-    private TextView	txtPri;
+    private TextView txtArr;
+    private TextView txtCod;
+    private TextView txtPri;
     private ImageView imgLogo;
 
     public VolListViewCache ( View baseView ) {
-
         this.baseView = baseView;
     }
     public View getViewBase (  ) {

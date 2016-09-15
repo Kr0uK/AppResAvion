@@ -366,6 +366,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 class Ident_User {
 
     /* Déclaration des variables (+GET/SET)*/
+    // idUser
+    private static int idUser;
+    public void setidUser ( int data){
+        idUser = data;
+    }
+    public int getidUser(){
+        return idUser;
+    }
     // Mail
     private static String mEmail;
     public void setEmail ( String data){
@@ -384,6 +392,11 @@ class Ident_User {
     }
 
     public Ident_User() {    }
+    public Ident_User(int id)
+    {
+        super();
+        this.idUser = id;
+    }
     public Ident_User(String Email, String Password)
     {
         super();
