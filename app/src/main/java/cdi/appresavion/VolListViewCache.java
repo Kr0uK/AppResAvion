@@ -56,11 +56,12 @@ public class VolListViewCache {
         }
         return txtPri;
     }
-
+    /*
     public ImageView getImgLogo (int resource) {
         if ( imgLogo == null ) {
             imgLogo = ( ImageView ) baseView.findViewById(R.id.volLogo);
         }
         return imgLogo;
     }
+    */
 }

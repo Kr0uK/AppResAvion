@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class VolListAdapterWithCache extends ArrayAdapter<Vol> {
 
-    private int				resource;
+    private int	resource;
     private LayoutInflater inflater;
     private Context context;
 
@@ -56,13 +56,13 @@ public class VolListAdapterWithCache extends ArrayAdapter<Vol> {
         txtCod.setText(newVol.getCode());
         TextView txtPri = viewCache.getTxtPrix(resource);
         txtPri.setText(newVol.getPrix());
-
+        /*
         ImageView imageCity = viewCache.getImgLogo(resource);
         String uri = "drawable/" + newVol.getLogo();
         int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
         Drawable image = context.getResources().getDrawable(imageResource);
         imageCity.setImageDrawable(image);
-
+    */
         return convertView;
     }
 }

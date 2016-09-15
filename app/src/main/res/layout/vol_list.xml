@@ -4,7 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <!-- Affichage sous forme de liste par le biai de vol_row_item -->
     <ListView
         android:id="@+id/vol_list"
         android:layout_width="fill_parent"

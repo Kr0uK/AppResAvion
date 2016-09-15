@@ -1,17 +1,5 @@
 package cdi.appresavion;
 
-// LIBRAIRIES
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import java.util.List;
-
 /**
  * Created by Frédéric on 15/09/2016.
  */
@@ -27,6 +15,13 @@ public class Vol {
 
     // CONSTRUCTEURS (avec surcharge pour definir les variables lors interrogation BDD)
     public Vol() {
+    }
+    public Vol(String depart, String arrivee, String code, String prix) {
+        super();
+        this.depart = depart;
+        this.arrivee = arrivee;
+        this.code = code;
+        this.prix = prix;
     }
     public Vol(String logo, String depart, String arrivee, String code, String prix) {
         super();

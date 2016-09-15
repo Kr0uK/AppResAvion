@@ -1,5 +1,6 @@
 package cdi.appresavion;
 
+//LIBRAIRIES
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -9,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.util.List;
 
 /*
@@ -60,12 +60,14 @@ public class VolListAdapter extends ArrayAdapter {
         TextView txtPri = (TextView) convertView.findViewById(R.id.txtPri);
         txtPri.setText(newvol.getArrivee());
 
-        /* Definir l'image de la compagnie pour ce vol */
+
+        /* // Definir l'image de la compagnie pour ce vol
         ImageView imgLogo = (ImageView) convertView.findViewById(R.id.volLogo);
         String uri = "drawable/" + newvol.getLogo();
         int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
         Drawable image = context.getResources().getDrawable(imageResource);
         imgLogo.setImageDrawable(image);
+        */
         return convertView;
     }
 }

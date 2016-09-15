@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +22,7 @@ import java.util.List;
 public class TrajetsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ListView listViewCity;
+    private ListView listViewVol;
     private Context ctx;
 
     @Override
@@ -49,16 +50,21 @@ public class TrajetsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        try {
+            ctx = this;
+            List listVol = new ArrayList();
+            // public Vol(String depart, String arrivee, String code, String prix) {
+            listVol.add(new Vol("10/11/12 21:00:00", "10/11/12 22:00:00", "CDG", "100"));
+            listVol.add(new Vol("10/11/12 22:15:00", "10/11/12 22:00:00", "CDG", "110"));
+            listVol.add(new Vol("10/11/12 23:30:00", "10/11/12 22:00:00", "CDG", "120"));
 
-        ctx = this;
-        List listVol= new ArrayList();
-        // public Vol(String logo, String depart, String arrivee, String code, String prix) {
-        listVol.add(new Vol("ic_indo_black_24dp","10/11/12 21:00:00","10/11/12 22:00:00","CDG","100"));
-        listVol.add(new Vol("ic_indo_black_24dp","10/11/12 22:15:00","10/11/12 22:00:00","CDG","110"));
-        listVol.add(new Vol("ic_indo_black_24dp","10/11/12 23:30:00","10/11/12 22:00:00","CDG","120"));
-
-        listViewCity = ( ListView ) findViewById( R.id.city_list);
-        listViewCity.setAdapter( new VolListAdapter(ctx, R.layout.vol_row_item, listVol ) );
+            listViewVol = (ListView) findViewById(R.id.vol_list);
+            listViewVol.setAdapter(new VolListAdapter(ctx, R.layout.vol_row_item, listVol));
+        } catch (Exception e) {
+            Log.w("ERROR",e.toString());
+            //09-15 11:05:22.646 24262-24262/cdi.appresavion W/ERROR: java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.ListView.setAdapter(android.widget.ListAdapter)' on a null object reference
+            //09-15 11:05:22.755 24262-24871/cdi.appresavion E/Surface: getSlotFromBufferLocked: unknown buffer: 0xae56dae0
+        }
     }
 
     @Override
