@@ -100,15 +100,15 @@ public class MainActivity extends AppCompatActivity
         //startActivity(Login);
 
         // SECTION ACCUEIL
-        Intent Accueil = new Intent(MainActivity.this, AccueilActivity.class);
-        startActivity(Accueil);
+        //Intent Accueil = new Intent(MainActivity.this, AccueilActivity.class);
+        //startActivity(Accueil);
 
         // SECTION API GOOGLE MAP
-        /*
+
         Geoloc_Aeroport Aeroport = new Geoloc_Aeroport("AFPA Frouard",48.776524,6.1393364);
         Intent GMap = new Intent(MainActivity.this, MapsActivity.class);
         startActivity(GMap);
-        */
+
     }
 
 /*

@@ -1,6 +1,8 @@
 package cdi.appresavion;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,7 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TableRow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +65,7 @@ public class TrajetsActivity extends AppCompatActivity
 
             listViewVol = (ListView) findViewById(R.id.vol_list);
             // VolListAdapter : Context ctx, int resourceId, List objects
-            Log.e("ERROR", ""+R.layout.vol_row_item);
+            Log.e("ERROR", "" + R.layout.vol_row_item);
 
 
             //listViewVol.setAdapter(new VolListAdapter(ctx, R.layout.vol_row_item, listVol));
@@ -70,11 +75,52 @@ public class TrajetsActivity extends AppCompatActivity
             adapter.notifyDataSetChanged();
             listViewVol.setAdapter(adapter);
 */
+/*
+            TableRow tableRow = (TableRow) findViewById(R.id.one);
+
+            tableRow.setClickable(true);
+            tableRow.setOnClickListener(onClickListener);
+*/
+
 
         } catch (Exception e) {
             Log.w("ERROR",e.toString());
         }
     }
+/*
+    private View.OnClickListener onClickListener= new View.OnClickListener() {
+        public void onClick(View v) {
+            show_dialog();
+
+        }
+    };
+*/
+
+/*
+    public void show_dialog() {
+
+        final Dialog dialog = new Dialog(getApplicationContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow();
+        dialog.setContentView(R.layout.yourlayout);
+        dialog.setTitle("yor title");
+        dialog.setCancelable(false);
+
+        final Button btnOkDialog = (Button) dialog.findViewById(R.id.ResetOkBtn);
+        btnOkDialog.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                //+SAVE de l'id du trajet pour passage en param
+//                Intent Details = new Intent(TrajetsActivity.this, DetailsActivity.class);
+//                startActivity(Details);
+            }
+        });
+        try {
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+*/
 
     @Override
     public void onBackPressed() {
