@@ -19,6 +19,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -160,7 +161,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        int id = 0;
+
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
@@ -193,7 +194,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(id, email, password);
+            mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
     }
@@ -304,8 +305,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        UserLoginTask(int id, String email, String password) {
-            Ident_User logUser = new Ident_User(id, email, password);
+        UserLoginTask(String email, String password) {
+            Ident_User logUser = new Ident_User(email, password);
         }
 
         Ident_User logUser = new Ident_User();
@@ -332,7 +333,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 if (utilisateur.getMail().equals(logUser.getEmail().toString())) {
                     if (utilisateur.getMdp().equals(logUser.getPassword().toString())) {
                         tempsuccess = true; // Si identique, on peux acceder a l'appli
-                        id = utilisateur.getId();
+                        logUser.setidUser(utilisateur.getId());
+                        Log.w("ID",""+logUser.getidUser());
+                        logUser.setPassword("HaHaHaVousNavezPasDitLeMotMagiqueHaHaHa");
                     }
                 }
             }
@@ -373,15 +376,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 class Ident_User {
 
     /* Déclaration des variables (+GET/SET)*/
-    // Id
-    private static int mId;
-
-    public void setId(int id) {
-        mId = id;
+    // idUser
+    private static int idUser;
+    public void setidUser ( int data){
+        idUser = data;
     }
-
-    public int getId() {
-        return mId;
+    public int getidUser(){
+        return idUser;
     }
 
     // Email
@@ -409,9 +410,8 @@ class Ident_User {
     public Ident_User() {
     }
 
-    public Ident_User(int id, String Email, String Password) {
+    public Ident_User(String Email, String Password) {
         super();
-        this.mId = id;
         this.mEmail = Email;
         this.mPassword = Password;
     }

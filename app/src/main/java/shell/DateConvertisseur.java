@@ -61,4 +61,8 @@ public class DateConvertisseur {
         Calendar calendar = Calendar.getInstance();
         return calendar.getTime();
     }
+    public static String dateToStringFormat (Date date){
+        SimpleDateFormat sdfNew = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return sdfNew.format(date);
+    }
 }

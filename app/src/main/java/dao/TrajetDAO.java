@@ -14,6 +14,7 @@ import dbclass.Trajet;
  */
 public class TrajetDAO {
 
+    //TODO recupérer tous les trajets + les infos du trajet au click
     //Entité de la table TRAJET + numéro de la colonne pour la sélection
     public static final String TRAJET_ID = "TRAJET_ID";
     public static final int NUM_TRAJET_ID = 0;
@@ -97,9 +98,9 @@ public class TrajetDAO {
     }
 
     /**
-     * Sélectionne un trajet dans la bdd a partir d'un id.
-     * @param id id du trajet
-     * @return Trajet
+     * Récupéreu un trajet de la bdd.
+     * @param id du trajet
+     * @return trajet
      */
     public static Trajet selectionnerTrajet(int id) {
         //Création du curseur
@@ -109,16 +110,16 @@ public class TrajetDAO {
         cursor.moveToFirst();
 
         //Ajoute les informations du curseur dans l'objet Trajet
-        Trajet trajetSelect = new Trajet();
-        trajetSelect.setTrajetId(cursor.getInt(NUM_TRAJET_ID));
-        trajetSelect.setAvionId(cursor.getInt(NUM_TRAJET_AVION_ID));
-        trajetSelect.setAeroportId(cursor.getInt(NUM_TRAJET_AEROPORT_ID));
-        trajetSelect.setAerAeroportId(cursor.getInt(NUM_TRAJET_AER_AEROPORT_ID));
-        trajetSelect.setDateDepart(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_DEPART)));
-        trajetSelect.setDateArrivee(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_ARRIVEE)));
+        Trajet trajetGetAll = new Trajet();
+        trajetGetAll.setTrajetId(cursor.getInt(NUM_TRAJET_ID));
+        trajetGetAll.setAvionId(cursor.getInt(NUM_TRAJET_AVION_ID));
+        trajetGetAll.setAeroportId(cursor.getInt(NUM_TRAJET_AEROPORT_ID));
+        trajetGetAll.setAerAeroportId(cursor.getInt(NUM_TRAJET_AER_AEROPORT_ID));
+        trajetGetAll.setDateDepart(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_DEPART)));
+        trajetGetAll.setDateArrivee(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_ARRIVEE)));
 
         cursor.close();
-        return trajetSelect;
+        return trajetGetAll;
     }
 
     /**

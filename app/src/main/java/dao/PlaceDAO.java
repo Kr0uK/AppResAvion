@@ -60,19 +60,12 @@ public class PlaceDAO {
 
     /**
      * Séléction d'une place dans la bdd a partir d'un id.
-     * @param id id de la place
-     * @param where si le where se fait sur la reservation ou le trajet
+     * @param id id de la réservation
      * @return Place
      */
-    public static Place selectionnerPlace(int id, String where) {
-        Cursor cursor = null;
-        if(where == "r"){
-            //Création du curseur
-            cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_PLACE + " WHERE " + PLACE_RESERVATION_ID + " = " + id, null);
-        } else {
-            //Création du curseur
-            cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_PLACE + " WHERE " + PLACE_TRAJET_ID + " = " + id, null);
-        }
+    public static Place selectionnerPlace(int id) {
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_PLACE + " WHERE " + PLACE_RESERVATION_ID + " = " + id, null);
 
         //Déplace le curseur a la valeur 0
         cursor.moveToFirst();
