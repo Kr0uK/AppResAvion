@@ -57,6 +57,24 @@ public class AccueilActivity extends AppCompatActivity
         Log.w("TAG", "" + id); //Vérification
         requeteReservation(id);
         int i = 1;
+        /*
+         TODO mettre en place le thread
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                requeteReservation(id);
+                //
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // TODO mettre le bazar d'affichage
+                    }
+                });
+            }
+
+        }).start();
+*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

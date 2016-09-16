@@ -83,14 +83,17 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
                 ReservationDAO.ajouterReservationPlace(reservation1, 1);
                 ReservationDAO.ajouterReservationPlace(reservation2, 2);
                 ReservationDAO.ajouterReservationPlace(reservation3, 2);
+
             }
         }).start();
 
+                // SECTION LOGIN
 
-        // SECTION LOGIN
+                Intent Login = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(Login);
 
-        Intent Login = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(Login);
+
+
 
 
     }
