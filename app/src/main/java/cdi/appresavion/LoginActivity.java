@@ -326,6 +326,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 if (utilisateur.getMail().equals(logUser.getEmail().toString())) {
                     if (utilisateur.getMdp().equals(logUser.getPassword().toString())) {
                         tempsuccess = true; // Si identique, on peux acceder a l'appli
+                        logUser.setidUser(utilisateur.getId());
+                        Log.w("ID",""+logUser.getidUser());
+                        logUser.setPassword("HaHaHaVousNavezPasDitLeMotMagiqueHaHaHa");
                     }
                 }
             }
@@ -344,9 +347,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                Geoloc_Aeroport Aeroport = new Geoloc_Aeroport("AFPA Frouard",48.776524,6.1393364);
-                Intent GMap = new Intent(LoginActivity.this, MapsActivity.class);
-                startActivity(GMap);
+                Intent Accueil = new Intent(LoginActivity.this, AccueilActivity.class);
+                startActivity(Accueil);
 
                 finish();
             } else {
@@ -392,11 +394,6 @@ class Ident_User {
     }
 
     public Ident_User() {    }
-    public Ident_User(int id)
-    {
-        super();
-        this.idUser = id;
-    }
     public Ident_User(String Email, String Password)
     {
         super();
