@@ -56,6 +56,7 @@ public class AccueilActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         Log.w("TAG", "" + id); //Vérification
         requeteReservation(id);
+        int i = 1;
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
