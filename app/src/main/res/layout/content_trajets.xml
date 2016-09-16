@@ -13,33 +13,47 @@
     tools:showIn="@layout/app_bar_trajets"
     android:background="@color/cast_intro_overlay_button_background_color">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="80dip" >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <!--
-        <ImageView
-            android:id="@+id/volLogo"
-            android:layout_width="90sp"
-            android:layout_height="90sp" />
-            -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Ajouter Spinner, + image a la place de la textbox au dessous"
+            android:id="@+id/textView2"
+            android:textAlignment="center" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Départ | Arrivée  |   Prix   |  Code"
+            android:id="@+id/textView3"
+            android:textAlignment="center" />
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical" >
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-            <ListView
-                android:id="@+id/vol_list"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingTop="20sp" >
-            </ListView>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_column="6"
+                android:minHeight="75dp"
+                android:onClick="rowClick">
 
-        </LinearLayout>
+                <ListView
+                    android:id="@+id/vol_list"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingTop="20sp" >
+                </ListView>
+            </TableRow>
 
+        </TableLayout>
+    </LinearLayout>
 
-
-    </RelativeLayout>
 </RelativeLayout>
