@@ -1,12 +1,8 @@
 package cdi.appresavion;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,19 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TableRow;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TrajetsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private ListView listViewVol;
-    private Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +27,7 @@ public class TrajetsActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Informations légales", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -54,73 +40,7 @@ public class TrajetsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        try {
-            ctx = this;
-            List listVol = new ArrayList();
-            // public Vol(String depart, String arrivee, String code, String prix) {
-            listVol.add(new Vol("09/11/12 21:00:00", "10/11/12 01:00:00", "CDG", "100"));
-            listVol.add(new Vol("10/11/12 22:15:00", "11/11/12 02:00:00", "CDG", "110"));
-            listVol.add(new Vol("11/11/12 23:30:00", "12/11/12 03:00:00", "CDG", "120"));
-
-            listViewVol = (ListView) findViewById(R.id.vol_list);
-            // VolListAdapter : Context ctx, int resourceId, List objects
-            Log.e("ERROR", "" + R.layout.vol_row_item);
-
-
-            //listViewVol.setAdapter(new VolListAdapter(ctx, R.layout.vol_row_item, listVol));
-            listViewVol.setAdapter(new VolListAdapterWithCache(ctx, R.layout.vol_row_item, listVol));
-/*
-            VolListAdapter adapter = new VolListAdapter(ctx, R.layout.vol_row_item, listVol);
-            adapter.notifyDataSetChanged();
-            listViewVol.setAdapter(adapter);
-*/
-/*
-            TableRow tableRow = (TableRow) findViewById(R.id.one);
-
-            tableRow.setClickable(true);
-            tableRow.setOnClickListener(onClickListener);
-*/
-
-
-        } catch (Exception e) {
-            Log.w("ERROR",e.toString());
-        }
     }
-/*
-    private View.OnClickListener onClickListener= new View.OnClickListener() {
-        public void onClick(View v) {
-            show_dialog();
-
-        }
-    };
-*/
-
-/*
-    public void show_dialog() {
-
-        final Dialog dialog = new Dialog(getApplicationContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow();
-        dialog.setContentView(R.layout.yourlayout);
-        dialog.setTitle("yor title");
-        dialog.setCancelable(false);
-
-        final Button btnOkDialog = (Button) dialog.findViewById(R.id.ResetOkBtn);
-        btnOkDialog.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                //+SAVE de l'id du trajet pour passage en param
-//                Intent Details = new Intent(TrajetsActivity.this, DetailsActivity.class);
-//                startActivity(Details);
-            }
-        });
-        try {
-            dialog.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-*/
 
     @Override
     public void onBackPressed() {

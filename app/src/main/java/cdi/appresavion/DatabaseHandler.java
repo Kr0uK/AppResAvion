@@ -13,6 +13,12 @@ import dao.PlaceDAO;
 import dao.ReservationDAO;
 import dao.TrajetDAO;
 import dao.UtilisateurDAO;
+import dbclass.Aeroport;
+import dbclass.Avion;
+import dbclass.Reservation;
+import dbclass.Trajet;
+import dbclass.Utilisateur;
+import shell.DateConvertisseur;
 
 
 /**
@@ -29,6 +35,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
+
             db.execSQL(UtilisateurDAO.CREATE_UTILISATEUR);
             db.execSQL(AeroportDAO.CREATE_AEROPORT);
             db.execSQL(AvionDAO.CREATE_AVION);
@@ -36,6 +43,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL(ReservationDAO.CREATE_RESERVATION);
             db.execSQL(PlaceDAO.CREATE_PLACE);
             Log.w("TEST", "Base created !");
+
+
+
+
         } catch (SQLiteException e) {
             Log.w("TEST", e);
         }

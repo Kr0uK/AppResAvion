@@ -151,6 +151,10 @@ public class UtilisateurDAO {
         return utilisateurSelect;
     }
 
+    /**
+     * Recupere tous les utilisateurs de la bdd.
+     * @return ArrayList d'utilsateur
+     */
     public static ArrayList<Utilisateur> getAllUtilisateur() {
         //Création du curseur
         Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_UTILISATEUR, null);
@@ -163,21 +167,21 @@ public class UtilisateurDAO {
 
         while (!cursor.isAfterLast()) {
             //Ajoute les informations du curseur dans l'objet Aeroport
-            Utilisateur utilisateurSelect = new Utilisateur();
-            utilisateurSelect.setId(cursor.getInt(NUM_UTILISATEUR_ID));
-            utilisateurSelect.setNom(cursor.getString(NUM_UTILISATEUR_NOM));
-            utilisateurSelect.setPrenom(cursor.getString(NUM_UTILISATEUR_PRENOM));
-            utilisateurSelect.setMail(cursor.getString(NUM_UTILISATEUR_MAIL));
-            utilisateurSelect.setTelephone(cursor.getString(NUM_UTILISATEUR_TELEPHONE));
-            utilisateurSelect.setMobile(cursor.getString(NUM_UTILISATEUR_MOBILE));
-            utilisateurSelect.setAdresse(cursor.getString(NUM_UTILISATEUR_ADRESSE));
-            utilisateurSelect.setCp(cursor.getString(NUM_UTILISATEUR_CP));
-            utilisateurSelect.setVille(cursor.getString(NUM_UTILISATEUR_VILLE));
-            utilisateurSelect.setUsername(cursor.getString(NUM_UTILISATEUR_USERNAME));
-            utilisateurSelect.setMdp(cursor.getString(NUM_UTILISATEUR_MDP));
+            Utilisateur utilisateurGetAll = new Utilisateur();
+            utilisateurGetAll.setId(cursor.getInt(NUM_UTILISATEUR_ID));
+            utilisateurGetAll.setNom(cursor.getString(NUM_UTILISATEUR_NOM));
+            utilisateurGetAll.setPrenom(cursor.getString(NUM_UTILISATEUR_PRENOM));
+            utilisateurGetAll.setMail(cursor.getString(NUM_UTILISATEUR_MAIL));
+            utilisateurGetAll.setTelephone(cursor.getString(NUM_UTILISATEUR_TELEPHONE));
+            utilisateurGetAll.setMobile(cursor.getString(NUM_UTILISATEUR_MOBILE));
+            utilisateurGetAll.setAdresse(cursor.getString(NUM_UTILISATEUR_ADRESSE));
+            utilisateurGetAll.setCp(cursor.getString(NUM_UTILISATEUR_CP));
+            utilisateurGetAll.setVille(cursor.getString(NUM_UTILISATEUR_VILLE));
+            utilisateurGetAll.setUsername(cursor.getString(NUM_UTILISATEUR_USERNAME));
+            utilisateurGetAll.setMdp(cursor.getString(NUM_UTILISATEUR_MDP));
 
             //Ajout dans l'ArrayList
-            array_list.add(utilisateurSelect);
+            array_list.add(utilisateurGetAll);
             cursor.moveToNext();
         }
         cursor.close();

@@ -3,22 +3,21 @@ package cdi.appresavion;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
+import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -30,13 +29,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import dao.DAOBase;
 import dao.UtilisateurDAO;
 import dbclass.Utilisateur;
 
@@ -51,7 +48,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+    public int id = 0;
 
+
+    /**
+     * A dummy authentication store containing known user names and passwords.
+     * TODO: remove after connecting to a real authentication system.
+     */
+    private static final String[] DUMMY_CREDENTIALS = new String[]{
+            "foo@example.com:hello", "bar@example.com:world"
+    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -62,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +161,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
+
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
@@ -305,7 +313,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-
             // TODO: attempt authentication against a network service.
             boolean tempsuccess = false;
             try {
@@ -347,6 +354,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+                Geoloc_Aeroport Aeroport = new Geoloc_Aeroport("AFPA Frouard", 48.776524, 6.1393364);
                 Intent Accueil = new Intent(LoginActivity.this, AccueilActivity.class);
                 startActivity(Accueil);
 
@@ -361,7 +369,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
-            int i = 1;
         }
     }
 }
@@ -377,29 +384,36 @@ class Ident_User {
     public int getidUser(){
         return idUser;
     }
-    // Mail
+
+    // Email
     private static String mEmail;
-    public void setEmail ( String data){
+
+    public void setEmail(String data) {
         mEmail = data;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return mEmail;
     }
+
     // Password
     private static String mPassword;
-    public void setPassword ( String data){
+
+    public void setPassword(String data) {
         mPassword = data;
     }
+
     public String getPassword() {
         return mPassword;
     }
 
-    public Ident_User() {    }
-    public Ident_User(String Email, String Password)
-    {
+    public Ident_User() {
+    }
+
+    public Ident_User(String Email, String Password) {
         super();
         this.mEmail = Email;
-        this.mPassword  = Password;
+        this.mPassword = Password;
     }
 }
 

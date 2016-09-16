@@ -2,9 +2,12 @@ package dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 
+import dbclass.Place;
+import dbclass.Trajet;
 import shell.DateConvertisseur;
 import dbclass.Reservation;
 
@@ -43,17 +46,21 @@ public class ReservationDAO {
      * Ajout d'une reservation dans la bdd a partir de l'objet Reservation.
      * @param reservationAdd Reservation
      */
-    public static void ajouterReservation(Reservation reservationAdd) {
+    public static void ajouterReservationPlace(Reservation reservationAdd, int idTrajet) {
         ContentValues value = new ContentValues();
 
         //Récupération des valeurs dans l'objet Reservation
         value.put(RESERVATION_UTILISATEUR_ID, reservationAdd.getUtilisateurId());
-        value.put(RESERVATION_DATE, DateConvertisseur.dateSys());
+        value.put(RESERVATION_DATE, DateConvertisseur.dateSysString());
         value.put(RESERVATION_PRIX, reservationAdd.getPrix());
         value.put(RESERVATION_NBPERSONNES, reservationAdd.getNbPersonnes());
 
-        //Insert dans la base
-        DAOBase.getWDb().insert(TABLE_RESERVATION, null, value);
+        //Insert dans la base reservation
+        int idReservation = (int) DAOBase.getWDb().insert(TABLE_RESERVATION, null, value);
+
+        //Ajout de la place
+        Place place = new Place(idReservation, idTrajet, 50);
+        PlaceDAO.ajouterPlace(place);
 
         //Fermeture de la connexion a la bdd
         DAOBase.close();
@@ -92,27 +99,42 @@ public class ReservationDAO {
     }
 
     /**
-     * Séléction d'une reservation dans la bdd a partir d'un id.
-     * @param id id de la reservation
-     * @return Reservation
+     * Séléction de reservation dans la bdd a partir d'un id.
+     * @param id id de l'utilisateur
+     * @return ArrayList de reservation
      */
-    public static Reservation selectionnerReservation(int id) {
+    public static ArrayList<Reservation> getReservationWhere(int id) {
         //Création du curseur
-        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_RESERVATION + " WHERE " + RESERVATION_ID + " = " + id, null);
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_RESERVATION + " r"
+                + " JOIN " + PlaceDAO.TABLE_PLACE + " p"
+                + " ON r." + RESERVATION_ID + " = p." + PlaceDAO.PLACE_RESERVATION_ID
+                + " JOIN " + TrajetDAO.TABLE_TRAJET+ " t"
+                + " ON t." + TrajetDAO.TRAJET_ID + " = p." + PlaceDAO.PLACE_TRAJET_ID
+                + " WHERE " + RESERVATION_UTILISATEUR_ID + " = " + id
+                + " AND " + TrajetDAO.TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateSysString() + "'"
+                , null);
 
         //Déplace le curseur a la valeur 0
         cursor.moveToFirst();
 
-        //Ajoute les informations du curseur dans l'objet reservation
-        Reservation reservationSelect = new Reservation();
-        reservationSelect.setReservationId(cursor.getInt(NUM_RESERVATION_ID));
-        reservationSelect.setUtilisateurId(cursor.getInt(NUM_RESERVATION_UTILISATEUR_ID));
-        reservationSelect.setDate(DateConvertisseur.stringToDate(cursor.getString(NUM_RESERVATION_DATE)));
-        reservationSelect.setPrix(cursor.getInt(NUM_RESERVATION_PRIX));
-        reservationSelect.setNbPersonnes(cursor.getInt(NUM_RESERVATION_NBPERSONNES));
+        //ArrayList qui va contenir les reservations
+        ArrayList<Reservation> arrayList = new ArrayList<>();
 
+        while (!cursor.isAfterLast()){
+            //Ajoute les informations du curseur dans l'objet reservation
+            Reservation reservationGetAll = new Reservation();
+            reservationGetAll.setReservationId(cursor.getInt(NUM_RESERVATION_ID));
+            reservationGetAll.setUtilisateurId(cursor.getInt(NUM_RESERVATION_UTILISATEUR_ID));
+            reservationGetAll.setDate(DateConvertisseur.stringToDate(cursor.getString(NUM_RESERVATION_DATE)));
+            reservationGetAll.setPrix(cursor.getInt(NUM_RESERVATION_PRIX));
+            reservationGetAll.setNbPersonnes(cursor.getInt(NUM_RESERVATION_NBPERSONNES));
+
+            //Ajout dans l'ArrayList
+            arrayList.add(reservationGetAll);
+            cursor.moveToNext();
+        }
         cursor.close();
-        return reservationSelect;
+        return arrayList;
     }
 
     /**

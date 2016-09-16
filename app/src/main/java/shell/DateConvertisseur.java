@@ -44,4 +44,25 @@ public class DateConvertisseur {
         Calendar calendar = Calendar.getInstance();
         return dateToString(calendar.getTime());
     }
+    /**
+     * Récupére la date du systeme.
+     * @return String de la date du systeme
+     */
+    public static String dateSysString() {
+        Calendar calendar = Calendar.getInstance();
+        return dateToString(calendar.getTime());
+    }
+
+    /**
+     * Récupére la date du systeme.
+     * @return date de la date du systeme
+     */
+    public static Date dateSysDate() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.getTime();
+    }
+    public static String dateToStringFormat (Date date){
+        SimpleDateFormat sdfNew = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return sdfNew.format(date);
+    }
 }
