@@ -116,6 +116,7 @@ public class TrajetsActivity extends AppCompatActivity
                     }
 
             */
+            int i = 0;
         } catch (Exception e) {
             Log.w("ERROR", ""+e.toString());
         }
