@@ -61,6 +61,12 @@ public class DateConvertisseur {
         Calendar calendar = Calendar.getInstance();
         return calendar.getTime();
     }
+
+    /**
+     * Change le format de la date en dd/MM/yyyy HH:mm:ss.
+     * @param date
+     * @return
+     */
     public static String dateToStringFormat (Date date){
         SimpleDateFormat sdfNew = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return sdfNew.format(date);

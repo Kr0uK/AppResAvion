@@ -191,7 +191,7 @@ public class AccueilActivity extends AppCompatActivity
                     + avion.getModele();
 
             //Resultat en Log pour les tests
-            Log.w("TEST", res);
+            Log.w("TAG", res);
         }
     }
 
