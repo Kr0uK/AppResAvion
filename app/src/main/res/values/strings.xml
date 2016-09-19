@@ -18,6 +18,10 @@
     <string name="error_incorrect_password">Votre mot de passe est incorrect...</string>
     <string name="error_field_required">Ce champs est requis !</string>
     <string name="permission_rationale">L\'accès à vos contacts est nécessaire pour permettre l\'auto-complétion !</string>
+    <string name="nouvel_user">Pas encore inscrit ? Cliquez sur le bouton ci-dessous</string>
+    <string name="nouvel_user_btn">Nouvel Utilisateur</string>
+
+    <!--    LOGIN ACTIVITY    -->
 
     <!--    MAPS ACTIVITY    -->
     <string name="geoloc_ok">"Géolocalisation effectuée avec succès !"</string>
@@ -41,5 +45,6 @@
 
     <!--    TRAJETS ACTIVITY   -->
     <string name="title_activity_trajets">Trouvez votre vol</string>
+    <string name="title_activity_nouvel_user">Nouvel Utilisateur</string>
 
 </resources>

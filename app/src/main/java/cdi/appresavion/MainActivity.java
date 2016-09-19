@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         Log.w("TAG", "Avant de lancer le thread");
         DAOBase daoBase = new DAOBase(getApplicationContext());
         daoBase.getWDb();
+
         if (isFirstTime()) {
             new Thread(new Runnable() {
                 @Override
