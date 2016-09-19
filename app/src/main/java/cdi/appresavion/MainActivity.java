@@ -7,6 +7,7 @@ import android.util.Log;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 import dao.AeroportDAO;
@@ -61,14 +62,10 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
                     Log.w("TAG", "Ceci est le test d'aeroport " + aeroport.getId() + " | " + aeroport.getNom() + " | " +aeroport.getPays());
                 }
 
-                //Test de recup de trajet
-                ArrayList trajetArrayList = TrajetDAO.getTrajetWhere(1, 2, DateConvertisseur.dateSysDate());
-                Log.w("TAG", DateConvertisseur.dateSysString());
-                Iterator<Trajet> trajetIterator = trajetArrayList.iterator();
-                while (trajetIterator.hasNext()) {
-                    Trajet trajet= trajetIterator.next();
-                    Log.w("TAG", "Ceci est le test de trajet " + trajet.getAeroportId() + " | " + trajet.getAerAeroportId() + " | " + DateConvertisseur.dateToString(trajet.getDateDepart()));
-                }
+                //Recup de trajet + avion + aeroport avec date choisis
+                getTrajetInfos(1, 2, DateConvertisseur.stringToDate("2016-09-19 10:00:00"));
+                //Recup de trajet + avion + aeroport avec date sys
+                //getTrajetInfos(1, 2, DateConvertisseur.dateSysDate());
             }
         }).start();
 
@@ -79,6 +76,26 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         startActivity(Login);
 
 
+    }
+
+    private void getTrajetInfos(int aeroportDepart, int aeroportArrivee, Date dateDepart) {
+        ArrayList trajetArrayList = TrajetDAO.getTrajetWhere(aeroportDepart, aeroportArrivee, dateDepart);
+        Iterator<Trajet> trajetIterator = trajetArrayList.iterator();
+        while (trajetIterator.hasNext()) {
+            Trajet trajet= trajetIterator.next();
+
+            //Création de l'objet qui contient l'aeroport de depart
+            Aeroport aeDep = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
+
+            //Création de l'objet qui contient l'aeroport d'arrivee
+            Aeroport aeArr = AeroportDAO.selectionnerAeroport(trajet.getAerAeroportId());
+
+            //Création de l'objet qui contient l'avion
+            Avion avion = AvionDAO.selectionnerAvion(trajet.getAvionId());
+
+            //Affichage
+            Log.w("TAG", "Ceci est le test de trajet " + aeDep.getNom() + " | " + aeArr.getNom() + " | " + DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()));
+        }
     }
 
     private void ajoutBase() {
@@ -112,8 +129,8 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         //Ajout d'un trajet
         Trajet trajet1 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-09-10 21:22:00"), DateConvertisseur.stringToDate("2016-10-20 14:21:00"), 500);
         Trajet trajet2 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-10-24 22:22:00"), DateConvertisseur.stringToDate("2016-10-25 15:21:00"), 550);
-        Trajet trajet3 = new Trajet(0, 1, 3, 1, DateConvertisseur.stringToDate("2016-10-24 22:22:00"), DateConvertisseur.stringToDate("2016-10-25 15:21:00"), 550);
-        Trajet trajet4 = new Trajet(0, 1, 1, 5, DateConvertisseur.stringToDate("2016-10-24 22:22:00"), DateConvertisseur.stringToDate("2016-10-25 15:21:00"), 550);
+        Trajet trajet3 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-10-24 20:22:00"), DateConvertisseur.stringToDate("2016-10-25 15:21:00"), 550);
+        Trajet trajet4 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-10-24 23:22:00"), DateConvertisseur.stringToDate("2016-10-25 15:21:00"), 550);
         Trajet trajet5 = new Trajet(0, 1, 7, 6, DateConvertisseur.stringToDate("2016-09-19 12:00:00"), DateConvertisseur.stringToDate("2016-09-20 15:21:00"), 550);
         Trajet trajet6 = new Trajet(0, 1, 6, 7, DateConvertisseur.stringToDate("2016-09-19 16:00:00"), DateConvertisseur.stringToDate("2016-09-20 15:21:00"), 550);
         TrajetDAO.ajouterTrajet(trajet1);

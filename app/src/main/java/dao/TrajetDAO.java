@@ -162,6 +162,12 @@ public class TrajetDAO {
         return arrayList;
     }
 
+    /**
+     *  Récupère les trajets en fonction des aeroports et la date.
+     * @param idAeroportDepart id
+     * @param idAeroportArrivee id
+     * @return arraylist de trajet
+     */
     public static ArrayList<Trajet> getTrajetWhere(int idAeroportDepart, int idAeroportArrivee, Date dateDepart) {
         //Création du curseur
         Cursor cursor;
@@ -169,6 +175,8 @@ public class TrajetDAO {
         cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_TRAJET + " WHERE "
                 + TRAJET_AEROPORT_ID + " = " + idAeroportDepart
                 + " AND " + TRAJET_AER_AEROPORT_ID + " = " + idAeroportArrivee
+                + " AND " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'"
+                + " ORDER BY " + TRAJET_DATE_DEPART
                 , null);
 
         //Déplace le curseur a la valeur 0
