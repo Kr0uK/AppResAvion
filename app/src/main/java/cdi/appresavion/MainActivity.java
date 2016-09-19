@@ -101,6 +101,16 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
 
     }
 
+    // Redirection dans le onResume()
+    @Override
+    public void onResume() {
+        super.onResume();
+        {
+        Intent Login = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(Login);
+        }
+    }
+
     class NavDetails {
         /**
          * id contenant le titre de la fenêtre
