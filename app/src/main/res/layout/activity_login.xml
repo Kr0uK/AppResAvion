@@ -79,7 +79,7 @@
                 android:text="@string/connect"
                 android:textStyle="bold"
                 android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
-                android:textColor="@color/abc_background_cache_hint_selector_material_light"
+                android:textColor="#FFFFFF"
                 android:textSize="20dp"
                 android:shadowColor="#ffffff" />
 
