@@ -22,6 +22,40 @@
     <string name="nouvel_user_btn">Nouvel Utilisateur</string>
 
     <!--    LOGIN ACTIVITY    -->
+    <string name="titre_nvuser">Nouvel utilisateur</string>
+
+    <string name="nom_user">Nom : </string>
+    <string name="nom_user_hint">Votre nom</string>
+
+    <string name="prenom_user">Prénom :</string>
+    <string name="prenom_user_hint">Votre Prénom</string>
+
+    <string name="pseudo_user">Pseudo : </string>
+    <string name="pseudo_user_hint">Votre pseudo souhaité</string>
+
+    <string name="mdp_user">Mot de passe : </string>
+    <string name="mdp_user_hint">Votre mot de passe</string>
+
+    <string name="confirm_mdp_user">Retaper le mot de passe : </string>
+    <string name="confirm_mdp_user_hint">Votre mot de passe</string>
+
+    <string name="mail_user">Adresse e-mail : </string>
+    <string name="mail_user_hint">Votre Adresse e-mail</string>
+
+    <string name="adresse_user">Adresse postale : </string>
+    <string name="adresse_user_hint">Votre adresse</string>
+
+    <string name="cp_user">Code Postal : </string>
+    <string name="cp_user_hint">Votre code postal</string>
+
+    <string name="ville_user">Ville : </string>
+    <string name="ville_user_hint">Votre ville</string>
+
+    <string name="tel_user">Numéro de téléphone : </string>
+    <string name="tel_user_hint">Votre numéro de téléphone</string>
+
+    <string name="btn_valider_nvuser">Valider</string>
+
 
     <!--    MAPS ACTIVITY    -->
     <string name="geoloc_ok">"Géolocalisation effectuée avec succès !"</string>
