@@ -13,16 +13,19 @@ public class Trajet {
     private int aerAeroportId;
     private Date dateDepart;
     private Date dateArrivee;
+    private int prix;
 
     public Trajet() {
     }
 
-    public Trajet(int avionId, int aeroportId, int aerAeroportId, Date dateDepart, Date dateArrivee) {
+    public Trajet(int trajetId, int avionId, int aeroportId, int aerAeroportId, Date dateDepart, Date dateArrivee, int prix) {
+        this.trajetId = trajetId;
         this.avionId = avionId;
         this.aeroportId = aeroportId;
         this.aerAeroportId = aerAeroportId;
         this.dateDepart = dateDepart;
         this.dateArrivee = dateArrivee;
+        this.prix = prix;
     }
 
     public int getTrajetId() {
@@ -71,5 +74,13 @@ public class Trajet {
 
     public void setDateArrivee(Date dateArrivee) {
         this.dateArrivee = dateArrivee;
+    }
+
+    public int getPrix() {
+        return prix;
+    }
+
+    public void setPrix(int prix) {
+        this.prix = prix;
     }
 }

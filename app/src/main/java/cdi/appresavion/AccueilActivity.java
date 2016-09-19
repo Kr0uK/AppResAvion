@@ -77,8 +77,8 @@ public class AccueilActivity extends AppCompatActivity
         btsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent trajets = new Intent(AccueilActivity.this, TrajetsActivity.class);
-                startActivity(trajets);
+                Intent search = new Intent(AccueilActivity.this, RechercheActivity.class);
+                startActivity(search);
             }
         });
 
@@ -187,7 +187,7 @@ public class AccueilActivity extends AppCompatActivity
                     + reservation.getUtilisateurId() + " | Aeroport de depart "
                     + aeroportDepart.getNom() + " | d'arrivée "
                     + aeroportArrivee.getNom() + " | la date ou on part "
-                    + DateConvertisseur.dateToStringFormat(trajet.getDateDepart()) + " on part avec un "
+                    + DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()) + " on part avec un "
                     + avion.getModele();
 
             //Resultat en Log pour les tests

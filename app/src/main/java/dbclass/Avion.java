@@ -14,7 +14,8 @@ public class Avion {
     public Avion() {
     }
 
-    public Avion(String modele, String constructeur, int nbPlaces, String compagnie) {
+    public Avion(int id, String modele, String constructeur, int nbPlaces, String compagnie) {
+        this.id = id;
         this.modele = modele;
         this.constructeur = constructeur;
         this.nbPlaces = nbPlaces;

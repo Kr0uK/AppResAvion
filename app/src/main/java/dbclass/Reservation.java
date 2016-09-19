@@ -16,7 +16,8 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(int utilisateurId, Date date, int prix, int nbPersonnes) {
+    public Reservation(int reservationId, int utilisateurId, Date date, int prix, int nbPersonnes) {
+        this.reservationId = reservationId;
         this.utilisateurId = utilisateurId;
         this.date = date;
         this.prix = prix;

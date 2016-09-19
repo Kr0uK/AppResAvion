@@ -27,7 +27,10 @@ public class ChoixLieu extends Activity implements TextWatcher {
     private static ListView lieuLVlisteAeroports;
     private static ListAdapter simpleadapter;
     private static ArrayList<HashMap<String,String>> listeMaj;
-    //private static ListeTablesBDD listeTablesBDD;
+
+    //TODO
+    // private static ListeTablesBDD listeTablesBDD;
+
     private static String resultat;
     private static String aitaResultat;
     private static String nomResultat;
@@ -45,8 +48,9 @@ public class ChoixLieu extends Activity implements TextWatcher {
         lieuETchoixAeroport  = (EditText) findViewById(R.id.lieuETchoixAeroport);
         lieuLVlisteAeroports = (ListView) findViewById(R.id.list);
 
-        //TODO ???
+        // Intent vide (instancié en ligne 76/78
         retourAccueil = new Intent();
+        // Bundle permettant d'eviter de retaper le contenu de extra
         extras = getIntent().getExtras();
         afficherClavier();
 
@@ -75,7 +79,7 @@ public class ChoixLieu extends Activity implements TextWatcher {
                 } else {
                     retourAccueil.putExtra(RechercheActivity.ARRIVEE,resultat);
                 }
-                //TODO ???
+                // startActivityForResult
                 setResult(Activity.RESULT_OK,retourAccueil);
                 finish();
             }
@@ -105,7 +109,7 @@ public class ChoixLieu extends Activity implements TextWatcher {
      */
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        /*
+        /* TODO a modif
                 listeTablesBDD = new ListeTablesBDD(this);
                 listeTablesBDD.open(this);
                 String choix = lieuETchoixAeroport.getText().toString();
@@ -124,7 +128,7 @@ public class ChoixLieu extends Activity implements TextWatcher {
                 }
                 lieuTVnbResultats.setText(nbReponses);
                 listeTablesBDD.close();
-*/
+        */
     }
 
     @Override

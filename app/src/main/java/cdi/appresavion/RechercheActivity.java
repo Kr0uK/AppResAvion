@@ -3,10 +3,9 @@ import cdi.appresavion.R;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,21 +16,7 @@ import android.widget.TextView;
 
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.content.Intent;
-import android.graphics.Color;
-import android.icu.util.Calendar;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class RechercheActivity extends AppCompatActivity {
 
@@ -45,7 +30,6 @@ public class RechercheActivity extends AppCompatActivity {
     private static Button accueilBTvalider;
     private static Intent accueil_to_lieu;
     private static Intent accueil_to_resultat;
-    private static Spinner accueilSPclasse;
     private static ArrayAdapter<CharSequence> classeAdapter;
     private static Bundle extras;
     public static String DEPART = "depart";
@@ -61,80 +45,96 @@ public class RechercheActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // STRINGS
-        accueilETchoixDepart = (EditText)findViewById(R.id.accueilETChoixDepart);
-        accueilETchoixArrivee = (EditText)findViewById(R.id.accueilETChoixArrivee);
-        accueilETdateDepart = (EditText)findViewById(R.id.accueilETdateDepart);
-        accueilETdateArrivee = (EditText)findViewById(R.id.accueilETdateArrivee);
-        accueilTVdateDepart = (TextView)findViewById(R.id.accueilTVdateDepart);
-        accueilTVdateArrivee = (TextView)findViewById(R.id.accueilTVdateArrivee);
-        accueilCBallerRetour = (CheckBox)findViewById(R.id.accueilCBallerRetour);
-        accueilBTvalider = (Button)findViewById(R.id.accueilBTvalider);
-        accueilSPclasse.setAdapter(classeAdapter);
-        accueilTVdateArrivee.setVisibility(View.GONE);
-        accueilETdateArrivee.setVisibility(View.GONE);
-
-
-        // REDIRECTUIONS
-        accueil_to_lieu = new Intent(RechercheActivity.this,recherche.ChoixLieu.class);
-        accueil_to_resultat = new Intent(RechercheActivity.this,TrajetsActivity.class);
-
-
-        // EVENTS
-        accueilETchoixDepart.setOnClickListener(new View.OnClickListener() {
+        try {
+            // TODO : Connection à la BDD pour effectuer les recherches
+        /*
+        new Thread(new Runnable() {
             @Override
-            public void onClick(View v) {
-                estDepart = true;
-                accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
-                startActivityForResult(accueil_to_lieu, REQUEST_CODE);
+            public void run() {
+
+                ListeTablesBDD osef = new ListeTablesBDD(getApplicationContext());
+                osef.open(getApplicationContext());
+                InsertionDonnees.insertionDonnees(getApplicationContext());
+                osef.close();
+
             }
-        });
-        accueilETchoixArrivee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                estDepart = false;
-                accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
-                startActivityForResult(accueil_to_lieu, REQUEST_CODE);
-            }
-        });
-        accueilCBallerRetour.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (accueilCBallerRetour.isChecked()){
-                    accueilTVdateArrivee.setVisibility(View.VISIBLE);
-                    accueilETdateArrivee.setVisibility(View.VISIBLE);
-                } else {
-                    accueilTVdateArrivee.setVisibility(View.GONE);
-                    accueilETdateArrivee.setVisibility(View.GONE);
+        }).start();
+        */
+
+            // STRINGS
+            accueilETchoixDepart = (EditText) findViewById(R.id.accueilETChoixDepart);
+            accueilETchoixArrivee = (EditText) findViewById(R.id.accueilETChoixArrivee);
+            accueilETdateDepart = (EditText) findViewById(R.id.accueilETdateDepart);
+            accueilETdateArrivee = (EditText) findViewById(R.id.accueilETdateArrivee);
+            accueilTVdateDepart = (TextView) findViewById(R.id.accueilTVdateDepart);
+            accueilTVdateArrivee = (TextView) findViewById(R.id.accueilTVdateArrivee);
+            accueilCBallerRetour = (CheckBox) findViewById(R.id.accueilCBallerRetour);
+            accueilBTvalider = (Button) findViewById(R.id.accueilBTvalider);
+            accueilTVdateArrivee.setVisibility(View.GONE);
+            accueilETdateArrivee.setVisibility(View.GONE);
+
+
+            // REDIRECTUIONS
+            accueil_to_lieu = new Intent(RechercheActivity.this, recherche.ChoixLieu.class);
+            accueil_to_resultat = new Intent(RechercheActivity.this, TrajetsActivity.class);
+
+
+            // EVENTS
+            accueilETchoixDepart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    estDepart = true;
+                    accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
+                    startActivityForResult(accueil_to_lieu, REQUEST_CODE);
                 }
-            }
-        });
-        accueilETdateDepart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                estDepart = true;
-                ouvrirCalendrier();
-            }
-        });
-        accueilETdateArrivee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                estDepart = false;
-                if (accueilCBallerRetour.isChecked()){
+            });
+            accueilETchoixArrivee.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    estDepart = false;
+                    accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
+                    startActivityForResult(accueil_to_lieu, REQUEST_CODE);
+                }
+            });
+            accueilCBallerRetour.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (accueilCBallerRetour.isChecked()) {
+                        accueilTVdateArrivee.setVisibility(View.VISIBLE);
+                        accueilETdateArrivee.setVisibility(View.VISIBLE);
+                    } else {
+                        accueilTVdateArrivee.setVisibility(View.GONE);
+                        accueilETdateArrivee.setVisibility(View.GONE);
+                    }
+                }
+            });
+            accueilETdateDepart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    estDepart = true;
                     ouvrirCalendrier();
                 }
+            });
+            accueilETdateArrivee.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    estDepart = false;
+                    if (accueilCBallerRetour.isChecked()) {
+                        ouvrirCalendrier();
+                    }
 
-            }
-        });
-        accueilBTvalider.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(accueil_to_resultat);
-            }
-        });
+                }
+            });
+            accueilBTvalider.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(accueil_to_resultat);
+                }
+            });
 
-
-
+        } catch (Exception e) {
+            Log.e("ERROR",e.toString());
+        }
     }
 
     /*

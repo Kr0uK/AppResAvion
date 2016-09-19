@@ -20,8 +20,8 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(String nom, String prenom, String mail, String telephone, String mobile, String adresse, String cp, String ville, String username, String mdp) {
-        super();
+    public Utilisateur(int id, String nom, String prenom, String mail, String telephone, String mobile, String adresse, String cp, String ville, String username, String mdp) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
