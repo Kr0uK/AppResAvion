@@ -11,7 +11,7 @@ import java.util.Date;
  * 13/09/2016
  */
 public class DateConvertisseur {
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * Permet de convertir une Date en String.
@@ -40,14 +40,6 @@ public class DateConvertisseur {
      * Récupére la date du systeme.
      * @return String de la date du systeme
      */
-    public static String dateSys() {
-        Calendar calendar = Calendar.getInstance();
-        return dateToString(calendar.getTime());
-    }
-    /**
-     * Récupére la date du systeme.
-     * @return String de la date du systeme
-     */
     public static String dateSysString() {
         Calendar calendar = Calendar.getInstance();
         return dateToString(calendar.getTime());
@@ -61,7 +53,13 @@ public class DateConvertisseur {
         Calendar calendar = Calendar.getInstance();
         return calendar.getTime();
     }
-    public static String dateToStringFormat (Date date){
+
+    /**
+     * Change le format de la date en dd/MM/yyyy HH:mm:ss.
+     * @param date
+     * @return string de la date
+     */
+    public static String dateToStringFormatShow(Date date){
         SimpleDateFormat sdfNew = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return sdfNew.format(date);
     }

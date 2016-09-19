@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppResAvion</string>
+    <string name="app_name">HEAVEN</string>
     <string name="title_activity_maps">Map</string>
 
     <!--    LOGIN ACTIVITY   -->
@@ -41,5 +41,24 @@
 
     <!--    TRAJETS ACTIVITY   -->
     <string name="title_activity_trajets">Trouvez votre vol</string>
+    <string name="title_activity_recherche">Rechercher un vol</string>
+
+    <!-- RECHERCHE AVTIVITY -->
+    <string name="lieuETchoixAeroport"></string>
+    <string name="lieuTVafficherAeroports" />
+    <string name="lieuLVlisteAeroports"></string>
+    <string name="lieuTVnbResultats"></string>
+    <string name="lieuHTlisteAeroports">-> Aéroport, ville, pays, code</string>
+    <string name="accueilTVafficherDepart">Départ</string>
+    <string name="accueilTVafficherArrivee">Arrivée</string>
+    <string name="accueilETChoixDepart" />
+    <string name="accueilETChoixArrivee" />
+    <string name="accueilTVdateDepart">Date aller</string>
+    <string name="accueilETdateDepart" />
+    <string name="accueilTVdateArrivee">Date retour</string>
+    <string name="accueilCVcalendrier"></string>
+    <string name="accueilCBallerRetour">Aller-retour</string>
+    <string name="accueilTVchoixClasse">Classe</string>
+    <string name="accueilBTvalider">RECHERCHER</string>
 
 </resources>

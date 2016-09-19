@@ -387,22 +387,18 @@ class Ident_User {
 
     // Email
     private static String mEmail;
-
     public void setEmail(String data) {
         mEmail = data;
     }
-
     public String getEmail() {
         return mEmail;
     }
 
     // Password
     private static String mPassword;
-
     public void setPassword(String data) {
         mPassword = data;
     }
-
     public String getPassword() {
         return mPassword;
     }

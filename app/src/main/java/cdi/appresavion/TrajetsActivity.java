@@ -57,7 +57,7 @@ public class TrajetsActivity extends AppCompatActivity
         try {
             ctx = this;
             List listVol = new ArrayList();
-            // public Vol(String depart, String arrivee, String code, String prix) {
+            // TODO EXAMPLE : public Vol(String depart, String arrivee, String code, String prix) {
             listVol.add(new Vol("09/11/12 21:00:00", "10/11/12 01:00:00", "CDG", "100"));
             listVol.add(new Vol("10/11/12 22:15:00", "11/11/12 02:00:00", "CDG", "110"));
             listVol.add(new Vol("11/11/12 23:30:00", "12/11/12 03:00:00", "CDG", "120"));
