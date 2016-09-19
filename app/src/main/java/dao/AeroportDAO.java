@@ -124,6 +124,11 @@ public class AeroportDAO {
         return array_list;
     }
 
+    /**
+     * selectionne les aeroports en fonction du champ entré.
+     * @param condition nom ou ville ou pays ou code
+     * @return arraylist d'aeroport
+     */
     public static ArrayList<Aeroport> getAeroportWithNom(String condition) {
         //Création du curseur
         Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_AEROPORT + " WHERE "
