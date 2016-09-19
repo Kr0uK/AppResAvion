@@ -33,7 +33,7 @@ public class TrajetDAO {
     public static final String TABLE_TRAJET = "TRAJET";
 
     //Création de la table TRAJET
-    public static final String CREATE_TRAJET = "CREATE TABLE " + TABLE_TRAJET + "("
+    public static final String CREATE_TRAJET = "CREATE TABLE IF NOT EXISTS " + TABLE_TRAJET + "("
             + TRAJET_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + TRAJET_AVION_ID + " INTEGER NOT NULL REFERENCES " + AvionDAO.TABLE_AVION + "(" + TRAJET_AVION_ID + ") ON DELETE RESTRICT ON UPDATE RESTRICT, "
             + TRAJET_AEROPORT_ID + " INTEGER NOT NULL REFERENCES " + AeroportDAO.TABLE_AEROPORT + "(" + TRAJET_AEROPORT_ID + ") ON DELETE RESTRICT ON UPDATE RESTRICT, "

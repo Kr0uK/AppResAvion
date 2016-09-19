@@ -42,7 +42,7 @@ public class UtilisateurDAO {
     public static final String TABLE_UTILISATEUR = "UTILISATEUR";
 
     //Création de la table UTILISATEUR
-    public static final String CREATE_UTILISATEUR = "CREATE TABLE " + TABLE_UTILISATEUR + " ("
+    public static final String CREATE_UTILISATEUR = "CREATE TABLE IF NOT EXISTS " + TABLE_UTILISATEUR + " ("
             + UTILISATEUR_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + UTILISATEUR_NOM + " VARCHAR(80), "
             + UTILISATEUR_PRENOM + " VARCHAR(80), "

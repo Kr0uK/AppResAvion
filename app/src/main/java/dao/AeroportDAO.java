@@ -33,7 +33,7 @@ public class AeroportDAO {
     public static final String TABLE_AEROPORT = "AEROPORT";
 
     //Création de la table aeroport
-    public static final String CREATE_AEROPORT = "CREATE TABLE " + TABLE_AEROPORT + "("
+    public static final String CREATE_AEROPORT = "CREATE TABLE IF NOT EXISTS " + TABLE_AEROPORT + "("
             + AEROPORT_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + AEROPORT_NOM + " VARCHAR(100), "
             + AEROPORT_VILLE + " VARCHAR(80), "

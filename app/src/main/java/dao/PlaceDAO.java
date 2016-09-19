@@ -25,7 +25,7 @@ public class PlaceDAO {
     public static final String TABLE_PLACE = "PLACE";
 
     //Création de la table
-    public static final String CREATE_PLACE = "CREATE TABLE " + TABLE_PLACE + "("
+    public static final String CREATE_PLACE = "CREATE TABLE IF NOT EXISTS " + TABLE_PLACE + "("
             + PLACE_RESERVATION_ID + " INTEGER NOT NULL REFERENCES " + ReservationDAO.TABLE_RESERVATION + "(" + PLACE_RESERVATION_ID + ") ON DELETE RESTRICT ON UPDATE RESTRICT, "
             + PLACE_TRAJET_ID + " INTEGER NOT NULL REFERENCES " + TrajetDAO.TABLE_TRAJET + "(" + PLACE_TRAJET_ID + ") ON DELETE RESTRICT ON UPDATE RESTRICT, "
             + PLACE_NUM + " INTEGER, "
