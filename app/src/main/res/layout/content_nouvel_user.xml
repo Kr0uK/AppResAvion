@@ -20,7 +20,11 @@
         android:text="@string/btn_valider_nvuser"
         android:id="@+id/btn_valider_nvuser"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/input_tel"
+        android:layout_marginBottom="25dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -232,7 +236,8 @@
         android:layout_alignBottom="@+id/txt_cp"
         android:layout_alignEnd="@+id/input_ville"
         android:maxLength="5"
-        android:hint="@string/cp_user_hint" />
+        android:hint="@string/cp_user_hint"
+        android:layout_alignStart="@+id/input_ville" />
 
     <EditText
         android:layout_width="wrap_content"
