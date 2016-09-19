@@ -22,19 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Ajouter Spinner, + image a la place de la textbox au dessous"
-            android:id="@+id/textView2"
-            android:textAlignment="center" />
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:id="@+id/listbox" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Départ | Arrivée  |   Prix   |  Code"
             android:id="@+id/textView3"
             android:textAlignment="center" />
@@ -56,6 +43,7 @@
                     android:layout_height="fill_parent"
                     android:paddingTop="20sp" >
                 </ListView>
+
             </TableRow>
 
         </TableLayout>

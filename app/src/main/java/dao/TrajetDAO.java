@@ -173,10 +173,10 @@ public class TrajetDAO {
         Cursor cursor;
 
         cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_TRAJET + " WHERE "
-                + TRAJET_AEROPORT_ID + " = " + idAeroportDepart
-                + " AND " + TRAJET_AER_AEROPORT_ID + " = " + idAeroportArrivee
-                + " AND " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'"
-                + " ORDER BY " + TRAJET_DATE_DEPART
+                        + TRAJET_AEROPORT_ID + " = " + idAeroportDepart
+                        + " AND " + TRAJET_AER_AEROPORT_ID + " = " + idAeroportArrivee
+                        + " AND " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'"
+                        + " ORDER BY " + TRAJET_DATE_DEPART
                 , null);
 
         //Déplace le curseur a la valeur 0

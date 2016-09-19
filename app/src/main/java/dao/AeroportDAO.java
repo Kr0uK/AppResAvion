@@ -132,10 +132,10 @@ public class AeroportDAO {
     public static ArrayList<Aeroport> getAeroportWithNom(String condition) {
         //Création du curseur
         Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_AEROPORT + " WHERE "
-                + AEROPORT_NOM + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
-                + AEROPORT_VILLE + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
-                + AEROPORT_PAYS + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
-                + AEROPORT_CODE + " LIKE \'%" + condition + "%\' COLLATE NOCASE"
+                        + AEROPORT_NOM + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
+                        + AEROPORT_VILLE + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
+                        + AEROPORT_PAYS + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
+                        + AEROPORT_CODE + " LIKE \'%" + condition + "%\' COLLATE NOCASE"
                 , null);
 
         //Déplace le curseur a la valeur 0

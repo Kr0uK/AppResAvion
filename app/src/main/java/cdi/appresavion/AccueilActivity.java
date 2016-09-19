@@ -77,8 +77,8 @@ public class AccueilActivity extends AppCompatActivity
         btsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent trajets = new Intent(AccueilActivity.this, TrajetsActivity.class);
-                startActivity(trajets);
+                Intent search = new Intent(AccueilActivity.this, RechercheActivity.class);
+                startActivity(search);
             }
         });
 
