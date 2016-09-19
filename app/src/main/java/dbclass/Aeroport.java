@@ -16,7 +16,8 @@ public class Aeroport {
     public Aeroport() {
     }
 
-    public Aeroport(String nom, String ville, String pays, String code, double latitude, double longitude) {
+    public Aeroport(int id, String nom, String ville, String pays, String code, double latitude, double longitude) {
+        this.id = id;
         this.nom = nom;
         this.ville = ville;
         this.pays = pays;

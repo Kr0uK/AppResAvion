@@ -42,7 +42,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL(TrajetDAO.CREATE_TRAJET);
             db.execSQL(ReservationDAO.CREATE_RESERVATION);
             db.execSQL(PlaceDAO.CREATE_PLACE);
-            Log.w("TEST", "Base created !");
+            Log.w("TAG", "Base created !");
 
 
 

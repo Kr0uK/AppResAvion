@@ -28,6 +28,9 @@ public class TrajetDAO {
     public static final int NUM_TRAJET_DATE_DEPART = 4;
     public static final String TRAJET_DATE_ARRIVEE = "TRAJET_DATE_ARRIVEE";
     public static final int NUM_TRAJET_DATE_ARRIVEE = 5;
+    public static final String TRAJET_PRIX = "TRAJET_PRIX";
+    public static final int NUM_TRAJET_PRIX = 6;
+
 
     //Nom de la table
     public static final String TABLE_TRAJET = "TRAJET";
@@ -39,7 +42,8 @@ public class TrajetDAO {
             + TRAJET_AEROPORT_ID + " INTEGER NOT NULL REFERENCES " + AeroportDAO.TABLE_AEROPORT + "(" + TRAJET_AEROPORT_ID + ") ON DELETE RESTRICT ON UPDATE RESTRICT, "
             + TRAJET_AER_AEROPORT_ID + " INTEGER NOT NULL REFERENCES " + AeroportDAO.TABLE_AEROPORT + "(" + TRAJET_AEROPORT_ID + ") ON DELETE RESTRICT ON UPDATE RESTRICT, "
             + TRAJET_DATE_DEPART + " date, "
-            + TRAJET_DATE_ARRIVEE + " date);";
+            + TRAJET_DATE_ARRIVEE + " date, "
+            + TRAJET_PRIX + " INTEGER);";
     //Suppression de la table TRAJET si elle existe
     public static final String DROP_TRAJET = "DROP TABLE IF EXISTS " + TABLE_TRAJET + ";";
 
@@ -56,6 +60,8 @@ public class TrajetDAO {
         value.put(TRAJET_AER_AEROPORT_ID, trajetAdd.getAerAeroportId());
         value.put(TRAJET_DATE_DEPART, DateConvertisseur.dateToString(trajetAdd.getDateDepart()));
         value.put(TRAJET_DATE_ARRIVEE, DateConvertisseur.dateToString(trajetAdd.getDateArrivee()));
+        value.put(TRAJET_DATE_ARRIVEE, DateConvertisseur.dateToString(trajetAdd.getDateArrivee()));
+        value.put(TRAJET_PRIX, trajetAdd.getPrix());
 
         //Insert dans la base
         DAOBase.getWDb().insert(TABLE_TRAJET, null, value);
@@ -89,6 +95,7 @@ public class TrajetDAO {
         value.put(TRAJET_AER_AEROPORT_ID, trajetUpdate.getAerAeroportId());
         value.put(TRAJET_DATE_DEPART, DateConvertisseur.dateToString(trajetUpdate.getDateDepart()));
         value.put(TRAJET_DATE_ARRIVEE, DateConvertisseur.dateToString(trajetUpdate.getDateArrivee()));
+        value.put(TRAJET_PRIX, trajetUpdate.getPrix());
 
         //Update dans la base
         DAOBase.getWDb().update(TABLE_TRAJET, value, TRAJET_ID + " = " + id, null);
@@ -117,6 +124,7 @@ public class TrajetDAO {
         trajetGetAll.setAerAeroportId(cursor.getInt(NUM_TRAJET_AER_AEROPORT_ID));
         trajetGetAll.setDateDepart(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_DEPART)));
         trajetGetAll.setDateArrivee(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_ARRIVEE)));
+        trajetGetAll.setPrix(cursor.getInt(NUM_TRAJET_PRIX));
 
         cursor.close();
         return trajetGetAll;
@@ -144,6 +152,7 @@ public class TrajetDAO {
             trajetGetAll.setAerAeroportId(cursor.getInt(NUM_TRAJET_AER_AEROPORT_ID));
             trajetGetAll.setDateDepart(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_DEPART)));
             trajetGetAll.setDateArrivee(DateConvertisseur.stringToDate(cursor.getString(NUM_TRAJET_DATE_ARRIVEE)));
+            trajetGetAll.setPrix(cursor.getInt(NUM_TRAJET_PRIX));
 
             //Ajout dans l'ArrayList
             arrayList.add(trajetGetAll);

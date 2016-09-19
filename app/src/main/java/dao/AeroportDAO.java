@@ -123,4 +123,38 @@ public class AeroportDAO {
         cursor.close();
         return array_list;
     }
+
+    public static ArrayList<Aeroport> getAeroportWithNom(String condition) {
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_AEROPORT + " WHERE "
+                + AEROPORT_NOM + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
+                + AEROPORT_VILLE + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
+                + AEROPORT_PAYS + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
+                + AEROPORT_CODE + " LIKE \'%" + condition + "%\' COLLATE NOCASE"
+                , null);
+
+        //Déplace le curseur a la valeur 0
+        cursor.moveToFirst();
+
+        //ArrayList qui va contenir les aeroports
+        ArrayList<Aeroport> array_list = new ArrayList<>();
+
+        while (!cursor.isAfterLast()) {
+            //Ajoute les informations du curseur dans l'objet Aeroport
+            Aeroport aeroportGetAll = new Aeroport();
+            aeroportGetAll.setId(cursor.getInt(NUM_AEROPORT_ID));
+            aeroportGetAll.setNom(cursor.getString(NUM_AEROPORT_NOM));
+            aeroportGetAll.setVille(cursor.getString(NUM_AEROPORT_VILLE));
+            aeroportGetAll.setPays(cursor.getString(NUM_AEROPORT_PAYS));
+            aeroportGetAll.setCode(cursor.getString(NUM_AEROPORT_CODE));
+            aeroportGetAll.setLatitude(cursor.getDouble(NUM_AEROPORT_LATITUDE));
+            aeroportGetAll.setLongitude(cursor.getDouble(NUM_AEROPORT_LONGITUDE));
+
+            //Ajout dans l'ArrayList
+            array_list.add(aeroportGetAll);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return array_list;
+    }
 }
