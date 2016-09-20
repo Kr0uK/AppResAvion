@@ -130,6 +130,8 @@ public class NouvelUserActivity extends AppCompatActivity {
                 }
                 // Mot de passe
 
+
+
             }
         });
     }
