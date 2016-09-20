@@ -1,6 +1,9 @@
 package recherche;
 import cdi.appresavion.R;
 import cdi.appresavion.RechercheActivity;
+import dao.AeroportDAO;
+import dao.DAOBase;
+import dbclass.Aeroport;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -109,26 +112,23 @@ public class ChoixLieu extends Activity implements TextWatcher {
      */
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        /* TODO a modif
-                listeTablesBDD = new ListeTablesBDD(this);
-                listeTablesBDD.open(this);
+                //TODO a modif
                 String choix = lieuETchoixAeroport.getText().toString();
-                listeMaj = listeTablesBDD.RechercheAeroport(choix);
+                listeMaj = AeroportDAO.RechercheAeroport(choix);
                 Log.w("TAG", "" + listeMaj.get(0).toString());
                 simpleadapter = new SimpleAdapter(getApplicationContext(),listeMaj, R.layout.choixlieu_listview, new String[]{"Nom","Ville"}, new int[] {R.id.list_content, R.id.list_content2});
                 lieuLVlisteAeroports.setAdapter(simpleadapter);
                 if (listeMaj.size() > 1) {
                     nbReponses = "Il y a " + listeMaj.size() + " résultats";
                 } else if (listeMaj.size() == 1 &&
-                        (listeMaj.get(0).get("Nom").equals(ListeTablesBDD.getReponseVide()) || listeMaj.get(0).get("Nom").equals(ListeTablesBDD.getAucuneReponse()))
+                        (listeMaj.get(0).get("Nom").equals(AeroportDAO.REPONSE_VIDE) || listeMaj.get(0).get("Nom").equals(AeroportDAO.AUCUNE_REPONSE))
                         ) {
                     nbReponses = null;
                 } else if (listeMaj.size() == 1) {
                     nbReponses = "Il y a 1 résultat";
                 }
                 lieuTVnbResultats.setText(nbReponses);
-                listeTablesBDD.close();
-        */
+                DAOBase.close();
     }
 
     @Override

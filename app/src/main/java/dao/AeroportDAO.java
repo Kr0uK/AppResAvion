@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dbclass.Aeroport;
 
@@ -12,6 +13,12 @@ import dbclass.Aeroport;
  * 07/09/2016
  */
 public class AeroportDAO {
+
+    //Constantes pour fonction recherche aeroports
+    public static final String AUCUNE_REPONSE = "Aucune réponse";
+    public static final String REPONSE_VIDE = "";
+    public static final String NOM = "Nom";
+    public static final String VILLE = "Ville";
 
     //Entité de la table AEROPORT + numéro de la colonne pour la sélection
     public static final String AEROPORT_ID = "AEROPORT_ID";
@@ -161,5 +168,55 @@ public class AeroportDAO {
         }
         cursor.close();
         return array_list;
+    }
+
+    public static ArrayList<HashMap<String,String>> RechercheAeroport(String saisieTexte){
+        boolean estContenu;
+        ArrayList<Aeroport> listeAeroport;
+        ArrayList<HashMap<String,String>> listeDetailleeAeroport = new ArrayList<>();
+        HashMap<String,String> Aeroport;
+        String[] mots = saisieTexte.split(" ");
+
+        if (saisieTexte.length() >= 3) {
+            estContenu = true;
+            listeAeroport = AeroportDAO.getAeroportWithNom(mots[0]);
+            for (int i = 0; i < listeAeroport.size(); i++) {
+                Aeroport = new HashMap<>();
+
+                for (String mot : mots) {
+                    if (!listeAeroport.get(i).toString().toUpperCase().contains(mot.toUpperCase())) {
+                        estContenu = false;
+                    }
+                }
+
+                if (estContenu) {
+                    /*
+                    String timeZone = Integer.toString(listeAeroport.get(i).getTimezone());
+                    if (listeAeroport.get(i).getTimezone() > 0) {
+                        timeZone = "+" + timeZone;
+                    }*/
+                    Aeroport.put(NOM,listeAeroport.get(i).getNom() + " (" + listeAeroport.get(i).getCode() + ")");
+                    Aeroport.put(VILLE,listeAeroport.get(i).getVille());//+ " (GMT " + timeZone + ":00)");
+                    listeDetailleeAeroport.add(Aeroport);
+                } // end if
+            } // end for
+
+
+            if (listeDetailleeAeroport.size() != 0){
+                return listeDetailleeAeroport;
+            }
+            else {
+                Aeroport = new HashMap<>();
+                Aeroport.put(NOM, AUCUNE_REPONSE);
+                listeDetailleeAeroport.add(Aeroport);
+                return listeDetailleeAeroport;
+            }
+        } else {
+            HashMap<String,String> listeVide = new HashMap<>();
+            listeVide.put(NOM, REPONSE_VIDE);
+            listeDetailleeAeroport.add(listeVide);
+            return listeDetailleeAeroport;
+        }
+
     }
 }
