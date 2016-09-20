@@ -25,9 +25,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import dao.AeroportDAO;
 import dao.TrajetDAO;
+import dbclass.Aeroport;
 import dbclass.Trajet;
 import shell.Convertissor;
+import shell.DateConvertisseur;
 
 public class TrajetsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -63,9 +66,8 @@ public class TrajetsActivity extends AppCompatActivity
         try {
             ctx = this;
 
-            List listVol = new ArrayList();
+            final List listVol = new ArrayList();
 
-/*
             // TODO
             new Thread(new Runnable() {
                 @Override
@@ -74,17 +76,20 @@ public class TrajetsActivity extends AppCompatActivity
                     Choix_Avion PrefVol = new Choix_Avion();
                     // Intérrogation de la BDD avec les critères de l'utilisateur
                     // TODO : ID : Peut-on utiliser l'indice du TableRow comme etant l'indice pour lire dans la List listVol et recup ainsi l'id réeel du trajet ?
+
                     //Recherche des trajets
-                    ArrayList trajettArrayList = TrajetDAO.getTrajetWhere(PrefVol.getAeroDepId(),PrefVol.getAeroArrId(), Convertissor.Sysdate(PrefVol.getAeroDateDep(),"yyyy/MM/dd HH:mm:ss"));
+                    ArrayList trajettArrayList = TrajetDAO.getTrajetWhere(PrefVol.getAeroDepId(),PrefVol.getAeroArrId(), DateConvertisseur.stringToDate(PrefVol.getAeroDateDep()));
                     Iterator<Trajet> trajetIterator = trajettArrayList.iterator();
                     while (trajetIterator.hasNext()) {
                         Trajet trajet = trajetIterator.next();
                         // TODO : J'ai fais tout mon traitement dans une listVol... Forte chance d'incompatibilité, tout a revoir... :/
-                        //listVol.add(new Vol("DateDep", "DateArr", "Code", "Prix"));
+
+                        Aeroport aeroport = new Aeroport();
+                        aeroport = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
+                        listVol.add(new Vol(trajet.getDateDepart().toString(), trajet.getDateArrivee().toString(), aeroport.getCode(), ""+trajet.getPrix()));
                     }
                 }
             }).start();
-*/
 
             // TODO EXAMPLE a delete apres : public Vol(String depart, String arrivee, String code, String prix) {
             listVol.add(new Vol("09/11/12 21:00:00", "10/11/12 01:00:00", "CDG", "100"));
