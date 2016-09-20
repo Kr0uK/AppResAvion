@@ -43,6 +43,8 @@
     <string name="ville_user_hint">Votre ville</string>
     <string name="tel_user">Numéro de téléphone : </string>
     <string name="tel_user_hint">Votre numéro de téléphone</string>
+    <string name="mobile_user">Numéro de téléphone mobile : </string>
+    <string name="mobile_user_hint">Votre numéro de téléphone mobile</string>
     <string name="btn_valider_nvuser">Valider</string>
 
 

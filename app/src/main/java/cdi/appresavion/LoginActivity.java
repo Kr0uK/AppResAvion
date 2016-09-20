@@ -345,7 +345,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     if (utilisateur.getMdp().equals(logUser.getPassword().toString())) {
                         tempsuccess = true; // Si identique, on peux acceder a l'appli
                         logUser.setidUser(utilisateur.getId());
-                        Log.w("ID",""+logUser.getidUser());
+                        Log.w("ID", "" + logUser.getidUser());
                         logUser.setPassword("HaHaHaVousNavezPasDitLeMotMagiqueHaHaHa");
                     }
                 }
@@ -389,10 +389,12 @@ class Ident_User {
     /* Déclaration des variables (+GET/SET)*/
     // idUser
     private static int idUser;
-    public void setidUser ( int data){
+
+    public void setidUser(int data) {
         idUser = data;
     }
-    public int getidUser(){
+
+    public int getidUser() {
         return idUser;
     }
 
