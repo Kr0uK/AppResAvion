@@ -14,8 +14,6 @@ import dbclass.Trajet;
  * 07/09/2016
  */
 public class TrajetDAO {
-
-    //TODO recupérer tous les trajets + les infos du trajet au click
     //Entité de la table TRAJET + numéro de la colonne pour la sélection
     public static final String TRAJET_ID = "TRAJET_ID";
     public static final int NUM_TRAJET_ID = 0;

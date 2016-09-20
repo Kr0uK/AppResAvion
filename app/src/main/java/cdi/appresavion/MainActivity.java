@@ -39,17 +39,13 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-/**
- * Thread qui va gérer la création et le premier remplissage de la base
- */
-
-        //Création de la base;
-        Log.w("TAG", "Avant de lancer le thread");
-
+        /**
+         * Thread qui va gérer la création et le premier remplissage de la base
+         */
         new Thread(new Runnable() {
             @Override
             public void run() {
+                //Création de la base
                 DAOBase daoBase = new DAOBase(getApplicationContext());
                 daoBase.getWDb();
             }
@@ -62,10 +58,6 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-
-
-                            Log.w("TAG", "On rentre bien dans le thread");
-
                             //Ajout dans la base
                             ajoutBase();
 
@@ -95,14 +87,18 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Intent Login = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(Login);
+                /*Intent Login = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(Login);*/
+
+                int idTrajet = 6;
+
+                Intent detail = new Intent(MainActivity.this, DetailsActivity.class);
+                //Stockage de l'idTrajet
+                detail.putExtra("idTrajet", Integer.toString(idTrajet));
+                startActivity(detail);
             }
         }).start();
-
-
     }
-
 
     // Redirection dans le onResume()
     @Override

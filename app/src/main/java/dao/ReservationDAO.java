@@ -55,7 +55,34 @@ public class ReservationDAO {
         value.put(RESERVATION_PRIX, reservationAdd.getPrix());
         value.put(RESERVATION_NBPERSONNES, reservationAdd.getNbPersonnes());
 
-        //Insert dans la base reservation
+        //Insert dans la base reservation + récup du dernier id de reservation
+        int idReservation = (int) DAOBase.getWDb().insert(TABLE_RESERVATION, null, value);
+
+        //Ajout de la place
+        Place place = new Place(idReservation, idTrajet, 50);
+        PlaceDAO.ajouterPlace(place);
+
+        //Fermeture de la connexion a la bdd
+        DAOBase.close();
+    }
+
+    /**
+     * Ajout d'une reservation dans la bdd a partir de l'objet Reservation.
+     * @param idUtilisateur id de l'utilisateur
+     * @param prixTrajet prix du trajet
+     * @param nbPersonne nombre de personne
+     * @param idTrajet id du trajet
+     */
+    public static void ajouterReservationPlace(int idUtilisateur, int prixTrajet, int nbPersonne, int idTrajet) {
+        ContentValues value = new ContentValues();
+
+        //Récupération des valeurs dans l'objet Reservation
+        value.put(RESERVATION_UTILISATEUR_ID, idUtilisateur);
+        value.put(RESERVATION_DATE, DateConvertisseur.dateSysString());
+        value.put(RESERVATION_PRIX, prixTrajet);
+        value.put(RESERVATION_NBPERSONNES, nbPersonne);
+
+        //Insert dans la base reservation + récup du dernier id de reservation
         int idReservation = (int) DAOBase.getWDb().insert(TABLE_RESERVATION, null, value);
 
         //Ajout de la place

@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_retour_details"
-        android:id="@+id/btn_retour"
+        android:id="@+id/detailsBtnRetour"
         android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
         android:textColor="#FFFFFF"
         android:minWidth="150dp"
@@ -46,18 +46,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_reserver"
-        android:id="@+id/btn_reserver"
+        android:id="@+id/detailsBtnReserver"
         android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
         android:textColor="#FFFFFF"
         android:minWidth="150dp"
-        android:layout_alignTop="@+id/btn_retour"
+        android:layout_alignTop="@+id/detailsBtnRetour"
         android:layout_alignEnd="@+id/txt_vol" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_aeroport_depart"
-        android:id="@+id/txt_aero_depart"
+        android:id="@+id/detailsLblAeroDepart"
         android:textStyle="bold"
         android:textSize="22dp"
         android:textAlignment="center"
@@ -69,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_aeroport_arrivee"
-        android:id="@+id/txt_aero_arrivee"
+        android:id="@+id/detailsLblAeroArrivee"
         android:textStyle="bold"
         android:textSize="22dp"
         android:textAlignment="center"
@@ -79,60 +79,60 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/aero_arrivee"
-        android:layout_below="@+id/txt_aero_arrivee"
-        android:layout_alignStart="@+id/txt_aero_arrivee" />
+        android:id="@+id/detailsAeroArrivee"
+        android:layout_below="@+id/detailsLblAeroArrivee"
+        android:layout_alignStart="@+id/detailsLblAeroArrivee" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_heure_arrivee"
-        android:id="@+id/txt_horaire_arrivee"
+        android:id="@+id/detailsLblDateArrivee"
         android:textSize="16dp"
         android:layout_marginTop="24dp"
-        android:layout_below="@+id/aero_arrivee"
+        android:layout_below="@+id/detailsAeroArrivee"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/aero_depart"
-        android:layout_below="@+id/txt_aero_depart"
-        android:layout_alignStart="@+id/txt_aero_depart" />
+        android:id="@+id/detailsAeroDepart"
+        android:layout_below="@+id/detailsLblAeroDepart"
+        android:layout_alignStart="@+id/detailsLblAeroDepart" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_heure_depart"
-        android:id="@+id/txt_horaire_depart"
+        android:id="@+id/detailsLblDateDepart"
         android:textSize="16dp"
-        android:layout_below="@+id/aero_depart"
-        android:layout_toEndOf="@+id/aero_depart"
+        android:layout_below="@+id/detailsAeroDepart"
+        android:layout_toEndOf="@+id/detailsAeroDepart"
         android:layout_marginTop="23dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/horaire_depart"
-        android:layout_below="@+id/txt_horaire_depart"
-        android:layout_alignStart="@+id/txt_horaire_depart" />
+        android:id="@+id/detailsDateDepart"
+        android:layout_below="@+id/detailsLblDateDepart"
+        android:layout_alignStart="@+id/detailsLblDateDepart" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/heure_arrivee"
-        android:layout_below="@+id/txt_horaire_arrivee"
-        android:layout_alignStart="@+id/txt_horaire_arrivee" />
+        android:id="@+id/detailsDateArrivee"
+        android:layout_below="@+id/detailsLblDateArrivee"
+        android:layout_alignStart="@+id/detailsLblDateArrivee" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
+        android:id="@+id/detailsBtnIteneraire"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/btn_reserver"
+        android:layout_alignEnd="@+id/detailsBtnReserver"
         android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
         android:textColor="#FFFFFF"
-        android:layout_toEndOf="@+id/heure_arrivee"
+        android:layout_toEndOf="@+id/detailsDateArrivee"
         android:text="@string/btn_itineraire" />
 
 </RelativeLayout>

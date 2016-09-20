@@ -31,7 +31,6 @@ public class ChoixLieu extends Activity implements TextWatcher {
     private static ListAdapter simpleadapter;
     private static ArrayList<HashMap<String,String>> listeMaj;
 
-    //TODO
     // private static ListeTablesBDD listeTablesBDD;
 
     private static String resultat;
@@ -117,7 +116,6 @@ public class ChoixLieu extends Activity implements TextWatcher {
      */
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        // TODO a modif
         String choix = lieuETchoixAeroport.getText().toString();
 
         listeMaj = AeroportDAO.RechercheAeroport(choix);
