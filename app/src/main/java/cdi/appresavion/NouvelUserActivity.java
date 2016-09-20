@@ -5,12 +5,33 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NouvelUserActivity extends AppCompatActivity {
 
     // Variables
+
+    public static final String TAG = "DEBUG";
+
+    // Patterns pour le Regex
+    Pattern regex_alpha = Pattern.compile("^[^0-9]+");
+    Pattern regex_alphanum = Pattern.compile("^[a-zA-Z_0-9]+");
+    Pattern regex_num = Pattern.compile("^[0-9]+");
+    Pattern regex_tel = Pattern.compile("/^(0)[1-5|9](\\d{2}){4}$/");
+    Pattern regex_mobile = Pattern.compile("/^(0)[67](\\d{2}){4}$/");
+    Pattern regex_email = Pattern.compile("^[A-Za-z0-9](([_\\.\\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\\.\\-]?[a-zA-Z0-9]+)*)\\.([A-Za-z]{2,})$");
+
+
+    // Matcher
+    Matcher m;
+
+    // EditTexts
     private EditText nom_user;
     private EditText prenom_user;
     private EditText pseudo_user;
@@ -22,6 +43,20 @@ public class NouvelUserActivity extends AppCompatActivity {
     private EditText cp_user;
     private EditText tel_user;
     private EditText mobile_user;
+    private Button btn_valider;
+
+    // Le texte qui va en être récupéré
+    private String nom;
+    private String prenom;
+    private String pseudo;
+    private String mdp;
+    private String confmdp;
+    private String mail;
+    private String adresse;
+    private String ville;
+    private String cp;
+    private String tel;
+    private String mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +68,7 @@ public class NouvelUserActivity extends AppCompatActivity {
         // On instancie la classe qui va stocker toutes les infos
         Nouvel_User nv_user = new Nouvel_User();
 
-    // On lie les EditText entre XML et Java
+        // On lie les EditText entre XML et Java
         nom_user = (EditText) findViewById(R.id.input_nom);
         prenom_user = (EditText) findViewById(R.id.input_prenom);
         pseudo_user = (EditText) findViewById(R.id.input_pseudo);
@@ -45,8 +80,47 @@ public class NouvelUserActivity extends AppCompatActivity {
         cp_user = (EditText) findViewById(R.id.input_cp);
         tel_user = (EditText) findViewById(R.id.input_tel);
         mobile_user = (EditText) findViewById(R.id.input_mobile);
+        btn_valider = (Button) findViewById(R.id.btn_valider_nvuser);
 
 
+        btn_valider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // On récupère l'input
+
+                String nom = nom_user.getText().toString();
+                String prenom = prenom_user.getText().toString();
+                String pseudo = pseudo_user.getText().toString();
+                String mdp = mdp_user.getText().toString();
+                String confmdp = confmdp_user.getText().toString();
+                String mail = mail_user.getText().toString();
+                String adresse = adresse_user.getText().toString();
+                String ville = ville_user.getText().toString();
+                String cp = cp_user.getText().toString();
+                String tel = tel_user.getText().toString();
+                String mobile = mobile_user.getText().toString();
+
+                /**
+                 * Vérifications des champs via Regex
+                 */
+                // Nom
+                m = regex_alpha.matcher(nom);
+                if (m.matches()) {
+                    Log.d(TAG, "Nom OK"); // TODO toast
+                } else {
+                    Log.d(TAG, "Nom pas OK"); // TODO toast
+                }
+                // Prénom
+                m = regex_alpha.matcher(prenom);
+                if (m.matches()) {
+                    Log.d(TAG, "Prénom OK"); // TODO toast
+                } else {
+                    Log.d(TAG, "Prénom pas OK"); // TODO toast
+                }
+                //
+
+            }
+        });
     }
 
 
@@ -56,8 +130,9 @@ public class NouvelUserActivity extends AppCompatActivity {
 /**
  * La classe qui va stocker les infos de l'utilisateur
  */
+
 class Nouvel_User {
-    private static String nom;
+
 
     public static String getNom() {
         return nom;
@@ -67,6 +142,7 @@ class Nouvel_User {
         Nouvel_User.nom = nom;
     }
 
+    private static String nom;
     private static String prenom;
     private static String pseudo;
     private static String mdp;
@@ -76,6 +152,8 @@ class Nouvel_User {
     private static String ville;
     private static String cp;
     private static String tel;
+    private static String mobile;
+
 
     public static String getMobile() {
         return mobile;
@@ -85,7 +163,6 @@ class Nouvel_User {
         Nouvel_User.mobile = mobile;
     }
 
-    private static String mobile;
 
     public static String getPrenom() {
         return prenom;
