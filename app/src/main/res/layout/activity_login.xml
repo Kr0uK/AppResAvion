@@ -82,6 +82,16 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20dp"
                 android:shadowColor="#ffffff" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nouvel_user_btn"
+                android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:id="@+id/btn_nouvel_user" />
 
         </LinearLayout>
     </ScrollView>

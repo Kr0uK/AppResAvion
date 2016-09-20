@@ -1,14 +1,20 @@
 package cdi.appresavion;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import dao.AeroportDAO;
 import dao.AvionDAO;
@@ -40,43 +46,125 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
 
         //Création de la base;
         Log.w("TAG", "Avant de lancer le thread");
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 DAOBase daoBase = new DAOBase(getApplicationContext());
                 daoBase.getWDb();
+            }
+        }).start();
 
-                Log.w("TAG", "On rentre bien dans le thread");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (isFirstTime()) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
 
-                //Ajout dans la base
-                //ajoutBase();
 
-                //Lecture de toutes les données de la base
-                //getAllDb();
+                            Log.w("TAG", "On rentre bien dans le thread");
 
+                            //Ajout dans la base
+                            ajoutBase();
 
+                            //Lecture de toutes les données de la base
+                            getAllDb();
 
-                //Recup de trajet + avion + aeroport avec date choisis
-                getTrajetInfos(1, 2, DateConvertisseur.stringToDate("2016-09-19 10:00:00"));
-                //Recup de trajet + avion + aeroport avec date sys
-                //getTrajetInfos(1, 2, DateConvertisseur.dateSysDate());
+                            //Recherche sur aeroport
+                            ArrayList aeroportArrayList = AeroportDAO.getAeroportWithNom("Etat");
+                            Iterator<Aeroport> aeroportIterator = aeroportArrayList.iterator();
+                            while (aeroportIterator.hasNext()) {
+                                Aeroport aeroport = aeroportIterator.next();
+                                Log.w("TAG", "Ceci est le test d'aeroport " + aeroport.getId() + " | " + aeroport.getNom() + " | " +aeroport.getPays());
+                            }
+
+                            //Recup de trajet + avion + aeroport avec date choisis
+                            getTrajetInfos(1, 2, DateConvertisseur.stringToDate("2016-09-19 10:00:00"));
+                            //Recup de trajet + avion + aeroport avec date sys
+                            //getTrajetInfos(1, 2, DateConvertisseur.dateSysDate());
+
+                        }
+                    }).start();
+                }
+            }
+        }).start();
+
+        // SECTION LOGIN
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Intent Login = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(Login);
             }
         }).start();
 
 
-        // SECTION LOGIN
-
-        Intent Login = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(Login);
+    }
 
 
+    // Redirection dans le onResume()
+    @Override
+    public void onResume() {
+        super.onResume();
+        {
+            Intent Login = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(Login);
+        }
+    }
+
+    class NavDetails {
+        /**
+         * id contenant le titre de la fenêtre
+         */
+        public final int titleId;
+
+        /**
+         * id contenant la description de la fenêtre.
+         */
+        public final int descriptionId;
+
+        /**
+         * le nom de la classe ouvrant la fenêtre
+         */
+        public final Class<? extends AppCompatActivity> activityClass;
+
+        public NavDetails(
+                int titleId, int descriptionId, Class<? extends AppCompatActivity> activityClass) {
+            this.titleId = titleId;
+            this.descriptionId = descriptionId;
+            this.activityClass = activityClass;
+        }
+    }
+
+    class Navigation {
+
+        /**
+         * Cette classe ne dois pas être instanciée.
+         */
+        private Navigation() {
+        }
+
+    }
+    // Vérif comme quoi la base se remplit qu'une seule fois
+    private boolean isFirstTime() {
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        boolean ranBefore = preferences.getBoolean("RanBefore", false);
+        if (!ranBefore) {
+            // first time
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("RanBefore", true);
+            editor.commit();
+        }
+        return !ranBefore;
     }
 
     private void getTrajetInfos(int aeroportDepart, int aeroportArrivee, Date dateDepart) {
         ArrayList trajetArrayList = TrajetDAO.getTrajetWhere(aeroportDepart, aeroportArrivee, dateDepart);
         Iterator<Trajet> trajetIterator = trajetArrayList.iterator();
         while (trajetIterator.hasNext()) {
-            Trajet trajet= trajetIterator.next();
+            Trajet trajet = trajetIterator.next();
 
             //Création de l'objet qui contient l'aeroport de depart
             Aeroport aeDep = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
@@ -91,7 +179,6 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
             Log.w("TAG", "Ceci est le test de trajet " + aeDep.getNom() + " | " + aeArr.getNom() + " | " + DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()));
         }
     }
-
     private void ajoutBase() {
         Utilisateur utilisateur1 = new Utilisateur(0, "METZ", "Renaud", "r@", "0388943632", "0622493390", "33 rue de la paix", "67160", "OBERLAUTERBACH", "renaud", "12345678");
         Utilisateur utilisateur2 = new Utilisateur(0, "Kenobi", "Obi-Wan", "obiwan@kenobi.jedi", "0123456789", "0678945632", "35 rue de la paix", "70420", "Perpète-les-Bains", "obiwan", "12345678");
@@ -201,38 +288,4 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
             Log.w("TAG", e);
         }
     }
-    class NavDetails {
-        /**
-         * id contenant le titre de la fenêtre
-         */
-        public final int titleId;
-
-        /**
-         * id contenant la description de la fenêtre.
-         */
-        public final int descriptionId;
-
-        /**
-         * le nom de la classe ouvrant la fenêtre
-         */
-        public final Class<? extends AppCompatActivity> activityClass;
-
-        public NavDetails(
-                int titleId, int descriptionId, Class<? extends AppCompatActivity> activityClass) {
-            this.titleId = titleId;
-            this.descriptionId = descriptionId;
-            this.activityClass = activityClass;
-        }
-    }
-
-    class Navigation {
-
-        /**
-         * Cette classe ne dois pas être instanciée.
-         */
-        private Navigation() {
-        }
-
-    }
-
 }

@@ -9,7 +9,7 @@ android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 android:background="#BB33B5E5"
 tools:context="cdi.appresavion.RechercheActivity"
-android:id="@+id/lieuLayout"
+android:id="@+id/RelativeLayout"
 android:foregroundGravity="top"
 android:gravity="fill_horizontal|top">
 
@@ -24,14 +24,14 @@ android:gravity="fill_horizontal|top">
     android:id="@+id/accueilTVafficherDepart"
     android:layout_alignParentTop="true"
     android:layout_alignParentStart="true"
-    android:layout_marginTop="100dp"
+    android:layout_marginTop="30dp"
     android:gravity="center"/>
 
 <EditText
     android:layout_width="wrap_content"
     android:layout_height="30dp"
     android:id="@+id/accueilETChoixDepart"
-    android:layout_marginTop="100dp"
+    android:layout_marginTop="30dp"
     android:layout_alignParentEnd="true"
     android:gravity="center_vertical"
     android:paddingLeft="5dp"
@@ -152,5 +152,14 @@ android:gravity="fill_horizontal|top">
     android:layout_marginTop="52dp"
     android:layout_alignParentEnd="true"
     android:textSize="30dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/heaven"
+        android:layout_below="@+id/accueilBTvalider" />
 
 </RelativeLayout>

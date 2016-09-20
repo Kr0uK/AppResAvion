@@ -40,7 +40,7 @@ public class AccueilActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     // On va utiliser requeteReservation avec l'id comme argument pour remplir la liste
-    Ident_User ident_user = new Ident_User(); // On instancie un Indent_User
+    Ident_User ident_user = new Ident_User(); // On instancie un Ident_User
     int id = ident_user.getidUser(); // On récupère l'id de l'ident_user
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -56,6 +56,19 @@ public class AccueilActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         Log.w("TAG", "" + id); //Vérification
         requeteReservation(id);
+        /*
+         TODO mettre en place le thread
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                requeteReservation(id);
+
+                });
+            }
+
+        }).start();
+*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +204,7 @@ public class AccueilActivity extends AppCompatActivity
                     + avion.getModele();
 
             //Resultat en Log pour les tests
-            Log.w("TAG", res);
+            Log.w("TEST", res);
         }
     }
 

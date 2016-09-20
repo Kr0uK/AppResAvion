@@ -1,6 +1,6 @@
 package cdi.appresavion;
 import cdi.appresavion.R;
-import dao.DAOBase;
+import dao.TrajetDAO;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,16 +48,19 @@ public class RechercheActivity extends AppCompatActivity {
 
         try {
             // TODO : Connection à la BDD pour effectuer les recherches
-
+        /*
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                //DAOBase.getRDb();
+                ListeTablesBDD osef = new ListeTablesBDD(getApplicationContext());
+                osef.open(getApplicationContext());
+                InsertionDonnees.insertionDonnees(getApplicationContext());
+                osef.close();
 
             }
         }).start();
-
+        */
 
             // STRINGS
             accueilETchoixDepart = (EditText) findViewById(R.id.accueilETChoixDepart);
@@ -72,7 +75,7 @@ public class RechercheActivity extends AppCompatActivity {
             accueilETdateArrivee.setVisibility(View.GONE);
 
 
-            // REDIRECTUIONS
+            // REDIRECTIONS
             accueil_to_lieu = new Intent(RechercheActivity.this, recherche.ChoixLieu.class);
             accueil_to_resultat = new Intent(RechercheActivity.this, TrajetsActivity.class);
 
@@ -126,6 +129,8 @@ public class RechercheActivity extends AppCompatActivity {
             accueilBTvalider.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //TrajetDAO.getTrajetWhere(accueilETchoixDepart.getText(), accueilETchoixArrivee.getText(),accueilETdateDepart.getText());
+                    Choix_Avion stockage = new Choix_Avion(accueilETdateDepart.getText().toString());
                     startActivity(accueil_to_resultat);
                 }
             });
@@ -178,4 +183,7 @@ public class RechercheActivity extends AppCompatActivity {
     public static boolean getEstDepart(){
         return estDepart;
     }
+
 }
+
+

@@ -55,6 +55,14 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
+            android:name=".NouvelUserActivity"
+            android:label="@string/title_activity_nouvel_user"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DetailsActivity"
+            android:label="@string/title_activity_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".RechercheActivity"
             android:label="@string/title_activity_recherche"
             android:theme="@style/AppTheme.NoActionBar" />

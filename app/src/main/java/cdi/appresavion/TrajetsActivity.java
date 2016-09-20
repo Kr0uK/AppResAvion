@@ -1,5 +1,6 @@
 package cdi.appresavion;
 
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +22,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableRow;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import dao.TrajetDAO;
+import dbclass.Trajet;
+import shell.Convertissor;
 
 public class TrajetsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -56,8 +62,31 @@ public class TrajetsActivity extends AppCompatActivity
 
         try {
             ctx = this;
+
             List listVol = new ArrayList();
-            // TODO EXAMPLE : public Vol(String depart, String arrivee, String code, String prix) {
+
+/*
+            // TODO
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //Récupération des choix de l'utilisateur pour la sélection du trajet aerien souhaité :
+                    Choix_Avion PrefVol = new Choix_Avion();
+                    // Intérrogation de la BDD avec les critères de l'utilisateur
+                    // TODO : ID : Peut-on utiliser l'indice du TableRow comme etant l'indice pour lire dans la List listVol et recup ainsi l'id réeel du trajet ?
+                    //Recherche des trajets
+                    ArrayList trajettArrayList = TrajetDAO.getTrajetWhere(PrefVol.getAeroDepId(),PrefVol.getAeroArrId(), Convertissor.Sysdate(PrefVol.getAeroDateDep(),"yyyy/MM/dd HH:mm:ss"));
+                    Iterator<Trajet> trajetIterator = trajettArrayList.iterator();
+                    while (trajetIterator.hasNext()) {
+                        Trajet trajet = trajetIterator.next();
+                        // TODO : J'ai fais tout mon traitement dans une listVol... Forte chance d'incompatibilité, tout a revoir... :/
+                        //listVol.add(new Vol("DateDep", "DateArr", "Code", "Prix"));
+                    }
+                }
+            }).start();
+*/
+
+            // TODO EXAMPLE a delete apres : public Vol(String depart, String arrivee, String code, String prix) {
             listVol.add(new Vol("09/11/12 21:00:00", "10/11/12 01:00:00", "CDG", "100"));
             listVol.add(new Vol("10/11/12 22:15:00", "11/11/12 02:00:00", "CDG", "110"));
             listVol.add(new Vol("11/11/12 23:30:00", "12/11/12 03:00:00", "CDG", "120"));
@@ -79,7 +108,6 @@ public class TrajetsActivity extends AppCompatActivity
             /*
             // GESTION ONCLICK SUR UN TABLEROW
             TableRow tableRow = (TableRow) findViewById(R.id.one);
-
             tableRow.setClickable(true);
             tableRow.setOnClickListener(onClickListener);
             */
@@ -87,20 +115,17 @@ public class TrajetsActivity extends AppCompatActivity
                 private View.OnClickListener onClickListener= new View.OnClickListener() {
                     public void onClick(View v) {
                         show_dialog();
-
                     }
                 };
             */
             /*
                 public void show_dialog() {
-
                     final Dialog dialog = new Dialog(getApplicationContext());
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialog.getWindow();
                     dialog.setContentView(R.layout.monLayout);
                     dialog.setTitle("Mon Titre");
                     dialog.setCancelable(false);
-
                     final Button btnOkDialog = (Button) dialog.findViewById(R.id.ResetOkBtn);
                     btnOkDialog.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View arg0) {
@@ -114,7 +139,6 @@ public class TrajetsActivity extends AppCompatActivity
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
             */
         } catch (Exception e) {
             Log.w("ERROR", ""+e.toString());

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cdi.appresavion.DetailsActivity"
+    tools:showIn="@layout/activity_details"
+    android:background="@color/cast_intro_overlay_button_background_color">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_logo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/avion"
+        android:layout_marginBottom="25dp"
+        android:contentDescription="@string/logo_avion" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_vol"
+        android:layout_alignTop="@+id/img_logo"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_retour_details"
+        android:id="@+id/btn_retour"
+        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+        android:textColor="#FFFFFF"
+        android:minWidth="150dp"
+        android:layout_marginBottom="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_reserver"
+        android:id="@+id/btn_reserver"
+        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+        android:textColor="#FFFFFF"
+        android:minWidth="150dp"
+        android:layout_alignTop="@+id/btn_retour"
+        android:layout_alignEnd="@+id/txt_vol" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_aeroport_depart"
+        android:id="@+id/txt_aero_depart"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:textAlignment="center"
+        android:layout_below="@+id/img_logo"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_aeroport_arrivee"
+        android:id="@+id/txt_aero_arrivee"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:textAlignment="center"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/aero_arrivee"
+        android:layout_below="@+id/txt_aero_arrivee"
+        android:layout_alignStart="@+id/txt_aero_arrivee" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_heure_arrivee"
+        android:id="@+id/txt_horaire_arrivee"
+        android:textSize="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/aero_arrivee"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/aero_depart"
+        android:layout_below="@+id/txt_aero_depart"
+        android:layout_alignStart="@+id/txt_aero_depart" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_heure_depart"
+        android:id="@+id/txt_horaire_depart"
+        android:textSize="16dp"
+        android:layout_below="@+id/aero_depart"
+        android:layout_toEndOf="@+id/aero_depart"
+        android:layout_marginTop="23dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/horaire_depart"
+        android:layout_below="@+id/txt_horaire_depart"
+        android:layout_alignStart="@+id/txt_horaire_depart" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heure_arrivee"
+        android:layout_below="@+id/txt_horaire_arrivee"
+        android:layout_alignStart="@+id/txt_horaire_arrivee" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/btn_reserver"
+        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+        android:textColor="#FFFFFF"
+        android:layout_toEndOf="@+id/heure_arrivee"
+        android:text="@string/btn_itineraire" />
+
+</RelativeLayout>

@@ -64,7 +64,8 @@ public class Calendrier extends DialogFragment implements DialogInterface.OnClic
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
                 //date = format.format(dayOfMonth) + "/" + format.format(month+1) + "/" + year;
-                date = year +"-"+ format.format(month+1) +"-"+ format.format(dayOfMonth) +" "+ DateConvertisseur.dateSysString();
+                //date = year +"-"+ format.format(month+1) +"-"+ format.format(dayOfMonth) +" "+ DateConvertisseur.dateSysString();
+                date = DateConvertisseur.dateSysString();
                 estChange = true;
             }
         });

@@ -18,6 +18,36 @@
     <string name="error_incorrect_password">Votre mot de passe est incorrect...</string>
     <string name="error_field_required">Ce champs est requis !</string>
     <string name="permission_rationale">L\'accès à vos contacts est nécessaire pour permettre l\'auto-complétion !</string>
+    <string name="nouvel_user">Pas encore inscrit ? Cliquez sur le bouton ci-dessous</string>
+    <string name="nouvel_user_btn">Nouvel Utilisateur</string>
+
+    <!--    NOUVEL USER ACTIVITY    -->
+    <string name="title_activity_nouvel_user">Nouvel Utilisateur</string>
+    <string name="titre_nvuser">Nouvel utilisateur</string>
+    <string name="nom_user">Nom : </string>
+    <string name="nom_user_hint">Votre nom</string>
+    <string name="prenom_user">Prénom :</string>
+    <string name="prenom_user_hint">Votre Prénom</string>
+    <string name="pseudo_user">Pseudo : </string>
+    <string name="pseudo_user_hint">Votre pseudo souhaité</string>
+    <string name="mdp_user">Mot de passe : </string>
+    <string name="mdp_user_hint">Votre mot de passe</string>
+    <string name="confirm_mdp_user">Retaper le mot de passe : </string>
+    <string name="confirm_mdp_user_hint">Votre mot de passe</string>
+    <string name="mail_user">Adresse e-mail : </string>
+    <string name="mail_user_hint">Votre Adresse e-mail</string>
+    <string name="adresse_user">Adresse postale : </string>
+    <string name="adresse_user_hint">Votre adresse</string>
+    <string name="cp_user">Code Postal : </string>
+    <string name="cp_user_hint">Votre code postal</string>
+    <string name="ville_user">Ville : </string>
+    <string name="ville_user_hint">Votre ville</string>
+    <string name="tel_user">Numéro de téléphone : </string>
+    <string name="tel_user_hint">Votre numéro de téléphone</string>
+    <string name="mobile_user">Numéro de téléphone mobile : </string>
+    <string name="mobile_user_hint">Votre numéro de téléphone mobile</string>
+    <string name="btn_valider_nvuser">Valider</string>
+
 
     <!--    MAPS ACTIVITY    -->
     <string name="geoloc_ok">"Géolocalisation effectuée avec succès !"</string>
@@ -41,9 +71,22 @@
 
     <!--    TRAJETS ACTIVITY   -->
     <string name="title_activity_trajets">Trouvez votre vol</string>
-    <string name="title_activity_recherche">Rechercher un vol</string>
+
+
+
+    <!--    DETAILS ACTIVITY    -->
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="btn_reserver">Réserver</string>
+    <string name="btn_retour_details">Retour</string>
+    <string name="txt_aeroport_depart">Aéroport de départ</string>
+    <string name="txt_heure_depart">Horaire de départ</string>
+    <string name="txt_aeroport_arrivee">Aéroport d\'arrivée</string>
+    <string name="txt_heure_arrivee">Horaire d\'arrivée</string>
+    <string name="logo_avion">logo_avion</string>
+    <string name="btn_itineraire">Voir itinéraire</string>
 
     <!-- RECHERCHE AVTIVITY -->
+    <string name="title_activity_recherche">RechercheActivity</string>
     <string name="lieuETchoixAeroport"></string>
     <string name="lieuTVafficherAeroports" />
     <string name="lieuLVlisteAeroports"></string>
