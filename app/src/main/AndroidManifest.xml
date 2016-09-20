@@ -57,6 +57,10 @@
         <activity
             android:name=".NouvelUserActivity"
             android:label="@string/title_activity_nouvel_user"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DetailsActivity"
+            android:label="@string/title_activity_details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
