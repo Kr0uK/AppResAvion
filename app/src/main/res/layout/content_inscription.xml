@@ -29,25 +29,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/titre_nvuser"
-        android:id="@+id/txt_titre_nvuser"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:textAlignment="center"
-        android:layout_marginBottom="15dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/nom_user"
         android:id="@+id/txt_nom"
-        android:layout_below="@+id/txt_titre_nvuser"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:textSize="15dp" />
 
     <TextView
@@ -57,7 +42,7 @@
         android:id="@+id/txt_prenom"
         android:layout_below="@+id/txt_nom"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:textSize="15dp" />
 
     <TextView
@@ -67,7 +52,7 @@
         android:id="@+id/txt_pseudo"
         android:layout_below="@+id/txt_prenom"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:textSize="15dp" />
 
     <TextView
@@ -87,7 +72,7 @@
         android:id="@+id/txt_mdpconf"
         android:layout_below="@+id/txt_mdp"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:textSize="15dp"
         android:layout_toStartOf="@+id/input_mdpconf" />
 
@@ -98,7 +83,7 @@
         android:id="@+id/txt_mail"
         android:layout_below="@+id/txt_mdpconf"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:textSize="15dp" />
 
     <TextView
@@ -108,7 +93,7 @@
         android:id="@+id/txt_adresse"
         android:layout_below="@+id/txt_mail"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:textSize="15dp" />
 
     <TextView
@@ -118,7 +103,7 @@
         android:id="@+id/txt_ville"
         android:layout_below="@+id/txt_adresse"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:textSize="15dp" />
 
     <TextView
@@ -128,7 +113,7 @@
         android:id="@+id/txt_cp"
         android:layout_below="@+id/txt_ville"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:textSize="15dp"/>
 
     <EditText
@@ -272,6 +257,7 @@
         android:textSize="15sp"
         android:layout_below="@+id/input_tel"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/input_tel" />
+        android:layout_toStartOf="@+id/input_tel"
+        android:layout_marginBottom="10dp" />
 
 </RelativeLayout>

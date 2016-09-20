@@ -83,6 +83,7 @@ public class UtilisateurDAO {
         DAOBase.close();
     }
 
+
     /**
      * Supprime un utilisateur a partir d'un id.
      * @param id id id de l'utilisateur
