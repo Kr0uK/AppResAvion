@@ -63,6 +63,9 @@ public class TrajetsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        /*
+         * Récupération des trajets et affichage
+         */
         try {
             ctx = this;
 
@@ -86,15 +89,16 @@ public class TrajetsActivity extends AppCompatActivity
 
                         Aeroport aeroport = new Aeroport();
                         aeroport = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
-                        listVol.add(new Vol(trajet.getDateDepart().toString(), trajet.getDateArrivee().toString(), aeroport.getCode(), ""+trajet.getPrix()));
+                        listVol.add(new Vol(DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()).toString(), DateConvertisseur.dateToStringFormatShow(trajet.getDateArrivee()).toString(), aeroport.getCode(), ""+trajet.getPrix()));
+                        //listVol.add(new Vol(trajet.getTrajetId(), trajet.getDateDepart().toString(), trajet.getDateArrivee().toString(), aeroport.getCode(), ""+trajet.getPrix()));
                     }
                 }
             }).start();
 
             // TODO EXAMPLE a delete apres : public Vol(String depart, String arrivee, String code, String prix) {
-            listVol.add(new Vol("09/11/12 21:00:00", "10/11/12 01:00:00", "CDG", "100"));
-            listVol.add(new Vol("10/11/12 22:15:00", "11/11/12 02:00:00", "CDG", "110"));
-            listVol.add(new Vol("11/11/12 23:30:00", "12/11/12 03:00:00", "CDG", "120"));
+            //listVol.add(new Vol("09/11/12 21:00:00", "10/11/12 01:00:00", "CDG", "100"));
+            //listVol.add(new Vol("10/11/12 22:15:00", "11/11/12 02:00:00", "CDG", "110"));
+            //listVol.add(new Vol("11/11/12 23:30:00", "12/11/12 03:00:00", "CDG", "120"));
 
             listViewVol = (ListView) findViewById(R.id.vol_list);
             // VolListAdapter : Context ctx, int resourceId, List objects
@@ -109,42 +113,22 @@ public class TrajetsActivity extends AppCompatActivity
         } catch (Exception e) {
             Log.w("ERROR",e.toString());
         }
+
+        /*
+         * Gestion clics sur tablerowr
+         */
         try {
-            /*
+
             // GESTION ONCLICK SUR UN TABLEROW
             TableRow tableRow = (TableRow) findViewById(R.id.one);
             tableRow.setClickable(true);
-            tableRow.setOnClickListener(onClickListener);
-            */
-            /* TODO
-                private View.OnClickListener onClickListener= new View.OnClickListener() {
-                    public void onClick(View v) {
-                        show_dialog();
+            tableRow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent Login = new Intent(TrajetsActivity.this, DetailsActivity.class);
+                        startActivity(Login);
                     }
-                };
-            */
-            /*
-                public void show_dialog() {
-                    final Dialog dialog = new Dialog(getApplicationContext());
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.getWindow();
-                    dialog.setContentView(R.layout.monLayout);
-                    dialog.setTitle("Mon Titre");
-                    dialog.setCancelable(false);
-                    final Button btnOkDialog = (Button) dialog.findViewById(R.id.ResetOkBtn);
-                    btnOkDialog.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View arg0) {
-                            //+SAVE de l'id du trajet pour passage en param
-            //                Intent Details = new Intent(TrajetsActivity.this, DetailsActivity.class);
-            //                startActivity(Details);
-                        }
-                    });
-                    try {
-                        dialog.show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-            */
+            });
         } catch (Exception e) {
             Log.w("ERROR", ""+e.toString());
         }

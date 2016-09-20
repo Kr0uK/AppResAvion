@@ -3,7 +3,7 @@
     <string name="title_activity_maps">Map</string>
 
     <!--    LOGIN ACTIVITY   -->
-    <string name="title_activity_login">AppResAvion : Identification</string>
+    <string name="title_activity_login">Identification</string>
     <string name="footer_login">Voyagez encore plus simplement !</string>
     <string name="create_account">Créer un compte</string>
     <string name="connect">Se connecter</string>
@@ -32,7 +32,7 @@
     <string name="pseudo_user_hint">Votre pseudo souhaité</string>
     <string name="mdp_user">Mot de passe : </string>
     <string name="mdp_user_hint">Votre mot de passe</string>
-    <string name="confirm_mdp_user">Retaper le mot de passe : </string>
+    <string name="confirm_mdp_user">Retaper le mdp : </string>
     <string name="confirm_mdp_user_hint">Votre mot de passe</string>
     <string name="mail_user">Adresse e-mail : </string>
     <string name="mail_user_hint">Votre Adresse e-mail</string>
@@ -42,10 +42,10 @@
     <string name="cp_user_hint">Votre code postal</string>
     <string name="ville_user">Ville : </string>
     <string name="ville_user_hint">Votre ville</string>
-    <string name="tel_user">Numéro de téléphone : </string>
-    <string name="tel_user_hint">Votre numéro de téléphone</string>
-    <string name="mobile_user">Numéro de téléphone mobile : </string>
-    <string name="mobile_user_hint">Votre numéro de téléphone mobile</string>
+    <string name="tel_user">Téléphone fixe : </string>
+    <string name="tel_user_hint">Numéro de téléphone</string>
+    <string name="mobile_user">Téléphone mobile : </string>
+    <string name="mobile_user_hint">Numéro de téléphone mobile</string>
     <string name="btn_valider_nvuser">Valider</string>
 
 

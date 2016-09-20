@@ -1,5 +1,7 @@
 package cdi.appresavion;
 
+// TODO : Etape suivante : https://developers.google.com/maps/documentation/distance-matrix/?hl=fr
+
 // LIBRAIRIES
 import android.*;
 import android.Manifest;
