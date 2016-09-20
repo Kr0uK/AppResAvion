@@ -81,4 +81,11 @@ public class Aeroport {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    @Override
+    public String toString() {
+        return "Aeroport{" +
+                "id=" + id + ", aita='" + code + '\'' + ", nom='" + nom + '\'' + ", ville='" + ville + '\'' +
+                ", pays='" + pays + '\'' + ", latitude=" + latitude + ", longitude=" + longitude + "'}'";
+    }
 }

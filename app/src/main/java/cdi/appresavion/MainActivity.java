@@ -49,18 +49,12 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
                 Log.w("TAG", "On rentre bien dans le thread");
 
                 //Ajout dans la base
-                ajoutBase();
+                //ajoutBase();
 
                 //Lecture de toutes les données de la base
-                getAllDb();
+                //getAllDb();
 
-                //Recherche sur aeroport
-                ArrayList aeroportArrayList = AeroportDAO.getAeroportWithNom("Etat");
-                Iterator<Aeroport> aeroportIterator = aeroportArrayList.iterator();
-                while (aeroportIterator.hasNext()) {
-                    Aeroport aeroport = aeroportIterator.next();
-                    Log.w("TAG", "Ceci est le test d'aeroport " + aeroport.getId() + " | " + aeroport.getNom() + " | " +aeroport.getPays());
-                }
+
 
                 //Recup de trajet + avion + aeroport avec date choisis
                 getTrajetInfos(1, 2, DateConvertisseur.stringToDate("2016-09-19 10:00:00"));

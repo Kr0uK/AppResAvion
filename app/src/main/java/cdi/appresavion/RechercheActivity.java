@@ -1,5 +1,6 @@
 package cdi.appresavion;
 import cdi.appresavion.R;
+import dao.DAOBase;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,19 +48,16 @@ public class RechercheActivity extends AppCompatActivity {
 
         try {
             // TODO : Connection à la BDD pour effectuer les recherches
-        /*
+
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                ListeTablesBDD osef = new ListeTablesBDD(getApplicationContext());
-                osef.open(getApplicationContext());
-                InsertionDonnees.insertionDonnees(getApplicationContext());
-                osef.close();
+                //DAOBase.getRDb();
 
             }
         }).start();
-        */
+
 
             // STRINGS
             accueilETchoixDepart = (EditText) findViewById(R.id.accueilETChoixDepart);
@@ -180,5 +178,4 @@ public class RechercheActivity extends AppCompatActivity {
     public static boolean getEstDepart(){
         return estDepart;
     }
-
 }

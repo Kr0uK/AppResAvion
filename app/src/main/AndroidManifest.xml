@@ -57,7 +57,10 @@
         <activity
             android:name=".RechercheActivity"
             android:label="@string/title_activity_recherche"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="recherche.ChoixLieu"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

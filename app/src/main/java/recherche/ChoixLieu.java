@@ -1,4 +1,5 @@
 package recherche;
+import cdi.appresavion.Choix_Avion;
 import cdi.appresavion.R;
 import cdi.appresavion.RechercheActivity;
 import dao.AeroportDAO;
@@ -74,12 +75,17 @@ public class ChoixLieu extends Activity implements TextWatcher {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 aitaResultat = listeMaj.get(position).get("Nom").
                         substring(listeMaj.get(position).get("Nom").lastIndexOf("("),listeMaj.get(position).get("Nom").lastIndexOf(")") + 1);
-                nomResultat = listeMaj.get(position).get("Ville").
-                        substring(0,listeMaj.get(position).get("Ville").indexOf("("));
-                resultat = nomResultat + aitaResultat;
+                nomResultat = listeMaj.get(position).get("Ville");
+                resultat = nomResultat + " " + aitaResultat;
+
+                Choix_Avion stockage = new Choix_Avion();
                 if (extras.getBoolean(RechercheActivity.DEPART_OU_ARRIVEE)){
+                    //Stockage de l'aeroport de depart
+                    stockage.setAeroDepId(Integer.parseInt(listeMaj.get(position).get("Id")));
                     retourAccueil.putExtra(RechercheActivity.DEPART,resultat);
                 } else {
+                    //Stockage de l'aeroport d'arrivée
+                    stockage.setAeroArrId(Integer.parseInt(listeMaj.get(position).get("Id")));
                     retourAccueil.putExtra(RechercheActivity.ARRIVEE,resultat);
                 }
                 // startActivityForResult
@@ -114,8 +120,9 @@ public class ChoixLieu extends Activity implements TextWatcher {
     public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //TODO a modif
                 String choix = lieuETchoixAeroport.getText().toString();
+
                 listeMaj = AeroportDAO.RechercheAeroport(choix);
-                Log.w("TAG", "" + listeMaj.get(0).toString());
+
                 simpleadapter = new SimpleAdapter(getApplicationContext(),listeMaj, R.layout.choixlieu_listview, new String[]{"Nom","Ville"}, new int[] {R.id.list_content, R.id.list_content2});
                 lieuLVlisteAeroports.setAdapter(simpleadapter);
                 if (listeMaj.size() > 1) {
