@@ -1,10 +1,7 @@
 package cdi.appresavion;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +10,7 @@ import android.widget.EditText;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NouvelUserActivity extends AppCompatActivity {
+public class InscriptionActivity extends AppCompatActivity {
 
     // Variables
 
@@ -61,7 +58,7 @@ public class NouvelUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nouvel_user);
+        setContentView(R.layout.activity_inscription);
 
         // TODO inscription nouvel user
 
@@ -100,13 +97,14 @@ public class NouvelUserActivity extends AppCompatActivity {
                 String tel = tel_user.getText().toString();
                 String mobile = mobile_user.getText().toString();
 
-                /**
-                 * Vérifications des champs via Regex
-                 * On lie un Pattern à un Matcher sur un String
-                 * ça renvoie un booléen si ca correspond
-                 * find() plutôt que matches() comme méthode
-                 *
-                 */
+                Log.d(TAG, " " + nom + " " + prenom + " " + pseudo + " " + mdp  + " " + confmdp + " " + mail + " " + adresse + " " + ville  + " " + cp  + " " + tel  + " " + mobile);
+                        /**
+                         * Vérifications des champs via Regex
+                         * On lie un Pattern à un Matcher sur un String
+                         * ça renvoie un booléen si ca correspond
+                         * find() plutôt que matches() comme méthode
+                         *
+                         */
                 // Nom
                 m = regex_alpha.matcher(nom);
                 if (m.find()) {
@@ -129,8 +127,24 @@ public class NouvelUserActivity extends AppCompatActivity {
                     Log.d(TAG, "Pseudo pas OK"); // TODO toast
                 }
                 // Mot de passe
+                if (mdp.length() > 4) {
+                    Log.d(TAG, "Mdp OK");
+                    if (mdp == confmdp) {
+                        Log.d(TAG, "Mdp bien confirmé");
+                    } else {
+                        Log.d(TAG, "les mdp sont différents");
+                    }
 
-
+                } else {
+                    Log.d(TAG, "Mdp pas OK");
+                }
+                //Mail
+                m = regex_email.matcher(mail);
+                if (m.find()){
+                    Log.d(TAG, "Mail OK");
+                } else {
+                    Log.d(TAG, "Mail pas OK");
+                }
 
             }
         });

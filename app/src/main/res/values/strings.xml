@@ -21,8 +21,8 @@
     <string name="nouvel_user">Pas encore inscrit ? Cliquez sur le bouton ci-dessous</string>
     <string name="nouvel_user_btn">Nouvel Utilisateur</string>
 
-    <!--    NOUVEL USER ACTIVITY    -->
-    <string name="title_activity_nouvel_user">Nouvel Utilisateur</string>
+    <!--   INSCRIPTION  ACTIVITY    -->
+    <string name="title_activity_inscription">Nouvel Utilisateur</string>
     <string name="titre_nvuser">Nouvel utilisateur</string>
     <string name="nom_user">Nom : </string>
     <string name="nom_user_hint">Votre nom</string>
@@ -85,7 +85,7 @@
     <string name="logo_avion">logo_avion</string>
     <string name="btn_itineraire">Voir itinéraire</string>
 
-    <!-- RECHERCHE AVTIVITY -->
+    <!-- RECHERCHE ACTIVITY -->
     <string name="title_activity_recherche">RechercheActivity</string>
     <string name="lieuETchoixAeroport"></string>
     <string name="lieuTVafficherAeroports" />

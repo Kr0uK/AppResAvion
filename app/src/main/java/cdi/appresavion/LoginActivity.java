@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -104,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mNouvelUserButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent NouvelUser = new Intent(LoginActivity.this, NouvelUserActivity.class);
+                Intent NouvelUser = new Intent(LoginActivity.this, InscriptionActivity.class);
                 startActivity(NouvelUser);
             }
         });
