@@ -102,22 +102,33 @@ public class NouvelUserActivity extends AppCompatActivity {
 
                 /**
                  * Vérifications des champs via Regex
+                 * On lie un Pattern à un Matcher sur un String
+                 * ça renvoie un booléen si ca correspond
+                 * find() plutôt que matches() comme méthode
+                 *
                  */
                 // Nom
                 m = regex_alpha.matcher(nom);
-                if (m.matches()) {
+                if (m.find()) {
                     Log.d(TAG, "Nom OK"); // TODO toast
                 } else {
                     Log.d(TAG, "Nom pas OK"); // TODO toast
                 }
                 // Prénom
                 m = regex_alpha.matcher(prenom);
-                if (m.matches()) {
+                if (m.find()) {
                     Log.d(TAG, "Prénom OK"); // TODO toast
                 } else {
                     Log.d(TAG, "Prénom pas OK"); // TODO toast
                 }
-                //
+                // Pseudo
+                m = regex_alphanum.matcher(pseudo);
+                if (m.find()) {
+                    Log.d(TAG, "Pseudo OK"); // TODO toast
+                } else {
+                    Log.d(TAG, "Pseudo pas OK"); // TODO toast
+                }
+                // Mot de passe
 
             }
         });

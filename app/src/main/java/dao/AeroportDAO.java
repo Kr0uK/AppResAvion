@@ -2,8 +2,11 @@ package dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import dbclass.Aeroport;
 
@@ -12,6 +15,13 @@ import dbclass.Aeroport;
  * 07/09/2016
  */
 public class AeroportDAO {
+
+    //Constantes pour fonction recherche aeroports
+    public static final String AUCUNE_REPONSE = "Aucune réponse";
+    public static final String REPONSE_VIDE = "";
+    public static final String NOM = "Nom";
+    public static final String VILLE = "Ville";
+    public static final String ID = "Id";
 
     //Entité de la table AEROPORT + numéro de la colonne pour la sélection
     public static final String AEROPORT_ID = "AEROPORT_ID";
@@ -33,7 +43,7 @@ public class AeroportDAO {
     public static final String TABLE_AEROPORT = "AEROPORT";
 
     //Création de la table aeroport
-    public static final String CREATE_AEROPORT = "CREATE TABLE IF NOT EXISTS " + TABLE_AEROPORT + "("
+    public static final String CREATE_AEROPORT = "CREATE TABLE " + TABLE_AEROPORT + "("
             + AEROPORT_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + AEROPORT_NOM + " VARCHAR(100), "
             + AEROPORT_VILLE + " VARCHAR(80), "
@@ -122,5 +132,92 @@ public class AeroportDAO {
         }
         cursor.close();
         return array_list;
+    }
+
+    /**
+     * selectionne les aeroports en fonction du champ entré.
+     * @param condition nom ou ville ou pays ou code
+     * @return arraylist d'aeroport
+     */
+    public static ArrayList<Aeroport> getAeroportWithNom(String condition) {
+        //Création du curseur
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_AEROPORT + " WHERE "
+                        + AEROPORT_NOM + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
+                        + AEROPORT_VILLE + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
+                        + AEROPORT_PAYS + " LIKE \'%" + condition + "%\' COLLATE NOCASE OR "
+                        + AEROPORT_CODE + " LIKE \'%" + condition + "%\' COLLATE NOCASE"
+                , null);
+
+        //Déplace le curseur a la valeur 0
+        cursor.moveToFirst();
+
+        //ArrayList qui va contenir les aeroports
+        ArrayList<Aeroport> array_list = new ArrayList<>();
+
+        while (!cursor.isAfterLast()) {
+            //Ajoute les informations du curseur dans l'objet Aeroport
+            Aeroport aeroportGetAll = new Aeroport();
+            aeroportGetAll.setId(cursor.getInt(NUM_AEROPORT_ID));
+            aeroportGetAll.setNom(cursor.getString(NUM_AEROPORT_NOM));
+            aeroportGetAll.setVille(cursor.getString(NUM_AEROPORT_VILLE));
+            aeroportGetAll.setPays(cursor.getString(NUM_AEROPORT_PAYS));
+            aeroportGetAll.setCode(cursor.getString(NUM_AEROPORT_CODE));
+            aeroportGetAll.setLatitude(cursor.getDouble(NUM_AEROPORT_LATITUDE));
+            aeroportGetAll.setLongitude(cursor.getDouble(NUM_AEROPORT_LONGITUDE));
+
+            //Ajout dans l'ArrayList
+            array_list.add(aeroportGetAll);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return array_list;
+    }
+
+    /**
+     * Retourne une arraylist avec les reponses.
+     * @param saisieTexte
+     * @return arraylist
+     */
+    public static ArrayList<HashMap<String,String>> RechercheAeroport(String saisieTexte){
+        boolean estContenu;
+        ArrayList<Aeroport> listeAeroport;
+        ArrayList<HashMap<String,String>> listeDetailleeAeroport = new ArrayList<>();
+        HashMap<String,String> Aeroport;
+        String[] mots = saisieTexte.split(" ");
+        if (saisieTexte.length() >= 3) {
+            estContenu = true;
+            listeAeroport = AeroportDAO.getAeroportWithNom(mots[0]);
+
+            for (int i = 0; i < listeAeroport.size(); i++) {
+                Aeroport = new HashMap<>();
+                for (String mot : mots) {
+                    if (!listeAeroport.get(i).toString().toUpperCase().contains(mot.toUpperCase())) {
+                        estContenu = false;
+                    }
+                }
+                if (estContenu) {
+                    Aeroport.put(NOM, listeAeroport.get(i).getNom() + " (" + listeAeroport.get(i).getCode() + ")");
+                    Aeroport.put(VILLE, listeAeroport.get(i).getVille());
+                    Aeroport.put(ID, Integer.toString(listeAeroport.get(i).getId()));
+                    listeDetailleeAeroport.add(Aeroport);
+                } // end if
+            } // end for
+
+            if (listeDetailleeAeroport.size() != 0){
+                return listeDetailleeAeroport;
+            }
+            else {
+                Aeroport = new HashMap<>();
+                Aeroport.put(NOM, AUCUNE_REPONSE);
+                listeDetailleeAeroport.add(Aeroport);
+                return listeDetailleeAeroport;
+            }
+        } else {
+            HashMap<String,String> listeVide = new HashMap<>();
+            listeVide.put(NOM, REPONSE_VIDE);
+            listeDetailleeAeroport.add(listeVide);
+            return listeDetailleeAeroport;
+        }
+
     }
 }

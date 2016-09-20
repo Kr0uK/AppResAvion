@@ -158,20 +158,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
+     * Les tentatives faites pour vous connecter ou vous inscrire au compte indiqué par le formulaire
+     * de connexion. S'il y a des erreurs de forme (e-mail valide, les champs manquants, etc.), les
+     * erreurs sont présentées et aucune tentative de connexion réelle est faite.
      */
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
         }
 
-        // Reset errors.
+        // Réinitialiser les erreurs.
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
-        // Store values at the time of the login attempt.
+        // Mémoriser des valeurs au moment de la tentative de connexion.
 
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
@@ -179,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
+        // Vérifier une adresse email valide.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
@@ -198,12 +198,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
+            // Il y avait une erreur; ne tentez pas de connexion et se concentrer  sur le premier
+            // champ du formulaire avec une erreur.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
+            // Afficher un spinner de progression, et le kick d'une tâche d'arrière-plan pour
+            // effectuer la tentative de connexion utilisateur.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
@@ -211,7 +211,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
+        //TODO: Replace this with your own logic / mettre le regex peut-etre
         return email.contains("@");
     }
 
@@ -221,7 +221,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     /**
-     * Shows the progress UI and hides the login form.
+     * Affiche l'interface utilisateur du progrès et de masquer le formulaire de connexion.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
@@ -259,17 +259,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
-                // Retrieve data rows for the device user's 'profile' contact.
+                // Récupérer des lignes de données pour «profil» du contact de l'utilisateur de l'appareil.
                 Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
                         ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
 
-                // Select only email addresses.
+                // Sélectionnez uniquement les adresses e-mail.
                 ContactsContract.Contacts.Data.MIMETYPE +
                         " = ?", new String[]{ContactsContract.CommonDataKinds.Email
                 .CONTENT_ITEM_TYPE},
 
-                // Show primary email addresses first. Note that there won't be
-                // a primary email address if the user hasn't specified one.
+                // Afficher les adresses électroniques primaires en premier.
                 ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
     }
 
@@ -291,7 +290,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
+        // Créer adaptateur pour indiquer au AutoCompleteTextView quoi montrer dans sa liste déroulante.
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
@@ -311,8 +310,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
+     * Représente une tâche connexion / Enregistrement asynchrone utilisé pour authentifier l'utilisateur.
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -328,7 +326,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             boolean tempsuccess = false;
             try {
 
-                // Simulate network access.
+                // Simuler l'accès au réseau.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 tempsuccess = false;
@@ -420,6 +418,7 @@ class Ident_User {
         return mPassword;
     }
 
+    // CONSTRUCTEURS
     public Ident_User() {
     }
 

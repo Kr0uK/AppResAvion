@@ -29,7 +29,7 @@ public class AvionDAO {
     public static final String TABLE_AVION = "AVION";
 
     //Création de la table AVION
-    public static final String CREATE_AVION = "CREATE TABLE IF NOT EXISTS " + TABLE_AVION + "("
+    public static final String CREATE_AVION = "CREATE TABLE " + TABLE_AVION + "("
             + AVION_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + AVION_MODELE + " VARCHAR(50), "
             + AVION_CONSTRUCTEUR + " VARCHAR(60), "
