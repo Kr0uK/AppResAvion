@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     android:background="@color/cast_intro_overlay_button_background_color"
     android:fitsSystemWindows="true"
-    tools:context=".InscriptionActivity">
+    tools:context=".InscriptionActivity"
+    tools:showIn="@layout/content_inscription">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:textAlignment="center"
+            android:background="?attr/colorPrimary" />
+
+    </android.support.design.widget.AppBarLayout>
+
     <include layout="@layout/content_inscription" />
+
+
 </android.support.design.widget.CoordinatorLayout>
