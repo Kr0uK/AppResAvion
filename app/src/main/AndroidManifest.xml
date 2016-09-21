@@ -56,8 +56,7 @@
 
         <activity
             android:name=".InscriptionActivity"
-            android:label="@string/title_activity_inscription"
-            />
+            android:label="@string/title_activity_inscription" />
         <activity
             android:name=".DetailsActivity"
             android:label="@string/title_activity_details"
@@ -68,10 +67,11 @@
             android:label="@string/title_activity_recherche"
 
             />
-        <activity
-            android:name="recherche.ChoixLieu"
+        <activity android:name="recherche.ChoixLieu"
 
             />
+
+
     </application>
 
 </manifest>

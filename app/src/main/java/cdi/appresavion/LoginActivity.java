@@ -65,7 +65,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
 
     Pattern regex_email = Pattern.compile("^[A-Za-z0-9](([_\\.\\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\\.\\-]?[a-zA-Z0-9]+)*)\\.([A-Za-z]{2,})$");
-    Matcher m;
+    Pattern regex_alphanum = Pattern.compile("^[a-zA-Z_0-9]+");
+    Matcher m, m2;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -216,12 +217,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isEmailValid(String email) {
         m = regex_email.matcher(email);
+        m2 = regex_alphanum.matcher(email);
+ // TODO : gérer la condition avec le pseudo
 
-        if (m.find()) {
+        if (m.find() || m2.find()) {
             m.reset();
+            m2.reset();
             return true;
         } else {
             m.reset();
+            m2.reset();
           return false;
         }
 
@@ -352,7 +357,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // autrement un message d'erreur nous signale de modifier les données.
             while (iterator.hasNext()) {
                 Utilisateur utilisateur = iterator.next();
-                if (utilisateur.getMail().equals(logUser.getEmail().toString())) {
+                if (utilisateur.getMail().equals(logUser.getEmail().toString()) || utilisateur.getUsername().equals(logUser.getEmail().toString())){
                     if (utilisateur.getMdp().equals(logUser.getPassword().toString())) {
                         tempsuccess = true; // Si identique, on peux acceder a l'appli
                         logUser.setidUser(utilisateur.getId());
