@@ -218,7 +218,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private boolean isEmailValid(String email) {
         m = regex_email.matcher(email);
         m2 = regex_alphanum.matcher(email);
- // TODO : gérer la condition avec le pseudo
 
         if (m.find() || m2.find()) {
             m.reset();

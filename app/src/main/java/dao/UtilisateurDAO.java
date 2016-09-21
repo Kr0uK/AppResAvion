@@ -55,42 +55,25 @@ public class UtilisateurDAO {
             + UTILISATEUR_USERNAME + " VARCHAR(20), "
             + UTILISATEUR_MDP + " VARCHAR(20));";
     //Suppression de la table UTILISATEUR si elle existe
-    public static final String DROP_UTILISATEUR = "DROP TABLE IF EXISTS " + TABLE_UTILISATEUR + ";";
+    public static final String  DROP_UTILISATEUR = "DROP TABLE IF EXISTS " + TABLE_UTILISATEUR + ";";
 
     /**
      * Ajout d'un utilisateur dans la bdd a partir de l'objet Utilisateur.
-     *
      * @param utilisateurAdd Utilisateur
      */
     public static void ajouterUtilisateur(Utilisateur utilisateurAdd) {
         ContentValues value = new ContentValues();
 
         //Récupération des valeurs dans l'objet Utilisateur
-        if (utilisateurAdd.getNom() != null) {
-            value.put(UTILISATEUR_NOM, utilisateurAdd.getNom());
-        }
-        if (utilisateurAdd.getPrenom() != null) {
-            value.put(UTILISATEUR_PRENOM, utilisateurAdd.getPrenom());
-        }
+        value.put(UTILISATEUR_NOM, utilisateurAdd.getNom());
+        value.put(UTILISATEUR_PRENOM, utilisateurAdd.getPrenom());
         value.put(UTILISATEUR_MAIL, utilisateurAdd.getMail());
-        if (utilisateurAdd.getTelephone() != null) {
-            value.put(UTILISATEUR_TELEPHONE, utilisateurAdd.getTelephone());
-        }
-        if (utilisateurAdd.getMobile() != null) {
-            value.put(UTILISATEUR_MOBILE, utilisateurAdd.getMobile());
-        }
-        if (utilisateurAdd.getAdresse() != null) {
-            value.put(UTILISATEUR_ADRESSE, utilisateurAdd.getAdresse());
-        }
-        if (utilisateurAdd.getCp() != null) {
-            value.put(UTILISATEUR_CP, utilisateurAdd.getCp());
-        }
-        if (utilisateurAdd.getVille() != null) {
-            value.put(UTILISATEUR_VILLE, utilisateurAdd.getVille());
-        }
-        if (utilisateurAdd.getUsername() != null) {
-            value.put(UTILISATEUR_USERNAME, utilisateurAdd.getUsername());
-        }
+        value.put(UTILISATEUR_TELEPHONE, utilisateurAdd.getTelephone());
+        value.put(UTILISATEUR_MOBILE, utilisateurAdd.getMobile());
+        value.put(UTILISATEUR_ADRESSE, utilisateurAdd.getAdresse());
+        value.put(UTILISATEUR_CP, utilisateurAdd.getCp());
+        value.put(UTILISATEUR_VILLE, utilisateurAdd.getVille());
+        value.put(UTILISATEUR_USERNAME, utilisateurAdd.getUsername());
         value.put(UTILISATEUR_MDP, utilisateurAdd.getMdp());
 
         //Insert dans la base
@@ -100,10 +83,8 @@ public class UtilisateurDAO {
         DAOBase.close();
     }
 
-
     /**
      * Supprime un utilisateur a partir d'un id.
-     *
      * @param id id id de l'utilisateur
      */
     public static void supprimerUtilisateur(int id) {
@@ -115,9 +96,8 @@ public class UtilisateurDAO {
 
     /**
      * Modifier un utilisateur a partir d'un id et de l'objet Utilisateur.
-     *
      * @param utilisateurUpdate utilisateur
-     * @param id                id de l'utilisateur
+     * @param id id de l'utilisateur
      */
     public static void modifierUtilisateur(Utilisateur utilisateurUpdate, int id) {
         ContentValues value = new ContentValues();
@@ -143,7 +123,6 @@ public class UtilisateurDAO {
 
     /**
      * Sélectionne un utilisateur dans la bdd.
-     *
      * @param id id id de l'utilisateur
      * @return utilisateur
      */
@@ -174,7 +153,6 @@ public class UtilisateurDAO {
 
     /**
      * Recupere tous les utilisateurs de la bdd.
-     *
      * @return ArrayList d'utilsateur
      */
     public static ArrayList<Utilisateur> getAllUtilisateur() {

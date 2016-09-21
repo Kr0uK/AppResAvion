@@ -55,7 +55,34 @@ public class ReservationDAO {
         value.put(RESERVATION_PRIX, reservationAdd.getPrix());
         value.put(RESERVATION_NBPERSONNES, reservationAdd.getNbPersonnes());
 
-        //Insert dans la base reservation
+        //Insert dans la base reservation + récup du dernier id de reservation
+        int idReservation = (int) DAOBase.getWDb().insert(TABLE_RESERVATION, null, value);
+
+        //Ajout de la place
+        Place place = new Place(idReservation, idTrajet, 50);
+        PlaceDAO.ajouterPlace(place);
+
+        //Fermeture de la connexion a la bdd
+        DAOBase.close();
+    }
+
+    /**
+     * Ajout d'une reservation dans la bdd a partir de l'objet Reservation.
+     * @param idUtilisateur id de l'utilisateur
+     * @param prixTrajet prix du trajet
+     * @param nbPersonne nombre de personne
+     * @param idTrajet id du trajet
+     */
+    public static void ajouterReservationPlace(int idUtilisateur, int prixTrajet, int nbPersonne, int idTrajet) {
+        ContentValues value = new ContentValues();
+
+        //Récupération des valeurs dans l'objet Reservation
+        value.put(RESERVATION_UTILISATEUR_ID, idUtilisateur);
+        value.put(RESERVATION_DATE, DateConvertisseur.dateSysString());
+        value.put(RESERVATION_PRIX, prixTrajet);
+        value.put(RESERVATION_NBPERSONNES, nbPersonne);
+
+        //Insert dans la base reservation + récup du dernier id de reservation
         int idReservation = (int) DAOBase.getWDb().insert(TABLE_RESERVATION, null, value);
 
         //Ajout de la place
@@ -106,12 +133,12 @@ public class ReservationDAO {
     public static ArrayList<Reservation> getReservationWhere(int id) {
         //Création du curseur
         Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_RESERVATION + " r"
-                + " JOIN " + PlaceDAO.TABLE_PLACE + " p"
-                + " ON r." + RESERVATION_ID + " = p." + PlaceDAO.PLACE_RESERVATION_ID
-                + " JOIN " + TrajetDAO.TABLE_TRAJET+ " t"
-                + " ON t." + TrajetDAO.TRAJET_ID + " = p." + PlaceDAO.PLACE_TRAJET_ID
-                + " WHERE " + RESERVATION_UTILISATEUR_ID + " = " + id
-                + " AND " + TrajetDAO.TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateSysString() + "'"
+                        + " JOIN " + PlaceDAO.TABLE_PLACE + " p"
+                        + " ON r." + RESERVATION_ID + " = p." + PlaceDAO.PLACE_RESERVATION_ID
+                        + " JOIN " + TrajetDAO.TABLE_TRAJET+ " t"
+                        + " ON t." + TrajetDAO.TRAJET_ID + " = p." + PlaceDAO.PLACE_TRAJET_ID
+                        + " WHERE " + RESERVATION_UTILISATEUR_ID + " = " + id
+                        + " AND " + TrajetDAO.TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateSysString() + "'"
                 , null);
 
         //Déplace le curseur a la valeur 0
@@ -166,5 +193,27 @@ public class ReservationDAO {
         }
         cursor.close();
         return arrayList;
+    }
+
+    /**
+     * Compte le nombre de place enregistré pour un trajet.
+     * @param idTrajet id du trajet
+     * @return le nombre de place prise
+     */
+    public static int sumPlace(int idTrajet) {
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT sum(" + RESERVATION_NBPERSONNES + ") FROM " + TABLE_RESERVATION + " r"
+                        +" JOIN " + PlaceDAO.TABLE_PLACE + " p"
+                        +" ON r." + RESERVATION_ID + " = p." + PlaceDAO.PLACE_RESERVATION_ID
+                        +" WHERE " + PlaceDAO.PLACE_TRAJET_ID + " = " + idTrajet
+                , null);
+
+        //Déplace le curseur a la valeur 0
+        cursor.moveToFirst();
+
+        int nbPlace = cursor.getInt(0);
+
+        cursor.close();
+
+        return nbPlace;
     }
 }

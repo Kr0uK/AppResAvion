@@ -12,7 +12,6 @@ import dbclass.Place;
  * 07/09/2016
  */
 public class PlaceDAO {
-    //TODO methode supprimer modifier pour une Place
     //Entité de la table PLACE + numéro de la colonne pour la sélection
     public static final String PLACE_RESERVATION_ID = "RESERVATION_ID";
     public static final int NUM_PLACE_RESERVATION_ID = 0;
