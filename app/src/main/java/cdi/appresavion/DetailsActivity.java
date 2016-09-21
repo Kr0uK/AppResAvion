@@ -28,12 +28,19 @@ public class DetailsActivity extends AppCompatActivity {
     //prix du trajet
     int prixTrajet;
     //nombre de place
-    int nbPlace;
+    int nbPlacesAvion;
 
     // On instancie un Ident_User
     Ident_User ident_user = new Ident_User();
     // On récupère l'id de l'ident_user
     int id = ident_user.getidUser();
+
+    /** A mettre ou on veut appeler les details
+     Intent detail = new Intent(?, DetailsActivity.class);
+     //Stockage de l'idTrajet
+     detail.putExtra("idTrajet", Integer.toString(6));
+     startActivity(detail);
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +66,7 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO nb personne reserver
                 //Verifie si il reste des places pour ce vol
-                if(nbPlace > ReservationDAO.sumPlace(idTrajet)){
+                if(nbPlacesAvion > ReservationDAO.sumPlace(idTrajet)){
                     //Param id de l'util, prix du trajet, nombre de personne, id du trajet
                     ReservationDAO.ajouterReservationPlace(id, prixTrajet, 1, idTrajet);
 
@@ -70,12 +77,6 @@ public class DetailsActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(DetailsActivity.this, "Il ne reste plus de place pour ce vol", Toast.LENGTH_SHORT).show();
                 }
-                /** A mettre ou on veut appeler les details
-                 Intent detail = new Intent(?, DetailsActivity.class);
-                 //Stockage de l'idTrajet
-                 detail.putExtra("idTrajet", Integer.toString(6));
-                 startActivity(detail);
-                 */
             }
         });
     }
@@ -101,7 +102,7 @@ public class DetailsActivity extends AppCompatActivity {
         //Stockage du prix du trajet
         prixTrajet = trajet.getPrix();
         //Stockage du nombre de places
-        nbPlace = avion.getNbPlaces();
+        nbPlacesAvion = avion.getNbPlaces();
 
         //Affichage des infos du trajet
         tvAeroDepart.setText(aeroportDepart.getNom());
