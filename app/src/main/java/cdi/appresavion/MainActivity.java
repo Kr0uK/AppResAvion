@@ -87,15 +87,9 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         new Thread(new Runnable() {
             @Override
             public void run() {
-                /*Intent Login = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(Login);*/
+                Intent Login = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(Login);
 
-                int idTrajet = 6;
-
-                Intent detail = new Intent(MainActivity.this, DetailsActivity.class);
-                //Stockage de l'idTrajet
-                detail.putExtra("idTrajet", Integer.toString(idTrajet));
-                startActivity(detail);
             }
         }).start();
     }

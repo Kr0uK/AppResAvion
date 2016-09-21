@@ -1,5 +1,6 @@
 package cdi.appresavion;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +26,10 @@ public class DetailsActivity extends AppCompatActivity {
     Button btnReserver;
     int prixTrajet;
 
+    // On va utiliser requeteReservation avec l'id comme argument pour remplir la liste
+    Ident_User ident_user = new Ident_User(); // On instancie un Ident_User
+    int id = ident_user.getidUser(); // On récupère l'id de l'ident_user
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,26 +52,45 @@ public class DetailsActivity extends AppCompatActivity {
         btnReserver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO continuer l'ajout d'une reservation
-                Log.w("TAG", "coucou");
-                ReservationDAO.ajouterReservationPlace(1, prixTrajet, 1, idTrajet);
+                //TODO nb personne + redirection
+                //Param id de l'util, prix du trajet, nombre de personne, id du trajet
+                ReservationDAO.ajouterReservationPlace(id, prixTrajet, 1, idTrajet);
+
+                Intent redirection = new Intent(DetailsActivity.this, AccueilActivity.class);
+                startActivity(redirection);
+
+                /** A mettre ou on veut appeler les details
+                 Intent detail = new Intent(LoginActivity.this, DetailsActivity.class);
+                 //Stockage de l'idTrajet
+                 detail.putExtra("idTrajet", Integer.toString(6));
+                 startActivity(detail);
+                */
             }
         });
     }
 
 
-
+    /**
+     * Recupere les details d'un trajet.
+     * change les textview pour afficher les infos souhaitées
+     * @param idTrajet id du trajet
+     */
     private void detailTrajet(int idTrajet) {
+        //Objet avec les infos du trajet cliquer
         Trajet trajet = TrajetDAO.selectionnerTrajet(idTrajet);
 
+        //Objet avec les infos de l'aeroport de depart
         Aeroport aeroportDepart = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
+        //Objet avec les infos de l'aeroport d'arrivee
         Aeroport aeroportArrivee = AeroportDAO.selectionnerAeroport(trajet.getAerAeroportId());
 
+        //Objet avec les infos de l'avion
         Avion avion = AvionDAO.selectionnerAvion(trajet.getAvionId());
 
+        //Stockage du prix du trajet
         prixTrajet = trajet.getPrix();
 
-        //Affichage
+        //Affichage des infos du trajet
         tvAeroDepart.setText(aeroportDepart.getNom());
         tvAeroArrivee.setText(aeroportArrivee.getNom());
         tvDateDepart.setText(DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()));
