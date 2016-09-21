@@ -32,6 +32,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import dao.UtilisateurDAO;
 import dbclass.Utilisateur;
@@ -61,6 +63,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
+
+    Pattern regex_email = Pattern.compile("^[A-Za-z0-9](([_\\.\\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\\.\\-]?[a-zA-Z0-9]+)*)\\.([A-Za-z]{2,})$");
+    Matcher m;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -210,8 +215,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic / mettre le regex peut-etre
-        return email.contains("@");
+        m = regex_email.matcher(email);
+
+        if (m.find()) {
+            m.reset();
+            return true;
+        } else {
+            m.reset();
+          return false;
+        }
+
+
     }
 
     private boolean isPasswordValid(String password) {

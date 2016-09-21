@@ -67,9 +67,6 @@ public class InscriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
 
-        // TODO inscription nouvel user
-
-
         // On lie les EditText entre XML et Java
         nom_user = (EditText) findViewById(R.id.input_nom);
         prenom_user = (EditText) findViewById(R.id.input_prenom);
@@ -107,13 +104,14 @@ public class InscriptionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // On instancie la classe qui va stocker toutes les infos
-                // On part du principe que c'est forcément juste quand on vza cliquer (les vérifs sont sur le onTextChanged)
+
+                // On part du principe que c'est forcément juste quand on va cliquer (les vérifs sont sur le onTextChanged)
 
                 Log.d(TAG, "" + nv_user.getNom() + " " + nv_user.getPrenom() + " " + nv_user.getUsername() + " " + nv_user.getMdp() + " " + nv_user.getMail() + " " + nv_user.getAdresse() + " " + nv_user.getVille() + " " + nv_user.getCp() + " " + nv_user.getTelephone() + " " + nv_user.getMobile());
 
                 UtilisateurDAO.ajouterUtilisateur(nv_user);
 
+                // On renvoie sur Login
                 Intent Login = new Intent(InscriptionActivity.this, LoginActivity.class);
 
                 startActivity(Login);
@@ -121,7 +119,17 @@ public class InscriptionActivity extends AppCompatActivity {
             }
         });
 
-
+        /**
+         * Récupération et vérification dans les onTextChanged
+         * On récupère d'abord le contenu du champ
+         * on assigne un Pattern de RegEx à un Matcher
+         * la fonction find() du Matcher va vérifier que le String correspond au RegEx
+         * Si oui -> on l'insère dans l'objet
+         * Si non -> on affiche l'erreur
+         *
+         * Pour le mot de passe, on vérifie qu'il fasse au moins 4 caractères
+         * Le confmdp sert à vérifier que le mdp soit bien entré
+         */
         nom_user.addTextChangedListener(new
 
                                                 TextWatcher() {
@@ -141,16 +149,16 @@ public class InscriptionActivity extends AppCompatActivity {
                                                     public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
-                                                            input_nom = nom_user.getText().toString();
-                                                            m = regex_alpha.matcher(input_nom);
-                                                            if (m.find()) {
-                                                                nv_user.setNom(input_nom);
-                                                            } else {
-                                                                nom_user.setError(getString(R.string.error_nom_user));
-                                                                focusView = nom_user;
-                                                            }
-                                                            m.reset();
+                                                        input_nom = nom_user.getText().toString();
+                                                        m = regex_alpha.matcher(input_nom);
+                                                        if (m.find()) {
+                                                            nv_user.setNom(input_nom);
+                                                        } else {
+                                                            nom_user.setError(getString(R.string.error_nom_user));
+                                                            focusView = nom_user;
                                                         }
+                                                        m.reset();
+                                                    }
 
                                                 }
 
