@@ -17,6 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_column="6"
+            android:onClick="rowClick"
+            android:id="@+id/one"
             android:minHeight="75dp">
 
             <TextView

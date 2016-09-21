@@ -21,6 +21,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableRow;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -77,62 +79,68 @@ public class TrajetsActivity extends AppCompatActivity
                 public void run() {
                     //Récupération des choix de l'utilisateur pour la sélection du trajet aerien souhaité :
                     Choix_Avion PrefVol = new Choix_Avion();
-                    // Intérrogation de la BDD avec les critères de l'utilisateur
-                    // TODO : ID : Peut-on utiliser l'indice du TableRow comme etant l'indice pour lire dans la List listVol et recup ainsi l'id réeel du trajet ?
-
-                    //Recherche des trajets
+                    // Intérrogation des trajets dans la BDD avec les critères de l'utilisateur
                     ArrayList trajettArrayList = TrajetDAO.getTrajetWhere(PrefVol.getAeroDepId(),PrefVol.getAeroArrId(), DateConvertisseur.stringToDate(PrefVol.getAeroDateDep()));
                     Iterator<Trajet> trajetIterator = trajettArrayList.iterator();
+                    // Stockage pour affichage des données récupérées
                     while (trajetIterator.hasNext()) {
                         Trajet trajet = trajetIterator.next();
-                        // TODO : J'ai fais tout mon traitement dans une listVol... Forte chance d'incompatibilité, tout a revoir... :/
-
                         Aeroport aeroport = new Aeroport();
                         aeroport = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
+                        // TODO : id du trajet a recup -> revoir les objets pour ajouter ce champs, ainsi que xml pour stocker ca et le recup !
                         listVol.add(new Vol(DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()).toString(), DateConvertisseur.dateToStringFormatShow(trajet.getDateArrivee()).toString(), aeroport.getCode(), ""+trajet.getPrix()));
                         //listVol.add(new Vol(trajet.getTrajetId(), trajet.getDateDepart().toString(), trajet.getDateArrivee().toString(), aeroport.getCode(), ""+trajet.getPrix()));
                     }
                 }
             }).start();
 
-            // TODO EXAMPLE a delete apres : public Vol(String depart, String arrivee, String code, String prix) {
-            //listVol.add(new Vol("09/11/12 21:00:00", "10/11/12 01:00:00", "CDG", "100"));
-            //listVol.add(new Vol("10/11/12 22:15:00", "11/11/12 02:00:00", "CDG", "110"));
-            //listVol.add(new Vol("11/11/12 23:30:00", "12/11/12 03:00:00", "CDG", "120"));
-
             listViewVol = (ListView) findViewById(R.id.vol_list);
-            // VolListAdapter : Context ctx, int resourceId, List objects
-            Log.e("ERROR", "" + R.layout.vol_row_item);
-            //listViewVol.setAdapter(new VolListAdapter(ctx, R.layout.vol_row_item, listVol));
             listViewVol.setAdapter(new VolListAdapterWithCache(ctx, R.layout.vol_row_item, listVol));
-            /* // ADAPTER SANS CACHE
-            VolListAdapter adapter = new VolListAdapter(ctx, R.layout.vol_row_item, listVol);
-            adapter.notifyDataSetChanged();
-            listViewVol.setAdapter(adapter);
-            */
+
+            // Rendre cliquable le tablerow
+            TableRow tableRow = (TableRow) findViewById(R.id.one);
+            tableRow.setClickable(true);
+
         } catch (Exception e) {
             Log.w("ERROR",e.toString());
         }
+    }
 
-        /*
-         * Gestion clics sur tablerowr
-         */
-        try {
+    // Methode se lancant automatiquement en cas de clic sur un tablerow
+    // TODO : recup id
+    public void rowClick(View view) {
+        switch(view.getId()) {
+            case R.id.one:
+                Log.w("TAG", "TRAJET : rowClick");
 
-            // GESTION ONCLICK SUR UN TABLEROW
-            TableRow tableRow = (TableRow) findViewById(R.id.one);
-            tableRow.setClickable(true);
-            tableRow.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent Login = new Intent(TrajetsActivity.this, DetailsActivity.class);
-                        startActivity(Login);
-                    }
-            });
-        } catch (Exception e) {
-            Log.w("ERROR", ""+e.toString());
+                //TODO : Phase de récupération de l'id du trajet
+                TextView lol =  (TextView) findViewById(R.id.txtDep);
+                Log.w("TAG", "ID a recup : "+lol.getText().toString());
+                /* // FONCTIONNE, plus qu' amodif les objets pour stocker l'id dans un textview invisible ! :D
+                09-21 09:08:47.489 10479-10479/cdi.appresavion W/TAG: TRAJET : rowClick
+                09-21 09:08:47.489 10479-10479/cdi.appresavion W/TAG: ID a recup : 24/10/2016 20:22:00
+                 */
+
+                // Ouverture de l'activité Détails (avec l'id du trajet)
+                Intent detail = new Intent(TrajetsActivity.this, DetailsActivity.class);
+                detail.putExtra("idTrajet", Integer.toString(6)); //TODO : remplacer le 6 par l'id du trajet a voir en details
+                startActivity(detail);
+
+                // TODO : amélioration future (WIP)
+                //Changer la couleur de fond
+                //view.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
+
+                //TO DO : retirer la ligne selectionner -> transformer ca en recup id de la ligne selectionné
+                // ((LinearLayout)v.getParent()).removeView(v);
+                //get the data you need
+                //TableRow tablerow = (TableRow)v.getParent();
+                //TextView sample = (TextView) tablerow.getChildAt(2);
+                //String result=sample.getText().toString();
+
+                break;
         }
     }
+
 
     @Override
     public void onBackPressed() {
