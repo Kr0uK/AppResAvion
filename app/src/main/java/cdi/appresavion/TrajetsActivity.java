@@ -115,17 +115,16 @@ public class TrajetsActivity extends AppCompatActivity
     public void rowClick(View view) {
         switch(view.getId()) {
             case R.id.one:
-                //TODO : ID : Phase de récupération de l'id du trajet /!\
+
+                //Recup ID
+                TableRow t = (TableRow) view;
+                TextView monID = (TextView) t.getChildAt(4);
                 TextView idTrajet =  (TextView) findViewById(R.id.txtId);
                 Log.w("TAG", "ID du trajet : "+idTrajet.getText().toString());
-                // N'arrive pas à se positionner sur la bonne ligne pour la recup ? [3,2,4]
-                // 09-21 09:43:09.569 24949-24949/cdi.appresavion W/TAG: ID du trajet : 3
-                // On dirait qu'il recup le premier txtId... A verif !
-
 
                 // Ouverture de l'activité Détails (avec l'id du trajet)
                 Intent detail = new Intent(TrajetsActivity.this, DetailsActivity.class);
-                detail.putExtra("idTrajet", idTrajet.getText().toString());
+                detail.putExtra("idTrajet", monID.getText().toString());
                 startActivity(detail);
 
                 // TODO : amélioration future (WIP)
