@@ -59,6 +59,8 @@ public class InscriptionActivity extends AppCompatActivity {
     private String cp;
     private String tel;
     private String mobile;
+    View focusView = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,24 @@ public class InscriptionActivity extends AppCompatActivity {
         tel_user = (EditText) findViewById(R.id.input_tel);
         mobile_user = (EditText) findViewById(R.id.input_mobile);
         btn_valider = (Button) findViewById(R.id.btn_valider_nvuser);
+
+
+        // On réinitialise les erreurs
+        nom_user.setError(null);
+        prenom_user.setError(null);
+        pseudo_user.setError(null);
+        mdp_user.setError(null);
+        confmdp_user.setError(null);
+        mail_user.setError(null);
+        adresse_user.setError(null);
+        ville_user.setError(null);
+        cp_user.setError(null);
+        tel_user.setError(null);
+        mobile_user.setError(null);
+
+
+
+        // On instancie l'objet utilisateur
         final Utilisateur nv_user = new Utilisateur();
 
 
@@ -90,6 +110,7 @@ public class InscriptionActivity extends AppCompatActivity {
 
                 // On instancie la classe qui va stocker toutes les infos
                 // On part du principe que c'est forcément juste quand on vza cliquer (les vérifs sont sur le onTextChanged)
+                Log.d(TAG,"" + nv_user.getNom() + " " + nv_user.getPrenom()  + " " + nv_user.getUsername()  + " " + nv_user.getMdp()+  " " + nv_user.getMail()  + " " + nv_user.getAdresse()  + " " + nv_user.getVille()  + " " + nv_user.getCp()  + " " + nv_user.getTelephone()  + " " + nv_user.getMobile());
                 UtilisateurDAO.ajouterUtilisateur(nv_user);
 
                 Intent Login = new Intent(InscriptionActivity.this, LoginActivity.class);
@@ -123,7 +144,8 @@ public class InscriptionActivity extends AppCompatActivity {
                                                         if (m.find()) {
                                                             nv_user.setNom(input_nom);
                                                         } else {
-                                                            Log.d(TAG, "Nom pas OK"); // TODO toast
+                                                           nom_user.setError(getString(R.string.error_nom_user));
+                                                            focusView = nom_user;
                                                         }
                                                         m.reset();
                                                     }
@@ -152,7 +174,8 @@ public class InscriptionActivity extends AppCompatActivity {
                                                            if (m.find()) {
                                                                nv_user.setPrenom(input_prenom);
                                                            } else {
-                                                               Log.d(TAG, "Prénom pas OK"); // TODO toast
+                                                               prenom_user.setError(getString(R.string.error_prenom_user));
+                                                               focusView = prenom_user;
                                                            }
                                                            m.reset();
 
@@ -182,11 +205,10 @@ public class InscriptionActivity extends AppCompatActivity {
                                                            if (m.find()) {
                                                                nv_user.setUsername(input_pseudo);
                                                            } else {
-                                                               Log.d(TAG, "Pseudo pas OK"); // TODO toast
+                                                               pseudo_user.setError(getString(R.string.error_pseudo_user));
+                                                               focusView = pseudo_user;
                                                            }
                                                            m.reset();
-
-
                                                        }
                                                    }
 
@@ -209,17 +231,11 @@ public class InscriptionActivity extends AppCompatActivity {
                                                     @Override
                                                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                                                         String input_mdp = mdp_user.getText().toString();
-                                                        if (input_mdp.length() > 4) {
-                                                        Log.d(TAG,"Mdp OK");
-                                                        } else
-
-                                                        {
-                                                            Log.d(TAG, "Mdp trop court");  // TODO toast
+                                                        if (input_mdp.length() < 4) {
+                                                            mdp_user.setError(getString(R.string.error_mdp_user));
+                                                            focusView = mdp_user;
                                                         }
-
                                                         m.reset();
-
-
                                                     }
 
                                                 }
@@ -246,14 +262,14 @@ public class InscriptionActivity extends AppCompatActivity {
                                                             String input_confmdp = confmdp_user.getText().toString();
                                                             if (input_confmdp.equals(input_mdp)) {
                                                                 nv_user.setMdp(input_mdp);
-                                                                //TODO erreur
                                                             } else {
-                                                                // TODO erreur mdp
+                                                                confmdp_user.setError(getString(R.string.error_confmdp_user));
+                                                                focusView = confmdp_user;
                                                             }
                                                         }});
 
 
-                                                        mail_user.addTextChangedListener(new
+        mail_user.addTextChangedListener(new
 
                                                         TextWatcher() {
                                                             @Override
@@ -280,7 +296,8 @@ public class InscriptionActivity extends AppCompatActivity {
                                                                 if (m.find()) {
                                                                     nv_user.setMail(input_mail);
                                                                 } else {
-                                                                    Log.d(TAG, "Mail pas OK");  // TODO toast
+                                                                    mail_user.setError(getString(R.string.error_mail_user));
+                                                                    focusView = mail_user;
                                                                 }
                                                                 m.reset();
                                                             }
@@ -316,7 +333,8 @@ public class InscriptionActivity extends AppCompatActivity {
                                                             if (m.find()) {
                                                                 nv_user.setAdresse(input_adresse);
                                                             } else {
-                                                                Log.d(TAG, "Adresse pas OK");  // TODO toast
+                                                                adresse_user.setError(getString(R.string.error_adresse_user));
+                                                                focusView = adresse_user;
                                                             }
                                                             m.reset();
 
@@ -352,7 +370,8 @@ public class InscriptionActivity extends AppCompatActivity {
                                                           if (m.find()) {
                                                               nv_user.setVille(input_ville);
                                                           } else {
-                                                              Log.d(TAG, "Ville pas OK");  // TODO toast
+                                                              ville_user.setError(getString(R.string.error_ville_user));
+                                                              focusView = ville_user;
                                                           }
                                                           m.reset();
 
@@ -388,7 +407,8 @@ public class InscriptionActivity extends AppCompatActivity {
                                                        if (m.find()) {
                                                            nv_user.setCp(input_cp);
                                                        } else {
-                                                           Log.d(TAG, "Code Postal pas OK");  // TODO toast
+                                                           cp_user.setError(getString(R.string.error_cp_user));
+                                                           focusView = cp_user;
                                                        }
                                                        m.reset();
 
@@ -424,7 +444,8 @@ public class InscriptionActivity extends AppCompatActivity {
                                                         if (m.find()) {
                                                             nv_user.setTelephone(input_tel);
                                                         } else {
-                                                            Log.d(TAG, "Téléphone pas OK");  // TODO toast
+                                                            tel_user.setError(getString(R.string.error_tel_user));
+                                                            focusView = tel_user;
                                                         }
                                                         m.reset();
 
@@ -460,7 +481,8 @@ public class InscriptionActivity extends AppCompatActivity {
                                                            if (m.find()) {
                                                                nv_user.setMobile(input_mobile);
                                                            } else {
-                                                               Log.d(TAG, "Téléphone input_mobile pas OK"); // TODO toast
+                                                               mobile_user.setError(getString(R.string.error_mobile_user));
+                                                               focusView = mobile_user;
                                                            }
                                                            m.reset();
 

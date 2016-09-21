@@ -57,18 +57,21 @@
         <activity
             android:name=".InscriptionActivity"
             android:label="@string/title_activity_inscription"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".DetailsActivity"
             android:label="@string/title_activity_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+            ></activity>
         <activity
             android:name=".RechercheActivity"
             android:label="@string/title_activity_recherche"
-            android:theme="@style/AppTheme.NoActionBar" />
+
+            />
         <activity
             android:name="recherche.ChoixLieu"
-            android:theme="@style/AppTheme.NoActionBar" />
+
+            />
     </application>
 
 </manifest>
