@@ -20,119 +20,204 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:background="@drawable/avion"
-        android:layout_marginBottom="25dp"
         android:contentDescription="@string/logo_avion" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_vol"
-        android:layout_alignTop="@+id/img_logo"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_retour_details"
-        android:id="@+id/detailsBtnRetour"
-        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
-        android:textColor="#FFFFFF"
-        android:minWidth="150dp"
-        android:layout_marginBottom="65dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_reserver"
-        android:id="@+id/detailsBtnReserver"
-        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
-        android:textColor="#FFFFFF"
-        android:minWidth="150dp"
-        android:layout_alignTop="@+id/detailsBtnRetour"
-        android:layout_alignEnd="@+id/txt_vol" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_aeroport_depart"
-        android:id="@+id/detailsLblAeroDepart"
-        android:textStyle="bold"
-        android:textSize="22dp"
-        android:textAlignment="center"
-        android:layout_below="@+id/img_logo"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_aeroport_arrivee"
-        android:id="@+id/detailsLblAeroArrivee"
-        android:textStyle="bold"
-        android:textSize="22dp"
-        android:textAlignment="center"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/detailsAeroArrivee"
-        android:layout_below="@+id/detailsLblAeroArrivee"
-        android:layout_alignStart="@+id/detailsLblAeroArrivee" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_heure_arrivee"
-        android:id="@+id/detailsLblDateArrivee"
-        android:textSize="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_below="@+id/detailsAeroArrivee"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/detailsAeroDepart"
-        android:layout_below="@+id/detailsLblAeroDepart"
-        android:layout_alignStart="@+id/detailsLblAeroDepart" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_heure_depart"
-        android:id="@+id/detailsLblDateDepart"
-        android:textSize="16dp"
-        android:layout_below="@+id/detailsAeroDepart"
-        android:layout_toEndOf="@+id/detailsAeroDepart"
-        android:layout_marginTop="23dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/detailsDateDepart"
-        android:layout_below="@+id/detailsLblDateDepart"
-        android:layout_alignStart="@+id/detailsLblDateDepart" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/detailsDateArrivee"
-        android:layout_below="@+id/detailsLblDateArrivee"
-        android:layout_alignStart="@+id/detailsLblDateArrivee" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/detailsBtnIteneraire"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/detailsBtnReserver"
         android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
         android:textColor="#FFFFFF"
-        android:layout_toEndOf="@+id/detailsDateArrivee"
-        android:text="@string/btn_itineraire" />
+        android:text="@string/btn_itineraire"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/img_logo"
+        android:textSize="23dp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/img_logo"
+        android:layout_below="@+id/detailsBtnIteneraire"
+        android:layout_alignParentStart="true"
+        android:id="@+id/tableLayout">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_aeroport_depart"
+                android:id="@+id/detailsLblAeroDepart"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:textSize="22dp"
+                android:textAlignment="center"
+                android:layout_below="@+id/img_logo"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailsAeroArrivee"
+                android:layout_below="@+id/detailsLblAeroArrivee"
+                android:layout_alignStart="@+id/detailsLblAeroArrivee"
+                android:textSize="20dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_aeroport_arrivee"
+                android:id="@+id/detailsLblAeroArrivee"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:textAlignment="center"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailsAeroDepart"
+                android:layout_below="@+id/detailsLblAeroDepart"
+                android:layout_alignStart="@+id/detailsLblAeroDepart"
+                android:textSize="20dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="HORAIRES"
+                android:layout_marginTop="20dp"
+                android:id="@+id/txtLbHoraires"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:layout_span="2"
+                android:textAlignment="center" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_heure_arrivee"
+                android:id="@+id/detailsLblDateArrivee"
+                android:textSize="22dp"
+                android:layout_below="@+id/detailsAeroArrivee"
+                android:layout_alignParentStart="true"
+                android:textStyle="bold"
+                android:textAlignment="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_heure_depart"
+                android:id="@+id/detailsLblDateDepart"
+                android:textSize="22dp"
+                android:layout_below="@+id/detailsAeroDepart"
+                android:layout_toEndOf="@+id/detailsAeroDepart"
+                android:textStyle="bold"
+                android:textAlignment="center" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailsDateDepart"
+                android:layout_below="@+id/detailsLblDateDepart"
+                android:layout_alignStart="@+id/detailsLblDateDepart"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailsDateArrivee"
+                android:layout_below="@+id/detailsLblDateArrivee"
+                android:layout_alignStart="@+id/detailsLblDateArrivee"
+                android:textSize="20dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_vol"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_span="2" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_retour_details"
+                android:id="@+id/detailsBtnRetour"
+                android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+                android:textColor="#FFFFFF"
+                android:minWidth="150dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:textSize="23dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_reserver"
+                android:id="@+id/detailsBtnReserver"
+                android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+                android:textColor="#FFFFFF"
+                android:minWidth="150dp"
+                android:layout_marginLeft="0dp"
+                android:layout_alignTop="@+id/detailsBtnRetour"
+                android:layout_alignEnd="@+id/txt_vol"
+                android:layout_column="1"
+                android:textSize="23dp" />
+        </TableRow>
+
+    </TableLayout>
 
 </RelativeLayout>

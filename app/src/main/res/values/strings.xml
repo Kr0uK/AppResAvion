@@ -90,9 +90,9 @@
     <string name="btn_reserver">Réserver</string>
     <string name="btn_retour_details">Retour</string>
     <string name="txt_aeroport_depart">Aéroport de départ</string>
-    <string name="txt_heure_depart">Horaire de départ</string>
+    <string name="txt_heure_depart">Départ</string>
     <string name="txt_aeroport_arrivee">Aéroport d\'arrivée</string>
-    <string name="txt_heure_arrivee">Horaire d\'arrivée</string>
+    <string name="txt_heure_arrivee">Arrivée</string>
     <string name="logo_avion">logo_avion</string>
     <string name="btn_itineraire">Voir itinéraire</string>
 
