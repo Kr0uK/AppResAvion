@@ -35,6 +35,13 @@ public class DetailsActivity extends AppCompatActivity {
     // On récupère l'id de l'ident_user
     int id = ident_user.getidUser();
 
+    /** A mettre ou on veut appeler les details
+     Intent detail = new Intent(?, DetailsActivity.class);
+     //Stockage de l'idTrajet
+     detail.putExtra("idTrajet", Integer.toString(6));
+     startActivity(detail);
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +77,6 @@ public class DetailsActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(DetailsActivity.this, "Il ne reste plus de place pour ce vol", Toast.LENGTH_SHORT).show();
                 }
-                /** A mettre ou on veut appeler les details
-                 Intent detail = new Intent(?, DetailsActivity.class);
-                 //Stockage de l'idTrajet
-                 detail.putExtra("idTrajet", Integer.toString(6));
-                 startActivity(detail);
-                 */
             }
         });
     }
