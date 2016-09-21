@@ -110,7 +110,9 @@ public class InscriptionActivity extends AppCompatActivity {
 
                 // On instancie la classe qui va stocker toutes les infos
                 // On part du principe que c'est forcément juste quand on vza cliquer (les vérifs sont sur le onTextChanged)
+
                 Log.d(TAG,"" + nv_user.getNom() + " " + nv_user.getPrenom()  + " " + nv_user.getUsername()  + " " + nv_user.getMdp()+  " " + nv_user.getMail()  + " " + nv_user.getAdresse()  + " " + nv_user.getVille()  + " " + nv_user.getCp()  + " " + nv_user.getTelephone()  + " " + nv_user.getMobile());
+
                 UtilisateurDAO.ajouterUtilisateur(nv_user);
 
                 Intent Login = new Intent(InscriptionActivity.this, LoginActivity.class);
@@ -120,20 +122,20 @@ public class InscriptionActivity extends AppCompatActivity {
             }
         });
 
-        // TODO ce bordel
+
         nom_user.addTextChangedListener(new
 
                                                 TextWatcher() {
                                                     @Override
                                                     public void afterTextChanged(Editable s) {
-
+                                                        m.reset();
 
                                                     }
 
                                                     @Override
                                                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-
+                                                        m.reset();
                                                     }
 
                                                     @Override
@@ -157,13 +159,13 @@ public class InscriptionActivity extends AppCompatActivity {
                                                    TextWatcher() {
                                                        @Override
                                                        public void afterTextChanged(Editable s) {
-
+                                                           m.reset();
 
                                                        }
 
                                                        @Override
                                                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                                                           m.reset();
 
                                                        }
 
@@ -188,13 +190,13 @@ public class InscriptionActivity extends AppCompatActivity {
                                                    TextWatcher() {
                                                        @Override
                                                        public void afterTextChanged(Editable s) {
-
+                                                           m.reset();
 
                                                        }
 
                                                        @Override
                                                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                                                           m.reset();
 
                                                        }
 
@@ -218,13 +220,13 @@ public class InscriptionActivity extends AppCompatActivity {
                                                 TextWatcher() {
                                                     @Override
                                                     public void afterTextChanged(Editable s) {
-
+                                                        m.reset();
 
                                                     }
 
                                                     @Override
                                                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                                                        m.reset();
 
                                                     }
 
@@ -246,13 +248,13 @@ public class InscriptionActivity extends AppCompatActivity {
                                                     TextWatcher() {
                                                         @Override
                                                         public void afterTextChanged(Editable s) {
-
+                                                            m.reset();
 
                                                         }
 
                                                         @Override
                                                         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                                                            m.reset();
 
                                                         }
 
@@ -276,14 +278,14 @@ public class InscriptionActivity extends AppCompatActivity {
                                                             public void afterTextChanged
                                                             (Editable s){
 
-
+                                                                m.reset();
                                                             }
 
                                                             @Override
                                                             public void beforeTextChanged
                                                             (CharSequence s,int start,
                                                             int count, int after){
-
+                                                                m.reset();
 
                                                             }
 
@@ -313,7 +315,7 @@ public class InscriptionActivity extends AppCompatActivity {
                                                         public void afterTextChanged
                                                                 (Editable s) {
 
-
+                                                            m.reset();
                                                         }
 
                                                         @Override
@@ -321,7 +323,7 @@ public class InscriptionActivity extends AppCompatActivity {
                                                                 (CharSequence s, int start,
                                                                  int count, int after) {
 
-
+                                                            m.reset();
                                                         }
 
                                                         @Override
@@ -350,14 +352,14 @@ public class InscriptionActivity extends AppCompatActivity {
                                                       public void afterTextChanged
                                                               (Editable s) {
 
-
+                                                          m.reset();
                                                       }
 
                                                       @Override
                                                       public void beforeTextChanged
                                                               (CharSequence s, int start,
                                                                int count, int after) {
-
+                                                          m.reset();
 
                                                       }
 
@@ -386,7 +388,7 @@ public class InscriptionActivity extends AppCompatActivity {
                                                    @Override
                                                    public void afterTextChanged
                                                            (Editable s) {
-
+                                                       m.reset();
 
                                                    }
 
@@ -395,7 +397,7 @@ public class InscriptionActivity extends AppCompatActivity {
                                                            (CharSequence s, int start,
                                                             int count, int after) {
 
-
+                                                       m.reset();
                                                    }
 
                                                    @Override
@@ -423,7 +425,7 @@ public class InscriptionActivity extends AppCompatActivity {
                                                     @Override
                                                     public void afterTextChanged
                                                             (Editable s) {
-
+                                                        m.reset();
 
                                                     }
 
@@ -432,7 +434,7 @@ public class InscriptionActivity extends AppCompatActivity {
                                                             (CharSequence s, int start,
                                                              int count, int after) {
 
-
+                                                        m.reset();
                                                     }
 
                                                     @Override
@@ -461,14 +463,14 @@ public class InscriptionActivity extends AppCompatActivity {
                                                        public void afterTextChanged
                                                                (Editable s) {
 
-
+                                                           m.reset();
                                                        }
 
                                                        @Override
                                                        public void beforeTextChanged
                                                                (CharSequence s, int start,
                                                                 int count, int after) {
-
+                                                           m.reset();
 
                                                        }
 

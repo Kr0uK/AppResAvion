@@ -7,11 +7,5 @@
     android:background="@color/cast_intro_overlay_button_background_color"
     android:fitsSystemWindows="true"
     tools:context=".InscriptionActivity">
-
-
-
-
     <include layout="@layout/content_inscription" />
-
-
 </android.support.design.widget.CoordinatorLayout>
