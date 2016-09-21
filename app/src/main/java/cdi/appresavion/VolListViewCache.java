@@ -2,11 +2,11 @@ package cdi.appresavion;
 
 // LIBRAIRIES
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Created by Frédéric on 15/09/2016.
+ * Created by Frédéric on 15/09/2016 - Last edit : 21/09/2016
+ *
  * Pour le rendu de chaque ligne , nous créons une nouvelle vue et nous prenons chaque composant
  * graphique de celui-ci (beaucoup findViewById de ce fait...). Ces opérations sont très coûteuses
  * en termes de mémoire et cpu. Pour l' éviter , nous pouvons modifier notre adaptateur pour
@@ -19,7 +19,7 @@ public class VolListViewCache {
     private TextView txtArr;
     private TextView txtCod;
     private TextView txtPri;
-    private ImageView imgLogo;
+    private TextView txtId;
 
     public VolListViewCache ( View baseView ) {
         this.baseView = baseView;
@@ -55,12 +55,11 @@ public class VolListViewCache {
         }
         return txtPri;
     }
-    /*
-    public ImageView getImgLogo (int resource) {
-        if ( imgLogo == null ) {
-            imgLogo = ( ImageView ) baseView.findViewById(R.id.volLogo);
+
+    public TextView getTxtId (int resource) {
+        if ( txtId == null ) {
+            txtId = ( TextView ) baseView.findViewById(R.id.txtId);
         }
-        return imgLogo;
+        return txtId;
     }
-    */
 }

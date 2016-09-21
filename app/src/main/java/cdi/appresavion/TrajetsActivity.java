@@ -1,7 +1,15 @@
 package cdi.appresavion;
+/**
+ * Created by Frédéric on 15/09/2016 - Last edit : 21/09/2016
+ */
 
+//LIBRAIRIES
+import shell.DateConvertisseur;
+import dao.AeroportDAO;
+import dao.TrajetDAO;
+import dbclass.Aeroport;
+import dbclass.Trajet;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,23 +25,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import dao.AeroportDAO;
-import dao.TrajetDAO;
-import dbclass.Aeroport;
-import dbclass.Trajet;
-import shell.Convertissor;
-import shell.DateConvertisseur;
-
+/*
+ * Affichage des trajets disponibles
+ * TODO : -> prendre en compte que si l'on ne viens pas de RechercheActivity (ou que l'envoi est vide), il n'y ai pas de bugs !
+ * -> redirection vers DetailsActivity pour reservation (OK)
+ */
 public class TrajetsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -88,8 +91,10 @@ public class TrajetsActivity extends AppCompatActivity
                         Aeroport aeroport = new Aeroport();
                         aeroport = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
                         // TODO : id du trajet a recup -> revoir les objets pour ajouter ce champs, ainsi que xml pour stocker ca et le recup !
-                        listVol.add(new Vol(DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()).toString(), DateConvertisseur.dateToStringFormatShow(trajet.getDateArrivee()).toString(), aeroport.getCode(), ""+trajet.getPrix()));
-                        //listVol.add(new Vol(trajet.getTrajetId(), trajet.getDateDepart().toString(), trajet.getDateArrivee().toString(), aeroport.getCode(), ""+trajet.getPrix()));
+                        listVol.add(new Vol(DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()).toString(),
+                                DateConvertisseur.dateToStringFormatShow(trajet.getDateArrivee()).toString(),
+                                ""+aeroport.getCode(), ""+trajet.getPrix(), ""+trajet.getTrajetId()));
+
                     }
                 }
             }).start();
@@ -107,23 +112,20 @@ public class TrajetsActivity extends AppCompatActivity
     }
 
     // Methode se lancant automatiquement en cas de clic sur un tablerow
-    // TODO : recup id
     public void rowClick(View view) {
         switch(view.getId()) {
             case R.id.one:
-                Log.w("TAG", "TRAJET : rowClick");
+                //TODO : ID : Phase de récupération de l'id du trajet /!\
+                TextView idTrajet =  (TextView) findViewById(R.id.txtId);
+                Log.w("TAG", "ID du trajet : "+idTrajet.getText().toString());
+                // N'arrive pas à se positionner sur la bonne ligne pour la recup ? [3,2,4]
+                // 09-21 09:43:09.569 24949-24949/cdi.appresavion W/TAG: ID du trajet : 3
+                // On dirait qu'il recup le premier txtId... A verif !
 
-                //TODO : Phase de récupération de l'id du trajet
-                TextView lol =  (TextView) findViewById(R.id.txtDep);
-                Log.w("TAG", "ID a recup : "+lol.getText().toString());
-                /* // FONCTIONNE, plus qu' amodif les objets pour stocker l'id dans un textview invisible ! :D
-                09-21 09:08:47.489 10479-10479/cdi.appresavion W/TAG: TRAJET : rowClick
-                09-21 09:08:47.489 10479-10479/cdi.appresavion W/TAG: ID a recup : 24/10/2016 20:22:00
-                 */
 
                 // Ouverture de l'activité Détails (avec l'id du trajet)
                 Intent detail = new Intent(TrajetsActivity.this, DetailsActivity.class);
-                detail.putExtra("idTrajet", Integer.toString(6)); //TODO : remplacer le 6 par l'id du trajet a voir en details
+                detail.putExtra("idTrajet", idTrajet.getText().toString());
                 startActivity(detail);
 
                 // TODO : amélioration future (WIP)

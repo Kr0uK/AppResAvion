@@ -50,6 +50,14 @@
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
                 android:layout_weight="0.25" />
+
+            <TextView
+                android:id="@+id/txtId"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:textSize="1sp"
+                android:layout_weight="0.1"
+                android:visibility="invisible" />
         </TableRow>
 
     </TableLayout>
