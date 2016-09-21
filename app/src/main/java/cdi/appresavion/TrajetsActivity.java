@@ -1,7 +1,15 @@
 package cdi.appresavion;
+/**
+ * Created by Frédéric on 15/09/2016 - Last edit : 21/09/2016
+ */
 
+//LIBRAIRIES
+import shell.DateConvertisseur;
+import dao.AeroportDAO;
+import dao.TrajetDAO;
+import dbclass.Aeroport;
+import dbclass.Trajet;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,21 +25,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableRow;
+import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import dao.AeroportDAO;
-import dao.TrajetDAO;
-import dbclass.Aeroport;
-import dbclass.Trajet;
-import shell.Convertissor;
-import shell.DateConvertisseur;
-
+/*
+ * Affichage des trajets disponibles
+ * TODO : -> prendre en compte que si l'on ne viens pas de RechercheActivity (ou que l'envoi est vide), il n'y ai pas de bugs !
+ * -> redirection vers DetailsActivity pour reservation (OK)
+ */
 public class TrajetsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -63,6 +68,9 @@ public class TrajetsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        /*
+         * Récupération des trajets et affichage
+         */
         try {
             ctx = this;
 
@@ -74,81 +82,66 @@ public class TrajetsActivity extends AppCompatActivity
                 public void run() {
                     //Récupération des choix de l'utilisateur pour la sélection du trajet aerien souhaité :
                     Choix_Avion PrefVol = new Choix_Avion();
-                    // Intérrogation de la BDD avec les critères de l'utilisateur
-                    // TODO : ID : Peut-on utiliser l'indice du TableRow comme etant l'indice pour lire dans la List listVol et recup ainsi l'id réeel du trajet ?
-
-                    //Recherche des trajets
+                    // Intérrogation des trajets dans la BDD avec les critères de l'utilisateur
                     ArrayList trajettArrayList = TrajetDAO.getTrajetWhere(PrefVol.getAeroDepId(),PrefVol.getAeroArrId(), DateConvertisseur.stringToDate(PrefVol.getAeroDateDep()));
                     Iterator<Trajet> trajetIterator = trajettArrayList.iterator();
+                    // Stockage pour affichage des données récupérées
                     while (trajetIterator.hasNext()) {
                         Trajet trajet = trajetIterator.next();
-                        // TODO : J'ai fais tout mon traitement dans une listVol... Forte chance d'incompatibilité, tout a revoir... :/
-
                         Aeroport aeroport = new Aeroport();
                         aeroport = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
-                        listVol.add(new Vol(trajet.getDateDepart().toString(), trajet.getDateArrivee().toString(), aeroport.getCode(), ""+trajet.getPrix()));
+                        // TODO : id du trajet a recup -> revoir les objets pour ajouter ce champs, ainsi que xml pour stocker ca et le recup !
+                        listVol.add(new Vol(DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()).toString(),
+                                DateConvertisseur.dateToStringFormatShow(trajet.getDateArrivee()).toString(),
+                                ""+aeroport.getCode(), ""+trajet.getPrix(), ""+trajet.getTrajetId()));
+
                     }
                 }
             }).start();
 
-            // TODO EXAMPLE a delete apres : public Vol(String depart, String arrivee, String code, String prix) {
-            listVol.add(new Vol("09/11/12 21:00:00", "10/11/12 01:00:00", "CDG", "100"));
-            listVol.add(new Vol("10/11/12 22:15:00", "11/11/12 02:00:00", "CDG", "110"));
-            listVol.add(new Vol("11/11/12 23:30:00", "12/11/12 03:00:00", "CDG", "120"));
-
             listViewVol = (ListView) findViewById(R.id.vol_list);
-            // VolListAdapter : Context ctx, int resourceId, List objects
-            Log.e("ERROR", "" + R.layout.vol_row_item);
-            //listViewVol.setAdapter(new VolListAdapter(ctx, R.layout.vol_row_item, listVol));
             listViewVol.setAdapter(new VolListAdapterWithCache(ctx, R.layout.vol_row_item, listVol));
-            /* // ADAPTER SANS CACHE
-            VolListAdapter adapter = new VolListAdapter(ctx, R.layout.vol_row_item, listVol);
-            adapter.notifyDataSetChanged();
-            listViewVol.setAdapter(adapter);
-            */
+
+            // Rendre cliquable le tablerow
+            TableRow tableRow = (TableRow) findViewById(R.id.one);
+            tableRow.setClickable(true);
+
         } catch (Exception e) {
             Log.w("ERROR",e.toString());
         }
-        try {
-            /*
-            // GESTION ONCLICK SUR UN TABLEROW
-            TableRow tableRow = (TableRow) findViewById(R.id.one);
-            tableRow.setClickable(true);
-            tableRow.setOnClickListener(onClickListener);
-            */
-            /* TODO
-                private View.OnClickListener onClickListener= new View.OnClickListener() {
-                    public void onClick(View v) {
-                        show_dialog();
-                    }
-                };
-            */
-            /*
-                public void show_dialog() {
-                    final Dialog dialog = new Dialog(getApplicationContext());
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.getWindow();
-                    dialog.setContentView(R.layout.monLayout);
-                    dialog.setTitle("Mon Titre");
-                    dialog.setCancelable(false);
-                    final Button btnOkDialog = (Button) dialog.findViewById(R.id.ResetOkBtn);
-                    btnOkDialog.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View arg0) {
-                            //+SAVE de l'id du trajet pour passage en param
-            //                Intent Details = new Intent(TrajetsActivity.this, DetailsActivity.class);
-            //                startActivity(Details);
-                        }
-                    });
-                    try {
-                        dialog.show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-            */
-        } catch (Exception e) {
-            Log.w("ERROR", ""+e.toString());
+    }
+
+    // Methode se lancant automatiquement en cas de clic sur un tablerow
+    public void rowClick(View view) {
+        switch(view.getId()) {
+            case R.id.one:
+
+                //Recup ID
+                TableRow t = (TableRow) view;
+                TextView monID = (TextView) t.getChildAt(4);
+                TextView idTrajet =  (TextView) findViewById(R.id.txtId);
+                Log.w("TAG", "ID du trajet : "+idTrajet.getText().toString());
+
+                // Ouverture de l'activité Détails (avec l'id du trajet)
+                Intent detail = new Intent(TrajetsActivity.this, DetailsActivity.class);
+                detail.putExtra("idTrajet", monID.getText().toString());
+                startActivity(detail);
+
+                // TODO : amélioration future (WIP)
+                //Changer la couleur de fond
+                //view.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
+
+                //TO DO : retirer la ligne selectionner -> transformer ca en recup id de la ligne selectionné
+                // ((LinearLayout)v.getParent()).removeView(v);
+                //get the data you need
+                //TableRow tablerow = (TableRow)v.getParent();
+                //TextView sample = (TextView) tablerow.getChildAt(2);
+                //String result=sample.getText().toString();
+
+                break;
         }
     }
+
 
     @Override
     public void onBackPressed() {

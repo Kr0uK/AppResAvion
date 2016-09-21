@@ -40,7 +40,7 @@ public class VolListAdapter extends ArrayAdapter {
         Log.w("ERROR","On rentre dedans");
         resource = resourceId;
         Log.w("ERROR", ""+ resourceId);
-       inflater = LayoutInflater.from( ctx );
+        inflater = LayoutInflater.from( ctx );
         Log.w("ERROR","premier inflater");
         context=ctx;
         Log.w("ERROR","après l'assignation du contexte");

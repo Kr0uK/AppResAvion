@@ -75,7 +75,7 @@ public class DetailsActivity extends AppCompatActivity {
                  //Stockage de l'idTrajet
                  detail.putExtra("idTrajet", Integer.toString(6));
                  startActivity(detail);
-                */
+                 */
             }
         });
     }

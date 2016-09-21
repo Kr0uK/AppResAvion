@@ -1,7 +1,7 @@
 package cdi.appresavion;
 
 /**
- * Created by Frédéric on 15/09/2016.
+ * Created by Frédéric on 15/09/2016 - Last edit : 21/09/2016
  */
 public class Vol {
 
@@ -10,7 +10,7 @@ public class Vol {
     private String arrivee;     //heure d'arrivée
     private String code;        //code de l'aeroport
     private String prix;        //prix en euros
-    private String logo;        //logo de la compagnie avion
+    private String Id;        //logo de la compagnie avion
 
 
     // CONSTRUCTEURS (avec surcharge pour definir les variables lors interrogation BDD)
@@ -23,13 +23,13 @@ public class Vol {
         this.code = code;
         this.prix = prix;
     }
-    public Vol(String logo, String depart, String arrivee, String code, String prix) {
+    public Vol(String depart, String arrivee, String code, String prix, String id) {
         super();
-        this.logo = logo;
         this.depart = depart;
         this.arrivee = arrivee;
         this.code = code;
         this.prix = prix;
+        this.Id = id;
     }
 
 
@@ -62,11 +62,11 @@ public class Vol {
         this.prix = data;
     }
 
-    public String getLogo() {
-        return logo;
+    public String getId() {
+        return Id;
     }
-    public void setLogo(String data) {
-        this.logo = data;
+    public void setId(String data) {
+        this.Id = data;
     }
 }
 

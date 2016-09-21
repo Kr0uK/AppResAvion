@@ -39,13 +39,18 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /**
-         * Thread qui va gérer la création et le premier remplissage de la base
-         */
+
+/**
+ * Thread qui va gérer la création et le premier remplissage de la base
+ */
+
+        //Création de la base;
+
+        Log.w("TAG", "Avant de lancer le thread");
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //Création de la base
                 DAOBase daoBase = new DAOBase(getApplicationContext());
                 daoBase.getWDb();
             }
@@ -58,6 +63,10 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
+
+
+                            Log.w("TAG", "On rentre bien dans le thread");
+
                             //Ajout dans la base
                             ajoutBase();
 
@@ -69,7 +78,7 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
                             Iterator<Aeroport> aeroportIterator = aeroportArrayList.iterator();
                             while (aeroportIterator.hasNext()) {
                                 Aeroport aeroport = aeroportIterator.next();
-                                Log.w("TAG", "Ceci est le test d'aeroport " + aeroport.getId() + " | " + aeroport.getNom() + " | " +aeroport.getPays());
+                                Log.w("TAG", "Ceci est le test d'aeroport " + aeroport.getId() + " | " + aeroport.getNom() + " | " + aeroport.getPays());
                             }
 
                             //Recup de trajet + avion + aeroport avec date choisis
@@ -89,10 +98,12 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
             public void run() {
                 Intent Login = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(Login);
-
             }
         }).start();
+
+
     }
+
 
     // Redirection dans le onResume()
     @Override
@@ -137,6 +148,7 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         }
 
     }
+
     // Vérif comme quoi la base se remplit qu'une seule fois
     private boolean isFirstTime() {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
@@ -169,6 +181,7 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
             Log.w("TAG", "Ceci est le test de trajet " + aeDep.getNom() + " | " + aeArr.getNom() + " | " + DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()));
         }
     }
+
     private void ajoutBase() {
         Utilisateur utilisateur1 = new Utilisateur(0, "METZ", "Renaud", "r@", "0388943632", "0622493390", "33 rue de la paix", "67160", "OBERLAUTERBACH", "renaud", "12345678");
         Utilisateur utilisateur2 = new Utilisateur(0, "Kenobi", "Obi-Wan", "obiwan@kenobi.jedi", "0123456789", "0678945632", "35 rue de la paix", "70420", "Perpète-les-Bains", "obiwan", "12345678");
@@ -225,13 +238,13 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
     }
 
     private void getAllDb() {
-        try{
+        try {
             //Affichage utilisateur
             ArrayList utilisateurtArrayList = UtilisateurDAO.getAllUtilisateur();
             Iterator<Utilisateur> utilisateurIterator = utilisateurtArrayList.iterator();
             while (utilisateurIterator.hasNext()) {
                 Utilisateur utilisateur = utilisateurIterator.next();
-                Log.w("TAG", utilisateur.getMail() + " | " +utilisateur.getMdp());
+                Log.w("TAG", utilisateur.getMail() + " | " + utilisateur.getMdp());
             }
 
             //Affichage aeroport
@@ -239,7 +252,7 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
             Iterator<Aeroport> aeroportIterator = aeroportArrayList.iterator();
             while (aeroportIterator.hasNext()) {
                 Aeroport aeroport = aeroportIterator.next();
-                Log.w("TAG",aeroport.getId() + " | " + aeroport.getNom() + " | " +aeroport.getPays());
+                Log.w("TAG", aeroport.getId() + " | " + aeroport.getNom() + " | " + aeroport.getPays());
             }
 
             //Affichage avion
@@ -254,7 +267,7 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
             ArrayList trajetArrayList = TrajetDAO.getAllTrajet();
             Iterator<Trajet> trajetIterator = trajetArrayList.iterator();
             while (trajetIterator.hasNext()) {
-                Trajet trajet= trajetIterator.next();
+                Trajet trajet = trajetIterator.next();
                 Log.w("TAG", trajet.getAeroportId() + " | " + trajet.getAerAeroportId() + " | " + DateConvertisseur.dateToString(trajet.getDateDepart()));
             }
 
@@ -263,7 +276,7 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
             Iterator<Reservation> reservationIterator = reservationArrayList.iterator();
             while (reservationIterator.hasNext()) {
                 Reservation reservation = reservationIterator.next();
-                Log.w("TAG", "RESERVATION : Reservation id : " + reservation.getReservationId() + " | Utilisateur id :"  + reservation.getUtilisateurId());
+                Log.w("TAG", "RESERVATION : Reservation id : " + reservation.getReservationId() + " | Utilisateur id :" + reservation.getUtilisateurId());
             }
 
             //Affichage place
@@ -271,11 +284,13 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
             Iterator<Place> placeIterator = placeArrayList.iterator();
             while (placeIterator.hasNext()) {
                 Place place = placeIterator.next();
-                Log.w("TAG", "PLACE : Reservation id : " + place.getReservationId() + " | Trajet id :"  + place.getTrajetId());
+                Log.w("TAG", "PLACE : Reservation id : " + place.getReservationId() + " | Trajet id :" + place.getTrajetId());
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.w("TAG", e);
         }
     }
+
+
 }

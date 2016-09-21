@@ -133,12 +133,12 @@ public class ReservationDAO {
     public static ArrayList<Reservation> getReservationWhere(int id) {
         //Création du curseur
         Cursor cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_RESERVATION + " r"
-                + " JOIN " + PlaceDAO.TABLE_PLACE + " p"
-                + " ON r." + RESERVATION_ID + " = p." + PlaceDAO.PLACE_RESERVATION_ID
-                + " JOIN " + TrajetDAO.TABLE_TRAJET+ " t"
-                + " ON t." + TrajetDAO.TRAJET_ID + " = p." + PlaceDAO.PLACE_TRAJET_ID
-                + " WHERE " + RESERVATION_UTILISATEUR_ID + " = " + id
-                + " AND " + TrajetDAO.TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateSysString() + "'"
+                        + " JOIN " + PlaceDAO.TABLE_PLACE + " p"
+                        + " ON r." + RESERVATION_ID + " = p." + PlaceDAO.PLACE_RESERVATION_ID
+                        + " JOIN " + TrajetDAO.TABLE_TRAJET+ " t"
+                        + " ON t." + TrajetDAO.TRAJET_ID + " = p." + PlaceDAO.PLACE_TRAJET_ID
+                        + " WHERE " + RESERVATION_UTILISATEUR_ID + " = " + id
+                        + " AND " + TrajetDAO.TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateSysString() + "'"
                 , null);
 
         //Déplace le curseur a la valeur 0
@@ -202,9 +202,9 @@ public class ReservationDAO {
      */
     public static int sumPlace(int idTrajet) {
         Cursor cursor = DAOBase.getRDb().rawQuery("SELECT sum(" + RESERVATION_NBPERSONNES + ") FROM " + TABLE_RESERVATION + " r"
-                +" JOIN " + PlaceDAO.TABLE_PLACE + " p"
-                +" ON r." + RESERVATION_ID + " = p." + PlaceDAO.PLACE_RESERVATION_ID
-                +" WHERE " + PlaceDAO.PLACE_TRAJET_ID + " = " + idTrajet
+                        +" JOIN " + PlaceDAO.TABLE_PLACE + " p"
+                        +" ON r." + RESERVATION_ID + " = p." + PlaceDAO.PLACE_RESERVATION_ID
+                        +" WHERE " + PlaceDAO.PLACE_TRAJET_ID + " = " + idTrajet
                 , null);
 
         //Déplace le curseur a la valeur 0

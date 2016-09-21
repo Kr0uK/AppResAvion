@@ -20,6 +20,14 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
+    public Utilisateur(int id, String mail, String mdp) {
+        super();
+        this.id = id;
+        this.mail = mail;
+        this.mdp = mdp;
+
+    }
+
     public Utilisateur(int id, String nom, String prenom, String mail, String telephone, String mobile, String adresse, String cp, String ville, String username, String mdp) {
         this.id = id;
         this.nom = nom;

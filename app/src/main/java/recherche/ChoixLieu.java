@@ -132,7 +132,7 @@ public class ChoixLieu extends Activity implements TextWatcher {
             nbReponses = "Il y a 1 résultat";
         }
         lieuTVnbResultats.setText(nbReponses);
-       // DAOBase.close();
+        // DAOBase.close();
 
     }
 
