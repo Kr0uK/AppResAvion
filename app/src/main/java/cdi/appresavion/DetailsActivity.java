@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import dao.AeroportDAO;
 import dao.AvionDAO;
@@ -24,11 +24,16 @@ public class DetailsActivity extends AppCompatActivity {
     TextView tvDateDepart;
     TextView tvDateArrivee;
     Button btnReserver;
-    int prixTrajet;
 
-    // On va utiliser requeteReservation avec l'id comme argument pour remplir la liste
-    Ident_User ident_user = new Ident_User(); // On instancie un Ident_User
-    int id = ident_user.getidUser(); // On récupère l'id de l'ident_user
+    //prix du trajet
+    int prixTrajet;
+    //nombre de place
+    int nbPlace;
+
+    // On instancie un Ident_User
+    Ident_User ident_user = new Ident_User();
+    // On récupère l'id de l'ident_user
+    int id = ident_user.getidUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +57,21 @@ public class DetailsActivity extends AppCompatActivity {
         btnReserver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO nb personne + redirection
-                //Param id de l'util, prix du trajet, nombre de personne, id du trajet
-                ReservationDAO.ajouterReservationPlace(id, prixTrajet, 1, idTrajet);
+                //TODO nb personne reserver
+                //Verifie si il reste des places pour ce vol
+                if(nbPlace > ReservationDAO.sumPlace(idTrajet)){
+                    //Param id de l'util, prix du trajet, nombre de personne, id du trajet
+                    ReservationDAO.ajouterReservationPlace(id, prixTrajet, 100, idTrajet);
 
-                Intent redirection = new Intent(DetailsActivity.this, AccueilActivity.class);
-                startActivity(redirection);
-
+                    //Toast + redirection de l'utilisateur
+                    Toast.makeText(DetailsActivity.this, "Reservation enregistrée !", Toast.LENGTH_LONG).show();
+                    Intent redirection = new Intent(DetailsActivity.this, AccueilActivity.class);
+                    startActivity(redirection);
+                } else {
+                    Toast.makeText(DetailsActivity.this, "Il ne reste plus de place pour ce vol", Toast.LENGTH_SHORT).show();
+                }
                 /** A mettre ou on veut appeler les details
-                 Intent detail = new Intent(LoginActivity.this, DetailsActivity.class);
+                 Intent detail = new Intent(?, DetailsActivity.class);
                  //Stockage de l'idTrajet
                  detail.putExtra("idTrajet", Integer.toString(6));
                  startActivity(detail);
@@ -89,6 +100,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         //Stockage du prix du trajet
         prixTrajet = trajet.getPrix();
+        //Stockage du nombre de places
+        nbPlace = avion.getNbPlaces();
 
         //Affichage des infos du trajet
         tvAeroDepart.setText(aeroportDepart.getNom());

@@ -169,7 +169,7 @@ public class AccueilActivity extends AppCompatActivity
      *
      * @param id de l'utilisateur
      */
-    private void requeteReservation(int id) {
+    public static void requeteReservation(int id) {
         //Création de l'ArrayList qui contient les reservations qui ne sont pas encore passé
         ArrayList reservationArrayList = ReservationDAO.getReservationWhere(id);
         //Iterator qui va permetre de parcourir l'ArrayList de reservation

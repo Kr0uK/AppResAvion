@@ -138,7 +138,7 @@ public class ReservationDAO {
                 + " JOIN " + TrajetDAO.TABLE_TRAJET+ " t"
                 + " ON t." + TrajetDAO.TRAJET_ID + " = p." + PlaceDAO.PLACE_TRAJET_ID
                 + " WHERE " + RESERVATION_UTILISATEUR_ID + " = " + id
-                //+ " AND " + TrajetDAO.TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateSysString() + "'"
+                + " AND " + TrajetDAO.TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateSysString() + "'"
                 , null);
 
         //Déplace le curseur a la valeur 0
@@ -193,5 +193,27 @@ public class ReservationDAO {
         }
         cursor.close();
         return arrayList;
+    }
+
+    /**
+     * Compte le nombre de place enregistré pour un trajet.
+     * @param idTrajet id du trajet
+     * @return le nombre de place prise
+     */
+    public static int sumPlace(int idTrajet) {
+        Cursor cursor = DAOBase.getRDb().rawQuery("SELECT sum(" + RESERVATION_NBPERSONNES + ") FROM " + TABLE_RESERVATION + " r"
+                +" JOIN " + PlaceDAO.TABLE_PLACE + " p"
+                +" ON r." + RESERVATION_ID + " = p." + PlaceDAO.PLACE_RESERVATION_ID
+                +" WHERE " + PlaceDAO.PLACE_TRAJET_ID + " = " + idTrajet
+                , null);
+
+        //Déplace le curseur a la valeur 0
+        cursor.moveToFirst();
+
+        int nbPlace = cursor.getInt(0);
+
+        cursor.close();
+
+        return nbPlace;
     }
 }
