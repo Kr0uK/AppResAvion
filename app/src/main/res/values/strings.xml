@@ -50,9 +50,11 @@
     <string name="error_nom_user">Veuillez entrer un nom valide.</string>
     <string name="error_prenom_user">Veuillez entrer un prénom valide.</string>
     <string name="error_pseudo_user">Veuillez entrer un pseudo valide.</string>
+    <string name="error_pseudo_taken">Le pseudo est déjà pris.</string>
     <string name="error_mdp_user">Veuillez entrer un mot de passe d\'au moins 4 caractères..</string>
     <string name="error_confmdp_user">Le mot de passe ne correspond pas à celui au-dessus.</string>
     <string name="error_mail_user">Veuillez entrer une adresse mail valide.</string>
+    <string name="error_mail_taken">L\'adresse e-mail est déjà prise.</string>
     <string name="error_adresse_user">Veuillez entrer une adresse valide.</string>
     <string name="error_ville_user">Veuillez entrer une ville valide.</string>
     <string name="error_cp_user">Veuillez entrer un code postal valide.</string>
