@@ -61,7 +61,7 @@ public class DetailsActivity extends AppCompatActivity {
                 //Verifie si il reste des places pour ce vol
                 if(nbPlace > ReservationDAO.sumPlace(idTrajet)){
                     //Param id de l'util, prix du trajet, nombre de personne, id du trajet
-                    ReservationDAO.ajouterReservationPlace(id, prixTrajet, 100, idTrajet);
+                    ReservationDAO.ajouterReservationPlace(id, prixTrajet, 1, idTrajet);
 
                     //Toast + redirection de l'utilisateur
                     Toast.makeText(DetailsActivity.this, "Reservation enregistrée !", Toast.LENGTH_LONG).show();
