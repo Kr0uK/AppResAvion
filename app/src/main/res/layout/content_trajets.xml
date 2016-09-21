@@ -26,15 +26,7 @@
             android:id="@+id/textView3"
             android:textAlignment="center" />
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_column="6"
-                android:minHeight="75dp">
 
                 <ListView
                     android:id="@+id/vol_list"
@@ -43,9 +35,6 @@
                     android:paddingTop="20sp" >
                 </ListView>
 
-            </TableRow>
-
-        </TableLayout>
     </LinearLayout>
 
 </RelativeLayout>
