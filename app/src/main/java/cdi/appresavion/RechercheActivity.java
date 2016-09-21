@@ -47,21 +47,6 @@ public class RechercheActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         try {
-            // TODO : Connection à la BDD pour effectuer les recherches
-        /*
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                ListeTablesBDD osef = new ListeTablesBDD(getApplicationContext());
-                osef.open(getApplicationContext());
-                InsertionDonnees.insertionDonnees(getApplicationContext());
-                osef.close();
-
-            }
-        }).start();
-        */
-
             // STRINGS
             accueilETchoixDepart = (EditText) findViewById(R.id.accueilETChoixDepart);
             accueilETchoixArrivee = (EditText) findViewById(R.id.accueilETChoixArrivee);
@@ -130,7 +115,7 @@ public class RechercheActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     //TrajetDAO.getTrajetWhere(accueilETchoixDepart.getText(), accueilETchoixArrivee.getText(),accueilETdateDepart.getText());
-                    Choix_Avion stockage = new Choix_Avion(accueilETdateDepart.getText().toString());
+                    //Choix_Avion stockage = new Choix_Avion(accueilETdateDepart.getText().toString());
                     startActivity(accueil_to_resultat);
                 }
             });
