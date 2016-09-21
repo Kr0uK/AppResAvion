@@ -39,15 +39,15 @@ public class MapsActivity extends AppCompatActivity
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback
 {
-        // Variables d'environnement pour l'API Google
-        private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-        private boolean mPermissionDenied = false;
-        private GoogleMap mMap;
-        private Location location;
-        private Marker mCurrLocationMarker;
-        private LocationRequest mLocationRequest;
-        private SupportMapFragment mapFrag;
-        private GoogleApiClient mGoogleApiClient;
+    // Variables d'environnement pour l'API Google
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private boolean mPermissionDenied = false;
+    private GoogleMap mMap;
+    private Location location;
+    private Marker mCurrLocationMarker;
+    private LocationRequest mLocationRequest;
+    private SupportMapFragment mapFrag;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
