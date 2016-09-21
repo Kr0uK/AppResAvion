@@ -81,6 +81,7 @@ public class InscriptionActivity extends AppCompatActivity {
         tel_user = (EditText) findViewById(R.id.input_tel);
         mobile_user = (EditText) findViewById(R.id.input_mobile);
         btn_valider = (Button) findViewById(R.id.btn_valider_nvuser);
+        final Utilisateur nv_user = new Utilisateur();
 
 
         btn_valider.setOnClickListener(new View.OnClickListener() {
@@ -88,280 +89,397 @@ public class InscriptionActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // On instancie la classe qui va stocker toutes les infos
-               final Utilisateur nv_user = new Utilisateur();
+                // On part du principe que c'est forcément juste quand on vza cliquer (les vérifs sont sur le onTextChanged)
+                UtilisateurDAO.ajouterUtilisateur(nv_user);
 
-                // TODO ce bordel
-                nom_user.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void afterTextChanged(Editable s) {
+                Intent Login = new Intent(InscriptionActivity.this, LoginActivity.class);
 
-
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                        String input_nom = nom_user.getText().toString();
-                        m = regex_alpha.matcher(input_nom);
-                        if (m.find()) {
-                            nv_user.setNom(input_nom);
-                        } else {
-                            Log.d(TAG, "Nom pas OK"); // TODO toast
-                        }
-                        m.reset();
-                    }
-                });
-                prenom_user.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        String input_prenom = prenom_user.getText().toString();
-                        m = regex_alpha.matcher(input_prenom);
-                        if (m.find()) {
-                            nv_user.setPrenom(input_prenom);
-                        } else {
-                            Log.d(TAG, "Prénom pas OK"); // TODO toast
-                        }
-                        m.reset();
-
-                    }
-                });
-                pseudo_user.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        String input_pseudo = pseudo_user.getText().toString();
-                        m = regex_alphanum.matcher(input_pseudo);
-                        if (m.find()) {
-                            nv_user.setUsername(input_pseudo);
-                        } else {
-                            Log.d(TAG, "Pseudo pas OK"); // TODO toast
-                        }
-                        m.reset();
-
-
-                    }
-                });
-                mdp_user.addTextChangedListener(new TextWatcher(){
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        String input_mdp = mdp_user.getText().toString();
-
-
-
-
-
-                    }
-                });
-                confmdp_user.addTextChangedListener(new TextWatcher(){
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-
-
-
-                    }
-                });
-                mail_user.addTextChangedListener(new TextWatcher(){
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-
-
-
-                    }
-                });
-                adresse_user.addTextChangedListener(new TextWatcher(){
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-
-
-
-                    }
-                });
-                ville_user.addTextChangedListener(new TextWatcher(){
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-
-
-
-                    }
-                });
-                cp_user.addTextChangedListener(new TextWatcher(){
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-
-
-
-                    }
-                });
-                tel_user.addTextChangedListener(new TextWatcher(){
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-
-
-
-                    }
-                });
-                mobile_user.addTextChangedListener(new TextWatcher(){
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-
-
-
-                    }
-                });
-
-
-                    UtilisateurDAO.ajouterUtilisateur(nv_user);
-
-                    Intent Login = new Intent(InscriptionActivity.this, LoginActivity.class);
-                    startActivity(Login);
-
-
+                startActivity(Login);
 
             }
         });
+
+        // TODO ce bordel
+        nom_user.addTextChangedListener(new
+
+                                                TextWatcher() {
+                                                    @Override
+                                                    public void afterTextChanged(Editable s) {
+
+
+                                                    }
+
+                                                    @Override
+                                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+                                                    }
+
+                                                    @Override
+                                                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                                                        String input_nom = nom_user.getText().toString();
+                                                        m = regex_alpha.matcher(input_nom);
+                                                        if (m.find()) {
+                                                            nv_user.setNom(input_nom);
+                                                        } else {
+                                                            Log.d(TAG, "Nom pas OK"); // TODO toast
+                                                        }
+                                                        m.reset();
+                                                    }
+                                                }
+
+        );
+        prenom_user.addTextChangedListener(new
+
+                                                   TextWatcher() {
+                                                       @Override
+                                                       public void afterTextChanged(Editable s) {
+
+
+                                                       }
+
+                                                       @Override
+                                                       public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+                                                       }
+
+                                                       @Override
+                                                       public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                                           String input_prenom = prenom_user.getText().toString();
+                                                           m = regex_alpha.matcher(input_prenom);
+                                                           if (m.find()) {
+                                                               nv_user.setPrenom(input_prenom);
+                                                           } else {
+                                                               Log.d(TAG, "Prénom pas OK"); // TODO toast
+                                                           }
+                                                           m.reset();
+
+                                                       }
+                                                   }
+
+        );
+        pseudo_user.addTextChangedListener(new
+
+                                                   TextWatcher() {
+                                                       @Override
+                                                       public void afterTextChanged(Editable s) {
+
+
+                                                       }
+
+                                                       @Override
+                                                       public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+                                                       }
+
+                                                       @Override
+                                                       public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                                           String input_pseudo = pseudo_user.getText().toString();
+                                                           m = regex_alphanum.matcher(input_pseudo);
+                                                           if (m.find()) {
+                                                               nv_user.setUsername(input_pseudo);
+                                                           } else {
+                                                               Log.d(TAG, "Pseudo pas OK"); // TODO toast
+                                                           }
+                                                           m.reset();
+
+
+                                                       }
+                                                   }
+
+        );
+        mdp_user.addTextChangedListener(new
+
+                                                TextWatcher() {
+                                                    @Override
+                                                    public void afterTextChanged(Editable s) {
+
+
+                                                    }
+
+                                                    @Override
+                                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+                                                    }
+
+                                                    @Override
+                                                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                                        String input_mdp = mdp_user.getText().toString();
+                                                        if (input_mdp.length() > 4) {
+                                                        Log.d(TAG,"Mdp OK");
+                                                        } else
+
+                                                        {
+                                                            Log.d(TAG, "Mdp trop court");  // TODO toast
+                                                        }
+
+                                                        m.reset();
+
+
+                                                    }
+
+                                                }
+
+        );
+        confmdp_user.addTextChangedListener(new
+
+                                                    TextWatcher() {
+                                                        @Override
+                                                        public void afterTextChanged(Editable s) {
+
+
+                                                        }
+
+                                                        @Override
+                                                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+                                                        }
+
+                                                        @Override
+                                                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                                            String input_mdp = mdp_user.getText().toString();
+                                                            String input_confmdp = confmdp_user.getText().toString();
+                                                            if (input_confmdp.equals(input_mdp)) {
+                                                                nv_user.setMdp(input_mdp);
+                                                                //TODO erreur
+                                                            } else {
+                                                                // TODO erreur mdp
+                                                            }
+                                                        }});
+
+
+                                                        mail_user.addTextChangedListener(new
+
+                                                        TextWatcher() {
+                                                            @Override
+                                                            public void afterTextChanged
+                                                            (Editable s){
+
+
+                                                            }
+
+                                                            @Override
+                                                            public void beforeTextChanged
+                                                            (CharSequence s,int start,
+                                                            int count, int after){
+
+
+                                                            }
+
+                                                            @Override
+                                                            public void onTextChanged
+                                                            (CharSequence s,int start,
+                                                            int before, int count){
+                                                                String input_mail = mail_user.getText().toString();
+                                                                m = regex_email.matcher(input_mail);
+                                                                if (m.find()) {
+                                                                    nv_user.setMail(input_mail);
+                                                                } else {
+                                                                    Log.d(TAG, "Mail pas OK");  // TODO toast
+                                                                }
+                                                                m.reset();
+                                                            }
+                                                        });
+
+
+
+
+        adresse_user.addTextChangedListener(new
+
+                                                    TextWatcher() {
+                                                        @Override
+                                                        public void afterTextChanged
+                                                                (Editable s) {
+
+
+                                                        }
+
+                                                        @Override
+                                                        public void beforeTextChanged
+                                                                (CharSequence s, int start,
+                                                                 int count, int after) {
+
+
+                                                        }
+
+                                                        @Override
+                                                        public void onTextChanged
+                                                                (CharSequence s, int start,
+                                                                 int before, int count) {
+                                                            String input_adresse = adresse_user.getText().toString();
+                                                            m = regex_alphanum.matcher(input_adresse);
+                                                            if (m.find()) {
+                                                                nv_user.setAdresse(input_adresse);
+                                                            } else {
+                                                                Log.d(TAG, "Adresse pas OK");  // TODO toast
+                                                            }
+                                                            m.reset();
+
+
+                                                        }
+                                                    }
+
+        );
+        ville_user.addTextChangedListener(new
+
+                                                  TextWatcher() {
+                                                      @Override
+                                                      public void afterTextChanged
+                                                              (Editable s) {
+
+
+                                                      }
+
+                                                      @Override
+                                                      public void beforeTextChanged
+                                                              (CharSequence s, int start,
+                                                               int count, int after) {
+
+
+                                                      }
+
+                                                      @Override
+                                                      public void onTextChanged
+                                                              (CharSequence s, int start,
+                                                               int before, int count) {
+                                                          String input_ville = ville_user.getText().toString();
+                                                          m = regex_alpha.matcher(input_ville);
+                                                          if (m.find()) {
+                                                              nv_user.setVille(input_ville);
+                                                          } else {
+                                                              Log.d(TAG, "Ville pas OK");  // TODO toast
+                                                          }
+                                                          m.reset();
+
+
+                                                      }
+                                                  }
+
+        );
+        cp_user.addTextChangedListener(new
+
+                                               TextWatcher() {
+                                                   @Override
+                                                   public void afterTextChanged
+                                                           (Editable s) {
+
+
+                                                   }
+
+                                                   @Override
+                                                   public void beforeTextChanged
+                                                           (CharSequence s, int start,
+                                                            int count, int after) {
+
+
+                                                   }
+
+                                                   @Override
+                                                   public void onTextChanged
+                                                           (CharSequence s, int start,
+                                                            int before, int count) {
+                                                       String input_cp = cp_user.getText().toString();
+                                                       m = regex_num.matcher(input_cp);
+                                                       if (m.find()) {
+                                                           nv_user.setCp(input_cp);
+                                                       } else {
+                                                           Log.d(TAG, "Code Postal pas OK");  // TODO toast
+                                                       }
+                                                       m.reset();
+
+
+                                                   }
+                                               }
+
+        );
+        tel_user.addTextChangedListener(new
+
+                                                TextWatcher() {
+                                                    @Override
+                                                    public void afterTextChanged
+                                                            (Editable s) {
+
+
+                                                    }
+
+                                                    @Override
+                                                    public void beforeTextChanged
+                                                            (CharSequence s, int start,
+                                                             int count, int after) {
+
+
+                                                    }
+
+                                                    @Override
+                                                    public void onTextChanged
+                                                            (CharSequence s, int start,
+                                                             int before, int count) {
+                                                        String input_tel = tel_user.getText().toString();
+                                                        m = regex_tel.matcher(input_tel);
+                                                        if (m.find()) {
+                                                            nv_user.setTelephone(input_tel);
+                                                        } else {
+                                                            Log.d(TAG, "Téléphone pas OK");  // TODO toast
+                                                        }
+                                                        m.reset();
+
+
+                                                    }
+                                                }
+
+        );
+        mobile_user.addTextChangedListener(new
+
+                                                   TextWatcher() {
+                                                       @Override
+                                                       public void afterTextChanged
+                                                               (Editable s) {
+
+
+                                                       }
+
+                                                       @Override
+                                                       public void beforeTextChanged
+                                                               (CharSequence s, int start,
+                                                                int count, int after) {
+
+
+                                                       }
+
+                                                       @Override
+                                                       public void onTextChanged
+                                                               (CharSequence s, int start,
+                                                                int before, int count) {
+                                                           String input_mobile = mobile_user.getText().toString();
+                                                           m = regex_mobile.matcher(input_mobile);
+                                                           if (m.find()) {
+                                                               nv_user.setMobile(input_mobile);
+                                                           } else {
+                                                               Log.d(TAG, "Téléphone input_mobile pas OK"); // TODO toast
+                                                           }
+                                                           m.reset();
+
+
+                                                       }
+                                                   }
+
+        );
+
+
 
 
 
     }
 
 
+
+
+
 }
+
+
