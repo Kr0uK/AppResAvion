@@ -48,19 +48,7 @@ public class RechercheActivity extends AppCompatActivity {
 
         try {
             // TODO : Connection à la BDD pour effectuer les recherches
-        /*
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
 
-                ListeTablesBDD osef = new ListeTablesBDD(getApplicationContext());
-                osef.open(getApplicationContext());
-                InsertionDonnees.insertionDonnees(getApplicationContext());
-                osef.close();
-
-            }
-        }).start();
-        */
 
             // STRINGS
             accueilETchoixDepart = (EditText) findViewById(R.id.accueilETChoixDepart);
@@ -85,16 +73,29 @@ public class RechercheActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     estDepart = true;
-                    accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
-                    startActivityForResult(accueil_to_lieu, REQUEST_CODE);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
+                            startActivityForResult(accueil_to_lieu, REQUEST_CODE);
+                        }
+                    }).start();
+
+
                 }
             });
             accueilETchoixArrivee.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     estDepart = false;
-                    accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
-                    startActivityForResult(accueil_to_lieu, REQUEST_CODE);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
+                            startActivityForResult(accueil_to_lieu, REQUEST_CODE);
+                        }
+                    }).start();
+
                 }
             });
             accueilCBallerRetour.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -113,7 +114,13 @@ public class RechercheActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     estDepart = true;
-                    ouvrirCalendrier();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ouvrirCalendrier();
+                        }
+                    }).start();
+
                 }
             });
             accueilETdateArrivee.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +128,13 @@ public class RechercheActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     estDepart = false;
                     if (accueilCBallerRetour.isChecked()) {
-                        ouvrirCalendrier();
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ouvrirCalendrier();
+                            }
+                        }).start();
+
                     }
 
                 }
