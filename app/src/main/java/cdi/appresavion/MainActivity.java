@@ -13,6 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,8 +39,7 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // On crée le service
-        startService(new Intent(getBaseContext(), ServiceNotif.class));
+
 
 /**
  * Thread qui va gérer la création et le premier remplissage de la base
@@ -293,5 +293,44 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         }
     }
 
+
+}
+class ListeResv {
+
+    final static List<Reserv> ListeResv = null;
+
+    private String aeroDep;     // Aeroport de départ
+    private String aeroArr;     // Aeroport d'arrivée
+    private String hourDep;     // Heure de départ
+    private String Id;          // ID du trajet
+
+
+    public String getDepart() {
+        return aeroDep;
+    }
+    public void setDepart(String data) {
+        aeroDep = data;
+    }
+
+    public String getArrivee() {
+        return aeroArr;
+    }
+    public void setArrivee(String data) {
+        aeroArr = data;
+    }
+
+    public String getHeure() {
+        return hourDep;
+    }
+    public void setHeure(String data) {
+        hourDep = data;
+    }
+
+    public String getId() {
+        return Id;
+    }
+    public void setId(String data) {
+        this.Id = data;
+    }
 
 }
