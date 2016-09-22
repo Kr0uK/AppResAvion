@@ -181,19 +181,14 @@ public class TrajetDAO {
             if(idAeroportArrivee != 0) {
                 query += " AND " + TRAJET_AER_AEROPORT_ID + " = " + idAeroportArrivee;
             }
-            //Date de depart renseigné AND
-            if(dateDepart != null) {
-                Log.w("TAG", "test");
-                query += " AND " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'";
-            }
+            //Date de depart AND
+            query += " AND " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'";
         //Aeroport d'arrivee renseigné WHERE
         } else if(idAeroportArrivee != 0) {
             query += " WHERE " + TRAJET_AER_AEROPORT_ID + " = " + idAeroportArrivee;
-            //Date de depart renseigné AND
-            if(dateDepart != null) {
-                query += " AND " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'";
-            }
-        //Date de depart renseigné WHERE
+            //Date de depart AND
+            query += " AND " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'";
+        //Date de depart WHERE
         } else {
             query += " WHERE " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'";
         }
