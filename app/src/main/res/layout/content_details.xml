@@ -32,6 +32,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/img_logo"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="20dp"
         android:textSize="23dp" />
 
     <TableLayout
@@ -49,10 +51,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="AEROPORTS"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView2"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:layout_span="2"
+                android:textAlignment="center" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/txt_aeroport_depart"
                 android:id="@+id/detailsLblAeroDepart"
                 android:textStyle="bold"
-                android:layout_marginTop="20dp"
                 android:textSize="22dp"
                 android:textAlignment="center"
                 android:layout_below="@+id/img_logo"
@@ -68,10 +86,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/detailsAeroArrivee"
-                android:layout_below="@+id/detailsLblAeroArrivee"
-                android:layout_alignStart="@+id/detailsLblAeroArrivee"
+                android:id="@+id/detailsAeroDepart"
+                android:layout_below="@+id/detailsLblAeroDepart"
+                android:layout_alignStart="@+id/detailsLblAeroDepart"
                 android:textSize="20dp" />
+
         </TableRow>
 
         <TableRow
@@ -98,9 +117,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/detailsAeroDepart"
-                android:layout_below="@+id/detailsLblAeroDepart"
-                android:layout_alignStart="@+id/detailsLblAeroDepart"
+                android:id="@+id/detailsAeroArrivee"
+                android:layout_below="@+id/detailsLblAeroArrivee"
+                android:layout_alignStart="@+id/detailsLblAeroArrivee"
                 android:textSize="20dp" />
         </TableRow>
 
@@ -129,22 +148,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_heure_arrivee"
-                android:id="@+id/detailsLblDateArrivee"
+                android:text="@string/txt_heure_depart"
+                android:id="@+id/detailsLblDateDepart"
                 android:textSize="22dp"
-                android:layout_below="@+id/detailsAeroArrivee"
-                android:layout_alignParentStart="true"
+                android:layout_below="@+id/detailsAeroDepart"
+                android:layout_toEndOf="@+id/detailsAeroDepart"
                 android:textStyle="bold"
                 android:textAlignment="center" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_heure_depart"
-                android:id="@+id/detailsLblDateDepart"
+                android:text="@string/txt_heure_arrivee"
+                android:id="@+id/detailsLblDateArrivee"
                 android:textSize="22dp"
-                android:layout_below="@+id/detailsAeroDepart"
-                android:layout_toEndOf="@+id/detailsAeroDepart"
+                android:layout_below="@+id/detailsAeroArrivee"
+                android:layout_alignParentStart="true"
                 android:textStyle="bold"
                 android:textAlignment="center" />
 
@@ -160,7 +179,8 @@
                 android:id="@+id/detailsDateDepart"
                 android:layout_below="@+id/detailsLblDateDepart"
                 android:layout_alignStart="@+id/detailsLblDateDepart"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textAlignment="textStart" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -168,7 +188,8 @@
                 android:id="@+id/detailsDateArrivee"
                 android:layout_below="@+id/detailsLblDateArrivee"
                 android:layout_alignStart="@+id/detailsLblDateArrivee"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textAlignment="textEnd" />
         </TableRow>
 
         <TableRow
@@ -178,12 +199,42 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txt_vol"
+                android:id="@+id/txtLbVol"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:text="Vol numéro : AF 0"
+                android:textAlignment="textEnd"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtVol"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:layout_span="2"
+                android:textAlignment="textStart"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtAutre"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:layout_span="2" />
-
+                android:layout_span="2"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textAlignment="center" />
         </TableRow>
 
         <TableRow
@@ -213,7 +264,7 @@
                 android:minWidth="150dp"
                 android:layout_marginLeft="0dp"
                 android:layout_alignTop="@+id/detailsBtnRetour"
-                android:layout_alignEnd="@+id/txt_vol"
+                android:layout_alignEnd="@+id/txtVol"
                 android:layout_column="1"
                 android:textSize="23dp" />
         </TableRow>
