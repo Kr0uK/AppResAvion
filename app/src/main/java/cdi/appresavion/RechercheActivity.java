@@ -1,6 +1,7 @@
 package cdi.appresavion;
 import cdi.appresavion.R;
 import dao.TrajetDAO;
+import shell.DateConvertisseur;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -114,8 +115,15 @@ public class RechercheActivity extends AppCompatActivity {
             accueilBTvalider.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TrajetDAO.getTrajetWhere(accueilETchoixDepart.getText(), accueilETchoixArrivee.getText(),accueilETdateDepart.getText());
-                    //Choix_Avion stockage = new Choix_Avion(accueilETdateDepart.getText().toString());
+                    Choix_Avion stockage = new Choix_Avion();
+                    stockage.setAeroDateDep(null);
+                    try {
+                        //Stock la date de depart si elle est renseignée
+                        stockage.setAeroDateDep(DateConvertisseur.dateToString(DateConvertisseur.stringToDateTemp(accueilETdateDepart.getText().toString())));
+                    } catch (Exception e){
+                        //Stock la date du jour si aucune date n'est renseignée
+                        stockage.setAeroDateDep(DateConvertisseur.dateSysString());
+                    }
                     startActivity(accueil_to_resultat);
                 }
             });

@@ -174,7 +174,6 @@ public class TrajetDAO {
         //Création de la requete
         String query = "SELECT * FROM " + TABLE_TRAJET;
 
-        //TODO verif sur la date
         //Aeroport de depart renseigné WHERE
         if(idAeroportDepart != 0) {
             query += " WHERE " + TRAJET_AEROPORT_ID + " = " + idAeroportDepart;
@@ -195,7 +194,7 @@ public class TrajetDAO {
                 query += " AND " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'";
             }
         //Date de depart renseigné WHERE
-        } else if(dateDepart != null) {
+        } else {
             query += " WHERE " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'";
         }
 

@@ -63,4 +63,13 @@ public class DateConvertisseur {
         SimpleDateFormat sdfNew = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return sdfNew.format(date);
     }
+
+    public static Date stringToDateTemp (String stringToConvert) {
+        SimpleDateFormat sdfTemp = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return sdfTemp.parse(stringToConvert);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

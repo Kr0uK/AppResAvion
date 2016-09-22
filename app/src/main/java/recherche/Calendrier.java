@@ -1,4 +1,5 @@
 package recherche;
+import cdi.appresavion.Choix_Avion;
 import cdi.appresavion.R;
 import cdi.appresavion.RechercheActivity;
 import shell.DateConvertisseur;
@@ -8,6 +9,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CalendarView;
@@ -57,15 +59,11 @@ public class Calendrier extends DialogFragment implements DialogInterface.OnClic
         calendrier = (CalendarView) calendrierVue.findViewById(R.id.accueilCVcalendrier);
         format = new DecimalFormat("00");
 
-        //simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
-        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.FRENCH);
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
         calendrier.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-
-                //date = format.format(dayOfMonth) + "/" + format.format(month+1) + "/" + year;
-                //date = year +"-"+ format.format(month+1) +"-"+ format.format(dayOfMonth) +" "+ DateConvertisseur.dateSysString();
-                date = DateConvertisseur.dateSysString();
+                date = format.format(dayOfMonth) + "/" + format.format(month+1) + "/" + year;
                 estChange = true;
             }
         });
