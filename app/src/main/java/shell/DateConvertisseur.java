@@ -55,15 +55,20 @@ public class DateConvertisseur {
     }
 
     /**
-     * Change le format de la date en dd/MM/yyyy HH:mm:ss.
+     * Change le format de la date en dd/MM/yyyy HH:mm.
      * @param date
      * @return string de la date
      */
     public static String dateToStringFormatShow(Date date){
-        SimpleDateFormat sdfNew = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat sdfNew = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return sdfNew.format(date);
     }
 
+    /**
+     * Transforme le string en date dans le format dd/MM/yyyy.
+     * @param stringToConvert string du calendrier
+     * @return date
+     */
     public static Date stringToDateTemp (String stringToConvert) {
         SimpleDateFormat sdfTemp = new SimpleDateFormat("dd/MM/yyyy");
         try {
