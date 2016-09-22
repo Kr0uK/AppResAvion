@@ -14,265 +14,279 @@
     android:background="@color/cast_intro_overlay_button_background_color"
     android:id="@+id/nvuser">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/linearLayout">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nom_user"
-            android:id="@+id/txt_nom"
-            android:layout_below="@+id/txt_titre_nvuser"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="21dp"
-            android:layout_marginTop="10dp"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/prenom_user"
-            android:id="@+id/txt_prenom"
-            android:layout_below="@+id/txt_nom"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="21dp"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pseudo_user"
-            android:id="@+id/txt_pseudo"
-            android:layout_below="@+id/txt_prenom"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="21dp"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mdp_user"
-            android:id="@+id/txt_mdp"
-            android:layout_below="@+id/txt_pseudo"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="21dp"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/confirm_mdp_user"
-            android:id="@+id/txt_mdpconf"
-            android:layout_below="@+id/txt_mdp"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="21dp"
-            android:textSize="15dp"
-            android:layout_toStartOf="@+id/input_mdpconf" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mail_user"
-            android:id="@+id/txt_mail"
-            android:layout_below="@+id/txt_mdpconf"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="21dp"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/adresse_user"
-            android:id="@+id/txt_adresse"
-            android:layout_below="@+id/txt_mail"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="21dp"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ville_user"
-            android:id="@+id/txt_ville"
-            android:layout_below="@+id/txt_adresse"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="21dp"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cp_user"
-            android:id="@+id/txt_cp"
-            android:layout_below="@+id/txt_ville"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="21dp"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tel_user"
-            android:id="@+id/txt_tel"
-            android:layout_below="@+id/txt_cp"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="21dp"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txt_mobile"
-            android:text="@string/mobile_user"
-            android:textSize="15sp"
-            android:layout_below="@+id/input_tel"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/input_tel" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="150dp"
-        android:layout_alignTop="@+id/linearLayout">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/input_nom"
-            android:layout_alignBottom="@+id/txt_nom"
-            android:layout_alignParentEnd="true"
-            android:textSize="15dp"
-            android:hint="@string/nom_user_hint" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/input_prenom"
-            android:layout_alignBottom="@+id/txt_prenom"
-            android:layout_alignEnd="@+id/input_nom"
-            android:textSize="15dp"
-            android:hint="@string/prenom_user_hint" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_pseudo"
-            android:textSize="15dp"
-            android:layout_alignBottom="@+id/txt_pseudo"
-            android:layout_alignEnd="@+id/input_prenom"
-            android:layout_alignStart="@+id/input_prenom"
-            android:hint="@string/pseudo_user_hint" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/input_mdp"
-            android:textSize="15dp"
-            android:layout_alignBottom="@+id/txt_mdp"
-            android:layout_alignEnd="@+id/input_pseudo"
-            android:hint="@string/mdp_user_hint" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/input_mdpconf"
-            android:textSize="15dp"
-            android:layout_alignBottom="@+id/txt_mdpconf"
-            android:layout_alignStart="@+id/input_mdp"
-            android:hint="@string/confirm_mdp_user_hint" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/input_mail"
-            android:textSize="15dp"
-            android:layout_alignBottom="@+id/txt_mail"
-            android:layout_alignStart="@+id/input_mdpconf"
-            android:hint="@string/mail_user_hint" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPostalAddress"
-            android:ems="10"
-            android:id="@+id/input_adresse"
-            android:textSize="15dp"
-            android:layout_alignBottom="@+id/txt_adresse"
-            android:layout_alignStart="@+id/input_mail"
-            android:hint="@string/adresse_user_hint" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_ville"
-            android:textSize="15dp"
-            android:layout_alignBottom="@+id/txt_ville"
-            android:layout_alignEnd="@+id/input_adresse"
-            android:layout_alignStart="@+id/input_adresse"
-            android:hint="@string/ville_user_hint" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="5"
-            android:id="@+id/input_cp"
-            android:textSize="15dp"
-            android:maxLength="5"
-            android:hint="@string/cp_user_hint"
-            android:layout_below="@+id/input_ville"
-            android:layout_alignStart="@+id/input_tel"
-            android:layout_alignEnd="@+id/input_ville" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:ems="10"
-            android:id="@+id/input_tel"
-            android:textSize="15dp"
-            android:maxLength="10"
-            android:hint="@string/tel_user_hint"
-            android:layout_below="@+id/input_cp"
-            android:layout_alignParentEnd="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_mobile"
-            android:hint="@string/mobile_user_hint"
-            android:textSize="15dp"
-            android:maxLength="10"
-            android:inputType="phone"
-            android:layout_below="@+id/input_tel"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/txt_mobile" />
-    </LinearLayout>
-
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_valider_nvuser"
-        android:id="@+id/btn_valider_nvuser"
-        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Nouvel Utilisateur"
+        android:id="@+id/textView2"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:textColor="#FFFFFF"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:textStyle="bold" />
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout"
+        android:layout_below="@+id/textView2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nom_user"
+                android:id="@+id/txt_nom"
+                android:layout_below="@+id/txt_titre_nvuser"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="21dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prenom_user"
+                android:id="@+id/txt_prenom"
+                android:layout_below="@+id/txt_nom"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="21dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pseudo_user"
+                android:id="@+id/txt_pseudo"
+                android:layout_below="@+id/txt_prenom"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="21dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mdp_user"
+                android:id="@+id/txt_mdp"
+                android:layout_below="@+id/txt_pseudo"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="21dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/confirm_mdp_user"
+                android:id="@+id/txt_mdpconf"
+                android:layout_below="@+id/txt_mdp"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="21dp"
+                android:textSize="15dp"
+                android:layout_toStartOf="@+id/input_mdpconf" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mail_user"
+                android:id="@+id/txt_mail"
+                android:layout_below="@+id/txt_mdpconf"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="21dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/adresse_user"
+                android:id="@+id/txt_adresse"
+                android:layout_below="@+id/txt_mail"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="21dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ville_user"
+                android:id="@+id/txt_ville"
+                android:layout_below="@+id/txt_adresse"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="21dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cp_user"
+                android:id="@+id/txt_cp"
+                android:layout_below="@+id/txt_ville"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="21dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tel_user"
+                android:id="@+id/txt_tel"
+                android:layout_below="@+id/txt_cp"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="21dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_mobile"
+                android:text="@string/mobile_user"
+                android:textSize="15sp"
+                android:layout_below="@+id/input_tel"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/input_tel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="150dp"
+            android:layout_alignTop="@+id/linearLayout">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/input_nom"
+                android:layout_alignBottom="@+id/txt_nom"
+                android:layout_alignParentEnd="true"
+                android:textSize="15dp"
+                android:hint="@string/nom_user_hint" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/input_prenom"
+                android:layout_alignBottom="@+id/txt_prenom"
+                android:layout_alignEnd="@+id/input_nom"
+                android:textSize="15dp"
+                android:hint="@string/prenom_user_hint" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/input_pseudo"
+                android:textSize="15dp"
+                android:layout_alignBottom="@+id/txt_pseudo"
+                android:layout_alignEnd="@+id/input_prenom"
+                android:layout_alignStart="@+id/input_prenom"
+                android:hint="@string/pseudo_user_hint" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/input_mdp"
+                android:textSize="15dp"
+                android:layout_alignBottom="@+id/txt_mdp"
+                android:layout_alignEnd="@+id/input_pseudo"
+                android:hint="@string/mdp_user_hint" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/input_mdpconf"
+                android:textSize="15dp"
+                android:layout_alignBottom="@+id/txt_mdpconf"
+                android:layout_alignStart="@+id/input_mdp"
+                android:hint="@string/confirm_mdp_user_hint" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/input_mail"
+                android:textSize="15dp"
+                android:layout_alignBottom="@+id/txt_mail"
+                android:layout_alignStart="@+id/input_mdpconf"
+                android:hint="@string/mail_user_hint" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:ems="10"
+                android:id="@+id/input_adresse"
+                android:textSize="15dp"
+                android:layout_alignBottom="@+id/txt_adresse"
+                android:layout_alignStart="@+id/input_mail"
+                android:hint="@string/adresse_user_hint" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/input_ville"
+                android:textSize="15dp"
+                android:layout_alignBottom="@+id/txt_ville"
+                android:layout_alignEnd="@+id/input_adresse"
+                android:layout_alignStart="@+id/input_adresse"
+                android:hint="@string/ville_user_hint" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="5"
+                android:id="@+id/input_cp"
+                android:textSize="15dp"
+                android:maxLength="5"
+                android:hint="@string/cp_user_hint"
+                android:layout_below="@+id/input_ville"
+                android:layout_alignStart="@+id/input_tel"
+                android:layout_alignEnd="@+id/input_ville" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/input_tel"
+                android:textSize="15dp"
+                android:maxLength="10"
+                android:hint="@string/tel_user_hint"
+                android:layout_below="@+id/input_cp"
+                android:layout_alignParentEnd="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/input_mobile"
+                android:hint="@string/mobile_user_hint"
+                android:textSize="15dp"
+                android:maxLength="10"
+                android:inputType="phone"
+                android:layout_below="@+id/input_tel"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/txt_mobile" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_valider_nvuser"
+            android:id="@+id/btn_valider_nvuser"
+            android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        // On crée le service
+        startService(new Intent(getBaseContext(), ServiceNotif.class));
 
 /**
  * Thread qui va gérer la création et le premier remplissage de la base
@@ -215,8 +216,8 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         Trajet trajet2 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-10-24 22:22:00"), DateConvertisseur.stringToDate("2016-10-25 15:21:00"), 550);
         Trajet trajet3 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-10-24 20:22:00"), DateConvertisseur.stringToDate("2016-10-25 15:21:00"), 550);
         Trajet trajet4 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-10-24 23:22:00"), DateConvertisseur.stringToDate("2016-10-25 15:21:00"), 550);
-        Trajet trajet5 = new Trajet(0, 1, 7, 6, DateConvertisseur.stringToDate("2016-09-19 12:00:00"), DateConvertisseur.stringToDate("2016-09-20 15:21:00"), 550);
-        Trajet trajet6 = new Trajet(0, 1, 6, 7, DateConvertisseur.stringToDate("2016-09-19 16:00:00"), DateConvertisseur.stringToDate("2016-09-20 15:21:00"), 550);
+        Trajet trajet5 = new Trajet(0, 1, 7, 6, DateConvertisseur.stringToDate("2016-10-20 12:00:00"), DateConvertisseur.stringToDate("2016-09-20 15:21:00"), 550);
+        Trajet trajet6 = new Trajet(0, 1, 6, 7, DateConvertisseur.stringToDate("2016-10-20 16:00:00"), DateConvertisseur.stringToDate("2016-09-20 15:21:00"), 550);
         TrajetDAO.ajouterTrajet(trajet1);
         TrajetDAO.ajouterTrajet(trajet2);
         TrajetDAO.ajouterTrajet(trajet3);

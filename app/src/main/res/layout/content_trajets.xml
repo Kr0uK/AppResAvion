@@ -28,12 +28,12 @@
 
 
 
-        <ListView
-            android:id="@+id/vol_list"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:paddingTop="20sp" >
-        </ListView>
+                <ListView
+                    android:id="@+id/vol_list"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingTop="20sp" >
+                </ListView>
 
     </LinearLayout>
 

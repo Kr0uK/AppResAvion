@@ -1,6 +1,7 @@
 package cdi.appresavion;
 import cdi.appresavion.R;
 import dao.TrajetDAO;
+import shell.DateConvertisseur;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,9 +48,6 @@ public class RechercheActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         try {
-            // TODO : Connection à la BDD pour effectuer les recherches
-
-
             // STRINGS
             accueilETchoixDepart = (EditText) findViewById(R.id.accueilETChoixDepart);
             accueilETchoixArrivee = (EditText) findViewById(R.id.accueilETChoixArrivee);
@@ -73,29 +71,16 @@ public class RechercheActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     estDepart = true;
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
-                            startActivityForResult(accueil_to_lieu, REQUEST_CODE);
-                        }
-                    }).start();
-
-
+                    accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
+                    startActivityForResult(accueil_to_lieu, REQUEST_CODE);
                 }
             });
             accueilETchoixArrivee.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     estDepart = false;
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
-                            startActivityForResult(accueil_to_lieu, REQUEST_CODE);
-                        }
-                    }).start();
-
+                    accueil_to_lieu.putExtra(RechercheActivity.DEPART_OU_ARRIVEE, estDepart);
+                    startActivityForResult(accueil_to_lieu, REQUEST_CODE);
                 }
             });
             accueilCBallerRetour.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -114,13 +99,7 @@ public class RechercheActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     estDepart = true;
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ouvrirCalendrier();
-                        }
-                    }).start();
-
+                    ouvrirCalendrier();
                 }
             });
             accueilETdateArrivee.setOnClickListener(new View.OnClickListener() {
@@ -128,13 +107,7 @@ public class RechercheActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     estDepart = false;
                     if (accueilCBallerRetour.isChecked()) {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ouvrirCalendrier();
-                            }
-                        }).start();
-
+                        ouvrirCalendrier();
                     }
 
                 }
@@ -142,8 +115,15 @@ public class RechercheActivity extends AppCompatActivity {
             accueilBTvalider.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TrajetDAO.getTrajetWhere(accueilETchoixDepart.getText(), accueilETchoixArrivee.getText(),accueilETdateDepart.getText());
-                    Choix_Avion stockage = new Choix_Avion(accueilETdateDepart.getText().toString());
+                    Choix_Avion stockage = new Choix_Avion();
+                    stockage.setAeroDateDep(null);
+                    try {
+                        //Stock la date de depart si elle est renseignée
+                        stockage.setAeroDateDep(DateConvertisseur.dateToString(DateConvertisseur.stringToDateTemp(accueilETdateDepart.getText().toString())));
+                    } catch (Exception e){
+                        //Stock la date du jour si aucune date n'est renseignée
+                        stockage.setAeroDateDep(DateConvertisseur.dateSysString());
+                    }
                     startActivity(accueil_to_resultat);
                 }
             });

@@ -2,6 +2,7 @@ package dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -170,12 +171,29 @@ public class TrajetDAO {
         //Création du curseur
         Cursor cursor;
 
-        cursor = DAOBase.getRDb().rawQuery("SELECT * FROM " + TABLE_TRAJET + " WHERE "
-                        + TRAJET_AEROPORT_ID + " = " + idAeroportDepart
-                        + " AND " + TRAJET_AER_AEROPORT_ID + " = " + idAeroportArrivee
-                        + " AND " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'"
-                        + " ORDER BY " + TRAJET_DATE_DEPART
-                , null);
+        //Création de la requete
+        String query = "SELECT * FROM " + TABLE_TRAJET;
+
+        //Aeroport de depart renseigné WHERE
+        if(idAeroportDepart != 0) {
+            query += " WHERE " + TRAJET_AEROPORT_ID + " = " + idAeroportDepart;
+            //Aeroport d'arrivee renseigné AND
+            if(idAeroportArrivee != 0) {
+                query += " AND " + TRAJET_AER_AEROPORT_ID + " = " + idAeroportArrivee;
+            }
+            //Date de depart AND
+            query += " AND " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'";
+        //Aeroport d'arrivee renseigné WHERE
+        } else if(idAeroportArrivee != 0) {
+            query += " WHERE " + TRAJET_AER_AEROPORT_ID + " = " + idAeroportArrivee;
+            //Date de depart AND
+            query += " AND " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'";
+        //Date de depart WHERE
+        } else {
+            query += " WHERE " + TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateToString(dateDepart) + "'";
+        }
+
+        cursor = DAOBase.getRDb().rawQuery(query + " ORDER BY " + TRAJET_DATE_DEPART, null);
 
         //Déplace le curseur a la valeur 0
         cursor.moveToFirst();

@@ -24,14 +24,14 @@ android:gravity="fill_horizontal|top">
     android:id="@+id/accueilTVafficherDepart"
     android:layout_alignParentTop="true"
     android:layout_alignParentStart="true"
-    android:layout_marginTop="30dp"
+    android:layout_marginTop="60dp"
     android:gravity="center"/>
 
 <EditText
     android:layout_width="wrap_content"
     android:layout_height="30dp"
     android:id="@+id/accueilETChoixDepart"
-    android:layout_marginTop="30dp"
+    android:layout_marginTop="60dp"
     android:layout_alignParentEnd="true"
     android:gravity="center_vertical"
     android:paddingLeft="5dp"
@@ -113,7 +113,8 @@ android:gravity="fill_horizontal|top">
     android:layout_marginTop="5dp"
     android:gravity="center"
     android:layout_below="@+id/accueilTVdateDepart"
-    android:layout_alignParentStart="true" />
+    android:layout_alignParentStart="true"
+    android:visibility="invisible" />
 
 <EditText
     android:layout_width="wrap_content"
@@ -128,7 +129,8 @@ android:gravity="fill_horizontal|top">
     android:layout_alignTop="@+id/accueilTVdateArrivee"
     android:layout_toEndOf="@id/accueilTVdateArrivee"
     android:layout_alignParentEnd="true"
-    android:textColor="#000000" />
+    android:textColor="#000000"
+    android:visibility="invisible" />
 
 <CheckBox
     android:layout_width="match_parent"
@@ -138,7 +140,8 @@ android:gravity="fill_horizontal|top">
     android:textSize="20sp"
     android:id="@+id/accueilCBallerRetour"
     android:layout_above="@+id/accueilETdateDepart"
-    android:layout_alignParentStart="true" />
+    android:layout_alignParentStart="true"
+    android:visibility="invisible" />
 
 <Button
     android:layout_width="100dp"

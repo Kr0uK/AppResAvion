@@ -72,7 +72,11 @@
             android:theme="@style/AppTheme.NoActionBar"
             />
 
-
+        <service android:name=".ServiceNotif"/>
     </application>
+
+
+
+
 
 </manifest>

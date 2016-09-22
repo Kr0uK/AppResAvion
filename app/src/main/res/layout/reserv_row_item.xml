@@ -4,11 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="300dip" >
 
-    <!--<ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="90sp"
-        android:layout_height="90sp" />-->
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,7 +13,7 @@
             android:layout_height="match_parent"
             android:layout_column="6"
             android:onClick="rowClick"
-            android:id="@+id/one"
+            android:id="@+id/ticket"
             android:minHeight="75dp">
 
             <TextView
@@ -37,19 +32,12 @@
                 android:layout_weight="0.3" />
 
             <TextView
-                android:id="@+id/txtPri"
+                android:id="@+id/txtHeure"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:autoLink="web"
                 android:textSize="25sp"
                 android:layout_weight="0.15" />
-
-            <TextView
-                android:id="@+id/txtCod"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:textSize="25sp"
-                android:layout_weight="0.25" />
 
             <TextView
                 android:id="@+id/txtId"

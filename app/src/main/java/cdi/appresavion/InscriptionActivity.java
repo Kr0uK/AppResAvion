@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -105,6 +103,8 @@ public class InscriptionActivity extends AppCompatActivity {
         btn_valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 // On part du principe que c'est forcément juste quand on va cliquer (les vérifs sont sur le onTextChanged)
 
                 Log.d(TAG, "" + nv_user.getNom() + " " + nv_user.getPrenom() + " " + nv_user.getUsername() + " " + nv_user.getMdp() + " " + nv_user.getMail() + " " + nv_user.getAdresse() + " " + nv_user.getVille() + " " + nv_user.getCp() + " " + nv_user.getTelephone() + " " + nv_user.getMobile());
@@ -199,18 +199,6 @@ public class InscriptionActivity extends AppCompatActivity {
                                                    TextWatcher() {
                                                        @Override
                                                        public void afterTextChanged(Editable s) {
-                                                           //TODO vérif
-                                                           new Thread(new Runnable() {
-                                                               @Override
-                                                               public void run() {
-                                                                   ArrayList utilisateurtArrayList = UtilisateurDAO.getAllUtilisateur();
-                                                                   Iterator<Utilisateur> utilisateurIterator = utilisateurtArrayList.iterator();
-                                                                   while (utilisateurIterator.hasNext()) {
-                                                                       Utilisateur utilisateur = utilisateurIterator.next();
-                                                                       Log.w("TAG", utilisateur.getMail() + " | " + utilisateur.getMdp());
-                                                                   }
-                                                               }
-                                                           }).start();
 
 
                                                        }
@@ -299,18 +287,6 @@ public class InscriptionActivity extends AppCompatActivity {
                                                      @Override
                                                      public void afterTextChanged
                                                              (Editable s) {
-                                                         //TODO vérif
-                                                         new Thread (new Runnable() {
-                                                             @Override
-                                                             public void run() {
-                                                                 ArrayList utilisateurtArrayList = UtilisateurDAO.getAllUtilisateur();
-                                                                 Iterator<Utilisateur> utilisateurIterator = utilisateurtArrayList.iterator();
-                                                                 while (utilisateurIterator.hasNext()) {
-                                                                     Utilisateur utilisateur = utilisateurIterator.next();
-                                                                     Log.w("TAG", utilisateur.getMail() + " | " + utilisateur.getMdp());
-                                                                 }
-                                                             }
-                                                         }).start();
 
 
                                                      }
