@@ -125,6 +125,7 @@ public class TrajetsActivity extends AppCompatActivity
                 // Ouverture de l'activité Détails (avec l'id du trajet)
                 Intent detail = new Intent(TrajetsActivity.this, DetailsActivity.class);
                 detail.putExtra("idTrajet", monID.getText().toString());
+                detail.putExtra("btnReserv", "TRAJETS");
                 startActivity(detail);
 
                 // TODO : amélioration future (WIP)

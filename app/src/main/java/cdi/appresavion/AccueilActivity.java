@@ -141,12 +141,13 @@ public class AccueilActivity extends AppCompatActivity
             case R.id.ticket:
                 //Recup ID
                 TableRow t = (TableRow) view;
-                TextView monID = (TextView) t.getChildAt(2); // TODO
+                TextView monID = (TextView) t.getChildAt(3);
                 TextView idTrajet =  (TextView) findViewById(R.id.txtId);
                 Log.w("TAG", "ID du trajet : "+idTrajet.getText().toString());
                 // Ouverture de l'activité Détails (avec l'id du trajet)
                 Intent detail = new Intent(AccueilActivity.this, DetailsActivity.class);
                 detail.putExtra("idTrajet", monID.getText().toString());
+                detail.putExtra("btnReserv", "ACCUEIL");
                 startActivity(detail);
                 break;
         }
