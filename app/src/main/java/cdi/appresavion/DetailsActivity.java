@@ -16,6 +16,7 @@ import dao.ReservationDAO;
 import dao.TrajetDAO;
 import dbclass.Aeroport;
 import dbclass.Avion;
+import dbclass.Reservation;
 import dbclass.Trajet;
 import shell.DateConvertisseur;
 
@@ -23,7 +24,9 @@ public class DetailsActivity extends AppCompatActivity {
     TextView tvAeroDepart;
     TextView tvAeroArrivee;
     TextView tvDateDepart;
+    TextView tvAutres;
     TextView tvDateArrivee;
+    TextView tvNumVol;
     Button btnReserver;
 
     // Pour le boutton GMap
@@ -38,14 +41,14 @@ public class DetailsActivity extends AppCompatActivity {
     //nombre de place reservée
     int nbPlacesReservee = 1;
 
-    // On instancie un Ident_User
-    Ident_User ident_user = new Ident_User();
-    // On récupère l'id de l'ident_user
-    int id = ident_user.getidUser();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadDetailsActivity();
+
+    }
+
+    private void loadDetailsActivity() {
         setContentView(R.layout.activity_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,36 +57,52 @@ public class DetailsActivity extends AppCompatActivity {
         tvAeroArrivee = (TextView) findViewById(R.id.detailsAeroArrivee);
         tvDateDepart = (TextView) findViewById(R.id.detailsDateDepart);
         tvDateArrivee = (TextView) findViewById(R.id.detailsDateArrivee);
+        tvAutres = (TextView) findViewById(R.id.txtAutre);
+        tvNumVol = (TextView) findViewById(R.id.txtVol);
+        btnReserver = (Button) findViewById(R.id.detailsBtnReserver);
+        btnGmap = (Button) findViewById(R.id.btnGmap);
+
+        // On instancie un Ident_User
+        Ident_User ident_user = new Ident_User();
+        // On récupère l'id de l'ident_user
+        final int id = ident_user.getidUser();
 
         //Recupération de l'idTrajet
         final int idTrajet = Integer.parseInt((String)getIntent().getExtras().get("idTrajet"));
+        //Infos de la page qu'on vient
+        final String vientDe = (String) getIntent().getExtras().get("btnReserv");
+
+        if (vientDe.equals("ACCUEIL")){
+            btnReserver.setText("Annuler");
+        }
 
         //Affichage du trajet
         detailTrajet(idTrajet);
 
-        btnReserver = (Button) findViewById(R.id.detailsBtnReserver);
         btnReserver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO verif de quel page on vient
                 // TODO nbPlacesReservee = Integer.parse(?.getText().toString());
 
-                //Verifie si il reste des places pour ce vol
-                if(nbPlacesAvion > ReservationDAO.sumPlace(idTrajet) + nbPlacesReservee){
-                    //Param id de l'util, prix du trajet, nombre de personne, id du trajet
-                    ReservationDAO.ajouterReservationPlace(id, prixTrajet, nbPlacesReservee, idTrajet);
-
-                    //Toast + redirection de l'utilisateur
-                    Toast.makeText(DetailsActivity.this, "Reservation enregistrée !", Toast.LENGTH_LONG).show();
-                    Intent redirection = new Intent(DetailsActivity.this, AccueilActivity.class);
-                    startActivity(redirection);
+                if (vientDe.equals("ACCUEIL")) {
+                    ReservationDAO.supprimerReservation(Integer.parseInt((String)getIntent().getExtras().get("idReserv")));
+                    Toast.makeText(DetailsActivity.this, "Votre réservation a bien était annulé !", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(DetailsActivity.this, "Il ne reste plus de place pour ce vol", Toast.LENGTH_SHORT).show();
+                    //Verifie si il reste des places pour ce vol
+                    if (nbPlacesAvion > ReservationDAO.sumPlace(idTrajet) + nbPlacesReservee) {
+                        //Param id de l'util, prix du trajet, nombre de personne, id du trajet
+                        ReservationDAO.ajouterReservationPlace(id, prixTrajet, nbPlacesReservee, idTrajet);
+                        Toast.makeText(DetailsActivity.this, "Reservation enregistrée !", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(DetailsActivity.this, "Il ne reste plus de place pour ce vol", Toast.LENGTH_SHORT).show();
+                    }
                 }
+                //Redirection de l'utilisateur
+                Intent redirection = new Intent(DetailsActivity.this, AccueilActivity.class);
+                startActivity(redirection);
             }
         });
 
-        btnGmap = (Button) findViewById(R.id.btnGmap);
         btnGmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,9 +116,13 @@ public class DetailsActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadDetailsActivity();
+    }
 
     /**
      * Recupere les details d'un trajet.
@@ -122,12 +145,16 @@ public class DetailsActivity extends AppCompatActivity {
         prixTrajet = trajet.getPrix();
         //Stockage du nombre de places
         nbPlacesAvion = avion.getNbPlaces();
+        //Place restantes
+        int nbPlacesRestantes = nbPlacesAvion - ReservationDAO.sumPlace(idTrajet);
 
         //Affichage des infos du trajet
         tvAeroDepart.setText(aeroportDepart.getNom());
         tvAeroArrivee.setText(aeroportArrivee.getNom());
         tvDateDepart.setText(DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()));
         tvDateArrivee.setText(DateConvertisseur.dateToStringFormatShow(trajet.getDateArrivee()));
+        //tvNumVol.setText(idTrajet);
+        tvAutres.setText("Modèle de l'avion " + avion.getModele() + ", nombres de places restantes : " + nbPlacesRestantes);
         // FRED : recup d'infos pour localisation de l'aeroport
         Latitude = aeroportDepart.getLatitude();
         Longitude = aeroportDepart.getLongitude();
