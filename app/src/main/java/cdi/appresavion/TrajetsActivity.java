@@ -33,7 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-// <!-- ♫ J'aime les licornes et leur jolie corne... ♫ -->
+// <!-- ♫ Elles ont un pelage semblable aux nuages... ♫ -->
 /*
  * Affichage des trajets disponibles
  * TODO : -> prendre en compte que si l'on ne viens pas de RechercheActivity (ou que l'envoi est vide), il n'y ai pas de bugs !
