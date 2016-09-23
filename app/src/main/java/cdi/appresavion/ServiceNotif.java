@@ -14,6 +14,7 @@ import android.util.Log;
 
 /*
  * Boris : service + notifications
+ * :)
  */
 public class ServiceNotif extends Service {
     String notificationTitle = "Test titre";
