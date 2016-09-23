@@ -33,20 +33,15 @@ public class DetailsActivity extends AppCompatActivity {
 
     //prix du trajet
     int prixTrajet;
-    //nombre de place
+    //nombre de place dans l'avion
     int nbPlacesAvion;
+    //nombre de place reservée
+    int nbPlacesReservee = 1;
 
     // On instancie un Ident_User
     Ident_User ident_user = new Ident_User();
     // On récupère l'id de l'ident_user
     int id = ident_user.getidUser();
-
-    /** A mettre ou on veut appeler les details
-     Intent detail = new Intent(?, DetailsActivity.class);
-     //Stockage de l'idTrajet
-     detail.putExtra("idTrajet", Integer.toString(6));
-     startActivity(detail);
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +65,13 @@ public class DetailsActivity extends AppCompatActivity {
         btnReserver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO nb personne reserver
+                //TODO verif de quel page on vient
+                // TODO nbPlacesReservee = Integer.parse(?.getText().toString());
+
                 //Verifie si il reste des places pour ce vol
-                if(nbPlacesAvion > ReservationDAO.sumPlace(idTrajet)){
+                if(nbPlacesAvion > ReservationDAO.sumPlace(idTrajet) + nbPlacesReservee){
                     //Param id de l'util, prix du trajet, nombre de personne, id du trajet
-                    ReservationDAO.ajouterReservationPlace(id, prixTrajet, 1, idTrajet);
+                    ReservationDAO.ajouterReservationPlace(id, prixTrajet, nbPlacesReservee, idTrajet);
 
                     //Toast + redirection de l'utilisateur
                     Toast.makeText(DetailsActivity.this, "Reservation enregistrée !", Toast.LENGTH_LONG).show();

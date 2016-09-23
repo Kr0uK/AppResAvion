@@ -53,6 +53,8 @@ public class AccueilActivity extends AppCompatActivity
      */
     private GoogleApiClient client;
 
+    static TextView intro;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,28 +63,22 @@ public class AccueilActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         Log.w("TAG", "ID USER : " + id); //Vérification
 
-        viewUserReserv(id);
+        intro = (TextView) findViewById(R.id.intro);
 
-        /*
-         TODO mettre en place le thread
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                viewUserReserv(id);
-
-                });
-            }
-
+		new Thread(new Runnable() {
+		@Override
+			public void run() {
+				viewUserReserv(id);
+				// On crée le service
+				startService(new Intent(getApplicationContext(), ServiceNotif.class));
+			}
         }).start();
-*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Les Ents-AI", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Les Ents-AI", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
 
@@ -197,11 +193,10 @@ public class AccueilActivity extends AppCompatActivity
                 Log.w("TAG", res);
             }
 
-            // TODO : ne marche pas ! Modif du Textview selon le nombre de billets d'avion réservés :
-            TextView intro = null;
+            // Modif du Textview selon le nombre de billets d'avion réservés :
             if (reservationArrayList.size() >= 2) {
                     intro.setText("Vous avez "+reservationArrayList.size()+" billets réservés !");
-            } if (reservationArrayList.size() == 1) {
+            } else if (reservationArrayList.size() == 1) {
                     intro.setText("Vous avez un billet d'avion réservé pour un vol à venir... !");
             } else {
                 intro.setText("Vous n'avez aucun billet d'avion réservé pour un vol à venir...");
