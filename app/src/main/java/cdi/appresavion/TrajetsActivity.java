@@ -170,6 +170,9 @@ public class TrajetsActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Geoloc_Aeroport Aeroport = new Geoloc_Aeroport("Sélectionnez un aéroport !", 0, 0);
+            Intent GMap = new Intent(TrajetsActivity.this, MapsActivity.class);
+            startActivity(GMap);
             return true;
         }
 
