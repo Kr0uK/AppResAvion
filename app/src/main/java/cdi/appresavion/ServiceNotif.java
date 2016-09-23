@@ -41,7 +41,7 @@ public class ServiceNotif extends Service {
                         createNotification(notificationTitle, notificationDesc, 1);
                         try {
                             synchronized(this){
-                                wait(3000);
+                                wait(5000);
                             }
                         }
                         catch(InterruptedException ex){
@@ -89,7 +89,7 @@ public class ServiceNotif extends Service {
                     .setContentText(notification_desc + " " + notifID)
                     .setContentIntent(pendingIntent)
                     .setSound(uri)
-                    .addAction(R.drawable.avion, "Annuler", lancerApp);
+                    .setAutoCancel(true);
 
             mNotification.notify(notifID, builder.build());
 
