@@ -145,6 +145,7 @@ public class AccueilActivity extends AppCompatActivity
                 detail.putExtra("idTrajet", monID.getText().toString());
                 detail.putExtra("idReserv", tonID.getText().toString());
                 detail.putExtra("btnReserv", "ACCUEIL");
+                
                 startActivity(detail);
                 break;
         }
