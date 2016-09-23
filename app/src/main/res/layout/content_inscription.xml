@@ -11,28 +11,14 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".InscriptionActivity"
     tools:showIn="@layout/activity_inscription"
-    android:background="@color/cast_intro_overlay_button_background_color"
+    android:background="@drawable/bg"
     android:id="@+id/nvuser">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nouvel Utilisateur"
-        android:id="@+id/textView2"
-        android:layout_alignEnd="@+id/linearLayout"
-        android:textAlignment="center"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold" />
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/linearLayout"
-        android:layout_below="@+id/textView2">
+            android:id="@+id/linearLayout">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -257,8 +243,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
-                android:ems="10"
                 android:id="@+id/input_tel"
+                android:ems="10"
                 android:textSize="15dp"
                 android:maxLength="10"
                 android:hint="@string/tel_user_hint"
@@ -283,7 +269,8 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_valider_nvuser"
             android:id="@+id/btn_valider_nvuser"
-            android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+            android:background="@drawable/border"
+
             android:textColor="#FFFFFF"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"

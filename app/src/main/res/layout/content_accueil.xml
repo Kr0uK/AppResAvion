@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="cdi.appresavion.AccueilActivity"
     tools:showIn="@layout/app_bar_accueil"
-    android:background="@color/cast_intro_overlay_button_background_color">
+    android:background="@drawable/bg">
 
     <!-- ViewPager a mettre en place pour switcher entre les ecran de gauche a droite
     http://blog.oxiane.com/2011/12/19/utiliser-le-viewpager-pour-slider-dun-ecran-a-un-autre/#video
@@ -35,11 +35,12 @@
         android:id="@+id/search"
         android:layout_row="1"
         android:layout_column="0"
-        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+        android:background="@drawable/roundbutton"
         android:textColor="#ffffff"
         android:textSize="20dp"
         android:layout_below="@+id/intro"
         android:layout_alignParentStart="true" />
+
 
     <ListView
         android:id="@+id/reserv_list"

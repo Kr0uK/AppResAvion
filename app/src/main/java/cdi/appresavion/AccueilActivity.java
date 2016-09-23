@@ -81,7 +81,7 @@ public class AccueilActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Informations légales", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Les Ents-AI", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -163,6 +163,7 @@ public class AccueilActivity extends AppCompatActivity
 
             //Parcours les reservations qui ne sont pas encore passé
             while (reservationIterator.hasNext()) {
+
                 //Objet contenant les reservations, s'incrémente a chaque next
                 Reservation reservation = reservationIterator.next();
 
@@ -195,6 +196,17 @@ public class AccueilActivity extends AppCompatActivity
                 //Resultat en Log pour les tests
                 Log.w("TAG", res);
             }
+
+            // TODO : ne marche pas ! Modif du Textview selon le nombre de billets d'avion réservés :
+            TextView intro = null;
+            if (reservationArrayList.size() >= 2) {
+                    intro.setText("Vous avez "+reservationArrayList.size()+" billets réservés !");
+            } if (reservationArrayList.size() == 1) {
+                    intro.setText("Vous avez un billet d'avion réservé pour un vol à venir... !");
+            } else {
+                intro.setText("Vous n'avez aucun billet d'avion réservé pour un vol à venir...");
+            }
+
         } catch(Exception e) {
             Log.w("ERROR", e.toString());
         }
