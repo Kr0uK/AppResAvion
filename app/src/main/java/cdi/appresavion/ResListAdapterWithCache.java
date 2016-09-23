@@ -57,6 +57,9 @@ public class ResListAdapterWithCache extends ArrayAdapter<Reserv> {
         TextView txtId = viewCache.getTxtId(resource);
         txtId.setText(newReserv.getId());
 
+        TextView txtIdReserv = viewCache.getTxtIdReserv(resource);
+        txtIdReserv.setText(newReserv.getIdReserv());
+
         return convertView;
     }
 }
