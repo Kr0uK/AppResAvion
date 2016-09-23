@@ -54,8 +54,10 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
             public void run() {
                 DAOBase daoBase = new DAOBase(getApplicationContext());
                 daoBase.getWDb();
+
             }
         }).start();
+
 
         new Thread(new Runnable() {
             @Override

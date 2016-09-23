@@ -4,6 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -109,8 +112,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mNouvelUserButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent NouvelUser = new Intent(LoginActivity.this, InscriptionActivity.class);
                 startActivity(NouvelUser);
+
             }
         });
 
@@ -226,7 +231,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             m.reset();
             m2.reset();
-          return false;
+            return false;
         }
 
 
@@ -356,7 +361,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // autrement un message d'erreur nous signale de modifier les données.
             while (iterator.hasNext()) {
                 Utilisateur utilisateur = iterator.next();
-                if (utilisateur.getMail().equals(logUser.getEmail().toString()) || utilisateur.getUsername().equals(logUser.getEmail().toString())){
+                if (utilisateur.getMail().equals(logUser.getEmail().toString()) || utilisateur.getUsername().equals(logUser.getEmail().toString())) {
                     if (utilisateur.getMdp().equals(logUser.getPassword().toString())) {
                         tempsuccess = true; // Si identique, on peux acceder a l'appli
                         logUser.setidUser(utilisateur.getId());
@@ -444,5 +449,8 @@ class Ident_User {
         this.mEmail = Email;
         this.mPassword = Password;
     }
+
+
 }
+
 

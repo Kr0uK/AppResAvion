@@ -6,10 +6,15 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.util.Log;
 
 public class ServiceNotif extends Service {
+    String notificationTitle = "Test titre";
+    String notificationDesc = "Test description";
     Ident_User ident_user = new Ident_User(); // On instancie un Ident_User
     int id = ident_user.getidUser(); // On récupère l'id de l'ident_user
     ListeResv listeResv = new ListeResv();
@@ -24,44 +29,77 @@ public class ServiceNotif extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        try {
-            Log.w(TAG, "Service démarré");
-            Log.w(TAG, "" + id);
-            // TODO service
-            if (id != 0) {
-                date = listeResv.getHeure();
-                Log.w(TAG, date);
+        Log.w(TAG, "Service démarré");
+        Log.w(TAG, "" + id);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
                 //TODO gérer la notif
 
-                createNotification();
+                    for (int i = 0; i < 25;i++){
+                        createNotification(notificationTitle, notificationDesc, 1);
+                        try {
+                            synchronized(this){
+                                wait(3000);
+                            }
+                        }
+                        catch(InterruptedException ex){
+                            break;
+                        }
+
+
+                    }
+
 
             }
+        }).start();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+
 
         return START_STICKY;
     }
 
+// Méthode qui permet de générer une notif
+    private final NotificationManager createNotification(String notification_title, String notification_desc, int notifID) {
 
-    private void createNotification() {
+        final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        final Intent launchNotifiactionIntent = new Intent(this, ServiceNotif.class);
+
+        final PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                1, launchNotifiactionIntent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+
+        final Intent lancerAppIntent = new Intent(this, AccueilActivity.class);
+
+        final PendingIntent lancerApp = PendingIntent.getActivity(this, 1, lancerAppIntent, PendingIntent.FLAG_ONE_SHOT);
         try {
-            //Récupération du notification Manager
-            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            //Récupération du titre et description de la notification
-            String notificationTitle = "Testerino";
-            String notificationDesc = "Kapparino";
+
+
+            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
             Notification.Builder builder = new Notification.Builder(this)
                     .setWhen(System.currentTimeMillis())
-                    .setTicker(notificationTitle)
+                    .setTicker(notification_title)
                     .setSmallIcon(R.drawable.avion)
-                    .setContentTitle(notificationTitle)
-                    .setContentText(notificationDesc);
-            notificationManager.notify(1, builder.build());
+                    .setContentTitle(notification_title)
+                    .setContentText(notification_desc + " " + notifID)
+                    .setContentIntent(pendingIntent)
+                    .setSound(uri)
+                    .addAction(R.drawable.avion, "Annuler", lancerApp);
+
+            mNotification.notify(notifID, builder.build());
+
+
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e(TAG, e.getStackTrace().toString());
         }
+
+
+        return mNotification;
     }
 }

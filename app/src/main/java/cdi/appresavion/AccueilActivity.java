@@ -71,7 +71,8 @@ public class AccueilActivity extends AppCompatActivity
             public void run() {
                 viewUserReserv(id);
                 // On crée le service
-                startService(new Intent(getBaseContext(), ServiceNotif.class));
+                startService(new Intent(getApplicationContext(), ServiceNotif.class));
+
 
 
             }
