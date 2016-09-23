@@ -33,7 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-// <!-- ♫ Elles ont un pelage semblable aux nuages... ♫  -->
+// <!-- ♫ Elles sont si gentilles avec leurs amies... ♫  -->
 /*
  * Affichage des trajets disponibles
  * TODO : -> prendre en compte que si l'on ne viens pas de RechercheActivity (ou que l'envoi est vide), il n'y ai pas de bugs !
