@@ -10,17 +10,19 @@ public class Reserv {
     private String aeroArr;     // Aeroport d'arrivée
     private String hourDep;     // Heure de départ
     private String Id;          // ID du trajet
+    private String IdReserv;    // ID du numero de reservation
 
 
     // CONSTRUCTEURS (avec surcharge pour definir les variables lors interrogation BDD)
     public Reserv() {
     }
-    public Reserv(String depart, String arrivee, String heure, String id) {
+    public Reserv(String depart, String arrivee, String heure, String id, String idReserv) {
         super();
         this.aeroDep = depart;
         this.aeroArr = arrivee;
         this.hourDep = heure;
         this.Id = id;
+        this.IdReserv = idReserv;
     }
 
     // GET/SET : Accesseurs/Mutateurs
@@ -38,9 +40,7 @@ public class Reserv {
         aeroArr = data;
     }
 
-    public String getHeure() {
-        return hourDep;
-    }
+    public String getHeure() { return hourDep;  }
     public void setHeure(String data) {
         hourDep = data;
     }
@@ -50,6 +50,13 @@ public class Reserv {
     }
     public void setId(String data) {
         this.Id = data;
+    }
+
+    public String getIdReserv() {
+        return IdReserv;
+    }
+    public void setIdReserv(String data) {
+        this.IdReserv = data;
     }
 }
 

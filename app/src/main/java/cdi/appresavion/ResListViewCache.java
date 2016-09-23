@@ -19,6 +19,7 @@ public class ResListViewCache {
     private TextView txtArr;
     private TextView txtHeure;
     private TextView txtId;
+    private TextView txtIdReserv;
 
     public ResListViewCache ( View baseView ) {
         this.baseView = baseView;
@@ -53,5 +54,12 @@ public class ResListViewCache {
             txtId = ( TextView ) baseView.findViewById(R.id.txtId);
         }
         return txtId;
+    }
+
+    public TextView getTxtIdReserv (int resource) {
+        if ( txtIdReserv == null ) {
+            txtIdReserv = ( TextView ) baseView.findViewById(R.id.txtIdReserv);
+        }
+        return txtIdReserv;
     }
 }

@@ -138,11 +138,12 @@ public class AccueilActivity extends AppCompatActivity
                 //Recup ID
                 TableRow t = (TableRow) view;
                 TextView monID = (TextView) t.getChildAt(3);
-                TextView idTrajet =  (TextView) findViewById(R.id.txtId);
-                Log.w("TAG", "ID du trajet : "+idTrajet.getText().toString());
+                TextView tonID = (TextView) t.getChildAt(4);
+
                 // Ouverture de l'activité Détails (avec l'id du trajet)
                 Intent detail = new Intent(AccueilActivity.this, DetailsActivity.class);
                 detail.putExtra("idTrajet", monID.getText().toString());
+                detail.putExtra("idReserv", tonID.getText().toString());
                 detail.putExtra("btnReserv", "ACCUEIL");
                 startActivity(detail);
                 break;
@@ -181,7 +182,7 @@ public class AccueilActivity extends AppCompatActivity
                 // Stockage pour affichage ulterieur des données
                 listReserv.add(new Reserv(
                         DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()).toString(),
-                        ""+aeroportDepart.getNom(), ""+aeroportArrivee.getNom(), ""+trajet.getTrajetId()));
+                        ""+aeroportDepart.getNom(), ""+aeroportArrivee.getNom(), ""+trajet.getTrajetId(), ""+reservation.getReservationId()));
 
                 // AFFICHAGE EN MODE LOG
                 String res = "Réponse = Id Util " + reservation.getUtilisateurId() +
