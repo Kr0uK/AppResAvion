@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mise  place de l'affichage graphique -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="300dip" >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_column="6"
+            android:onClick="rowClick"
+            android:id="@+id/ticket"
+            android:minHeight="75dp">
+
+            <TextView
+                android:id="@+id/txtDep"
+                android:layout_width="121dp"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_weight="0.3" />
+
+            <TextView
+                android:id="@+id/txtArr"
+                android:layout_width="121dp"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:textSize="25sp"
+                android:layout_weight="0.3" />
+
+            <TextView
+                android:id="@+id/txtHeure"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:textSize="25sp"
+                android:layout_weight="0.15" />
+
+            <TextView
+                android:id="@+id/txtId"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:textSize="1sp"
+                android:layout_weight="0.1"
+                android:visibility="invisible" />
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>

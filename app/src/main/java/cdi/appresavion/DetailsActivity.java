@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,6 +25,11 @@ public class DetailsActivity extends AppCompatActivity {
     TextView tvDateDepart;
     TextView tvDateArrivee;
     Button btnReserver;
+
+    // Pour le boutton GMap
+    Double Longitude;
+    Double Latitude;
+    Button btnGmap;
 
     //prix du trajet
     int prixTrajet;
@@ -48,7 +54,6 @@ public class DetailsActivity extends AppCompatActivity {
         tvAeroArrivee = (TextView) findViewById(R.id.detailsAeroArrivee);
         tvDateDepart = (TextView) findViewById(R.id.detailsDateDepart);
         tvDateArrivee = (TextView) findViewById(R.id.detailsDateArrivee);
-        btnReserver = (Button) findViewById(R.id.detailsBtnReserver);
 
         //Recupération de l'idTrajet
         final int idTrajet = Integer.parseInt((String)getIntent().getExtras().get("idTrajet"));
@@ -56,6 +61,7 @@ public class DetailsActivity extends AppCompatActivity {
         //Affichage du trajet
         detailTrajet(idTrajet);
 
+        btnReserver = (Button) findViewById(R.id.detailsBtnReserver);
         btnReserver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +82,22 @@ public class DetailsActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnGmap = (Button) findViewById(R.id.btnGmap);
+        btnGmap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    // FRED : Redirection vers l'activité GMap avec marquage de l'aeroport
+                    Geoloc_Aeroport Aeroport = new Geoloc_Aeroport(tvAeroDepart.getText().toString(), Latitude, Longitude);
+                    Intent GMap = new Intent(DetailsActivity.this, MapsActivity.class);
+                    startActivity(GMap);
+                } catch (Exception e) {
+                    Log.w("ERROR",e.toString());
+                }
+            }
+        });
+
     }
 
 
@@ -106,5 +128,8 @@ public class DetailsActivity extends AppCompatActivity {
         tvAeroArrivee.setText(aeroportArrivee.getNom());
         tvDateDepart.setText(DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()));
         tvDateArrivee.setText(DateConvertisseur.dateToStringFormatShow(trajet.getDateArrivee()));
+        // FRED : recup d'infos pour localisation de l'aeroport
+        Latitude = aeroportDepart.getLatitude();
+        Longitude = aeroportDepart.getLongitude();
     }
 }

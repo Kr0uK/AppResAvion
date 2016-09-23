@@ -54,7 +54,7 @@ public class TrajetsActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Les Ents-AI", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -125,6 +125,7 @@ public class TrajetsActivity extends AppCompatActivity
                 // Ouverture de l'activité Détails (avec l'id du trajet)
                 Intent detail = new Intent(TrajetsActivity.this, DetailsActivity.class);
                 detail.putExtra("idTrajet", monID.getText().toString());
+                detail.putExtra("btnReserv", "TRAJETS");
                 startActivity(detail);
 
                 // TODO : amélioration future (WIP)
@@ -169,6 +170,9 @@ public class TrajetsActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Geoloc_Aeroport Aeroport = new Geoloc_Aeroport("Sélectionnez un aéroport !", 0, 0);
+            Intent GMap = new Intent(TrajetsActivity.this, MapsActivity.class);
+            startActivity(GMap);
             return true;
         }
 

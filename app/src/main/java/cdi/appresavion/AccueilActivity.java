@@ -1,5 +1,6 @@
 package cdi.appresavion;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -23,6 +27,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import dao.AeroportDAO;
 import dao.AvionDAO;
@@ -48,34 +53,32 @@ public class AccueilActivity extends AppCompatActivity
      */
     private GoogleApiClient client;
 
+    static TextView intro;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Log.w("TAG", "" + id); //Vérification
-        requeteReservation(id);
-        /*
-         TODO mettre en place le thread
+        Log.w("TAG", "ID USER : " + id); //Vérification
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                requeteReservation(id);
+        intro = (TextView) findViewById(R.id.intro);
 
-                });
-            }
-
+		new Thread(new Runnable() {
+		@Override
+			public void run() {
+				viewUserReserv(id);
+				// On crée le service
+				startService(new Intent(getApplicationContext(), ServiceNotif.class));
+			}
         }).start();
-*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Informations légales", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Les Ents-AI", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
 
@@ -101,6 +104,107 @@ public class AccueilActivity extends AppCompatActivity
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+    private static Trajet trajet;
+    private ListView listViewRes;
+    private Context ctx;
+
+    // FRED : Methode permettant la récupération des données de reservation, de l'affichage et de rendre possible une vue en details
+    private void viewUserReserv(int id) {
+        try {
+            ctx = this;
+            List listReserv = new ArrayList();
+
+            // Interrogation BDD
+            requeteReservation(id, listReserv);
+
+            // Affichage des données
+            listViewRes = (ListView) findViewById(R.id.reserv_list);
+            listViewRes.setAdapter(new ResListAdapterWithCache(ctx, R.layout.reserv_row_item, listReserv));
+
+            // Rendre cliquable le tablerow
+            TableRow tableRow = (TableRow) findViewById(R.id.ticket);
+            tableRow.setClickable(true);
+
+        } catch (Exception e) {
+            Log.w("ERROR",e.toString());
+        }
+    }
+
+    // FRED : Methode se lancant automatiquement en cas de clic sur un tablerow (redirection page Details)
+    public void rowClick(View view) {
+        switch(view.getId()) {
+            case R.id.ticket:
+                //Recup ID
+                TableRow t = (TableRow) view;
+                TextView monID = (TextView) t.getChildAt(3);
+                TextView idTrajet =  (TextView) findViewById(R.id.txtId);
+                Log.w("TAG", "ID du trajet : "+idTrajet.getText().toString());
+                // Ouverture de l'activité Détails (avec l'id du trajet)
+                Intent detail = new Intent(AccueilActivity.this, DetailsActivity.class);
+                detail.putExtra("idTrajet", monID.getText().toString());
+                detail.putExtra("btnReserv", "ACCUEIL");
+                startActivity(detail);
+                break;
+        }
+    }
+
+    // RENAUD (edit FRED) : Methode permettant de recupérer les reservations de l'utilisateur depuis BDD
+    public static void requeteReservation(int id, List listReserv) {
+        try {
+            //Création de l'ArrayList qui contient les reservations qui ne sont pas encore passé
+            ArrayList reservationArrayList = ReservationDAO.getReservationWhere(id);
+            //Iterator qui va permetre de parcourir l'ArrayList de reservation
+            Iterator<Reservation> reservationIterator = reservationArrayList.iterator();
+
+            //Parcours les reservations qui ne sont pas encore passé
+            while (reservationIterator.hasNext()) {
+
+                //Objet contenant les reservations, s'incrémente a chaque next
+                Reservation reservation = reservationIterator.next();
+
+                //Création de l'objet qui contient la place
+                Place place = PlaceDAO.selectionnerPlace(reservation.getReservationId());
+
+                //Création de l'objet qui contient le trajet
+                trajet = TrajetDAO.selectionnerTrajet(place.getTrajetId());
+
+                //Création de l'objet qui contient l'aeroport de depart
+                Aeroport aeroportDepart = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
+
+                //Création de l'objet qui contient l'aeroport d'arrivee
+                Aeroport aeroportArrivee = AeroportDAO.selectionnerAeroport(trajet.getAerAeroportId());
+
+                //Création de l'objet qui contient l'avion
+                Avion avion = AvionDAO.selectionnerAvion(trajet.getAvionId());
+
+                // Stockage pour affichage ulterieur des données
+                listReserv.add(new Reserv(
+                        DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()).toString(),
+                        ""+aeroportDepart.getNom(), ""+aeroportArrivee.getNom(), ""+trajet.getTrajetId()));
+
+                // AFFICHAGE EN MODE LOG
+                String res = "Réponse = Id Util " + reservation.getUtilisateurId() +
+                             " | Aeroport de depart " + aeroportDepart.getNom() +
+                             " | d'arrivée " + aeroportArrivee.getNom() +
+                             " | la date ou on part " + DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()) +
+                             " on part avec un " + avion.getModele();
+                //Resultat en Log pour les tests
+                Log.w("TAG", res);
+            }
+
+            // Modif du Textview selon le nombre de billets d'avion réservés :
+            if (reservationArrayList.size() >= 2) {
+                    intro.setText("Vous avez "+reservationArrayList.size()+" billets réservés !");
+            } else if (reservationArrayList.size() == 1) {
+                    intro.setText("Vous avez un billet d'avion réservé pour un vol à venir... !");
+            } else {
+                intro.setText("Vous n'avez aucun billet d'avion réservé pour un vol à venir...");
+            }
+
+        } catch(Exception e) {
+            Log.w("ERROR", e.toString());
+        }
     }
 
     @Override
@@ -161,51 +265,6 @@ public class AccueilActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    /**
-     * Récupére les réservations d'un utilisateur a partir de son id.
-     * TODO nom a définir
-     *
-     * @param id de l'utilisateur
-     */
-    public static void requeteReservation(int id) {
-        //Création de l'ArrayList qui contient les reservations qui ne sont pas encore passé
-        ArrayList reservationArrayList = ReservationDAO.getReservationWhere(id);
-        //Iterator qui va permetre de parcourir l'ArrayList de reservation
-        Iterator<Reservation> reservationIterator = reservationArrayList.iterator();
-
-        //Parcours les reservations qui ne sont pas encore passé
-        while (reservationIterator.hasNext()) {
-            //Objet contenant les reservations, s'incrémente a chaque next
-            Reservation reservation = reservationIterator.next();
-
-            //Création de l'objet qui contient la place
-            Place place = PlaceDAO.selectionnerPlace(reservation.getReservationId());
-
-            //Création de l'objet qui contient le trajet
-            Trajet trajet = TrajetDAO.selectionnerTrajet(place.getTrajetId());
-
-            //Création de l'objet qui contient l'aeroport de depart
-            Aeroport aeroportDepart = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
-
-            //Création de l'objet qui contient l'aeroport d'arrivee
-            Aeroport aeroportArrivee = AeroportDAO.selectionnerAeroport(trajet.getAerAeroportId());
-
-            //Création de l'objet qui contient l'avion
-            Avion avion = AvionDAO.selectionnerAvion(trajet.getAvionId());
-
-            //String de test avec quelque infos des reservations
-            String res = "Réponse = Id Util "
-                    + reservation.getUtilisateurId() + " | Aeroport de depart "
-                    + aeroportDepart.getNom() + " | d'arrivée "
-                    + aeroportArrivee.getNom() + " | la date ou on part "
-                    + DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()) + " on part avec un "
-                    + avion.getModele();
-
-            //Resultat en Log pour les tests
-            Log.w("TAG", res);
-        }
     }
 
     @Override

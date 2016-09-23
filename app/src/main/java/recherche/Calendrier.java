@@ -59,7 +59,7 @@ public class Calendrier extends DialogFragment implements DialogInterface.OnClic
         calendrier = (CalendarView) calendrierVue.findViewById(R.id.accueilCVcalendrier);
         format = new DecimalFormat("00");
 
-        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
+		simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
         calendrier.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
