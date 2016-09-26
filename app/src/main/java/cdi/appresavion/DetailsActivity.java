@@ -153,7 +153,7 @@ public class DetailsActivity extends AppCompatActivity {
         tvAeroArrivee.setText(aeroportArrivee.getNom());
         tvDateDepart.setText(DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()));
         tvDateArrivee.setText(DateConvertisseur.dateToStringFormatShow(trajet.getDateArrivee()));
-        //tvNumVol.setText(idTrajet);
+        tvNumVol.setText(Integer.toString(idTrajet));
         tvAutres.setText("Modèle de l'avion " + avion.getModele() + ", nombres de places restantes : " + nbPlacesRestantes);
         // FRED : recup d'infos pour localisation de l'aeroport
         Latitude = aeroportDepart.getLatitude();
