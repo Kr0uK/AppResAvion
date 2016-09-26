@@ -63,29 +63,8 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-
-
-                            Log.w("TAG", "On rentre bien dans le thread");
-
                             //Ajout dans la base
                             ajoutBase();
-
-                            //Lecture de toutes les données de la base
-                            getAllDb();
-
-                            //Recherche sur aeroport
-                            ArrayList aeroportArrayList = AeroportDAO.getAeroportWithNom("Etat");
-                            Iterator<Aeroport> aeroportIterator = aeroportArrayList.iterator();
-                            while (aeroportIterator.hasNext()) {
-                                Aeroport aeroport = aeroportIterator.next();
-                                Log.w("TAG", "Ceci est le test d'aeroport " + aeroport.getId() + " | " + aeroport.getNom() + " | " + aeroport.getPays());
-                            }
-
-                            //Recup de trajet + avion + aeroport avec date choisis
-                            getTrajetInfos(1, 2, DateConvertisseur.stringToDate("2016-09-19 10:00:00"));
-                            //Recup de trajet + avion + aeroport avec date sys
-                            //getTrajetInfos(1, 2, DateConvertisseur.dateSysDate());
-
                         }
                     }).start();
                 }
@@ -115,39 +94,6 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         }
     }
 
-    class NavDetails {
-        /**
-         * id contenant le titre de la fenêtre
-         */
-        public final int titleId;
-
-        /**
-         * id contenant la description de la fenêtre.
-         */
-        public final int descriptionId;
-
-        /**
-         * le nom de la classe ouvrant la fenêtre
-         */
-        public final Class<? extends AppCompatActivity> activityClass;
-
-        public NavDetails(
-                int titleId, int descriptionId, Class<? extends AppCompatActivity> activityClass) {
-            this.titleId = titleId;
-            this.descriptionId = descriptionId;
-            this.activityClass = activityClass;
-        }
-    }
-
-    class Navigation {
-
-        /**
-         * Cette classe ne dois pas être instanciée.
-         */
-        private Navigation() {
-        }
-
-    }
 
     // Vérif comme quoi la base se remplit qu'une seule fois
     private boolean isFirstTime() {
@@ -162,31 +108,13 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         return !ranBefore;
     }
 
-    private void getTrajetInfos(int aeroportDepart, int aeroportArrivee, Date dateDepart) {
-        ArrayList trajetArrayList = TrajetDAO.getTrajetWhere(aeroportDepart, aeroportArrivee, dateDepart);
-        Iterator<Trajet> trajetIterator = trajetArrayList.iterator();
-        while (trajetIterator.hasNext()) {
-            Trajet trajet = trajetIterator.next();
-
-            //Création de l'objet qui contient l'aeroport de depart
-            Aeroport aeDep = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
-
-            //Création de l'objet qui contient l'aeroport d'arrivee
-            Aeroport aeArr = AeroportDAO.selectionnerAeroport(trajet.getAerAeroportId());
-
-            //Création de l'objet qui contient l'avion
-            Avion avion = AvionDAO.selectionnerAvion(trajet.getAvionId());
-
-            //Affichage
-            Log.w("TAG", "Ceci est le test de trajet " + aeDep.getNom() + " | " + aeArr.getNom() + " | " + DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()));
-        }
-    }
-
+    /**
+     * Ajout dans la base quelque données.
+     */
     private void ajoutBase() {
-        Utilisateur utilisateur1 = new Utilisateur(0, "METZ", "Renaud", "r@", "0388943632", "0622493390", "33 rue de la paix", "67160", "OBERLAUTERBACH", "renaud", "12345678");
-        Utilisateur utilisateur2 = new Utilisateur(0, "Kenobi", "Obi-Wan", "obiwan@kenobi.jedi", "0123456789", "0678945632", "35 rue de la paix", "70420", "Perpète-les-Bains", "obiwan", "12345678");
-        UtilisateurDAO.ajouterUtilisateur(utilisateur1);
-        UtilisateurDAO.ajouterUtilisateur(utilisateur2);
+        //Ajout d'utilisateur
+        Utilisateur admin = new Utilisateur(0, "admin", "admin", "admin@admin.admin", "0388943632", "0622493390", "admin", "67160", "admin", "admin", "12345678");
+        UtilisateurDAO.ajouterUtilisateur(admin);
 
         //Ajout d'aeroports
         Aeroport aeroport1 = new Aeroport(0, "Charles De Gaulle", "Paris", "France", "CDG", 49.012779, 2.55);
@@ -206,35 +134,31 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         AeroportDAO.ajouterAeroport(aeroport7);
         AeroportDAO.ajouterAeroport(aeroport8);
 
-        //Ajout d'un avion
-        Avion avion = new Avion(0, "Boeing 737 600", "Boeing", 132, "Air France");
-        AvionDAO.ajouterAvion(avion);
+        //Ajout d'avions
+        Avion avion1 = new Avion(0, "Boeing 737 600", "Boeing", 132, "Air France");
+        Avion avion2 = new Avion(0, "Airbus A340 300", "Airbus", 295, "Air France");
+        AvionDAO.ajouterAvion(avion1);
+        AvionDAO.ajouterAvion(avion2);
 
         //Ajout d'un trajet
-        Trajet trajet1 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-09-10 21:22:00"), DateConvertisseur.stringToDate("2016-10-20 14:21:00"), 500);
-        Trajet trajet2 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-10-24 22:22:00"), DateConvertisseur.stringToDate("2016-10-25 15:21:00"), 550);
-        Trajet trajet3 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-10-24 20:22:00"), DateConvertisseur.stringToDate("2016-10-25 15:21:00"), 550);
-        Trajet trajet4 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-10-24 23:22:00"), DateConvertisseur.stringToDate("2016-10-25 15:21:00"), 550);
-        Trajet trajet5 = new Trajet(0, 1, 7, 6, DateConvertisseur.stringToDate("2016-10-20 12:00:00"), DateConvertisseur.stringToDate("2016-09-20 15:21:00"), 550);
-        Trajet trajet6 = new Trajet(0, 1, 6, 7, DateConvertisseur.stringToDate("2016-10-20 16:00:00"), DateConvertisseur.stringToDate("2016-09-20 15:21:00"), 550);
+        Trajet trajet1 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-10-01 12:30:00"), DateConvertisseur.stringToDate("2016-10-01 20:30:00"), 500);
+        Trajet trajet2 = new Trajet(0, 2, 2, 1, DateConvertisseur.stringToDate("2016-10-01 08:30:00"), DateConvertisseur.stringToDate("2016-10-01 16:30:00"), 550);
+        Trajet trajet3 = new Trajet(0, 1, 4, 3, DateConvertisseur.stringToDate("2016-10-01 16:00:00"), DateConvertisseur.stringToDate("2016-10-01 22:00:00"), 550);
+        Trajet trajet4 = new Trajet(0, 2, 5, 2, DateConvertisseur.stringToDate("2016-10-04 20:45:00"), DateConvertisseur.stringToDate("2016-10-05 06:45:00"), 550);
+        Trajet trajet5 = new Trajet(0, 1, 7, 6, DateConvertisseur.stringToDate("2016-10-06 12:00:00"), DateConvertisseur.stringToDate("2016-10-06 16:00:00"), 550);
+        Trajet trajet6 = new Trajet(0, 2, 6, 7, DateConvertisseur.stringToDate("2016-10-08 16:00:00"), DateConvertisseur.stringToDate("2016-10-08 21:00:00"), 550);
+        Trajet trajet7 = new Trajet(0, 1, 8, 5, DateConvertisseur.stringToDate("2016-10-08 16:00:00"), DateConvertisseur.stringToDate("2016-10-08 21:00:00"), 550);
+        Trajet trajet8 = new Trajet(0, 2, 1, 8, DateConvertisseur.stringToDate("2016-10-09 16:00:00"), DateConvertisseur.stringToDate("2016-10-09 21:00:00"), 550);
+        Trajet trajet9 = new Trajet(0, 1, 3, 4, DateConvertisseur.stringToDate("2016-10-10 16:00:00"), DateConvertisseur.stringToDate("2016-10-10 21:00:00"), 550);
         TrajetDAO.ajouterTrajet(trajet1);
         TrajetDAO.ajouterTrajet(trajet2);
         TrajetDAO.ajouterTrajet(trajet3);
         TrajetDAO.ajouterTrajet(trajet4);
         TrajetDAO.ajouterTrajet(trajet5);
         TrajetDAO.ajouterTrajet(trajet6);
-
-
-        //Ajout d'une reservation/place
-        Reservation reservation1 = new Reservation(0, 1, DateConvertisseur.dateSysDate(), 384, 1);
-        Reservation reservation2 = new Reservation(0, 2, DateConvertisseur.dateSysDate(), 384, 2);
-        ReservationDAO.ajouterReservationPlace(reservation1, 1);
-        ReservationDAO.ajouterReservationPlace(reservation2, 2);
-        ReservationDAO.ajouterReservationPlace(reservation1, 2);
-        ReservationDAO.ajouterReservationPlace(reservation1, 3);
-        ReservationDAO.ajouterReservationPlace(reservation1, 4);
-        ReservationDAO.ajouterReservationPlace(reservation1, 5);
-        ReservationDAO.ajouterReservationPlace(reservation1, 6);
+        TrajetDAO.ajouterTrajet(trajet7);
+        TrajetDAO.ajouterTrajet(trajet8);
+        TrajetDAO.ajouterTrajet(trajet9);
     }
 
     private void getAllDb() {
