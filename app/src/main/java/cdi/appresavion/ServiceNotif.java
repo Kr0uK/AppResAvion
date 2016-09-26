@@ -45,7 +45,7 @@ public class ServiceNotif extends Service {
             @Override
             public void run() {
 
-                for (int i = 0; i < Integer.MAX_VALUE; i++) {
+                for (int i = 0; i < 5; i++) {
 
                     //RNG notif
                     rndRoll = rnd.nextInt(100)+1;
