@@ -19,6 +19,7 @@ import java.util.Random;
  * :)
  */
 public class ServiceNotif extends Service {
+    // Strings
     String notificationTitle = "INFORMATIONS SUR LE VOL";
     String notificationDesc = "Ce modèle d'avion n'a jamais connu  de crashs recensés";
     String notificationTitle2 = "INFORMATIONS SUR LE VOL";
@@ -26,6 +27,8 @@ public class ServiceNotif extends Service {
     Ident_User ident_user = new Ident_User(); // On instancie un Ident_User
     int id = ident_user.getidUser(); // On récupère l'id de l'ident_user
     public static final String TAG = "DEBUG";
+    
+    //Générateur de temps aléatoire pour les notifs
     Random rnd = new Random();
     int tpsWait;
     int rndRoll;
@@ -40,7 +43,7 @@ public class ServiceNotif extends Service {
         Log.w(TAG, "Service démarré");
         Log.w(TAG, "" + id);
 
-        // Notifie l'utilisateur tout les (wait), pendant 3 fois (for)
+        // Notifie l'utilisateur tout les (wait), pendant x fois (nombre d'itérations du for)
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -53,6 +56,7 @@ public class ServiceNotif extends Service {
                     tpsWait = (rnd.nextInt(30000) + 1000);
 
                     if (rndRoll < 50) {
+                        // Lance la notif 1
                         createNotification(notificationTitle, notificationDesc, 1);
                         try {
                             synchronized(this){
@@ -64,6 +68,7 @@ public class ServiceNotif extends Service {
                         }
 
                     }else {
+                        // Lance la notif 2
                         createNotification2(notificationTitle2, notificationDesc2, 1);
                         try {
                             synchronized(this){
