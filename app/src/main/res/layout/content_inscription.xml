@@ -269,7 +269,7 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_valider_nvuser"
             android:id="@+id/btn_valider_nvuser"
-            android:background="@drawable/border"
+            android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
 
             android:textColor="#FFFFFF"
             android:layout_alignParentBottom="true"
