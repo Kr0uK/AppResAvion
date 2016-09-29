@@ -1,5 +1,7 @@
 package cdi.appresavion;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -65,14 +67,7 @@ public class AccueilActivity extends AppCompatActivity
 
         intro = (TextView) findViewById(R.id.intro);
 
-		new Thread(new Runnable() {
-		@Override
-			public void run() {
-				viewUserReserv(id);
-				// On crée le service
-				startService(new Intent(getApplicationContext(), ServiceNotif.class));
-			}
-        }).start();
+        viewUserReserv(id);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +111,7 @@ public class AccueilActivity extends AppCompatActivity
             List listReserv = new ArrayList();
 
             // Interrogation BDD
-            requeteReservation(id, listReserv);
+            requeteReservation(id, listReserv, getApplicationContext());
 
             // Affichage des données
             listViewRes = (ListView) findViewById(R.id.reserv_list);
@@ -152,12 +147,20 @@ public class AccueilActivity extends AppCompatActivity
     }
 
     // RENAUD (edit FRED) : Methode permettant de recupérer les reservations de l'utilisateur depuis BDD
-    public static void requeteReservation(int id, List listReserv) {
+    public static void requeteReservation(int id, List listReserv, Context context) {
         try {
             //Création de l'ArrayList qui contient les reservations qui ne sont pas encore passé
             ArrayList reservationArrayList = ReservationDAO.getReservationWhere(id);
             //Iterator qui va permetre de parcourir l'ArrayList de reservation
             Iterator<Reservation> reservationIterator = reservationArrayList.iterator();
+
+            // Alarme pour service
+            AlarmManager alarms = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(context, ServiceNotif.class);
+            PendingIntent operation = PendingIntent.getService(context, 0, intent, 0);
+            long alarmeService = 0;
+            boolean recup = false;
+            long alerteTemps = 18000000;
 
             //Parcours les reservations qui ne sont pas encore passé
             while (reservationIterator.hasNext()) {
@@ -170,6 +173,12 @@ public class AccueilActivity extends AppCompatActivity
 
                 //Création de l'objet qui contient le trajet
                 trajet = TrajetDAO.selectionnerTrajet(place.getTrajetId());
+
+                //Recuperation du vol le plus tot
+                if (!recup){
+                    alarmeService = trajet.getDateDepart().getTime();
+                    recup = true;
+                }
 
                 //Création de l'objet qui contient l'aeroport de depart
                 Aeroport aeroportDepart = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
@@ -184,22 +193,16 @@ public class AccueilActivity extends AppCompatActivity
                 listReserv.add(new Reserv(
                         DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()).toString(),
                         ""+aeroportDepart.getNom(), ""+aeroportArrivee.getNom(), ""+trajet.getTrajetId(), ""+reservation.getReservationId()));
-
-                // AFFICHAGE EN MODE LOG
-                String res = "Réponse = Id Util " + reservation.getUtilisateurId() +
-                             " | Aeroport de depart " + aeroportDepart.getNom() +
-                             " | d'arrivée " + aeroportArrivee.getNom() +
-                             " | la date ou on part " + DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()) +
-                             " on part avec un " + avion.getModele();
-                //Resultat en Log pour les tests
-                Log.w("TAG", res);
             }
-
             // Modif du Textview selon le nombre de billets d'avion réservés :
             if (reservationArrayList.size() >= 2) {
-                    intro.setText("Vous avez "+reservationArrayList.size()+" billets réservés !");
+                intro.setText("Vous avez "+reservationArrayList.size()+" billets réservés !");
+                //Création du service
+                alarms.set(AlarmManager.RTC_WAKEUP, alarmeService - alerteTemps, operation);
             } else if (reservationArrayList.size() == 1) {
-                    intro.setText("Vous avez un billet d'avion réservé pour un vol à venir... !");
+                intro.setText("Vous avez un billet d'avion réservé pour un vol à venir... !");
+                //Création du service
+                alarms.set(AlarmManager.RTC_WAKEUP, alarmeService - alerteTemps, operation);
             } else {
                 intro.setText("Vous n'avez aucun billet d'avion réservé pour un vol à venir...");
             }

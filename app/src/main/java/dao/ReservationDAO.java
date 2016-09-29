@@ -139,6 +139,7 @@ public class ReservationDAO {
                         + " ON t." + TrajetDAO.TRAJET_ID + " = p." + PlaceDAO.PLACE_TRAJET_ID
                         + " WHERE " + RESERVATION_UTILISATEUR_ID + " = " + id
                         + " AND " + TrajetDAO.TRAJET_DATE_DEPART + " >= '" + DateConvertisseur.dateSysString() + "'"
+                        + " ORDER BY " + TrajetDAO.TRAJET_DATE_DEPART
                 , null);
 
         //Déplace le curseur a la valeur 0

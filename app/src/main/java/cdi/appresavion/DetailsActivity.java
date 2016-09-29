@@ -87,19 +87,24 @@ public class DetailsActivity extends AppCompatActivity {
                 if (vientDe.equals("ACCUEIL")) {
                     ReservationDAO.supprimerReservation(Integer.parseInt((String)getIntent().getExtras().get("idReserv")));
                     Toast.makeText(DetailsActivity.this, "Votre réservation a bien était annulé !", Toast.LENGTH_LONG).show();
+
+                    //Redirection de l'utilisateur
+                    Intent redirection = new Intent(DetailsActivity.this, AccueilActivity.class);
+                    startActivity(redirection);
                 } else {
                     //Verifie si il reste des places pour ce vol
                     if (nbPlacesAvion > ReservationDAO.sumPlace(idTrajet) + nbPlacesReservee) {
                         //Param id de l'util, prix du trajet, nombre de personne, id du trajet
                         ReservationDAO.ajouterReservationPlace(id, prixTrajet, nbPlacesReservee, idTrajet);
                         Toast.makeText(DetailsActivity.this, "Reservation enregistrée !", Toast.LENGTH_LONG).show();
+
+                        //Redirection de l'utilisateur
+                        Intent redirection = new Intent(DetailsActivity.this, AccueilActivity.class);
+                        startActivity(redirection);
                     } else {
                         Toast.makeText(DetailsActivity.this, "Il ne reste plus de place pour ce vol", Toast.LENGTH_SHORT).show();
                     }
                 }
-                //Redirection de l'utilisateur
-                Intent redirection = new Intent(DetailsActivity.this, AccueilActivity.class);
-                startActivity(redirection);
             }
         });
 
