@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         AvionDAO.ajouterAvion(avion2);
 
         //Ajout d'un trajet
-        Trajet trajet1 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-09-29 17:40:00"), DateConvertisseur.stringToDate("2016-10-01 20:30:00"), 500);
+        Trajet trajet1 = new Trajet(0, 1, 1, 2, DateConvertisseur.stringToDate("2016-09-30 14:19:00"), DateConvertisseur.stringToDate("2016-10-01 20:30:00"), 500);
         Trajet trajet2 = new Trajet(0, 2, 2, 1, DateConvertisseur.stringToDate("2016-10-01 08:30:00"), DateConvertisseur.stringToDate("2016-10-01 16:30:00"), 550);
         Trajet trajet3 = new Trajet(0, 1, 4, 3, DateConvertisseur.stringToDate("2016-10-01 16:00:00"), DateConvertisseur.stringToDate("2016-10-01 22:00:00"), 550);
         Trajet trajet4 = new Trajet(0, 2, 5, 2, DateConvertisseur.stringToDate("2016-10-04 20:45:00"), DateConvertisseur.stringToDate("2016-10-05 06:45:00"), 550);

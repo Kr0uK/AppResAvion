@@ -15,13 +15,27 @@ import android.util.Log;
 
 import java.util.Random;
 
+import shell.DateConvertisseur;
+
 /*
  * Boris : service + notifications
  * :)
  */
 public class ServiceNotif extends Service {
+    //Recupere de l'user
+    Ident_User ident_user = new Ident_User(); // On instancie un Ident_User
+    int id = ident_user.getidUser(); // On récupère l'id de l'ident_user
+
+    //Recupere les infos du trajet
+    TrajetNotif trajetNotif = new TrajetNotif();
+    long dateDepart = trajetNotif.getDateDepart();
+    String aeroportDepart = trajetNotif.getAeroportDepart();
+    String aeroportArrivee = trajetNotif.getAeroportArrivee();
+
+
     String notificationTitle = "INFORMATIONS SUR LE VOL";
-    String notificationDesc = "Votre vol va bientôt partir";
+    String notificationDesc = "Votre vol de " + aeroportDepart + "\n va bientôt partir pour " + aeroportArrivee;
+
     public static final String TAG = "DEBUG";
 
     @Override
@@ -34,7 +48,9 @@ public class ServiceNotif extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                createNotification(notificationTitle, notificationDesc, 1);
+                if ((dateDepart + 60000) > DateConvertisseur.dateSysDate().getTime()) {
+                    createNotification(notificationTitle, notificationDesc, 1);
+                }
             }
         }).start();
         return START_STICKY;
@@ -45,9 +61,10 @@ public class ServiceNotif extends Service {
 
         final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        final Intent launchNotifiactionIntent = new Intent(this, ServiceNotif.class);
+        Intent resultIntent = new Intent(this, AccueilActivity.class);
+        resultIntent.putExtra("idUser", Integer.toString(id));
 
-        final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, launchNotifiactionIntent, PendingIntent.FLAG_ONE_SHOT);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         try {
             Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
@@ -58,14 +75,9 @@ public class ServiceNotif extends Service {
                     .setContentTitle(notification_title)
                     .setContentText(notification_desc)
                     .setSound(uri)
+                    .setContentIntent(pendingIntent)
                     .setAutoCancel(true);
 
-            Intent resultIntent = new Intent(this, AccueilActivity.class);
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-            stackBuilder.addParentStack(MainActivity.class);
-            stackBuilder.addNextIntent(resultIntent);
-            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-            builder.setContentIntent(resultPendingIntent);
 
             mNotification.notify(notifID, builder.build());
         } catch (Exception e) {

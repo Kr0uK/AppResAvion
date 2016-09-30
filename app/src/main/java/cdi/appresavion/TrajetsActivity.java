@@ -120,7 +120,6 @@ public class TrajetsActivity extends AppCompatActivity
                 TableRow t = (TableRow) view;
                 TextView monID = (TextView) t.getChildAt(4);
                 TextView idTrajet =  (TextView) findViewById(R.id.txtId);
-                Log.w("TAG", "ID du trajet : "+idTrajet.getText().toString());
 
                 // Ouverture de l'activité Détails (avec l'id du trajet)
                 Intent detail = new Intent(TrajetsActivity.this, DetailsActivity.class);

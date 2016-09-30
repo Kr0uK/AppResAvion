@@ -33,6 +33,7 @@ import java.util.List;
 
 import dao.AeroportDAO;
 import dao.AvionDAO;
+import dao.DAOBase;
 import dao.PlaceDAO;
 import dao.ReservationDAO;
 import dao.TrajetDAO;
@@ -63,7 +64,10 @@ public class AccueilActivity extends AppCompatActivity
         setContentView(R.layout.activity_accueil);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Log.w("TAG", "ID USER : " + id); //Vérification
+
+        if (id == 0){
+            id = Integer.parseInt((String)getIntent().getExtras().get("idUser"));
+        }
 
         intro = (TextView) findViewById(R.id.intro);
 
@@ -149,6 +153,9 @@ public class AccueilActivity extends AppCompatActivity
     // RENAUD (edit FRED) : Methode permettant de recupérer les reservations de l'utilisateur depuis BDD
     public static void requeteReservation(int id, List listReserv, Context context) {
         try {
+            DAOBase daoBase = new DAOBase(context);
+            daoBase.getWDb();
+
             //Création de l'ArrayList qui contient les reservations qui ne sont pas encore passé
             ArrayList reservationArrayList = ReservationDAO.getReservationWhere(id);
             //Iterator qui va permetre de parcourir l'ArrayList de reservation
@@ -164,7 +171,6 @@ public class AccueilActivity extends AppCompatActivity
 
             //Parcours les reservations qui ne sont pas encore passé
             while (reservationIterator.hasNext()) {
-
                 //Objet contenant les reservations, s'incrémente a chaque next
                 Reservation reservation = reservationIterator.next();
 
@@ -173,12 +179,6 @@ public class AccueilActivity extends AppCompatActivity
 
                 //Création de l'objet qui contient le trajet
                 trajet = TrajetDAO.selectionnerTrajet(place.getTrajetId());
-
-                //Recuperation du vol le plus tot
-                if (!recup){
-                    alarmeService = trajet.getDateDepart().getTime();
-                    recup = true;
-                }
 
                 //Création de l'objet qui contient l'aeroport de depart
                 Aeroport aeroportDepart = AeroportDAO.selectionnerAeroport(trajet.getAeroportId());
@@ -189,6 +189,13 @@ public class AccueilActivity extends AppCompatActivity
                 //Création de l'objet qui contient l'avion
                 Avion avion = AvionDAO.selectionnerAvion(trajet.getAvionId());
 
+                //Recuperation du vol le plus tot
+                if (!recup){
+                    alarmeService = trajet.getDateDepart().getTime() - alerteTemps;
+                    TrajetNotif trajetNotif = new TrajetNotif(alarmeService, aeroportDepart.getNom(), aeroportArrivee.getNom());
+                    recup = true;
+                }
+
                 // Stockage pour affichage ulterieur des données
                 listReserv.add(new Reserv(
                         DateConvertisseur.dateToStringFormatShow(trajet.getDateDepart()).toString(),
@@ -198,11 +205,11 @@ public class AccueilActivity extends AppCompatActivity
             if (reservationArrayList.size() >= 2) {
                 intro.setText("Vous avez "+reservationArrayList.size()+" billets réservés !");
                 //Création du service
-                alarms.set(AlarmManager.RTC_WAKEUP, alarmeService - alerteTemps, operation);
+                alarms.setExact(AlarmManager.RTC_WAKEUP, alarmeService, operation);
             } else if (reservationArrayList.size() == 1) {
                 intro.setText("Vous avez un billet d'avion réservé pour un vol à venir... !");
                 //Création du service
-                alarms.set(AlarmManager.RTC_WAKEUP, alarmeService - alerteTemps, operation);
+                alarms.setExact(AlarmManager.RTC_WAKEUP, alarmeService, operation);
             } else {
                 intro.setText("Vous n'avez aucun billet d'avion réservé pour un vol à venir...");
             }
